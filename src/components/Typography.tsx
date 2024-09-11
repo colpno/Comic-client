@@ -26,7 +26,7 @@ type TypoAsExternalLinkProps = ExternalLinkProps & {
 
 type Props = TypoAsTypoProps | TypoAsLinkProps | TypoAsExternalLinkProps;
 
-const Typography = memo(({ className, ...props }: Props) => {
+function Typography({ className, ...props }: Props) {
   const classes = cx(
     {
       link: props.to,
@@ -44,6 +44,6 @@ const Typography = memo(({ className, ...props }: Props) => {
   }
 
   return <MUITypography className={classes} {...props} />;
-});
+}
 
-export default Typography;
+export default memo(Typography);
