@@ -3,7 +3,7 @@ import classNames from 'classnames/bind';
 import { AnchorHTMLAttributes, memo } from 'react';
 import { Link, LinkProps, To } from 'react-router-dom';
 
-import styles from '~/assets/styles/Typography.module.scss';
+import styles from '~/styles/Typography.module.scss';
 
 const cx = classNames.bind(styles);
 
