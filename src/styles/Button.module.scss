@@ -1,0 +1,19 @@
+.btn {
+  & + .btn {
+    margin-left: 8px;
+  }
+
+  &.disable-gutter {
+    margin-left: unset;
+  }
+
+  &.disable-text-transform {
+    text-transform: unset;
+  }
+
+  &.loading {
+    display: flex;
+    gap: 0.5em;
+    align-items: center;
+  }
+}
