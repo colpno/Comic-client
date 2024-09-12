@@ -1,3 +1,5 @@
+export { default as Image } from './Image.tsx';
+export { default as Slider } from './Slider/Slider.tsx';
 export { default as Typography } from './Typography.tsx';
 
 export { default as Button } from './form/components/Button.tsx';

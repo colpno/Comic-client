@@ -1,0 +1,59 @@
+import { Box } from '@mui/material';
+import { memo, useId, useState } from 'react';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
+import { Swiper, SwiperClass, SwiperProps, SwiperSlide, SwiperSlideProps } from 'swiper/react';
+
+import SliderNavigators from './components/SliderNavigators.tsx';
+import { getModules } from './helpers/getModules.ts';
+
+export interface SliderProps extends SwiperProps {
+  slidesProps?: Omit<SwiperSlideProps, 'children'>;
+}
+
+function Slider(props: SliderProps) {
+  const { children, slidesProps, modules = [], ...swiperProps } = props;
+  const [swiper, setSwiper] = useState<SwiperClass>();
+  const id = useId();
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- unused, just for re-rendering navigators when slide change
+  const [_slideIndex, setSlideIndex] = useState(0);
+
+  modules.concat(getModules(props));
+
+  const handleSlideChange = (swp: SwiperClass) => setSlideIndex(swp.activeIndex);
+
+  return (
+    <Box
+      sx={{
+        // Hide default navigation buttons
+        '& .swiper-button-next, & .swiper-button-prev': {
+          display: 'none',
+        },
+      }}
+      className="relative"
+    >
+      <Swiper
+        modules={modules}
+        {...swiperProps}
+        onSwiper={setSwiper}
+        onSlideChange={handleSlideChange}
+      >
+        {Array.isArray(children) ? (
+          children.map((child, index) => (
+            <SwiperSlide {...slidesProps} key={`slide-${id}-${index}`}>
+              {child}
+            </SwiperSlide>
+          ))
+        ) : (
+          <SwiperSlide {...slidesProps}>{children}</SwiperSlide>
+        )}
+      </Swiper>
+      <SliderNavigators swiper={swiper} />
+    </Box>
+  );
+}
+
+export default memo(Slider);
