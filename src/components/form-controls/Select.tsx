@@ -1,5 +1,4 @@
-import FormControl from '@mui/material/FormControl/FormControl';
-import FormHelperText from '@mui/material/FormHelperText/FormHelperText';
+import { FormControl, FormHelperText } from '@mui/material';
 import { memo } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 

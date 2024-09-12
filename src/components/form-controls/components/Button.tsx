@@ -1,4 +1,4 @@
-import MUIButton from '@mui/material/Button/Button';
+import { Button as MUIButton } from '@mui/material';
 import classNames from 'classnames/bind';
 import { memo } from 'react';
 import { Link } from 'react-router-dom';

@@ -1,5 +1,4 @@
-import { CircularProgress } from '@mui/material';
-import Backdrop from '@mui/material/Backdrop/Backdrop';
+import { Backdrop, CircularProgress } from '@mui/material';
 import { useSelector } from 'react-redux';
 
 import { RootState } from '~/libs/redux/store.ts';

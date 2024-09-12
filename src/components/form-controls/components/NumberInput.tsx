@@ -1,9 +1,12 @@
-import IconButton, { IconButtonProps } from '@mui/material/IconButton/IconButton';
-import InputAdornment from '@mui/material/InputAdornment/InputAdornment';
-import { InputBaseComponentProps } from '@mui/material/InputBase/InputBase';
-import Stack from '@mui/material/Stack/Stack';
+import { KeyboardArrowDown, KeyboardArrowUp } from '@mui/icons-material';
+import {
+  IconButton,
+  IconButtonProps,
+  InputAdornment,
+  InputBaseComponentProps,
+  Stack,
+} from '@mui/material';
 import { forwardRef, useState } from 'react';
-import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
 import { NumericFormat, NumericFormatProps } from 'react-number-format';
 
 import { NumberInputProps, TextInputChangeEvent } from '~/types/formControls.ts';
@@ -128,7 +131,7 @@ const NumberInput = forwardRef<HTMLDivElement, NumberInputProps>(function Number
                     onClick={increment}
                     {...commonAdornmentButtonProps}
                   >
-                    <FaAngleUp fontSize={size} />
+                    <KeyboardArrowUp fontSize={size} />
                   </IconButton>
                   <IconButton
                     aria-label={'decrementAriaLabel'}
@@ -136,7 +139,7 @@ const NumberInput = forwardRef<HTMLDivElement, NumberInputProps>(function Number
                     onClick={decrement}
                     {...commonAdornmentButtonProps}
                   >
-                    <FaAngleDown fontSize={size} />
+                    <KeyboardArrowDown fontSize={size} />
                   </IconButton>
                 </Stack>
               </InputAdornment>

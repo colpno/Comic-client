@@ -1,10 +1,9 @@
-import FormControl, { FormControlProps } from '@mui/material/FormControl/FormControl';
-import FormHelperText from '@mui/material/FormHelperText/FormHelperText';
+import { FormControl, FormControlProps, FormHelperText } from '@mui/material';
 import {
   DatePicker as MUIDatePicker,
   DatePickerProps as MUIDatePickerProps,
-} from '@mui/x-date-pickers/DatePicker';
-import { PickerValidDate } from '@mui/x-date-pickers/models/pickers';
+  PickerValidDate,
+} from '@mui/x-date-pickers';
 import moment from 'moment';
 import { memo } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';

@@ -1,4 +1,4 @@
-import MUITypography, { TypographyProps } from '@mui/material/Typography/Typography';
+import { Typography as MUITypography, TypographyProps } from '@mui/material';
 import classNames from 'classnames/bind';
 import { AnchorHTMLAttributes, memo } from 'react';
 import { Link, LinkProps, To } from 'react-router-dom';

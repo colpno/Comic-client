@@ -1,10 +1,12 @@
-import Checkbox from '@mui/material/Checkbox/Checkbox';
-import FormControl from '@mui/material/FormControl/FormControl';
-import FormControlLabel from '@mui/material/FormControlLabel/FormControlLabel';
-import FormGroup from '@mui/material/FormGroup/FormGroup';
-import FormHelperText from '@mui/material/FormHelperText/FormHelperText';
-import FormLabel from '@mui/material/FormLabel/FormLabel';
-import useTheme from '@mui/material/styles/useTheme';
+import {
+  Checkbox,
+  FormControl,
+  FormControlLabel,
+  FormGroup,
+  FormHelperText,
+  FormLabel,
+  useTheme,
+} from '@mui/material';
 import { InputHTMLAttributes, memo } from 'react';
 import { Controller, ControllerRenderProps, useFormContext } from 'react-hook-form';
 

@@ -1,10 +1,7 @@
-import Box from '@mui/material/Box/Box';
-import FormControl from '@mui/material/FormControl/FormControl';
-import FormHelperText from '@mui/material/FormHelperText/FormHelperText';
-import Grid from '@mui/material/Grid/Grid';
+import { Close } from '@mui/icons-material';
+import { Box, FormControl, FormHelperText, Grid } from '@mui/material';
 import { forwardRef, memo, Ref } from 'react';
 import { Control, Controller, FieldError, useFieldArray, useFormContext } from 'react-hook-form';
-import { IoClose } from 'react-icons/io5';
 
 import { Button } from '~/components/index.ts';
 import { ButtonProps } from '~/types/formControls.ts';
@@ -143,7 +140,7 @@ function ButtonDelete(props: ButtonProps) {
       style={{ width: 'unset', height: 'unset' }}
       {...props}
     >
-      <IoClose />
+      <Close />
     </Button>
   );
 }

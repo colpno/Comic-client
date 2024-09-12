@@ -1,5 +1,4 @@
-import useTheme from '@mui/material/styles/useTheme';
-import useMediaQuery from '@mui/material/useMediaQuery';
+import { useMediaQuery, useTheme } from '@mui/material';
 
 type Device = 'mobile' | 'tablet' | 'desktop';
 

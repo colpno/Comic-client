@@ -1,9 +1,9 @@
 import {
   AutocompleteProps as MUIAutocompleteProps,
   AutocompleteValue as MUIAutocompleteValue,
-} from '@mui/material/Autocomplete/Autocomplete';
-import { ButtonProps as MUIButtonProps } from '@mui/material/Button/Button';
-import { TextFieldProps as MUITextFieldProps } from '@mui/material/TextField/TextField';
+  ButtonProps as MUIButtonProps,
+  TextFieldProps as MUITextFieldProps,
+} from '@mui/material';
 import { AnchorHTMLAttributes, ReactNode } from 'react';
 import { NumericFormatProps } from 'react-number-format/types/types';
 import { LinkProps, To } from 'react-router-dom';

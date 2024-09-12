@@ -1,10 +1,12 @@
-import FormControl from '@mui/material/FormControl/FormControl';
-import FormControlLabel from '@mui/material/FormControlLabel/FormControlLabel';
-import FormHelperText from '@mui/material/FormHelperText/FormHelperText';
-import FormLabel from '@mui/material/FormLabel/FormLabel';
-import Radio from '@mui/material/Radio/Radio';
-import MUIRadioGroup from '@mui/material/RadioGroup/RadioGroup';
-import useTheme from '@mui/material/styles/useTheme';
+import {
+  FormControl,
+  FormControlLabel,
+  FormHelperText,
+  FormLabel,
+  Radio,
+  RadioGroup as MUIRadioGroup,
+  useTheme,
+} from '@mui/material';
 import { InputHTMLAttributes, memo } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 

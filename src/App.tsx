@@ -1,7 +1,6 @@
-import CssBaseline from '@mui/material/CssBaseline/CssBaseline';
-import ThemeProvider from '@mui/material/styles/ThemeProvider';
+import { CssBaseline, ThemeProvider } from '@mui/material';
+import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider/LocalizationProvider';
 import { Provider } from 'react-redux';
 
 import '~/libs/moment/config.ts';

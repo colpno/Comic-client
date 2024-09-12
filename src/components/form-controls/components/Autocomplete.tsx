@@ -1,5 +1,4 @@
-import MUIAutocomplete from '@mui/material/Autocomplete/Autocomplete';
-import MUITextField from '@mui/material/TextField/TextField';
+import { Autocomplete as MUIAutocomplete, TextField as MUITextField } from '@mui/material';
 import { forwardRef, Ref } from 'react';
 
 import { AutocompleteOption, AutocompleteProps, AutocompleteValue } from '~/types/formControls';

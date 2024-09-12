@@ -1,4 +1,4 @@
-import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
+import { KeyboardArrowLeft, KeyboardArrowRight } from '@mui/icons-material';
 import { SwiperClass } from 'swiper/react';
 
 import { Button } from '~/components/index.ts';
@@ -28,14 +28,14 @@ function SliderNavigators({ swiper }: SwiperNavButtonsProps) {
         className={`${className} -left-6 ${isBeginning ? 'opacity-0' : ''}`}
         onClick={handleClickPrev}
       >
-        <MdKeyboardArrowLeft />
+        <KeyboardArrowLeft />
       </Button>
       <Button
         unstyled
         className={`${className} -right-6 ${isEnd ? 'opacity-0' : ''}`}
         onClick={handleClickNext}
       >
-        <MdKeyboardArrowRight />
+        <KeyboardArrowRight />
       </Button>
     </>
   );

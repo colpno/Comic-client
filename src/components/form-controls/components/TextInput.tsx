@@ -1,4 +1,4 @@
-import TextField from '@mui/material/TextField/TextField';
+import { TextField } from '@mui/material';
 import { forwardRef, Ref, useState } from 'react';
 
 import { useDeviceWatcher } from '~/hooks/index.ts';
