@@ -4,6 +4,7 @@ import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider/LocalizationProvider';
 import { Provider } from 'react-redux';
 
+import '~/libs/moment/config.ts';
 import { theme } from './libs/mui/theme.ts';
 import store from './libs/redux/store.ts';
 import { LoadingPage } from './pages/index.ts';
