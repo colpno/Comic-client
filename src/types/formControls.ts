@@ -89,21 +89,24 @@ type BaseProps = {
   disableTextTransform?: boolean;
 };
 
-type ButtonAsButtonProps = AssignProps<MUIButtonProps, BaseProps> & {
+type ButtonAsButtonProps = {
   to?: never;
   href?: never;
-};
+  unstyled?: boolean;
+} & AssignProps<MUIButtonProps, BaseProps>;
 
-type ButtonAsLinkProps = AssignProps<LinkProps, BaseProps> &
-  AssignProps<LinkProps, MUIButtonProps> & {
-    to: To;
-    href?: never;
-  };
+type ButtonAsLinkProps = {
+  to: To;
+  href?: never;
+  unstyled?: never;
+} & AssignProps<LinkProps, BaseProps> &
+  AssignProps<LinkProps, MUIButtonProps>;
 
-type ButtonAsExternalLinkProps = AssignProps<ExternalLinkProps, BaseProps> &
-  AssignProps<ExternalLinkProps, MUIButtonProps> & {
-    to?: never;
-    href: ExternalLinkProps['href'];
-  };
+type ButtonAsExternalLinkProps = {
+  to?: never;
+  href: ExternalLinkProps['href'];
+  unstyled?: never;
+} & AssignProps<ExternalLinkProps, BaseProps> &
+  AssignProps<ExternalLinkProps, MUIButtonProps>;
 
 export type ButtonProps = ButtonAsButtonProps | ButtonAsLinkProps | ButtonAsExternalLinkProps;

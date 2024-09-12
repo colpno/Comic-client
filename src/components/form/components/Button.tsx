@@ -3,7 +3,7 @@ import classNames from 'classnames/bind';
 import { memo } from 'react';
 import { Link } from 'react-router-dom';
 
-import styles from '~/assets/styles/Button.module.scss';
+import styles from '~/styles/Button.module.scss';
 import { ButtonProps } from '~/types/formControls.ts';
 
 const cx = classNames.bind(styles);
@@ -14,6 +14,7 @@ function Button({
   loading,
   disableGutter,
   disableTextTransform,
+  unstyled,
   ...props
 }: ButtonProps) {
   const classes = cx(
@@ -30,6 +31,14 @@ function Button({
     variant: 'contained',
     disabled: loading,
   };
+
+  if (unstyled) {
+    return (
+      <button {...props} className={className}>
+        {children}
+      </button>
+    );
+  }
 
   if (props.variant === 'text') {
     defaultProps.color = 'inherit';
