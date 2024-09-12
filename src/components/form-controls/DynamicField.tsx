@@ -8,7 +8,7 @@ import { IoClose } from 'react-icons/io5';
 
 import { Button } from '~/components/index.ts';
 import { ButtonProps } from '~/types/formControls.ts';
-import TextInput from '../components/TextInput.tsx';
+import TextInput from './components/TextInput.tsx';
 
 type RenderInputArgs = { control: InputFieldProps['control'] } & Omit<Props, 'renderInput'>;
 

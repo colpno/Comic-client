@@ -1,25 +1,19 @@
-import FormControl, { FormControlProps } from '@mui/material/FormControl/FormControl';
+import FormControl from '@mui/material/FormControl/FormControl';
 import FormHelperText from '@mui/material/FormHelperText/FormHelperText';
-import { ComponentProps, memo } from 'react';
+import { memo } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 
-import TextInput from '../components/TextInput';
+import { NumberInputProps } from '~/types/formControls.ts';
+import NumberInput from './components/NumberInput.tsx';
 
-interface Props extends Omit<ComponentProps<typeof TextInput>, 'onChange'> {
+interface Props extends NumberInputProps {
   name: string;
   label?: string;
-  uppercase?: boolean;
-  formControlProps?: FormControlProps;
+  fullWidth?: boolean;
 }
 
-function TextField({
-  name,
-  required,
-  fullWidth,
-  formControlProps,
-  defaultValue = null,
-  ...props
-}: Props) {
+function NumberField(props: Props) {
+  const { name, fullWidth, required, defaultValue = null, ...others } = props;
   const {
     control,
     /*
@@ -33,22 +27,17 @@ function TextField({
   const errorMessage = getFieldState(name)?.error?.message;
 
   return (
-    <FormControl
-      error={!!errorMessage}
-      fullWidth={fullWidth}
-      required={required}
-      {...formControlProps}
-    >
+    <FormControl required={required} fullWidth={fullWidth} error={!!errorMessage}>
       <Controller
+        name={name}
         control={control}
         defaultValue={defaultValue}
-        name={name}
         render={({ field }) => (
-          <TextInput
-            {...props}
-            error={!!errorMessage}
-            fullWidth={fullWidth}
+          <NumberInput
+            {...others}
             required={required}
+            fullWidth={fullWidth}
+            error={!!errorMessage}
             {...field}
           />
         )}
@@ -57,4 +46,5 @@ function TextField({
     </FormControl>
   );
 }
-export default memo(TextField);
+
+export default memo(NumberField);

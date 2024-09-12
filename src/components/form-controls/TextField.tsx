@@ -1,19 +1,25 @@
-import FormControl from '@mui/material/FormControl/FormControl';
+import FormControl, { FormControlProps } from '@mui/material/FormControl/FormControl';
 import FormHelperText from '@mui/material/FormHelperText/FormHelperText';
-import { memo } from 'react';
+import { ComponentProps, memo } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 
-import { NumberInputProps } from '~/types/formControls.ts';
-import NumberInput from '../components/NumberInput.tsx';
+import TextInput from './components/TextInput';
 
-interface Props extends NumberInputProps {
+interface Props extends Omit<ComponentProps<typeof TextInput>, 'onChange'> {
   name: string;
   label?: string;
-  fullWidth?: boolean;
+  uppercase?: boolean;
+  formControlProps?: FormControlProps;
 }
 
-function NumberField(props: Props) {
-  const { name, fullWidth, required, defaultValue = null, ...others } = props;
+function TextField({
+  name,
+  required,
+  fullWidth,
+  formControlProps,
+  defaultValue = null,
+  ...props
+}: Props) {
   const {
     control,
     /*
@@ -27,17 +33,22 @@ function NumberField(props: Props) {
   const errorMessage = getFieldState(name)?.error?.message;
 
   return (
-    <FormControl required={required} fullWidth={fullWidth} error={!!errorMessage}>
+    <FormControl
+      error={!!errorMessage}
+      fullWidth={fullWidth}
+      required={required}
+      {...formControlProps}
+    >
       <Controller
-        name={name}
         control={control}
         defaultValue={defaultValue}
+        name={name}
         render={({ field }) => (
-          <NumberInput
-            {...others}
-            required={required}
-            fullWidth={fullWidth}
+          <TextInput
+            {...props}
             error={!!errorMessage}
+            fullWidth={fullWidth}
+            required={required}
             {...field}
           />
         )}
@@ -46,5 +57,4 @@ function NumberField(props: Props) {
     </FormControl>
   );
 }
-
-export default memo(NumberField);
+export default memo(TextField);

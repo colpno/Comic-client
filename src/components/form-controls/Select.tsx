@@ -4,7 +4,7 @@ import { memo } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 
 import { AutocompleteProps } from '~/types/formControls.ts';
-import Autocomplete from '../components/Autocomplete.tsx';
+import Autocomplete from './components/Autocomplete.tsx';
 
 export type SelectProps = Omit<AutocompleteProps, 'name' | 'value' | 'onChange' | 'onBlur'> & {
   name: string;
