@@ -4,6 +4,7 @@ import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { Provider } from 'react-redux';
 
 import '~/libs/moment/config.ts';
+import { Toast } from './components/index.ts';
 import { theme } from './libs/mui/theme.ts';
 import store from './libs/redux/store.ts';
 import { LoadingPage } from './pages/index.ts';
@@ -13,6 +14,7 @@ function App() {
     <ContextWrapper>
       <span className="text-red-500">Hello World!</span>
       <LoadingPage />
+      <Toast />
     </ContextWrapper>
   );
 }
