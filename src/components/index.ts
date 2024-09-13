@@ -1,4 +1,8 @@
-export { default as Form } from './Form/Form.tsx';
+import { lazy } from 'react';
+
+export const Table = lazy(() => import('./Table/Table.tsx'));
+export const Form = lazy(() => import('./Form/Form.tsx'));
+
 export { default as Image } from './Image.tsx';
 export { default as Pagination } from './Pagination.tsx';
 export { default as Slider } from './Slider/Slider.tsx';
