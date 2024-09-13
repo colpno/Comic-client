@@ -1,12 +1,8 @@
 import { Button as MUIButton } from '@mui/material';
-import classNames from 'classnames/bind';
 import { memo } from 'react';
 import { Link } from 'react-router-dom';
 
-import styles from '~/styles/Button.module.scss';
 import { ButtonProps } from '~/types/formControls.ts';
-
-const cx = classNames.bind(styles);
 
 function Button({
   children,
@@ -17,15 +13,11 @@ function Button({
   unstyled,
   ...props
 }: ButtonProps) {
-  const classes = cx(
-    'btn',
-    {
-      loading,
-      ['disable-gutter']: disableGutter,
-      ['disable-text-transform']: disableTextTransform,
-    },
-    className
-  );
+  let classes = `${className} [&_+_&]:ml-2`;
+  if (loading) classes += ' flex gap-2 items-center';
+  if (disableGutter) classes += ' !ml-0';
+  if (disableTextTransform) classes += ' !text-transform-none';
+
   const defaultProps: ButtonProps = {
     type: 'button',
     variant: 'contained',
@@ -54,6 +46,7 @@ function Button({
 
   return (
     <MUIButton {...defaultProps} {...props} className={classes}>
+      <div className="text-3xl bg:red *:border-l-2" />
       {loading ? <LoadingSpinner /> : null}
       {children}
     </MUIButton>

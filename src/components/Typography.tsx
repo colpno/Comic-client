@@ -1,11 +1,6 @@
 import { Typography as MUITypography, TypographyProps } from '@mui/material';
-import classNames from 'classnames/bind';
 import { AnchorHTMLAttributes, memo } from 'react';
 import { Link, LinkProps, To } from 'react-router-dom';
-
-import styles from '~/styles/Typography.module.scss';
-
-const cx = classNames.bind(styles);
 
 type ExternalLinkProps = AnchorHTMLAttributes<HTMLAnchorElement>;
 
@@ -26,24 +21,16 @@ type TypoAsExternalLinkProps = ExternalLinkProps & {
 
 type Props = TypoAsTypoProps | TypoAsLinkProps | TypoAsExternalLinkProps;
 
-function Typography({ className, ...props }: Props) {
-  const classes = cx(
-    {
-      link: props.to,
-      ['external-link']: props.href,
-    },
-    className
-  );
-
+function Typography(props: Props) {
   if (props.to) {
-    return <Link className={classes} {...props} />;
+    return <Link {...props} />;
   }
 
   if (props.href) {
-    return <a className={classes} {...props} />;
+    return <a {...props} />;
   }
 
-  return <MUITypography className={classes} {...props} />;
+  return <MUITypography {...props} />;
 }
 
 export default memo(Typography);
