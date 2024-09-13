@@ -1,0 +1,16 @@
+{
+  "presets": [["@babel/preset-react", { "runtime": "automatic" }], "@babel/preset-typescript"],
+  "plugins": [
+    [
+      "babel-plugin-direct-import",
+      {
+        "modules": [
+          "@mui/material",
+          "@mui/icons-material",
+          "@mui/x-data-grid",
+          "@mui/x-date-pickers"
+        ]
+      }
+    ]
+  ]
+}
