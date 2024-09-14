@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Box, BoxProps } from '@mui/material';
 import { memo, useState } from 'react';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -6,6 +6,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import { Swiper, SwiperClass, SwiperProps, SwiperSlide, SwiperSlideProps } from 'swiper/react';
 import { SwiperModule } from 'swiper/types';
+import { twMerge } from 'tailwind-merge';
 import { v4 } from 'uuid';
 
 import { Omit } from '~/types/common.ts';
@@ -14,6 +15,7 @@ import { getModules } from './helpers/getModules.ts';
 
 export interface SliderProps extends Omit<SwiperProps, 'modules'> {
   slotProps?: SliderNavigatorsProps['slotProps'] & {
+    container?: BoxProps;
     slides?: SwiperSlideProps;
   };
 }
@@ -32,13 +34,15 @@ function Slider(props: SliderProps) {
 
   return (
     <Box
+      {...slotProps?.container}
       sx={{
+        ...slotProps?.container?.sx,
         // Hide default navigation buttons
         '& .swiper-button-next, & .swiper-button-prev': {
           display: 'none',
         },
       }}
-      className="relative"
+      className={twMerge('relative', slotProps?.container?.className)}
     >
       <Swiper
         modules={modules}
