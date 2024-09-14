@@ -1,8 +1,9 @@
 import { Button as MUIButton } from '@mui/material';
 import { memo } from 'react';
 import { Link } from 'react-router-dom';
+import { twMerge } from 'tailwind-merge';
 
-import { ButtonProps } from '~/types/formControls.ts';
+import { ButtonAsUnstyledProps, ButtonProps } from '~/types/formControls.ts';
 
 function Button({
   children,
@@ -13,24 +14,20 @@ function Button({
   unstyled,
   ...props
 }: ButtonProps) {
-  let classes = `${className} [&_+_&]:ml-2`;
-  if (loading) classes += ' flex gap-2 items-center';
-  if (disableGutter) classes += ' !ml-0';
-  if (disableTextTransform) classes += ' !text-transform-none';
+  if (unstyled) {
+    return (
+      <button {...props} type={props.type ?? 'button'} className={className}>
+        {children}
+      </button>
+    );
+  }
 
+  props = props as Exclude<ButtonProps, ButtonAsUnstyledProps>;
   const defaultProps: ButtonProps = {
     type: 'button',
     variant: 'contained',
     disabled: loading,
   };
-
-  if (unstyled) {
-    return (
-      <button {...props} className={className}>
-        {children}
-      </button>
-    );
-  }
 
   if (props.variant === 'text') {
     defaultProps.color = 'inherit';
@@ -45,8 +42,17 @@ function Button({
   }
 
   return (
-    <MUIButton {...defaultProps} {...props} className={classes}>
-      <div className="text-3xl bg:red *:border-l-2" />
+    <MUIButton
+      {...defaultProps}
+      {...props}
+      className={twMerge(
+        '[&_+_&]:ml-2',
+        loading && 'flex gap-2 items-center',
+        disableGutter && '!ml-0',
+        disableTextTransform && '!text-transform-none',
+        className
+      )}
+    >
       {loading ? <LoadingSpinner /> : null}
       {children}
     </MUIButton>
