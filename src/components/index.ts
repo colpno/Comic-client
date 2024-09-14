@@ -9,11 +9,11 @@ export { default as Slider } from './Slider/Slider.tsx';
 export { default as Toast } from './Toast.tsx';
 export { default as Typography } from './Typography.tsx';
 
-export { default as CheckBoxGroup } from './form-controls/CheckBoxGroup.tsx';
-export { default as Button } from './form-controls/components/Button.tsx';
-export { default as DatePicker } from './form-controls/DatePicker.tsx';
-export { default as DynamicField } from './form-controls/DynamicField.tsx';
-export { default as NumberField } from './form-controls/NumberField.tsx';
-export { default as RadioGroup } from './form-controls/RadioGroup.tsx';
-export { default as Select } from './form-controls/Select.tsx';
+export const CheckBoxGroup = lazy(() => import('./form-controls/CheckBoxGroup.tsx'));
+export const Button = lazy(() => import('./form-controls/components/Button.tsx'));
+export const DatePicker = lazy(() => import('./form-controls/DatePicker.tsx'));
+export const DynamicField = lazy(() => import('./form-controls/DynamicField.tsx'));
+export const NumberField = lazy(() => import('./form-controls/NumberField.tsx'));
+export const RadioGroup = lazy(() => import('./form-controls/RadioGroup.tsx'));
+export const Select = lazy(() => import('./form-controls/Select.tsx'));
 export { default as TextField } from './form-controls/TextField.tsx';
