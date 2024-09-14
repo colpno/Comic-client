@@ -13,9 +13,9 @@ interface ImageAsImageProps extends ImgHTMLAttributes<HTMLImageElement> {
   lazy?: never;
 }
 
-type Props = ImageAsImageProps | ImageAsLazyImageProps;
+export type ImageProps = ImageAsImageProps | ImageAsLazyImageProps;
 
-function Image({ lazy, ...imgProps }: Props) {
+function Image({ lazy, ...imgProps }: ImageProps) {
   if (lazy) {
     return <LazyLoadImage {...imgProps} effect="blur" placeholderSrc={PlaceholderImage} />;
   }

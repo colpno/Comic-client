@@ -1,11 +1,11 @@
 import { Cancel } from '@mui/icons-material';
 import { GridActionsCellItem } from '@mui/x-data-grid';
 
-export interface TableCancelCell {
+interface Props {
   onClick: () => void;
 }
 
-function TableCancelActionButton(props: TableCancelCell) {
+function TableCancelActionButton(props: Props) {
   return <GridActionsCellItem icon={<Cancel />} label="Cancel" color="inherit" {...props} />;
 }
 

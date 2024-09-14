@@ -3,11 +3,11 @@ import { SwiperClass } from 'swiper/react';
 
 import { Button } from '~/components/index.ts';
 
-interface SwiperNavButtonsProps {
+export interface SliderNavigatorsProps {
   swiper?: SwiperClass;
 }
 
-function SliderNavigators({ swiper }: SwiperNavButtonsProps) {
+function SliderNavigators({ swiper }: SliderNavigatorsProps) {
   const isBeginning = swiper?.isBeginning;
   const isEnd = swiper?.isEnd;
   const noSlide = swiper?.slides?.length === 0;

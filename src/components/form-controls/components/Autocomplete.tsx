@@ -1,10 +1,10 @@
 import { Autocomplete as MUIAutocomplete, TextField as MUITextField } from '@mui/material';
 import { forwardRef, Ref } from 'react';
 
-import { AutocompleteOption, AutocompleteProps, AutocompleteValue } from '~/types/formControls';
+import { AutocompleteProps, AutocompleteValue, Option } from '~/types/formControls';
 
 const Autocomplete = forwardRef(
-  <T extends AutocompleteOption>(
+  <T extends Option>(
     {
       options = [],
       value: valueProp,

@@ -3,11 +3,11 @@ import { IconButton } from '@mui/material';
 
 import { useTableContext } from '~/contexts/TableContext.ts';
 
-interface Props {
+interface ToolbarAddButtonProps {
   onClick: () => void;
 }
 
-function ToolbarAddButton(props: Props) {
+function ToolbarAddButton(props: ToolbarAddButtonProps) {
   const { disableAdd } = useTableContext();
 
   if (disableAdd) return null;

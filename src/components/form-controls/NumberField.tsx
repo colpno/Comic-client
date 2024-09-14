@@ -5,13 +5,13 @@ import { Controller, useFormContext } from 'react-hook-form';
 import { NumberInputProps } from '~/types/formControls.ts';
 import NumberInput from './components/NumberInput.tsx';
 
-interface Props extends NumberInputProps {
+export interface NumberFieldProps extends NumberInputProps {
   name: string;
   label?: string;
   fullWidth?: boolean;
 }
 
-function NumberField(props: Props) {
+function NumberField(props: NumberFieldProps) {
   const { name, fullWidth, required, defaultValue = null, ...others } = props;
   const {
     control,

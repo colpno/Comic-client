@@ -1,11 +1,11 @@
 import { Save } from '@mui/icons-material';
 import { GridActionsCellItem } from '@mui/x-data-grid';
 
-export interface TableSaveActionButtonProps {
+interface Props {
   onClick: () => void;
 }
 
-function TableSaveActionButton(props: TableSaveActionButtonProps) {
+function TableSaveActionButton(props: Props) {
   return <GridActionsCellItem icon={<Save />} label="Save" color="inherit" {...props} />;
 }
 

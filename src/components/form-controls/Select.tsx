@@ -5,10 +5,11 @@ import { Controller, useFormContext } from 'react-hook-form';
 import { AutocompleteProps } from '~/types/formControls.ts';
 import Autocomplete from './components/Autocomplete.tsx';
 
-export type SelectProps = Omit<AutocompleteProps, 'name' | 'value' | 'onChange' | 'onBlur'> & {
+export interface SelectProps
+  extends Omit<AutocompleteProps, 'name' | 'value' | 'onChange' | 'onBlur'> {
   name: string;
   label?: string;
-};
+}
 
 function Select({ name, fullWidth, required, defaultValue, ...props }: SelectProps) {
   const {

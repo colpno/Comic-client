@@ -7,6 +7,7 @@ import { PAGINATION_INITIAL_PAGE } from '~/constants/common.ts';
 import { useDeviceWatcher } from '~/hooks/useDeviceWatcher.ts';
 
 export interface PaginationProps extends Omit<MUIPaginationProps, 'onChange' | 'count'> {
+  /** Total of pages */
   pageCount: number;
   onChange?: (newPage: number) => void;
 }

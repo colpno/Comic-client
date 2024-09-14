@@ -4,7 +4,7 @@ import { Controller, useFormContext } from 'react-hook-form';
 
 import TextInput from './components/TextInput';
 
-interface Props extends Omit<ComponentProps<typeof TextInput>, 'onChange'> {
+export interface TextFieldProps extends Omit<ComponentProps<typeof TextInput>, 'onChange'> {
   name: string;
   label?: string;
   uppercase?: boolean;
@@ -18,7 +18,7 @@ function TextField({
   formControlProps,
   defaultValue = null,
   ...props
-}: Props) {
+}: TextFieldProps) {
   const {
     control,
     /*

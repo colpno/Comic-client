@@ -3,12 +3,12 @@ import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { CSSProperties, memo } from 'react';
 
-interface DraggableProps {
+export interface DraggableWrapperProps {
   children: React.ReactNode;
   itemId: UniqueIdentifier;
 }
 
-function DraggableWrapper({ children, itemId }: DraggableProps) {
+function DraggableWrapper({ children, itemId }: DraggableWrapperProps) {
   const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
     id: itemId,
   });

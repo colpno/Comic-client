@@ -12,7 +12,7 @@ import { useId } from 'react';
 import ToolbarAddButton from './ToolbarAddButton.tsx';
 import ToolbarMultipleDeleteButton from './ToolbarMultipleDeleteButton.tsx';
 
-interface TableToolbarProps extends GridToolbarProps {
+export interface TableToolbarProps extends GridToolbarProps {
   setRows: (newRows: (oldRows: GridRowsProp) => GridRowsProp) => void;
   setRowModesModel: (newModel: (oldModel: GridRowModesModel) => GridRowModesModel) => void;
 }

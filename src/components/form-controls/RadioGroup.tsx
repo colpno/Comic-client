@@ -15,14 +15,15 @@ export interface Option {
   value: string | boolean;
 }
 
-interface Props extends Omit<InputHTMLAttributes<HTMLInputElement>, 'defaultValue' | 'name'> {
+export interface RadioGroupProps
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'defaultValue' | 'name'> {
   name: string;
   label?: string;
   options: Option[];
   defaultValue?: Option;
 }
 
-function RadioGroup(props: Props) {
+function RadioGroup(props: RadioGroupProps) {
   const { label, name, options, required, defaultValue = null } = props;
   const theme = useTheme();
   const {

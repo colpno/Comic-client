@@ -1,7 +1,7 @@
 import { Close, Visibility, VisibilityOff } from '@mui/icons-material';
 import { IconButton, InputAdornment } from '@mui/material';
 
-interface AdornmentProps {
+export interface AdornmentProps {
   onClick: () => void;
 }
 
@@ -15,7 +15,7 @@ export const EraseAdornment = ({ onClick }: AdornmentProps) => {
   );
 };
 
-interface ShowPasswordAdornmentProps extends AdornmentProps {
+export interface ShowPasswordAdornmentProps extends AdornmentProps {
   showPassword: boolean;
 }
 

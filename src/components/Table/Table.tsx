@@ -26,9 +26,13 @@ export interface TableProps
     | 'slots'
     | 'slotProps'
   > {
+  /** Disable the ability of deleting rows individually. */
   disableDelete?: boolean;
+  /** Disable the ability of editing rows. */
   disableEdit?: boolean;
+  /** Disable the ability of adding a new record. */
   disableAdd?: boolean;
+  /** Sort a column. */
   sort?: Exclude<GridSortModel, []>;
 }
 

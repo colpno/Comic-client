@@ -1,11 +1,11 @@
 import { Delete } from '@mui/icons-material';
 import { GridActionsCellItem } from '@mui/x-data-grid';
 
-export interface TableDeleteActionButtonProps {
+interface Props {
   onClick: () => void;
 }
 
-function TableDeleteActionButton(props: TableDeleteActionButtonProps) {
+function TableDeleteActionButton(props: Props) {
   return <GridActionsCellItem icon={<Delete />} label="Delete" color="inherit" {...props} />;
 }
 

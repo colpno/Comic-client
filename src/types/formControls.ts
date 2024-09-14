@@ -11,7 +11,7 @@ import { LinkProps, To } from 'react-router-dom';
 /* 
   Autocomplete
 */
-export type AutocompleteOption = {
+export type Option = {
   groupByProperty?: string;
   label: string;
   value: string;
@@ -22,7 +22,7 @@ type CustomTextFieldProps = Omit<
   'label' | 'error' | 'InputLabelProps' | 'fullWidth' | 'placeholder'
 >;
 
-type CustomAutocompleteProps<T extends AutocompleteOption> = Omit<
+type CustomAutocompleteProps<T extends Option> = Omit<
   MUIAutocompleteProps<T, boolean | undefined, boolean | undefined, boolean | undefined>,
   'onChange' | 'renderInput'
 >;
@@ -34,8 +34,7 @@ export type AutocompleteValue<T> = MUIAutocompleteValue<
   boolean | undefined
 >;
 
-export interface AutocompleteProps<T extends AutocompleteOption = AutocompleteOption>
-  extends CustomAutocompleteProps<T> {
+export interface AutocompleteProps<T extends Option = Option> extends CustomAutocompleteProps<T> {
   name?: string;
   label?: string;
   error?: boolean;

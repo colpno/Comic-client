@@ -7,19 +7,22 @@ import { Button } from '~/components/index.ts';
 import { ButtonProps } from '~/types/formControls.ts';
 import TextInput from './components/TextInput.tsx';
 
-type RenderInputArgs = { control: InputFieldProps['control'] } & Omit<Props, 'renderInput'>;
+type RenderInputArgs = { control: InputFieldProps['control'] } & Omit<
+  DynamicFieldProps,
+  'renderInput'
+>;
 
-type InputFieldProps = {
+interface InputFieldProps extends DynamicFieldProps {
   error?: boolean;
   index: number;
   control: Control;
-} & Props;
+}
 
 interface Errors {
   [key: string | number]: FieldError;
 }
 
-interface Props {
+export interface DynamicFieldProps {
   name: string;
   label?: string;
   required?: boolean;
@@ -29,7 +32,10 @@ interface Props {
 }
 
 const DynamicField = forwardRef(
-  ({ name, required, fullWidth, disabled, ...props }: Props, ref: Ref<HTMLInputElement>) => {
+  (
+    { name, required, fullWidth, disabled, ...props }: DynamicFieldProps,
+    ref: Ref<HTMLInputElement>
+  ) => {
     const {
       control,
       /*
