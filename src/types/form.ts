@@ -3,7 +3,7 @@ import { FieldValues, UseFormProps, UseFormReset, UseFormSetValue } from 'react-
 import { ZodSchema } from 'zod';
 
 export interface ChildrenProps<FormValues extends FieldValues> {
-  formID: Exclude<HTMLAttributes<HTMLFormElement>['id'], undefined>;
+  formId: Exclude<HTMLAttributes<HTMLFormElement>['id'], undefined>;
   reset: UseFormReset<FormValues>;
 }
 

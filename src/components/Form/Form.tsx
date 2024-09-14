@@ -29,7 +29,7 @@ function Form<FormValueTypes extends FieldValues>(props: FormProps<FormValueType
     setValue,
   } = useFormStates;
 
-  const formID = `form-${useId()}`;
+  const formId = `form-${useId()}`;
 
   //   Watch for changes in the form fields
   useEffect(() => {
@@ -59,8 +59,8 @@ function Form<FormValueTypes extends FieldValues>(props: FormProps<FormValueType
 
   return (
     <FormProvider {...useFormStates}>
-      <form {...formProps} id={formID} onSubmit={handleSubmit(submitHandler)}>
-        {typeof children === 'function' ? children({ formID, reset }) : children}
+      <form {...formProps} id={formId} onSubmit={handleSubmit(submitHandler)}>
+        {typeof children === 'function' ? children({ formId: formId, reset }) : children}
       </form>
     </FormProvider>
   );
