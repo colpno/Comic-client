@@ -14,28 +14,28 @@ export interface PaginationProps extends Omit<MUIPaginationProps, 'onChange' | '
 function Pagination({
   shape = 'rounded',
   color = 'primary',
-  siblingCount = 2,
   defaultPage = PAGINATION_INITIAL_PAGE,
   pageCount,
+  siblingCount,
   onChange,
   ...props
 }: PaginationProps) {
   const isMobile = useDeviceWatcher() === 'mobile';
   if (isMobile) {
-    siblingCount = 1;
-    props.hidePrevButton = true;
-    props.hideNextButton = true;
+    siblingCount = siblingCount ?? 1;
+    props.hidePrevButton = props.hidePrevButton ?? true;
+    props.hideNextButton = props.hideNextButton ?? true;
   }
 
   if (!pageCount || pageCount <= 0) return null;
 
   return (
     <MUIPagination
+      {...props}
       shape={shape}
       count={pageCount}
-      siblingCount={siblingCount}
       color={color}
-      {...props}
+      siblingCount={siblingCount ?? 2}
       defaultPage={defaultPage}
       onChange={(_, newPage) => onChange?.(newPage)}
     />
