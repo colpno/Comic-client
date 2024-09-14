@@ -12,6 +12,7 @@ function Button({
   disableGutter,
   disableTextTransform,
   unstyled,
+  disabled,
   ...props
 }: ButtonProps) {
   if (unstyled) {
@@ -23,28 +24,25 @@ function Button({
   }
 
   props = props as Exclude<ButtonProps, ButtonAsUnstyledProps>;
-  const defaultProps: ButtonProps = {
-    type: 'button',
-    variant: 'contained',
-    disabled: loading,
-  };
 
   if (props.variant === 'text') {
-    defaultProps.color = 'inherit';
+    props.color = 'inherit';
   }
 
   if (props.to) {
-    defaultProps.LinkComponent = Link;
+    props.LinkComponent = Link;
   }
 
   if (props.href) {
-    defaultProps.LinkComponent = 'a';
+    props.LinkComponent = 'a';
   }
 
   return (
     <MUIButton
-      {...defaultProps}
+      type="button"
+      variant="contained"
       {...props}
+      disabled={disabled || loading}
       className={twMerge(
         '[&_+_&]:ml-2',
         loading && 'flex gap-2 items-center',
