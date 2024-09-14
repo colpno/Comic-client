@@ -10,7 +10,7 @@ function LoadingPage() {
 
   return (
     <Backdrop style={{ backdropFilter: 'blur(2px)' }} open={true}>
-      <div className="relative size-12 sm:size-16 md:size-24 lg:size-28 rounded-full flex items-center justify-center text-white">
+      <div className="relative flex items-center justify-center text-white rounded-full size-12 sm:size-16 md:size-24 lg:size-28">
         <CircularProgress color="inherit" />
         <span className="absolute size-full bg-gray-300 rounded-[inherit] opacity-60 animate-[loadingPulse_4s_ease-out_infinite_1s]" />
       </div>
