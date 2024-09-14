@@ -1,12 +1,13 @@
 import { Box } from '@mui/material';
-import { memo, useId, useState } from 'react';
+import { memo, useState } from 'react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
-import { Swiper, SwiperClass, SwiperProps, SwiperSlide, SwiperSlideProps } from 'swiper/react';
+import { Swiper, SwiperClass, SwiperProps, SwiperSlideProps } from 'swiper/react';
 
 import SliderNavigators from './components/SliderNavigators.tsx';
+import SliderSlides from './components/SliderSlides.tsx';
 import { getModules } from './helpers/getModules.ts';
 
 export interface SliderProps extends SwiperProps {
@@ -16,7 +17,6 @@ export interface SliderProps extends SwiperProps {
 function Slider(props: SliderProps) {
   const { children, slidesProps, modules = [], ...swiperProps } = props;
   const [swiper, setSwiper] = useState<SwiperClass>();
-  const id = useId();
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars -- unused, just for re-rendering navigators when slide change
   const [_slideIndex, setSlideIndex] = useState(0);
@@ -41,15 +41,7 @@ function Slider(props: SliderProps) {
         onSwiper={setSwiper}
         onSlideChange={handleSlideChange}
       >
-        {Array.isArray(children) ? (
-          children.map((child, index) => (
-            <SwiperSlide {...slidesProps} key={`slide-${id}-${index}`}>
-              {child}
-            </SwiperSlide>
-          ))
-        ) : (
-          <SwiperSlide {...slidesProps}>{children}</SwiperSlide>
-        )}
+        <SliderSlides {...slidesProps}>{children}</SliderSlides>
       </Swiper>
       <SliderNavigators swiper={swiper} />
     </Box>
