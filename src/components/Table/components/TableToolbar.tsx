@@ -8,6 +8,7 @@ import {
   useGridApiContext,
 } from '@mui/x-data-grid';
 import { useId } from 'react';
+import { twMerge } from 'tailwind-merge';
 
 import ToolbarAddButton from './ToolbarAddButton.tsx';
 import ToolbarMultipleDeleteButton from './ToolbarMultipleDeleteButton.tsx';
@@ -17,7 +18,12 @@ export interface TableToolbarProps extends GridToolbarProps {
   setRowModesModel: (newModel: (oldModel: GridRowModesModel) => GridRowModesModel) => void;
 }
 
-function TableToolbar({ setRows, setRowModesModel, ...gridToolbarProps }: TableToolbarProps) {
+function TableToolbar({
+  setRows,
+  setRowModesModel,
+  className,
+  ...gridToolbarProps
+}: TableToolbarProps) {
   const id = useId();
   const { current } = useGridApiContext();
   const { getSelectedRows } = current;
@@ -43,7 +49,12 @@ function TableToolbar({ setRows, setRowModesModel, ...gridToolbarProps }: TableT
   };
 
   return (
-    <GridToolbarContainer className="flex flex-col-reverse sm:flex-row sm:justify-between sm:items-center">
+    <GridToolbarContainer
+      className={twMerge(
+        'flex flex-col-reverse sm:flex-row sm:justify-between sm:items-center',
+        className
+      )}
+    >
       <div>
         <ToolbarMultipleDeleteButton onClick={handleMultipleDeleteClick} />
         <ToolbarAddButton onClick={handleAddClick} />

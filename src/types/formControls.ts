@@ -4,7 +4,7 @@ import {
   ButtonProps as MUIButtonProps,
   TextFieldProps as MUITextFieldProps,
 } from '@mui/material';
-import { AnchorHTMLAttributes, ReactNode } from 'react';
+import { AnchorHTMLAttributes, ButtonHTMLAttributes, HTMLProps, ReactNode } from 'react';
 import { NumericFormatProps } from 'react-number-format/types/types';
 import { LinkProps, To } from 'react-router-dom';
 
@@ -88,24 +88,35 @@ type BaseProps = {
   disableTextTransform?: boolean;
 };
 
-type ButtonAsButtonProps = {
+export type ButtonAsButtonProps = {
+  to?: never;
+  href?: never;
+  unstyled?: never;
+} & AssignProps<MUIButtonProps, BaseProps>;
+
+export type ButtonAsUnstyledProps = {
   to?: never;
   href?: never;
   unstyled?: boolean;
-} & AssignProps<MUIButtonProps, BaseProps>;
+} & AssignProps<ButtonHTMLAttributes<HTMLButtonElement>, BaseProps> &
+  HTMLProps<HTMLButtonElement>;
 
-type ButtonAsLinkProps = {
+export type ButtonAsLinkProps = {
   to: To;
   href?: never;
   unstyled?: never;
 } & AssignProps<LinkProps, BaseProps> &
   AssignProps<LinkProps, MUIButtonProps>;
 
-type ButtonAsExternalLinkProps = {
+export type ButtonAsExternalLinkProps = {
   to?: never;
   href: ExternalLinkProps['href'];
   unstyled?: never;
 } & AssignProps<ExternalLinkProps, BaseProps> &
   AssignProps<ExternalLinkProps, MUIButtonProps>;
 
-export type ButtonProps = ButtonAsButtonProps | ButtonAsLinkProps | ButtonAsExternalLinkProps;
+export type ButtonProps =
+  | ButtonAsButtonProps
+  | ButtonAsUnstyledProps
+  | ButtonAsLinkProps
+  | ButtonAsExternalLinkProps;

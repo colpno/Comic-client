@@ -1,23 +1,27 @@
-import { Box } from '@mui/material';
+import { Box, BoxProps } from '@mui/material';
 import { memo, useState } from 'react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
-import { Swiper, SwiperClass, SwiperProps, SwiperSlideProps } from 'swiper/react';
+import { Swiper, SwiperClass, SwiperProps, SwiperSlide, SwiperSlideProps } from 'swiper/react';
 import { SwiperModule } from 'swiper/types';
+import { twMerge } from 'tailwind-merge';
+import { v4 } from 'uuid';
 
 import { Omit } from '~/types/common.ts';
-import SliderNavigators from './components/SliderNavigators.tsx';
-import SliderSlides from './components/SliderSlides.tsx';
+import SliderNavigators, { SliderNavigatorsProps } from './components/SliderNavigators.tsx';
 import { getModules } from './helpers/getModules.ts';
 
 export interface SliderProps extends Omit<SwiperProps, 'modules'> {
-  slidesProps?: Omit<SwiperSlideProps, 'children'>;
+  slotProps?: SliderNavigatorsProps['slotProps'] & {
+    container?: BoxProps;
+    slides?: SwiperSlideProps;
+  };
 }
 
 function Slider(props: SliderProps) {
-  const { children, slidesProps, ...swiperProps } = props;
+  const { children, slotProps, ...swiperProps } = props;
   const [swiper, setSwiper] = useState<SwiperClass>();
   const modules: SwiperModule[] = [];
 
@@ -30,13 +34,15 @@ function Slider(props: SliderProps) {
 
   return (
     <Box
+      {...slotProps?.container}
       sx={{
+        ...slotProps?.container?.sx,
         // Hide default navigation buttons
         '& .swiper-button-next, & .swiper-button-prev': {
           display: 'none',
         },
       }}
-      className="relative"
+      className={twMerge('relative', slotProps?.container?.className)}
     >
       <Swiper
         modules={modules}
@@ -44,9 +50,17 @@ function Slider(props: SliderProps) {
         onSwiper={setSwiper}
         onSlideChange={handleSlideChange}
       >
-        <SliderSlides {...slidesProps}>{children}</SliderSlides>
+        {Array.isArray(children) ? (
+          children.map((child, index) => (
+            <SwiperSlide {...slotProps?.slides} key={`slide-${v4()}-${index}`}>
+              {child}
+            </SwiperSlide>
+          ))
+        ) : (
+          <SwiperSlide {...slotProps?.slides}>{children}</SwiperSlide>
+        )}
       </Swiper>
-      <SliderNavigators swiper={swiper} />
+      {props.navigation ? <SliderNavigators slotProps={slotProps} swiper={swiper} /> : null}
     </Box>
   );
 }
