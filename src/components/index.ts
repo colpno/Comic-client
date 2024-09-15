@@ -13,6 +13,7 @@ export { default as Slider } from './Slider/Slider.tsx';
 export { default as LinkTabs } from './tabs/LinkTabs.tsx';
 export { default as Tab } from './tabs/Tab.tsx';
 export { default as Tabs } from './tabs/Tabs.tsx';
+export { default as TabsWrapper } from './tabs/TabsWrapper.tsx';
 export { default as Toast } from './Toast.tsx';
 export { default as Typography } from './Typography.tsx';
 
