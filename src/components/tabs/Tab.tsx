@@ -12,7 +12,7 @@ export interface TabAsTabProps extends BaseProps {
   to?: never;
 }
 
-export interface TabAsLinkProps extends Omit<BaseProps, 'value'> {
+export interface TabAsLinkProps extends Omit<BaseProps, 'value' | 'component'> {
   /** Internal link. @example '/users/1' */
   to: To;
   /** Route. @example '/users/add' */
