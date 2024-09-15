@@ -1,6 +1,6 @@
 import { useMediaQuery, useTheme } from '@mui/material';
 
-type Device = 'mobile' | 'tablet' | 'desktop';
+export type Device = 'mobile' | 'tablet' | 'desktop';
 
 export const useDeviceWatcher = (): Device => {
   const theme = useTheme();
