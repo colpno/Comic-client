@@ -3,35 +3,70 @@ import { memo, SyntheticEvent, useState } from 'react';
 
 import { useDeviceWatcher } from '~/hooks/useDeviceWatcher.ts';
 import { Omit } from '~/types/common.ts';
+import LinkTabs, { LinkTabsProps } from './LinkTabs.tsx';
+import TabsWrapper from './TabsWrapper.tsx';
 
 export type TabsValue = false | number;
 
-export interface TabsProps extends Omit<MUITabsProps, 'defaultValue' | 'onChange'> {
-  defaultValue?: TabsValue;
-  onChange?: (newValue: TabsValue) => void;
+interface BaseProps {
+  children: React.ReactNode;
 }
 
-function Tabs({ children, defaultValue = 0, variant, centered, onChange, ...props }: TabsProps) {
-  const [currentTabIndex, setCurrentTabIndex] =
-    useState<Exclude<TabsProps['defaultValue'], undefined>>(defaultValue);
-  const isMobile = useDeviceWatcher() === 'mobile';
+export interface TabsAsTabsProps extends Omit<MUITabsProps, 'defaultValue' | 'onChange' | 'value'> {
+  value?: TabsValue;
+  onChange?: (newValue: TabsValue) => void;
+  routes?: never;
+}
+
+export type TabsProps = (TabsAsTabsProps | LinkTabsProps) & BaseProps;
+
+function Tabs({
+  routes,
+  children,
+  variant: variantProp,
+  value: valueProp,
+  centered: centeredProp,
+  onChange,
+  ...props
+}: TabsProps) {
+  const [currentValue, setCurrentValue] = useState<Exclude<TabsAsTabsProps['value'], undefined>>(
+    valueProp ?? 0
+  );
+  const device = useDeviceWatcher();
+  const isMobile = device === 'mobile';
+  const variant = variantProp ?? isMobile ? 'fullWidth' : 'scrollable';
+  const centered = centeredProp && !isMobile ? false : centeredProp;
 
   const handleChange = (_: SyntheticEvent, newValue: TabsValue) => {
-    setCurrentTabIndex(newValue);
-    onChange?.(newValue);
+    setCurrentValue(newValue);
+    (onChange as TabsAsTabsProps['onChange'])?.(newValue);
   };
 
   return (
-    <MUITabs
-      variant={variant ?? isMobile ? 'fullWidth' : 'scrollable'}
-      centered={centered ?? !isMobile}
-      role="tablist"
-      {...props}
-      value={currentTabIndex}
-      onChange={handleChange}
-    >
-      {children}
-    </MUITabs>
+    <TabsWrapper device={device} {...props} centered={centered}>
+      {routes ? (
+        <LinkTabs
+          {...props}
+          routes={routes}
+          value={valueProp}
+          centered={centered}
+          variant={variant}
+        >
+          {children}
+        </LinkTabs>
+      ) : (
+        <MUITabs
+          role="tablist"
+          {...props}
+          centered={centered}
+          variant={variant}
+          value={currentValue}
+          onChange={handleChange}
+        >
+          {children}
+        </MUITabs>
+      )}
+    </TabsWrapper>
   );
 }
 
