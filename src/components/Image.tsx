@@ -15,12 +15,20 @@ interface ImageAsImageProps extends ImgHTMLAttributes<HTMLImageElement> {
 
 export type ImageProps = ImageAsImageProps | ImageAsLazyImageProps;
 
-function Image({ lazy, ...imgProps }: ImageProps) {
+function Image({ lazy, loading = 'lazy', decoding = 'async', ...imgProps }: ImageProps) {
   if (lazy) {
-    return <LazyLoadImage {...imgProps} effect="blur" placeholderSrc={PlaceholderImage} />;
+    return (
+      <LazyLoadImage
+        {...imgProps}
+        effect="blur"
+        placeholderSrc={PlaceholderImage}
+        loading={loading}
+        decoding={decoding}
+      />
+    );
   }
 
-  return <img {...imgProps} />;
+  return <img {...imgProps} loading={loading} decoding={decoding} />;
 }
 
 export default memo(Image);
