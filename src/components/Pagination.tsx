@@ -28,7 +28,7 @@ function Pagination({
     props.hideNextButton = props.hideNextButton ?? true;
   }
 
-  if (!pageCount || pageCount <= 0) return null;
+  if (!pageCount || pageCount <= 1) return null;
 
   return (
     <MUIPagination
