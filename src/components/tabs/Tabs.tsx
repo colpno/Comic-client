@@ -3,8 +3,8 @@ import { memo, SyntheticEvent, useState } from 'react';
 
 import { useDeviceWatcher } from '~/hooks/useDeviceWatcher.ts';
 import { Omit } from '~/types/common.ts';
-import LinkTabs, { LinkTabsProps } from './LinkTabs.tsx';
-import TabsWrapper from './TabsWrapper.tsx';
+import LinkTabs, { LinkTabsProps } from './components/LinkTabs.tsx';
+import TabsWrapper from './components/TabsWrapper.tsx';
 
 export type TabsValue = false | number;
 
