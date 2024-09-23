@@ -1,7 +1,9 @@
+import { PaginationItem as MUIPaginationItem } from '@mui/material';
 import MUIPagination, {
   PaginationProps as MUIPaginationProps,
 } from '@mui/material/Pagination/Pagination';
-import { memo } from 'react';
+import { memo, useMemo } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
 
 import { PAGINATION_INITIAL_PAGE } from '~/constants/common.ts';
 import { useDeviceWatcher } from '~/hooks/useDeviceWatcher.ts';
@@ -28,6 +30,12 @@ function Pagination({
     props.hideNextButton = props.hideNextButton ?? true;
   }
 
+  const [searchParams] = useSearchParams();
+  const page = useMemo(() => {
+    const pageParam = searchParams.get('page');
+    return (pageParam && parseInt(pageParam)) || defaultPage;
+  }, [defaultPage, searchParams]);
+
   if (!pageCount || pageCount <= 1) return null;
 
   return (
@@ -37,8 +45,14 @@ function Pagination({
       count={pageCount}
       color={color}
       siblingCount={siblingCount ?? 2}
-      defaultPage={defaultPage}
+      page={page}
       onChange={(_, newPage) => onChange?.(newPage)}
+      renderItem={(item) => {
+        const itemPage = item.page?.toString() || PAGINATION_INITIAL_PAGE.toString();
+        searchParams.set('page', itemPage);
+        if (+itemPage === page) return <MUIPaginationItem {...item} />;
+        return <MUIPaginationItem {...item} component={Link} to={`?${searchParams.toString()}`} />;
+      }}
     />
   );
 }
