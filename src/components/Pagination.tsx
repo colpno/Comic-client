@@ -2,7 +2,7 @@ import { PaginationItem as MUIPaginationItem } from '@mui/material';
 import MUIPagination, {
   PaginationProps as MUIPaginationProps,
 } from '@mui/material/Pagination/Pagination';
-import { memo, useMemo } from 'react';
+import { memo, useEffect, useRef } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 
 import { PAGINATION_INITIAL_PAGE } from '~/constants/common.ts';
@@ -31,10 +31,17 @@ function Pagination({
   }
 
   const [searchParams] = useSearchParams();
-  const page = useMemo(() => {
-    const pageParam = searchParams.get('page');
-    return (pageParam && parseInt(pageParam)) || defaultPage;
-  }, [defaultPage, searchParams]);
+  const queryPage = searchParams.get('page');
+  const page = queryPage && /^\d+$/.test(queryPage) ? parseInt(queryPage) : defaultPage;
+  const isFirstMount = useRef(true);
+
+  useEffect(() => {
+    if (isFirstMount.current) {
+      isFirstMount.current = false;
+    } else if (page <= pageCount) {
+      onChange?.(page);
+    }
+  }, [onChange, page, pageCount]);
 
   if (!pageCount || pageCount <= 1) return null;
 
@@ -49,9 +56,11 @@ function Pagination({
       onChange={(_, newPage) => onChange?.(newPage)}
       renderItem={(item) => {
         const itemPage = item.page?.toString() || PAGINATION_INITIAL_PAGE.toString();
-        searchParams.set('page', itemPage);
+        const newParams = new URLSearchParams(searchParams);
+        newParams.set('page', itemPage);
+
         if (+itemPage === page) return <MUIPaginationItem {...item} />;
-        return <MUIPaginationItem {...item} component={Link} to={`?${searchParams.toString()}`} />;
+        return <MUIPaginationItem {...item} component={Link} to={`?${newParams.toString()}`} />;
       }}
     />
   );
