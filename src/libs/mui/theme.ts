@@ -9,9 +9,6 @@ export const theme = createTheme(
       primary: {
         main: '#f50000',
       },
-      background: {
-        default: '#fff',
-      },
     },
   },
   viVN,
