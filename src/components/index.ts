@@ -19,6 +19,7 @@ export { default as TextField } from './form-controls/TextField.tsx';
 export { default as Tab } from './tabs/Tab.tsx';
 export { default as Tabs } from './tabs/Tabs.tsx';
 
+export { default as ComicSlider } from './ComicSlider/ComicSlider.tsx';
 export { default as Slider } from './Slider/Slider.tsx';
 
 export { default as Image } from './Image.tsx';

@@ -21,7 +21,7 @@ function SliderNavigators({ swiper, slotProps }: SliderNavigatorsProps) {
     swiper && swiper.slides && swiper.slides.length <= swiper.slidesPerViewDynamic();
 
   let className =
-    '!absolute top-1/2 -translate-y-1/2 z-10 !bg-white !min-w-0 !rounded-full !p-2 shadow-md text-gray-600 text-4xl transition-opacity ease-out flex items-center justify-center';
+    'absolute z-10 flex items-center justify-center min-w-0 p-2 text-4xl text-gray-600 transition-opacity ease-out -translate-y-1/2 bg-white rounded-full shadow-md top-1/2';
   if (!className.includes('hidden') && (noSlide || notEnoughSlides)) className += ' hidden';
 
   const handleClickPrev = () => swiper && swiper.slidePrev();
@@ -31,6 +31,7 @@ function SliderNavigators({ swiper, slotProps }: SliderNavigatorsProps) {
   return (
     <>
       <Button
+        as="unstyled"
         {...slotProps?.prevButton}
         className={twMerge(
           className,
@@ -43,6 +44,7 @@ function SliderNavigators({ swiper, slotProps }: SliderNavigatorsProps) {
         <KeyboardArrowLeft />
       </Button>
       <Button
+        as="unstyled"
         {...slotProps?.prevButton}
         disableGutter
         className={twMerge(
