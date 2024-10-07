@@ -1,37 +1,37 @@
-import { Container, useTheme } from '@mui/material';
+import { useTheme } from '@mui/material';
 import { useState } from 'react';
-import { Outlet } from 'react-router-dom';
-import { twMerge } from 'tailwind-merge';
+import { Link, Outlet } from 'react-router-dom';
 
 import { Logo } from '~/components/index.ts';
 import { useDeviceWatcher, useScroll } from '~/hooks/index.ts';
+import DefaultHeader from './components/Header.tsx';
 import HeaderActions from './components/HeaderActions.tsx';
 
 function Header() {
-  const theme = useTheme();
   const isMobile = useDeviceWatcher() === 'mobile';
+  const theme = useTheme();
   const [activeHeader, setActiveHeader] = useState(false); // true if the user has scrolled down
   const logoColor = activeHeader ? theme.palette.primary.main : '#fff';
 
   useScroll(() => setActiveHeader(window.scrollY > 100));
 
   return (
-    <header
-      id="header"
-      className={twMerge(
-        'fixed top-0 left-0 right-0 z-header',
-        activeHeader ? 'bg-white shadow-md' : 'bg-transparent'
-      )}
+    <DefaultHeader
+      slotProps={{
+        container: {
+          className: activeHeader ? '' : 'bg-transparent',
+        },
+      }}
     >
-      <Container maxWidth="md" className="flex items-center justify-between">
+      <Link to="/">
         {isMobile ? (
           <Logo variant="small" fill={logoColor} />
         ) : (
           <Logo width={110} height={27} fill={logoColor} />
         )}
-        <HeaderActions />
-      </Container>
-    </header>
+      </Link>
+      <HeaderActions />
+    </DefaultHeader>
   );
 }
 
