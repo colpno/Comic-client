@@ -1,9 +1,19 @@
-import { Button as MUIButton } from '@mui/material';
+import {
+  Button as MUIButton,
+  ButtonProps as MUIButtonProps,
+  IconButton as MUIIconButton,
+} from '@mui/material';
 import { memo } from 'react';
 import { Link } from 'react-router-dom';
 import { twMerge } from 'tailwind-merge';
 
-import { ButtonAsUnstyledProps, ButtonProps } from '~/types/formControls.ts';
+import {
+  ButtonAsButtonProps,
+  ButtonAsExternalLinkProps,
+  ButtonAsIconButtonProps,
+  ButtonAsLinkProps,
+  ButtonProps,
+} from '~/types/formControls.ts';
 
 function Button({
   children,
@@ -11,37 +21,47 @@ function Button({
   loading,
   disableGutter,
   disableTextTransform,
-  unstyled,
   disabled,
+  as,
   ...props
 }: ButtonProps) {
-  if (unstyled) {
-    return (
-      <button {...props} type={props.type ?? 'button'} className={className}>
-        {children}
-      </button>
-    );
+  switch (as) {
+    case 'unstyled':
+      return (
+        <button {...props} type={props.type ?? 'button'} className={className}>
+          {children}
+        </button>
+      );
+    case 'iconButton':
+      return (
+        <MUIIconButton
+          type="button"
+          disabled={disabled || loading}
+          {...(props as ButtonAsIconButtonProps)}
+          className={className}
+        >
+          {children}
+        </MUIIconButton>
+      );
+    case 'link':
+      (props as ButtonAsLinkProps).LinkComponent = Link;
+      break;
+    case 'externalLink':
+      (props as ButtonAsExternalLinkProps).LinkComponent = 'a';
+      break;
+    default:
+      break;
   }
 
-  props = props as Exclude<ButtonProps, ButtonAsUnstyledProps>;
-
-  if (props.variant === 'text') {
+  if ((props as ButtonAsButtonProps).variant === 'text') {
     props.color = 'inherit';
-  }
-
-  if (props.to) {
-    props.LinkComponent = Link;
-  }
-
-  if (props.href) {
-    props.LinkComponent = 'a';
   }
 
   return (
     <MUIButton
       type="button"
       variant="contained"
-      {...props}
+      {...(props as MUIButtonProps)}
       disabled={disabled || loading}
       className={twMerge(
         '[&_+_&]:ml-2',

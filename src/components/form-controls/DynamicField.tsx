@@ -4,7 +4,7 @@ import { forwardRef, memo, Ref } from 'react';
 import { Control, Controller, FieldError, useFieldArray, useFormContext } from 'react-hook-form';
 
 import { Button } from '~/components/index.ts';
-import { ButtonProps } from '~/types/formControls.ts';
+import { ButtonAsButtonProps, ButtonAsIconButtonProps } from '~/types/formControls.ts';
 import TextInput from './components/TextInput.tsx';
 
 type RenderInputArgs = { control: InputFieldProps['control'] } & Omit<
@@ -118,7 +118,7 @@ const InputField = forwardRef(
   }
 );
 
-function ButtonMore(props: ButtonProps) {
+function ButtonMore(props: ButtonAsButtonProps) {
   return (
     <Button
       variant="text"
@@ -134,10 +134,10 @@ function ButtonMore(props: ButtonProps) {
   );
 }
 
-function ButtonDelete(props: ButtonProps) {
+function ButtonDelete(props: Partial<ButtonAsIconButtonProps>) {
   return (
     <Button
-      variant="text"
+      as="iconButton"
       size="small"
       color="inherit"
       sx={{

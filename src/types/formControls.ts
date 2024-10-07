@@ -2,11 +2,12 @@ import {
   AutocompleteProps as MUIAutocompleteProps,
   AutocompleteValue as MUIAutocompleteValue,
   ButtonProps as MUIButtonProps,
+  IconButtonProps as MUIIconButtonProps,
   TextFieldProps as MUITextFieldProps,
 } from '@mui/material';
 import { AnchorHTMLAttributes, ButtonHTMLAttributes, HTMLProps, ReactNode } from 'react';
 import { NumericFormatProps } from 'react-number-format/types/types';
-import { LinkProps, To } from 'react-router-dom';
+import { LinkProps } from 'react-router-dom';
 
 /* 
   Autocomplete
@@ -89,34 +90,31 @@ type BaseProps = {
 };
 
 export type ButtonAsButtonProps = {
-  to?: never;
-  href?: never;
-  unstyled?: never;
+  as?: 'button';
 } & AssignProps<MUIButtonProps, BaseProps>;
 
+export type ButtonAsIconButtonProps = {
+  as: 'iconButton';
+  children: JSX.Element;
+} & AssignProps<Omit<MUIIconButtonProps, 'children'>, BaseProps>;
+
 export type ButtonAsUnstyledProps = {
-  to?: never;
-  href?: never;
-  unstyled?: boolean;
+  as: 'unstyled';
 } & AssignProps<ButtonHTMLAttributes<HTMLButtonElement>, BaseProps> &
   HTMLProps<HTMLButtonElement>;
 
 export type ButtonAsLinkProps = {
-  to: To;
-  href?: never;
-  unstyled?: never;
-} & AssignProps<LinkProps, BaseProps> &
-  AssignProps<LinkProps, MUIButtonProps>;
+  as: 'link';
+} & AssignProps<AssignProps<LinkProps, BaseProps>, MUIButtonProps>;
 
 export type ButtonAsExternalLinkProps = {
-  to?: never;
-  href: ExternalLinkProps['href'];
-  unstyled?: never;
-} & AssignProps<ExternalLinkProps, BaseProps> &
-  AssignProps<ExternalLinkProps, MUIButtonProps>;
+  as: 'externalLink';
+  href: string;
+} & AssignProps<AssignProps<Omit<ExternalLinkProps, 'href'>, BaseProps>, MUIButtonProps>;
 
 export type ButtonProps =
   | ButtonAsButtonProps
+  | ButtonAsIconButtonProps
   | ButtonAsUnstyledProps
   | ButtonAsLinkProps
   | ButtonAsExternalLinkProps;
