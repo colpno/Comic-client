@@ -21,7 +21,7 @@ function SliderNavigators({ swiper, slotProps }: SliderNavigatorsProps) {
     swiper && swiper.slides && swiper.slides.length <= swiper.slidesPerViewDynamic();
 
   let className =
-    'absolute z-10 flex items-center justify-center min-w-0 p-2 text-4xl text-gray-600 transition-opacity ease-out -translate-y-1/2 bg-white rounded-full shadow-md top-1/2';
+    'absolute z-10 flex items-center justify-center min-w-0 p-2 text-4xl text-gray-600 transition-opacity ease-out -translate-y-1/2 rounded-full shadow-md bg-primary top-1/2';
   if (!className.includes('hidden') && (noSlide || notEnoughSlides)) className += ' hidden';
 
   const handleClickPrev = () => swiper && swiper.slidePrev();
