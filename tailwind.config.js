@@ -1,8 +1,11 @@
+import { zIndexes } from './src/utils/css.ts';
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      zIndex: zIndexes,
       colors: {
         primary: '#f50000',
       },
