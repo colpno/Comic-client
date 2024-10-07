@@ -1,4 +1,5 @@
 import { zIndexes } from './src/utils/css.ts';
+import { theme } from './src/libs/mui/theme.ts';
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -7,11 +8,11 @@ export default {
     extend: {
       zIndex: zIndexes,
       colors: {
-        primary: '#f50000',
+        primary: theme.palette.primary.main,
       },
       backgroundColor: {
-        primary: '#fff',
-        secondary: '#f1f3f5',
+        primary: theme.palette.background.default,
+        secondary: theme.palette.mode === 'light' ? '#f1f3f5' : '#1c1c1c',
       },
       keyframes: {
         loadingPulse: { '100%': { transform: 'scale(10)', opacity: 0 } },
