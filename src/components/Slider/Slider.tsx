@@ -1,51 +1,57 @@
 import { Box, BoxProps } from '@mui/material';
-import { memo, useState } from 'react';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/scrollbar';
+import { memo, useCallback, useState } from 'react';
 import { Swiper, SwiperClass, SwiperProps, SwiperSlide, SwiperSlideProps } from 'swiper/react';
-import { SwiperModule } from 'swiper/types';
+import { NavigationOptions } from 'swiper/types';
 import { twMerge } from 'tailwind-merge';
 import { v4 } from 'uuid';
 
 import { Omit } from '~/types/common.ts';
-import SliderNavigators, { SliderNavigatorsProps } from './components/SliderNavigators.tsx';
+import { SliderNavigatorsProps } from '../ComicSlider/components/SliderNavigators.tsx';
 import { getModules } from './helpers/getModules.ts';
 
-export interface SliderProps extends Omit<SwiperProps, 'modules'> {
+export interface SliderProps extends Omit<SwiperProps, 'children' | 'modules' | 'navigation'> {
+  children: React.ReactNode | React.ReactNode[];
   slotProps?: SliderNavigatorsProps['slotProps'] & {
     container?: BoxProps;
     slides?: SwiperSlideProps;
   };
+  navigation?:
+    | boolean
+    | ({ custom?: (props: SliderNavigatorsProps) => JSX.Element } & NavigationOptions);
 }
 
 function Slider(props: SliderProps) {
   const { children, slotProps, ...swiperProps } = props;
   const [swiper, setSwiper] = useState<SwiperClass>();
-  const modules: SwiperModule[] = [];
+
+  const customizedNavigators =
+    typeof props.navigation === 'object' && props.navigation.custom !== undefined
+      ? props.navigation.custom({ swiper, slotProps })
+      : null;
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars -- unused, just for re-rendering navigators when slide change
   const [_slideIndex, setSlideIndex] = useState(0);
 
-  modules.concat(getModules(props));
-
-  const handleSlideChange = (swp: SwiperClass) => setSlideIndex(swp.activeIndex);
+  const handleSlideChange = useCallback((swp: SwiperClass) => setSlideIndex(swp.activeIndex), []);
 
   return (
     <Box
       {...slotProps?.container}
-      sx={{
-        ...slotProps?.container?.sx,
-        // Hide default navigation buttons
-        '& .swiper-button-next, & .swiper-button-prev': {
-          display: 'none',
-        },
-      }}
+      sx={
+        customizedNavigators !== null
+          ? {
+              ...slotProps?.container?.sx,
+              // Hide default navigation buttons
+              '& .swiper-button-next, & .swiper-button-prev': {
+                display: 'none',
+              },
+            }
+          : slotProps?.container?.sx
+      }
       className={twMerge('relative', slotProps?.container?.className)}
     >
       <Swiper
-        modules={modules}
+        modules={getModules(props)}
         {...swiperProps}
         onSwiper={setSwiper}
         onSlideChange={handleSlideChange}
@@ -60,7 +66,7 @@ function Slider(props: SliderProps) {
           <SwiperSlide {...slotProps?.slides}>{children}</SwiperSlide>
         )}
       </Swiper>
-      {props.navigation ? <SliderNavigators slotProps={slotProps} swiper={swiper} /> : null}
+      {customizedNavigators}
     </Box>
   );
 }

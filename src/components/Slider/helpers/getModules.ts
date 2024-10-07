@@ -1,3 +1,7 @@
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
 import { Keyboard, Mousewheel, Navigation, Pagination } from 'swiper/modules';
 import { SwiperProps } from 'swiper/react';
 import { SwiperModule } from 'swiper/types';
