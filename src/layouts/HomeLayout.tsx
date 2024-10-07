@@ -4,6 +4,7 @@ import { Link, Outlet } from 'react-router-dom';
 
 import { Logo } from '~/components/index.ts';
 import { useDeviceWatcher, useScroll } from '~/hooks/index.ts';
+import Footer from './components/Footer.tsx';
 import DefaultHeader from './components/Header.tsx';
 import HeaderActions from './components/HeaderActions.tsx';
 
@@ -40,12 +41,7 @@ function HomeLayout() {
     <>
       <Header />
       <Outlet />
-      <footer
-        id="footer"
-        className="flex flex-col items-center justify-center py-10 bg-secondary text-[#868e96] text-sm"
-      >
-        © Comic Corporation. All rights reserved.
-      </footer>
+      <Footer />
     </>
   );
 }
