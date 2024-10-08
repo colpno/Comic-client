@@ -11,19 +11,19 @@ export interface State {
   isLoggedIn: boolean;
 }
 
+type LoginAction = PayloadAction<Exclude<State['user'], null>>;
+
 const initialState: State = {
   user: null,
   isLoggedIn: false,
 };
 
-type LoginAction = PayloadAction<Exclude<State['user'], null>>;
-
 const slice = createSlice({
   name: REDUCER_PATH_AUTH,
   initialState,
   reducers: {
-    login: (state, action: LoginAction) => {
-      state.user = action.payload;
+    login: (state, { payload }: LoginAction) => {
+      state.user = payload;
       state.isLoggedIn = true;
     },
     logout: (state) => {
