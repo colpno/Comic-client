@@ -9,13 +9,13 @@ import { Button } from '~/components/index.ts';
 function HeaderActions() {
   return (
     <div>
-      <Button as="iconButton">
+      <Button as="iconButton" title="Search">
         <SearchOutlined />
       </Button>
-      <Button as="iconButton">
+      <Button as="iconButton" title="Bookmark list">
         <CollectionsBookmarkOutlined />
       </Button>
-      <Button as="iconButton">
+      <Button as="iconButton" title="Account">
         <PermIdentityOutlined />
       </Button>
     </div>
