@@ -23,6 +23,7 @@ export { default as ComicSlider } from './ComicSlider/ComicSlider.tsx';
 export { default as Slider } from './Slider/Slider.tsx';
 
 export { default as Image } from './Image.tsx';
+export { default as Loading } from './Loading.tsx';
 export { default as Logo } from './Logo.tsx';
 export { default as Pagination } from './Pagination.tsx';
 export { default as Toast } from './Toast.tsx';

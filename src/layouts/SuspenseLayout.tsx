@@ -1,13 +1,12 @@
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 
-import LoadingPage from '~/pages/LoadingPage.tsx';
+import { Loading } from '~/components/index.ts';
 
 function SuspenseLayout() {
   return (
-    <Suspense fallback={<LoadingPage />}>
+    <Suspense fallback={<Loading />}>
       <Outlet />
-      <LoadingPage />
     </Suspense>
   );
 }
