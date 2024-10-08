@@ -6,7 +6,7 @@ import { viVN as pickerViVN } from '@mui/x-date-pickers/locales';
 export const locales = [viVN, dataGridViVN, pickerViVN];
 
 const getCSSVariableValue = (variable: string) => {
-  return getComputedStyle(document.documentElement).getPropertyValue(variable);
+  return getComputedStyle(document.body).getPropertyValue(variable);
 };
 
 type Mode = 'light' | 'dark';

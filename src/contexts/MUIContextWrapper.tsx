@@ -1,7 +1,7 @@
-import { CssBaseline, ThemeProvider } from '@mui/material';
+import { CssBaseline, Theme, ThemeProvider } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import '~/libs/moment/config.ts';
@@ -14,11 +14,16 @@ interface ContextWrapperProps {
 
 function MUIContextWrapper({ children }: ContextWrapperProps) {
   const themeMode = useSelector((state: RootState) => state.common.theme);
-  const theme = getTheme(themeMode);
+  const [theme, setTheme] = useState<Theme | null>(null);
 
   useEffect(() => {
     document.body.classList.toggle('dark', themeMode === 'dark');
+    setTheme(getTheme(themeMode));
   }, [themeMode]);
+
+  if (!theme) {
+	return null;
+  }
 
   return (
     <ThemeProvider theme={theme}>
