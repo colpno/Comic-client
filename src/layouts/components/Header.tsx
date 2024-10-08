@@ -5,7 +5,7 @@ import { twMerge } from 'tailwind-merge';
 
 import { Logo } from '~/components/index.ts';
 import { useDeviceWatcher } from '~/hooks/index.ts';
-import HeaderActions from './HeaderActions.tsx';
+import HeaderActions from './HeaderActions/HeaderActions.tsx';
 
 interface Props {
   children?: React.ReactNode;

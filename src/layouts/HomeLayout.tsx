@@ -6,7 +6,7 @@ import { Logo } from '~/components/index.ts';
 import { useDeviceWatcher, useScroll } from '~/hooks/index.ts';
 import Footer from './components/Footer.tsx';
 import DefaultHeader from './components/Header.tsx';
-import HeaderActions from './components/HeaderActions.tsx';
+import HeaderActions from './components/HeaderActions/HeaderActions.tsx';
 
 function Header() {
   const isMobile = useDeviceWatcher() === 'mobile';
