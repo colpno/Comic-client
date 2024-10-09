@@ -29,8 +29,8 @@ function Header({ slotProps, children }: Props) {
       )}
     >
       <Container
-        {...slotProps?.wrapper}
         maxWidth="md"
+        {...slotProps?.wrapper}
         className={twMerge(
           'flex items-center justify-between h-[60px] md:h-[80px]',
           slotProps?.wrapper?.className
