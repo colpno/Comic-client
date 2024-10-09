@@ -5,7 +5,7 @@ import { Link, Outlet } from 'react-router-dom';
 import { Logo } from '~/components/index.ts';
 import { useDeviceWatcher, useScroll } from '~/hooks/index.ts';
 import Footer from './components/Footer.tsx';
-import DefaultHeader from './components/Header.tsx';
+import MainHeader from './components/Header.tsx';
 import HeaderActions from './components/HeaderActions/HeaderActions.tsx';
 
 function Header() {
@@ -17,7 +17,7 @@ function Header() {
   useScroll(() => setActiveHeader(window.scrollY > 100));
 
   return (
-    <DefaultHeader
+    <MainHeader
       slotProps={{
         container: {
           className: activeHeader ? '' : 'bg-transparent',
@@ -32,17 +32,19 @@ function Header() {
         )}
       </Link>
       <HeaderActions />
-    </DefaultHeader>
+    </MainHeader>
   );
 }
 
 function HomeLayout() {
   return (
-    <>
+    <div className="flex flex-col min-h-dvh">
       <Header />
-      <Outlet />
+      <main className="flex-1">
+        <Outlet />
+      </main>
       <Footer />
-    </>
+    </div>
   );
 }
 
