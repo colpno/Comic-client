@@ -3,8 +3,10 @@ import {
   PermIdentityOutlined,
   SearchOutlined,
 } from '@mui/icons-material';
+import { Link } from 'react-router-dom';
 
 import { Button } from '~/components/index.ts';
+import { ROUTE_LIBRARY } from '~/constants/routes.ts';
 
 function HeaderActions() {
   return (
@@ -12,9 +14,11 @@ function HeaderActions() {
       <Button as="iconButton" title="Search">
         <SearchOutlined />
       </Button>
-      <Button as="iconButton" title="Bookmark list">
-        <CollectionsBookmarkOutlined />
-      </Button>
+      <Link to={ROUTE_LIBRARY}>
+        <Button as="iconButton" title="Library">
+          <CollectionsBookmarkOutlined />
+        </Button>
+      </Link>
       <Button as="iconButton" title="Account">
         <PermIdentityOutlined />
       </Button>
