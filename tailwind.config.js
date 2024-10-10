@@ -1,10 +1,11 @@
-import { zIndexes } from './src/utils/css.ts';
+import { zIndexes, heights } from './src/utils/css.ts';
 
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     zIndex: zIndexes,
+    height: heights,
     extend: {
       colors: {
         primary: 'var(--primary)',
