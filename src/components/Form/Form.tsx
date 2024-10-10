@@ -1,22 +1,21 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { memo, useEffect, useId } from 'react';
+import { memo, useId } from 'react';
 import { FieldValues, FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 
 import { FormProps } from '~/types/form.ts';
 import { getDirtyValues } from './helpers/getDirtyValues.ts';
 
-function Form<FormValueTypes extends FieldValues>(props: FormProps<FormValueTypes>) {
-  const {
-    children,
-    validationSchema,
-    returnDirtyValuesOnly,
-    defaultValues,
-    onSubmit,
-    onWatch,
-    ...formProps
-  } = props;
+function Form<F extends FieldValues>({
+  children,
+  validationSchema,
+  submitDirtyValuesOnly,
+  defaultValues,
+  onSubmit,
+  ...props
+}: FormProps<F>) {
+  const formId = `form-${useId()}`;
 
-  const useFormStates = useForm<FormValueTypes>({
+  const formStates = useForm<F>({
     resolver: zodResolver(validationSchema),
     defaultValues,
   });
@@ -24,43 +23,21 @@ function Form<FormValueTypes extends FieldValues>(props: FormProps<FormValueType
   const {
     handleSubmit,
     formState: { dirtyFields },
-    reset,
-    watch,
-    setValue,
-  } = useFormStates;
+  } = formStates;
 
-  const formId = `form-${useId()}`;
-
-  //   Watch for changes in the form fields
-  useEffect(() => {
-    if (!onWatch) return;
-
-    const subscription = watch((value, { name, type }) =>
-      onWatch({
-        value: value as FormValueTypes,
-        setFieldValue: setValue,
-        fieldName: name,
-        action: type,
-      })
-    );
-
-    return () => subscription.unsubscribe();
-  }, [onWatch, setValue, watch]);
-
-  const submitHandler: SubmitHandler<FormValueTypes> = (data) => {
-    if (returnDirtyValuesOnly) {
-      const dirtyData = getDirtyValues(dirtyFields, data) as FormValueTypes;
-
-      if (Object.keys(dirtyData).length > 0) onSubmit(dirtyData);
+  const submitHandler: SubmitHandler<F> = async (data) => {
+    if (submitDirtyValuesOnly) {
+      const dirtyData = getDirtyValues(dirtyFields, data) as F;
+      if (Object.keys(dirtyData).length > 0) await onSubmit(dirtyData);
     } else {
-      onSubmit(data);
+      await onSubmit(data);
     }
   };
 
   return (
-    <FormProvider {...useFormStates}>
-      <form {...formProps} id={formId} onSubmit={handleSubmit(submitHandler)}>
-        {typeof children === 'function' ? children({ formId: formId, reset }) : children}
+    <FormProvider {...formStates}>
+      <form {...props} id={formId} onSubmit={handleSubmit(submitHandler)}>
+        {typeof children === 'function' ? children({ ...formStates, formId: formId }) : children}
       </form>
     </FormProvider>
   );
