@@ -1,6 +1,6 @@
 import { RouteObject } from 'react-router-dom';
 
-import { ROUTE_HOME } from '~/constants/common.ts';
+import { ROUTE_HOME } from '~/constants/routes';
 import { HomeLayout } from '~/layouts/index.ts';
 import { HomePage } from '~/pages/index.ts';
 
