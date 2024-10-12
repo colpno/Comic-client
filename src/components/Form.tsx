@@ -3,7 +3,7 @@ import { memo, useId } from 'react';
 import { FieldValues, FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 
 import { FormProps } from '~/types/form.ts';
-import { getDirtyValues } from './helpers/getDirtyValues.ts';
+import { getDirtyValues } from '~/utils/formUtils.ts';
 
 function Form<F extends FieldValues>({
   children,
