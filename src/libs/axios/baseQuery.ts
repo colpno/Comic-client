@@ -1,7 +1,7 @@
 import { BaseQueryFn } from '@reduxjs/toolkit/query/react';
 import axios, { AxiosError, AxiosRequestConfig, Method } from 'axios';
 
-import { ApiError, ApiResponse } from '~/types/api.ts';
+import { ApiError, ApiResponse } from '~/types/apiTypes';
 
 interface ApiRequest {
   url: string;

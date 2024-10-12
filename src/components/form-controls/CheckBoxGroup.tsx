@@ -10,17 +10,14 @@ import {
 import { InputHTMLAttributes, memo } from 'react';
 import { Controller, ControllerRenderProps, useFormContext } from 'react-hook-form';
 
-export interface Option {
-  label: string;
-  value: string;
-}
+import { CheckboxOption } from '~/types/formControlTypes.ts';
 
-export interface CheckBoxGroupProps
+interface CheckBoxGroupProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, 'defaultValue' | 'name'> {
   name: string;
   label?: string;
-  options: Option[];
-  defaultValue?: Option[];
+  options: CheckboxOption[];
+  defaultValue?: CheckboxOption[];
 }
 
 function CheckBoxGroup(props: CheckBoxGroupProps) {
@@ -38,7 +35,7 @@ function CheckBoxGroup(props: CheckBoxGroupProps) {
   } = useFormContext();
   const errorMessage = getFieldState(name)?.error?.message;
 
-  const handleChange = (field: ControllerRenderProps, item: Option) => {
+  const handleChange = (field: ControllerRenderProps, item: CheckboxOption) => {
     // Not in checked list, then add to checked list
     if (!field.value.includes(item.value)) {
       field.onChange([...field.value, item.value]);

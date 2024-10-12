@@ -19,20 +19,20 @@ import { memo } from 'react';
 
 import '~/libs/moment/config.ts';
 
-export interface OnDrop {
+interface DroppableAreaOnDropArg {
   draggedItemId: UniqueIdentifier;
   droppedItemId: UniqueIdentifier;
   moveArrayItems: typeof arrayMove;
   getPosition: <T>(array: T[], callback: (arrayItem: T) => boolean) => number;
 }
 
-export interface DroppableAreaProps {
+interface Props {
   children: React.ReactNode;
   itemIds: UniqueIdentifier[];
-  onDrop: (args: OnDrop) => void;
+  onDrop: (arg: DroppableAreaOnDropArg) => void;
 }
 
-function DroppableArea({ children, itemIds, onDrop }: DroppableAreaProps) {
+function DroppableWrapper({ children, itemIds, onDrop }: Props) {
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(TouchSensor),
@@ -64,4 +64,4 @@ function DroppableArea({ children, itemIds, onDrop }: DroppableAreaProps) {
   );
 }
 
-export default memo(DroppableArea);
+export default memo(DroppableWrapper);

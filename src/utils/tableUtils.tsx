@@ -4,14 +4,21 @@ import {
   GridRowModes,
   GridRowModesModel,
   GridRowsProp,
+  GridSlots,
+  GridSlotsComponentsProps,
 } from '@mui/x-data-grid';
+import { GridInitialStateCommunity } from '@mui/x-data-grid/models/gridStateCommunity';
 
-import TableCancelActionButton from '../components/TableCancelActionButton.tsx';
-import TableDeleteActionButton from '../components/TableDeleteActionButton.tsx';
-import TableEditActionButton from '../components/TableEditActionButton.tsx';
-import TableSaveActionButton from '../components/TableSaveActionButton.tsx';
+import TableCancelActionButton from '~/components/Table/components/TableCancelActionButton.tsx';
+import TableDeleteActionButton from '~/components/Table/components/TableDeleteActionButton.tsx';
+import TableEditActionButton from '~/components/Table/components/TableEditActionButton.tsx';
+import TableNoRowsOverlay from '~/components/Table/components/TableNoRowsOverlay.tsx';
+import TableNoSearchResultsOverlay from '~/components/Table/components/TableNoSearchResultsOverlay.tsx';
+import TablePagination from '~/components/Table/components/TablePagination.tsx';
+import TableSaveActionButton from '~/components/Table/components/TableSaveActionButton.tsx';
+import TableToolbar from '~/components/Table/components/TableToolbar.tsx';
 
-export interface GetActionsCell {
+interface GetActionsCell {
   rowModes: GridRowModesModel;
   setRowModes: (newModel: (oldModel: GridRowModesModel) => GridRowModesModel) => void;
   rows: GridRowsProp;
@@ -63,7 +70,7 @@ export const getGridActionColumn = ({
   };
 };
 
-export interface GetGridActionsInEditMode {
+interface GetGridActionsInEditMode {
   id: GridRowId;
   setRowModes: GetActionsCell['setRowModes'];
   rows: GetActionsCell['rows'];
@@ -97,3 +104,42 @@ export const getGridActionsInEditMode = ({
     <TableCancelActionButton onClick={handleCancelClick(id)} />,
   ];
 };
+export const getInitialState = (
+  initialState?: GridInitialStateCommunity
+): GridInitialStateCommunity => ({
+  ...initialState,
+  pagination: {
+    ...initialState?.pagination,
+    paginationModel: {
+      pageSize: 25,
+      ...initialState?.pagination?.paginationModel,
+    },
+  },
+});
+
+export const getSlots = (): Partial<GridSlots> => ({
+  toolbar: TableToolbar as GridSlots['toolbar'],
+  pagination: TablePagination,
+  noRowsOverlay: TableNoRowsOverlay,
+  noResultsOverlay: TableNoSearchResultsOverlay,
+});
+
+interface GetSlotProps extends GridSlotsComponentsProps {
+  setRows: (rows: GridRowsProp) => void;
+  setRowModesModel: (rowModesModel: GridRowModesModel) => void;
+}
+
+export const getSlotProps = ({
+  setRows,
+  setRowModesModel,
+}: GetSlotProps): GridSlotsComponentsProps => ({
+  toolbar: {
+    setRows,
+    setRowModesModel,
+    printOptions: { hideToolbar: true },
+  },
+  loadingOverlay: {
+    variant: 'skeleton',
+    noRowsVariant: 'skeleton',
+  },
+});

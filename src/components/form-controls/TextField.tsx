@@ -2,9 +2,9 @@ import { FormControl, FormControlProps, FormHelperText } from '@mui/material';
 import { ComponentProps, memo } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 
-import TextInput from './components/TextInput';
+import TextInput from './base-controls/TextInput';
 
-export interface TextFieldProps extends Omit<ComponentProps<typeof TextInput>, 'onChange'> {
+interface Props extends Omit<ComponentProps<typeof TextInput>, 'onChange'> {
   name: string;
   label?: string;
   uppercase?: boolean;
@@ -18,7 +18,7 @@ function TextField({
   formControlProps,
   defaultValue = null,
   ...props
-}: TextFieldProps) {
+}: Props) {
   const {
     control,
     /*

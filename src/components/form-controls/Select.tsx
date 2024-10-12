@@ -1,17 +1,16 @@
 import { FormControl, FormHelperText } from '@mui/material';
-import { memo } from 'react';
+import { ComponentProps, memo } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 
-import { AutocompleteProps } from '~/types/formControls.ts';
-import Autocomplete from './components/Autocomplete.tsx';
+import Autocomplete from './base-controls/Autocomplete.tsx';
 
-export interface SelectProps
-  extends Omit<AutocompleteProps, 'name' | 'value' | 'onChange' | 'onBlur'> {
+interface Props
+  extends Omit<ComponentProps<typeof Autocomplete>, 'name' | 'value' | 'onChange' | 'onBlur'> {
   name: string;
   label?: string;
 }
 
-function Select({ name, fullWidth, required, defaultValue, ...props }: SelectProps) {
+function Select({ name, fullWidth, required, defaultValue, ...props }: Props) {
   const {
     control,
     /*

@@ -1,4 +1,4 @@
-import { zIndexes, heights } from './src/utils/css.ts';
+import { zIndexes, heights } from './src/utils/cssUtils.ts';
 
 /** @type {import('tailwindcss').Config} */
 export default {

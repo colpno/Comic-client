@@ -13,7 +13,7 @@ import {
   ButtonAsIconButtonProps,
   ButtonAsLinkProps,
   ButtonProps,
-} from '~/types/formControls.ts';
+} from '~/types/formControlTypes';
 
 function Button({
   children,

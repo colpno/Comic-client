@@ -1,13 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { REDUCER_PATH_AUTH } from '~/constants/redux.ts';
+import { User } from '~/types/userTypes';
 
-export interface State {
-  user: null | {
-    id: string;
-    name: string;
-    email: string;
-  };
+interface State {
+  user: User | null;
   isLoggedIn: boolean;
 }
 

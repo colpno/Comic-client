@@ -1,9 +1,0 @@
-function LoginPage() {
-  return (
-    <div>
-      <span>LoginPage</span>
-    </div>
-  );
-}
-
-export default LoginPage;

@@ -1,11 +1,13 @@
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@mui/icons-material';
-import { HTMLAttributes } from 'react';
+import { Box } from '@mui/material';
+import { ComponentProps, HTMLAttributes, memo, useState } from 'react';
 import { SwiperClass } from 'swiper/react';
 import { twMerge } from 'tailwind-merge';
 
 import { Button } from '~/components/index.ts';
+import Slider from './Slider.tsx';
 
-export interface SliderNavigatorsProps {
+interface NavigatorsProps {
   swiper?: SwiperClass;
   slotProps?: {
     prevButton?: HTMLAttributes<HTMLButtonElement>;
@@ -13,7 +15,7 @@ export interface SliderNavigatorsProps {
   };
 }
 
-function SliderNavigators({ swiper, slotProps }: SliderNavigatorsProps) {
+function Navigators({ swiper, slotProps }: NavigatorsProps) {
   const isBeginning = swiper?.isBeginning;
   const isEnd = swiper?.isEnd;
   const noSlide = swiper?.slides?.length === 0;
@@ -61,4 +63,23 @@ function SliderNavigators({ swiper, slotProps }: SliderNavigatorsProps) {
   );
 }
 
-export default SliderNavigators;
+function ComicSlider(props: ComponentProps<typeof Slider>) {
+  const [swiper, setSwiper] = useState<SwiperClass>();
+
+  return (
+    <Box
+      className="relative"
+      sx={{
+        // Hide default navigation buttons
+        '& .swiper-button-next, & .swiper-button-prev': {
+          display: 'none',
+        },
+      }}
+    >
+      <Slider {...props} onSwiper={setSwiper} navigation />
+      <Navigators swiper={swiper} />
+    </Box>
+  );
+}
+
+export default memo(ComicSlider);

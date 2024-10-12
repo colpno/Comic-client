@@ -1,21 +1,8 @@
-import { Close, Visibility, VisibilityOff } from '@mui/icons-material';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { IconButton, InputAdornment } from '@mui/material';
 
-export interface AdornmentProps {
+interface ShowPasswordAdornmentProps {
   onClick: () => void;
-}
-
-export const EraseAdornment = ({ onClick }: AdornmentProps) => {
-  return (
-    <InputAdornment position="end">
-      <IconButton aria-label="erase field's value" onClick={onClick} edge="end">
-        <Close fontSize="small" color="disabled" />
-      </IconButton>
-    </InputAdornment>
-  );
-};
-
-export interface ShowPasswordAdornmentProps extends AdornmentProps {
   showPassword: boolean;
 }
 

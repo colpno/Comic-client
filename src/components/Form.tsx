@@ -1,9 +1,33 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { memo, useId } from 'react';
-import { FieldValues, FormProvider, SubmitHandler, useForm } from 'react-hook-form';
+import { HTMLAttributes, memo, ReactNode, useId } from 'react';
+import {
+  FieldValues,
+  FormProvider,
+  SubmitHandler,
+  useForm,
+  UseFormProps,
+  UseFormReturn,
+} from 'react-hook-form';
+import { ZodSchema } from 'zod';
 
-import { FormProps } from '~/types/form.ts';
 import { getDirtyValues } from '~/utils/formUtils.ts';
+
+type ChildrenAsFunction<FormValues extends FieldValues> = (
+  childrenProps: UseFormReturn<FormValues> & {
+    formId: Exclude<HTMLAttributes<HTMLFormElement>['id'], undefined>;
+  }
+) => ReactNode;
+
+interface Props<FormValues extends FieldValues = FieldValues>
+  extends Omit<HTMLAttributes<HTMLFormElement>, 'children' | 'onSubmit'> {
+  children: ReactNode | ChildrenAsFunction<FormValues>;
+  validationSchema: ZodSchema;
+  defaultValues?: UseFormProps<FormValues>['defaultValues'];
+  /** Determines the form will only return the value of fields that had been changed. */
+  submitDirtyValuesOnly?: boolean;
+  /** Use promise to determine the form loading state. */
+  onSubmit: (data: FormValues) => Promise<void> | void;
+}
 
 function Form<F extends FieldValues>({
   children,
@@ -12,7 +36,7 @@ function Form<F extends FieldValues>({
   defaultValues,
   onSubmit,
   ...props
-}: FormProps<F>) {
+}: Props<F>) {
   const formId = `form-${useId()}`;
 
   const formStates = useForm<F>({
@@ -44,6 +68,6 @@ function Form<F extends FieldValues>({
 }
 
 // Explicitly type the memo function
-const MemoizedForm = memo(Form) as <F extends FieldValues>(props: FormProps<F>) => JSX.Element;
+const MemoizedForm = memo(Form) as <F extends FieldValues>(props: Props<F>) => JSX.Element;
 
 export default MemoizedForm;

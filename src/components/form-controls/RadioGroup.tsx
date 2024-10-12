@@ -10,17 +10,14 @@ import {
 import { InputHTMLAttributes, memo } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 
-export interface Option {
-  label: string;
-  value: string | boolean;
-}
+import { RadioOption } from '~/types/formControlTypes.ts';
 
 export interface RadioGroupProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, 'defaultValue' | 'name'> {
   name: string;
   label?: string;
-  options: Option[];
-  defaultValue?: Option;
+  options: RadioOption[];
+  defaultValue?: RadioOption;
 }
 
 function RadioGroup(props: RadioGroupProps) {

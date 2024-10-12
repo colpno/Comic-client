@@ -5,14 +5,28 @@ import {
   InputAdornment,
   InputBaseComponentProps,
   Stack,
+  TextFieldProps as MUITextFieldProps,
 } from '@mui/material';
 import { forwardRef, useState } from 'react';
 import { NumericFormat, NumericFormatProps } from 'react-number-format';
 
-import { NumberInputProps, TextInputChangeEvent } from '~/types/formControls.ts';
 import TextInput from './TextInput.tsx';
 
-const NumberInput = forwardRef<HTMLDivElement, NumberInputProps>(function NumberInput(props, ref) {
+interface Props extends Omit<MUITextFieldProps, 'onChange' | 'name'> {
+  name: string;
+  hideActionButtons?: boolean;
+  max?: number;
+  min?: number;
+  numericFormatProps?: NumericFormatProps;
+  onChange?: (value: number | null) => void;
+  step?: number;
+  value?: number | null;
+  endAdornment?: React.ReactNode;
+  fullWidth?: boolean;
+  error?: boolean;
+}
+
+const NumberInput = forwardRef<HTMLDivElement, Props>(function NumberInput(props, ref) {
   const {
     disabled = false,
     hideActionButtons = false,
@@ -108,9 +122,8 @@ const NumberInput = forwardRef<HTMLDivElement, NumberInputProps>(function Number
       {...rest}
       ref={ref}
       value={value ?? ''} // We can't ever pass null to value because it breaks the shrink state of the label, so we pass empty string instead
-      onChange={(e) => {
-        const event = e as TextInputChangeEvent;
-        onChange?.(event.target.value ? parseFloat(event.target.value) : null);
+      onChange={(value) => {
+        onChange?.(value ? parseFloat(value) : null);
       }}
       disabled={disabled}
       error={error}

@@ -3,7 +3,7 @@ import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { CSSProperties, memo } from 'react';
 
-export interface DraggableWrapperProps {
+interface DraggableWrapperProps {
   children: React.ReactNode;
   itemId: UniqueIdentifier;
 }

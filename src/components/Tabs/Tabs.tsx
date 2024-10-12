@@ -2,7 +2,7 @@ import { Tabs as MUITabs, TabsProps as MUITabsProps } from '@mui/material';
 import { memo, SyntheticEvent, useState } from 'react';
 
 import { useDeviceWatcher } from '~/hooks/useDeviceWatcher.ts';
-import { Omit } from '~/types/common.ts';
+import { Omit } from '~/types/commonTypes.ts';
 import LinkTabs, { LinkTabsProps } from './components/LinkTabs.tsx';
 import TabsWrapper from './components/TabsWrapper.tsx';
 

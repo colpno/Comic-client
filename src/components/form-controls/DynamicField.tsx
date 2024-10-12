@@ -4,15 +4,12 @@ import { forwardRef, memo, Ref } from 'react';
 import { Control, Controller, FieldError, useFieldArray, useFormContext } from 'react-hook-form';
 
 import { Button } from '~/components/index.ts';
-import { ButtonAsButtonProps, ButtonAsIconButtonProps } from '~/types/formControls.ts';
-import TextInput from './components/TextInput.tsx';
+import { ButtonAsButtonProps, ButtonAsIconButtonProps } from '~/types/formControlTypes.ts';
+import TextInput from './base-controls/TextInput.tsx';
 
-type RenderInputArgs = { control: InputFieldProps['control'] } & Omit<
-  DynamicFieldProps,
-  'renderInput'
->;
+type RenderInputArgs = { control: InputFieldProps['control'] } & Omit<Props, 'renderInput'>;
 
-interface InputFieldProps extends DynamicFieldProps {
+interface InputFieldProps extends Props {
   error?: boolean;
   index: number;
   control: Control;
@@ -22,7 +19,7 @@ interface Errors {
   [key: string | number]: FieldError;
 }
 
-export interface DynamicFieldProps {
+interface Props {
   name: string;
   label?: string;
   required?: boolean;
@@ -32,10 +29,7 @@ export interface DynamicFieldProps {
 }
 
 const DynamicField = forwardRef(
-  (
-    { name, required, fullWidth, disabled, ...props }: DynamicFieldProps,
-    ref: Ref<HTMLInputElement>
-  ) => {
+  ({ name, required, fullWidth, disabled, ...props }: Props, ref: Ref<HTMLInputElement>) => {
     const {
       control,
       /*

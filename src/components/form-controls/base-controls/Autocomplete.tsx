@@ -1,10 +1,48 @@
-import { Autocomplete as MUIAutocomplete, TextField as MUITextField } from '@mui/material';
+import {
+  Autocomplete as MUIAutocomplete,
+  AutocompleteProps as MUIAutocompleteProps,
+  AutocompleteValue as MUIAutocompleteValue,
+  TextField as MUITextField,
+  TextFieldProps as MUITextFieldProps,
+} from '@mui/material';
 import { forwardRef, Ref } from 'react';
 
-import { AutocompleteProps, AutocompleteValue, Option } from '~/types/formControls';
+import { AutocompleteOption } from '~/types/formControlTypes.ts';
+
+type TextFieldProps = Omit<
+  MUITextFieldProps,
+  'label' | 'error' | 'InputLabelProps' | 'fullWidth' | 'placeholder'
+>;
+
+type CustomAutocompleteProps<T extends AutocompleteOption> = Omit<
+  MUIAutocompleteProps<T, boolean | undefined, boolean | undefined, boolean | undefined>,
+  'onChange' | 'renderInput'
+>;
+
+export type AutocompleteOnChangeArg<T> = MUIAutocompleteValue<
+  T,
+  boolean | undefined,
+  boolean | undefined,
+  boolean | undefined
+>;
+
+export interface Props<T extends AutocompleteOption = AutocompleteOption>
+  extends CustomAutocompleteProps<T> {
+  name?: string;
+  label?: string;
+  error?: boolean;
+  required?: boolean;
+  onChange: (data: AutocompleteOnChangeArg<T>) => void;
+  textFieldProps?: TextFieldProps;
+  returnLabeOnly?: boolean;
+  returnValueOnly?: boolean;
+  group?: boolean;
+  groupOrder?: 'asc' | 'desc';
+  placeholder?: string;
+}
 
 const Autocomplete = forwardRef(
-  <T extends Option>(
+  <T extends AutocompleteOption>(
     {
       options = [],
       value: valueProp,
@@ -20,13 +58,13 @@ const Autocomplete = forwardRef(
       group,
       groupOrder,
       ...props
-    }: AutocompleteProps<T>,
+    }: Props<T>,
     ref: Ref<HTMLDivElement>
   ) => {
     // Turn the value from string to Option-type object
     const mapValueToOption = (
-      val: AutocompleteValue<T> | undefined
-    ): AutocompleteValue<T> | undefined => {
+      val: AutocompleteOnChangeArg<T> | undefined
+    ): AutocompleteOnChangeArg<T> | undefined => {
       const getValue = (v: string) => {
         return options.find((option) => option.label === v || option.value === v) || v;
       };
@@ -46,7 +84,7 @@ const Autocomplete = forwardRef(
     };
 
     // Return value based on demand
-    const handleChange = (data: AutocompleteValue<T>) => {
+    const handleChange = (data: AutocompleteOnChangeArg<T>) => {
       const getValue = (val: string) => {
         if (returnLabeOnly) return options.find((option) => option.value === val)!.label;
         if (returnValueOnly) return options.find((option) => option.value === val)!.value;

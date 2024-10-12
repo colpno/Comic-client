@@ -1,40 +1,21 @@
 import {
   DataGrid,
-  DataGridProps,
   GridColDef,
   GridEventListener,
   GridRowEditStopReasons,
   GridRowModel,
   GridRowModesModel,
-  GridSortModel,
 } from '@mui/x-data-grid';
 import { memo, useState } from 'react';
 
 import { TableContextType, TableProvider } from '~/contexts/TableContext.ts';
-import { Omit } from '~/types/common.ts';
-import { getGridActionColumn } from './helpers/getGridColumns.tsx';
-import { getInitialState, getSlotProps, getSlots } from './helpers/getGridStates.ts';
-
-export interface TableProps
-  extends Omit<
-    DataGridProps,
-    | 'rowModesModel'
-    | 'editMode'
-    | 'onRowModesModelChange'
-    | 'onRowEditStop'
-    | 'processRowUpdate'
-    | 'slots'
-    | 'slotProps'
-  > {
-  /** Disable the ability of deleting rows individually. */
-  disableDelete?: boolean;
-  /** Disable the ability of editing rows. */
-  disableEdit?: boolean;
-  /** Disable the ability of adding a new record. */
-  disableAdd?: boolean;
-  /** Sort a column. */
-  sort?: Exclude<GridSortModel, []>;
-}
+import { TableProps } from '~/types/tableTypes.ts';
+import {
+  getGridActionColumn,
+  getInitialState,
+  getSlotProps,
+  getSlots,
+} from '~/utils/tableUtils.tsx';
 
 function Table({
   rows: rowsProp = [],

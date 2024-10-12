@@ -10,7 +10,7 @@ import { Controller, useFormContext } from 'react-hook-form';
 
 import { DATE_FORMAT } from '~/constants/common.ts';
 
-export interface DatePickerProps extends MUIDatePickerProps<PickerValidDate> {
+interface Props extends MUIDatePickerProps<PickerValidDate> {
   name: string;
   required?: boolean;
   fullWidth?: boolean;
@@ -26,7 +26,7 @@ function DatePicker({
   format,
   defaultValue = null,
   ...props
-}: DatePickerProps) {
+}: Props) {
   const {
     control,
     /*
