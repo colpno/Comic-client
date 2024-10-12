@@ -1,7 +1,6 @@
 import { lazy } from 'react';
 
 export const Table = lazy(() => import('./Table/Table.tsx'));
-export const Form = lazy(() => import('./Form/Form.tsx'));
 
 export const DraggableWrapper = lazy(() => import('./drag-drop/DraggableWrapper.tsx'));
 export const DroppableArea = lazy(() => import('./drag-drop/DroppableArea.tsx'));
@@ -22,6 +21,7 @@ export { default as Tabs } from './tabs/Tabs.tsx';
 export { default as ComicSlider } from './ComicSlider/ComicSlider.tsx';
 export { default as Slider } from './Slider/Slider.tsx';
 
+export { default as Form } from './Form/Form.tsx';
 export { default as Image } from './Image.tsx';
 export { default as Loading } from './Loading.tsx';
 export { default as Logo } from './Logo.tsx';
