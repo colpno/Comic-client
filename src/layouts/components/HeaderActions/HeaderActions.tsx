@@ -1,12 +1,9 @@
-import {
-  CollectionsBookmarkOutlined,
-  PermIdentityOutlined,
-  SearchOutlined,
-} from '@mui/icons-material';
+import { CollectionsBookmarkOutlined, SearchOutlined } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 
 import { Button } from '~/components/index.ts';
 import { ROUTE_LIBRARY } from '~/constants/routes.ts';
+import HeaderAccountButton from './HeaderAccountButton';
 
 function HeaderActions() {
   return (
@@ -19,9 +16,7 @@ function HeaderActions() {
           <CollectionsBookmarkOutlined />
         </Button>
       </Link>
-      <Button as="iconButton" title="Account">
-        <PermIdentityOutlined />
-      </Button>
+      <HeaderAccountButton />
     </div>
   );
 }
