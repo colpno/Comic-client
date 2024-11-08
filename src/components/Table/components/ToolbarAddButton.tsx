@@ -1,7 +1,7 @@
 import { Add } from '@mui/icons-material';
 import { IconButton } from '@mui/material';
 
-import { useTableContext } from '~/contexts/TableContext.ts';
+import { useTableContext } from '~/components/Table/TableContext';
 
 interface ToolbarAddButtonProps {
   onClick: () => void;

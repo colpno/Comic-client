@@ -21,7 +21,7 @@ export { default as Tabs } from './Tabs/Tabs.tsx';
 export { default as ComicSlider } from './sliders/ComicSlider.tsx';
 export { default as Slider } from './sliders/Slider.tsx';
 
-export { default as Form } from './Form.tsx';
+export { default as Form } from './Form/Form.tsx';
 export { default as Image } from './Image.tsx';
 export { default as Loading } from './Loading.tsx';
 export { default as Logo } from './Logo.tsx';

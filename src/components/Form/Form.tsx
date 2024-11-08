@@ -10,7 +10,7 @@ import {
 } from 'react-hook-form';
 import { ZodSchema } from 'zod';
 
-import { getDirtyValues } from '~/utils/formUtils.ts';
+import { getDirtyValues } from './formUtils.ts';
 
 type ChildrenAsFunction<FormValues extends FieldValues> = (
   childrenProps: UseFormReturn<FormValues> & {
