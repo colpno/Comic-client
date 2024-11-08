@@ -8,13 +8,13 @@ import {
 } from '@mui/x-data-grid';
 import { memo, useState } from 'react';
 
-import { TableProps } from '~/types/tableTypes.ts';
+import { TableProps } from '~/components/Table/tableType.ts';
 import {
   getGridActionColumn,
   getInitialState,
   getSlotProps,
   getSlots,
-} from '~/utils/tableUtils.tsx';
+} from '~/components/Table/tableUtils.tsx';
 import { TableContextType, TableProvider } from './TableContext.ts';
 
 function Table({

@@ -1,7 +1,7 @@
 import { DataGridProps } from '@mui/x-data-grid';
 import { createContext, useContext } from 'react';
 
-import { TableProps } from '~/types/tableTypes.ts';
+import { TableProps } from '~/components/Table/tableType';
 
 export type TableContextType = Pick<DataGridProps, 'checkboxSelection'> &
   Pick<TableProps, 'disableAdd' | 'disableDelete' | 'disableEdit'>;
