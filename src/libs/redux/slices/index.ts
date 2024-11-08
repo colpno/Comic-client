@@ -2,7 +2,7 @@ import { combineReducers } from '@reduxjs/toolkit';
 import { persistReducer } from 'redux-persist';
 
 import api from '~/apis/index.ts';
-import { REDUCER_PATH_AUTH, REDUCER_PATH_COMMON } from '~/constants/redux.ts';
+import { REDUCER_PATH_AUTH, REDUCER_PATH_COMMON } from '~/constants/reduxConstants.ts';
 import { commonPersistConfig, rootPersistConfig } from '../persist/index.ts';
 import authReducer from './auth.ts';
 import commonReducer from './common.ts';

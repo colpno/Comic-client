@@ -2,7 +2,7 @@ import { CollectionsBookmarkOutlined, SearchOutlined } from '@mui/icons-material
 import { Link } from 'react-router-dom';
 
 import { Button } from '~/components/index.ts';
-import { ROUTE_LIBRARY } from '~/constants/routes.ts';
+import { ROUTE_LIBRARY } from '~/constants/routeConstants';
 import HeaderAccountButton from './HeaderAccountButton';
 
 function HeaderActions() {

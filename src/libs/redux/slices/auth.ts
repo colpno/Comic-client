@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { REDUCER_PATH_AUTH } from '~/constants/redux.ts';
+import { REDUCER_PATH_AUTH } from '~/constants/reduxConstants';
 import { User } from '~/types/userTypes';
 
 interface State {

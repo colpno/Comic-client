@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { REDUCER_PATH_COMMON } from '~/constants/redux.ts';
+import { REDUCER_PATH_COMMON } from '~/constants/reduxConstants';
 
 interface InitialState {
   theme: 'light' | 'dark';

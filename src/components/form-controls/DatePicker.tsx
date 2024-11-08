@@ -8,7 +8,7 @@ import moment from 'moment';
 import { memo } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 
-import { DATE_FORMAT } from '~/constants/common.ts';
+import { DATE_FORMAT } from '~/constants/commonConstants';
 
 interface Props extends MUIDatePickerProps<PickerValidDate> {
   name: string;
