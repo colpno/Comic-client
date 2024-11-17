@@ -5,8 +5,8 @@ export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     zIndex: zIndexes,
-    height: heights,
     extend: {
+      height: heights,
       colors: {
         primary: 'var(--primary)',
       },

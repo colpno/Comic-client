@@ -1,39 +1,39 @@
 import { Typography as MUITypography, TypographyProps as MUITypographyProps } from '@mui/material';
-import { AnchorHTMLAttributes, memo } from 'react';
-import { Link, LinkProps, To } from 'react-router-dom';
-import { twMerge } from 'tailwind-merge';
+import { memo } from 'react';
+import { Link } from 'react-router-dom';
 
-type ExternalLinkProps = AnchorHTMLAttributes<HTMLAnchorElement>;
-
-type TypoAsTypoProps = MUITypographyProps & {
-  to?: never;
-  href?: never;
+type TypoAsLinkProps = MUITypographyProps & {
+  href: string;
+  externalLink?: false;
 };
 
-type TypoAsLinkProps = LinkProps & {
-  /** For internal link */
-  to: To;
-  href?: never;
+type TypoAsExternalLinkProps = MUITypographyProps & {
+  href: string;
+  externalLink: true;
 };
 
-type TypoAsExternalLinkProps = ExternalLinkProps & {
-  to?: never;
-  /** For external link */
-  href: ExternalLinkProps['href'];
-};
+type Props = MUITypographyProps | TypoAsLinkProps | TypoAsExternalLinkProps;
 
-export type TypographyProps = TypoAsTypoProps | TypoAsLinkProps | TypoAsExternalLinkProps;
+function Typography(props: Props) {
+  if ('href' in props) {
+    const { href, externalLink, ...componentProps } = props;
 
-function Typography({ className, ...props }: TypographyProps) {
-  if (props.to) {
-    return <Link {...props} className={twMerge('text-primary', className)} />;
+    if (externalLink) {
+      return (
+        <a href={href}>
+          <MUITypography {...componentProps} />
+        </a>
+      );
+    }
+
+    return (
+      <Link to={href}>
+        <MUITypography {...componentProps} />
+      </Link>
+    );
   }
 
-  if (props.href) {
-    return <a {...props} className={twMerge('text-primary', className)} />;
-  }
-
-  return <MUITypography {...props} className={className} />;
+  return <MUITypography {...props} />;
 }
 
 export default memo(Typography);

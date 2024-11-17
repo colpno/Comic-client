@@ -5,7 +5,6 @@ import {
 } from '@mui/material';
 import { memo } from 'react';
 import { Link } from 'react-router-dom';
-import { twMerge } from 'tailwind-merge';
 
 import {
   ButtonAsButtonProps,
@@ -14,6 +13,7 @@ import {
   ButtonAsLinkProps,
   ButtonProps,
 } from '~/types/formControlTypes';
+import { cn } from '~/utils/cssUtils.ts';
 
 function Button({
   children,
@@ -32,23 +32,31 @@ function Button({
           {children}
         </button>
       );
-    case 'iconButton':
+    case 'iconButton': {
+      const { href, ...componentProps } = props as ButtonAsIconButtonProps<'a'>;
       return (
         <MUIIconButton
           type="button"
+          LinkComponent={href ? Link : 'a'}
+          {...componentProps}
           disabled={disabled || loading}
-          {...(props as ButtonAsIconButtonProps)}
+          href={href as string}
           className={className}
         >
           {children}
         </MUIIconButton>
       );
-    case 'link':
-      (props as ButtonAsLinkProps).LinkComponent = Link;
+    }
+    case 'link': {
+      const componentProps = props as ButtonAsLinkProps;
+      componentProps.LinkComponent = Link;
       break;
-    case 'externalLink':
-      (props as ButtonAsExternalLinkProps).LinkComponent = 'a';
+    }
+    case 'externalLink': {
+      const componentProps = props as ButtonAsExternalLinkProps;
+      componentProps.LinkComponent = 'a';
       break;
+    }
     default:
       break;
   }
@@ -63,7 +71,7 @@ function Button({
       variant="contained"
       {...(props as MUIButtonProps)}
       disabled={disabled || loading}
-      className={twMerge(
+      className={cn(
         '[&_+_&]:ml-2',
         loading && 'flex gap-2 items-center',
         disableGutter && '!ml-0',

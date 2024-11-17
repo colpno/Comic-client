@@ -8,8 +8,8 @@ import {
   useGridApiContext,
 } from '@mui/x-data-grid';
 import { useId } from 'react';
-import { twMerge } from 'tailwind-merge';
 
+import { cn } from '~/utils/cssUtils.ts';
 import ToolbarAddButton from './ToolbarAddButton.tsx';
 import ToolbarMultipleDeleteButton from './ToolbarMultipleDeleteButton.tsx';
 
@@ -50,7 +50,7 @@ function TableToolbar({
 
   return (
     <GridToolbarContainer
-      className={twMerge(
+      className={cn(
         'flex flex-col-reverse sm:flex-row sm:justify-between sm:items-center',
         className
       )}

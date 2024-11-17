@@ -1,6 +1,7 @@
 import {
   ButtonProps as MUIButtonProps,
   IconButtonProps as MUIIconButtonProps,
+  IconButtonTypeMap,
 } from '@mui/material';
 import { AnchorHTMLAttributes, ButtonHTMLAttributes, HTMLProps } from 'react';
 import { LinkProps } from 'react-router-dom';
@@ -20,10 +21,13 @@ export type ButtonAsButtonProps = {
   as?: 'button';
 } & AssignProps<MUIButtonProps, BaseProps>;
 
-export type ButtonAsIconButtonProps = {
+export type ButtonAsIconButtonProps<
+  D extends React.ElementType = IconButtonTypeMap['defaultComponent']
+> = {
   as: 'iconButton';
   children: JSX.Element;
-} & AssignProps<Omit<MUIIconButtonProps, 'children'>, BaseProps>;
+  href?: string;
+} & AssignProps<Omit<MUIIconButtonProps<D>, 'children'>, BaseProps>;
 
 export type ButtonAsUnstyledProps = {
   as: 'unstyled';
@@ -32,7 +36,8 @@ export type ButtonAsUnstyledProps = {
 
 export type ButtonAsLinkProps = {
   as: 'link';
-} & AssignProps<AssignProps<LinkProps, BaseProps>, MUIButtonProps>;
+  href: string;
+} & AssignProps<AssignProps<Omit<LinkProps, 'to'>, BaseProps>, MUIButtonProps>;
 
 export type ButtonAsExternalLinkProps = {
   as: 'externalLink';

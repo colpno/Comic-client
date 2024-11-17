@@ -1,10 +1,10 @@
 import { Container, ContainerProps, useTheme } from '@mui/material';
 import { HTMLAttributes, memo } from 'react';
 import { Link } from 'react-router-dom';
-import { twMerge } from 'tailwind-merge';
 
 import { Logo } from '~/components/index.ts';
 import { useDeviceWatcher } from '~/hooks/index.ts';
+import { cn } from '~/utils/cssUtils.ts';
 import HeaderActions from './HeaderActions/HeaderActions.tsx';
 
 interface Props {
@@ -23,7 +23,7 @@ function Header({ slotProps, children }: Props) {
     <header
       {...slotProps?.container}
       id="header"
-      className={twMerge(
+      className={cn(
         'fixed top-0 left-0 right-0 z-header bg-primary',
         slotProps?.container?.className
       )}
@@ -31,8 +31,8 @@ function Header({ slotProps, children }: Props) {
       <Container
         maxWidth="md"
         {...slotProps?.wrapper}
-        className={twMerge(
-          'flex items-center justify-between h-header md:h-headerMd',
+        className={cn(
+          'flex items-center justify-between h-header md:h-header-md',
           slotProps?.wrapper?.className
         )}
       >
