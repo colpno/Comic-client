@@ -3,18 +3,17 @@ import {
   IconButtonProps as MUIIconButtonProps,
   IconButtonTypeMap,
 } from '@mui/material';
-import { AnchorHTMLAttributes, ButtonHTMLAttributes, HTMLProps } from 'react';
-import { LinkProps } from 'react-router-dom';
+import { ButtonHTMLAttributes, HTMLProps } from 'react';
 
 /* 
   Button
 */
 type AssignProps<T, P> = P & Omit<T, keyof P>;
-type ExternalLinkProps = AnchorHTMLAttributes<HTMLAnchorElement>;
 type BaseProps = {
   loading?: boolean;
   disableGutter?: boolean;
   disableTextTransform?: boolean;
+  externalLink?: boolean;
 };
 
 export type ButtonAsButtonProps = {
@@ -34,22 +33,7 @@ export type ButtonAsUnstyledProps = {
 } & AssignProps<ButtonHTMLAttributes<HTMLButtonElement>, BaseProps> &
   HTMLProps<HTMLButtonElement>;
 
-export type ButtonAsLinkProps = {
-  as: 'link';
-  href: string;
-} & AssignProps<AssignProps<Omit<LinkProps, 'to'>, BaseProps>, MUIButtonProps>;
-
-export type ButtonAsExternalLinkProps = {
-  as: 'externalLink';
-  href: string;
-} & AssignProps<AssignProps<Omit<ExternalLinkProps, 'href'>, BaseProps>, MUIButtonProps>;
-
-export type ButtonProps =
-  | ButtonAsButtonProps
-  | ButtonAsIconButtonProps
-  | ButtonAsUnstyledProps
-  | ButtonAsLinkProps
-  | ButtonAsExternalLinkProps;
+export type ButtonProps = ButtonAsButtonProps | ButtonAsIconButtonProps | ButtonAsUnstyledProps;
 
 /* 
   Autocomplete

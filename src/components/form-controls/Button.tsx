@@ -8,9 +8,7 @@ import { Link } from 'react-router-dom';
 
 import {
   ButtonAsButtonProps,
-  ButtonAsExternalLinkProps,
   ButtonAsIconButtonProps,
-  ButtonAsLinkProps,
   ButtonProps,
 } from '~/types/formControlTypes';
 import { cn } from '~/utils/cssUtils.ts';
@@ -23,8 +21,12 @@ function Button({
   disableTextTransform,
   disabled,
   as,
+  href,
+  externalLink,
   ...props
 }: ButtonProps) {
+  const LinkComponent = externalLink ? 'a' : Link;
+
   switch (as) {
     case 'unstyled':
       return (
@@ -33,12 +35,12 @@ function Button({
         </button>
       );
     case 'iconButton': {
-      const { href, ...componentProps } = props as ButtonAsIconButtonProps<'a'>;
+      const componentProps = props as ButtonAsIconButtonProps<'a'>;
       return (
         <MUIIconButton
           type="button"
-          LinkComponent={href ? Link : 'a'}
           {...componentProps}
+          LinkComponent={LinkComponent}
           disabled={disabled || loading}
           href={href as string}
           className={className}
@@ -46,16 +48,6 @@ function Button({
           {children}
         </MUIIconButton>
       );
-    }
-    case 'link': {
-      const componentProps = props as ButtonAsLinkProps;
-      componentProps.LinkComponent = Link;
-      break;
-    }
-    case 'externalLink': {
-      const componentProps = props as ButtonAsExternalLinkProps;
-      componentProps.LinkComponent = 'a';
-      break;
     }
     default:
       break;
@@ -70,6 +62,8 @@ function Button({
       type="button"
       variant="contained"
       {...(props as MUIButtonProps)}
+      LinkComponent={LinkComponent}
+      href={href}
       disabled={disabled || loading}
       className={cn(
         '[&_+_&]:ml-2',
