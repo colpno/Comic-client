@@ -1,4 +1,3 @@
-import { KeyboardArrowDown, KeyboardArrowUp } from '@mui/icons-material';
 import {
   IconButton,
   IconButtonProps,
@@ -8,6 +7,7 @@ import {
   TextFieldProps as MUITextFieldProps,
 } from '@mui/material';
 import { forwardRef, useState } from 'react';
+import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md';
 import { NumericFormat, NumericFormatProps } from 'react-number-format';
 
 import TextInput from './TextInput.tsx';
@@ -144,7 +144,7 @@ const NumberInput = forwardRef<HTMLDivElement, Props>(function NumberInput(props
                     onClick={increment}
                     {...commonAdornmentButtonProps}
                   >
-                    <KeyboardArrowUp fontSize={size} />
+                    <MdKeyboardArrowUp fontSize={size} />
                   </IconButton>
                   <IconButton
                     aria-label={'decrementAriaLabel'}
@@ -152,7 +152,7 @@ const NumberInput = forwardRef<HTMLDivElement, Props>(function NumberInput(props
                     onClick={decrement}
                     {...commonAdornmentButtonProps}
                   >
-                    <KeyboardArrowDown fontSize={size} />
+                    <MdKeyboardArrowDown fontSize={size} />
                   </IconButton>
                 </Stack>
               </InputAdornment>

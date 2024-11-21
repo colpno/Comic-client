@@ -1,5 +1,5 @@
-import { Delete } from '@mui/icons-material';
 import { IconButton } from '@mui/material';
+import { MdDelete } from 'react-icons/md';
 
 import { useTableContext } from '~/components/Table/TableContext';
 
@@ -20,7 +20,7 @@ function ToolbarMultipleDeleteButton(props: Props) {
       size="large"
       {...props}
     >
-      <Delete />
+      <MdDelete />
     </IconButton>
   );
 }

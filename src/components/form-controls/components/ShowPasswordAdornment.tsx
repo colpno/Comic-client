@@ -1,5 +1,5 @@
-import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { IconButton, InputAdornment } from '@mui/material';
+import { MdVisibility, MdVisibilityOff } from 'react-icons/md';
 
 interface ShowPasswordAdornmentProps {
   onClick: () => void;
@@ -11,9 +11,9 @@ export const ShowPasswordAdornment = ({ onClick, showPassword }: ShowPasswordAdo
     <InputAdornment position="end">
       <IconButton aria-label="toggle password visibility" onClick={onClick} edge="end">
         {showPassword ? (
-          <VisibilityOff fontSize="small" />
+          <MdVisibilityOff fontSize="small" />
         ) : (
-          <Visibility color="disabled" fontSize="small" />
+          <MdVisibility color="disabled" fontSize="small" />
         )}
       </IconButton>
     </InputAdornment>

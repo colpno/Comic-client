@@ -1,7 +1,7 @@
-import { Close } from '@mui/icons-material';
 import { Box, FormControl, FormHelperText, Grid } from '@mui/material';
 import { forwardRef, memo, Ref } from 'react';
 import { Control, Controller, FieldError, useFieldArray, useFormContext } from 'react-hook-form';
+import { MdClose } from 'react-icons/md';
 
 import { Button } from '~/components/index.ts';
 import { ButtonAsButtonProps, ButtonAsIconButtonProps } from '~/types/formControlTypes.ts';
@@ -140,7 +140,7 @@ function ButtonDelete(props: Partial<ButtonAsIconButtonProps>) {
       style={{ width: 'unset', height: 'unset' }}
       {...props}
     >
-      <Close />
+      <MdClose />
     </Button>
   );
 }

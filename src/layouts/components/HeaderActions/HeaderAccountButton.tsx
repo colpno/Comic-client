@@ -1,11 +1,11 @@
-import { PermIdentityOutlined } from '@mui/icons-material';
+import { MdOutlinePermIdentity } from 'react-icons/md';
 
 import { Button } from '~/components/index.ts';
 
 export default function HeaderAccountButton() {
   return (
     <Button as="iconButton" color="inherit" title="Account">
-      <PermIdentityOutlined />
+      <MdOutlinePermIdentity />
     </Button>
   );
 }

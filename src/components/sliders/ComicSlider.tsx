@@ -1,6 +1,6 @@
-import { KeyboardArrowLeft, KeyboardArrowRight } from '@mui/icons-material';
 import { Box } from '@mui/material';
 import { ComponentProps, HTMLAttributes, memo, useEffect, useState } from 'react';
+import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
 import { SwiperClass } from 'swiper/react';
 
 import { Button } from '~/components/index.ts';
@@ -63,7 +63,7 @@ function Navigators({ swiper, slotProps }: NavigatorsProps) {
         )}
         onClick={handleClickPrev}
       >
-        <KeyboardArrowLeft />
+        <MdKeyboardArrowLeft />
       </Button>
       <Button
         as="unstyled"
@@ -71,7 +71,7 @@ function Navigators({ swiper, slotProps }: NavigatorsProps) {
         className={cn(className, '-right-6', isEnd && 'hidden', slotProps?.nextButton?.className)}
         onClick={handleClickNext}
       >
-        <KeyboardArrowRight />
+        <MdKeyboardArrowRight />
       </Button>
     </>
   );

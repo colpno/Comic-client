@@ -1,4 +1,5 @@
-import { CollectionsBookmarkOutlined, SearchOutlined } from '@mui/icons-material';
+import { MdOutlineSearch } from 'react-icons/md';
+import { PiBooks } from 'react-icons/pi';
 import { Link } from 'react-router-dom';
 
 import { Button } from '~/components/index.ts';
@@ -9,11 +10,11 @@ function HeaderActions() {
   return (
     <div>
       <Button as="iconButton" color="inherit" title="Search">
-        <SearchOutlined />
+        <MdOutlineSearch />
       </Button>
       <Link to={ROUTE_LIBRARY}>
         <Button as="iconButton" color="inherit" title="Library">
-          <CollectionsBookmarkOutlined />
+          <PiBooks />
         </Button>
       </Link>
       <HeaderAccountButton />

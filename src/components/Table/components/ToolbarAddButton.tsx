@@ -1,5 +1,5 @@
-import { Add } from '@mui/icons-material';
 import { IconButton } from '@mui/material';
+import { MdAdd } from 'react-icons/md';
 
 import { useTableContext } from '~/components/Table/TableContext';
 
@@ -20,7 +20,7 @@ function ToolbarAddButton(props: ToolbarAddButtonProps) {
       size="large"
       {...props}
     >
-      <Add />
+      <MdAdd />
     </IconButton>
   );
 }
