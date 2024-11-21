@@ -76,7 +76,7 @@ function CardRow({ title, items, itemsPerGroup = 5 }: CardRowProps) {
   return (
     <Container maxWidth={MUI_CONTAINER_MAX_WIDTH} className="mb-8">
       <div className="flex items-center justify-between mb-4">
-        <Typography variant="h5" href={genreUrl}>
+        <Typography variant="h5" href={genreUrl} className="!font-semibold">
           {title}
         </Typography>
         <Button as="iconButton" href={genreUrl}>

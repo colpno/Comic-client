@@ -17,7 +17,7 @@ interface MenuItemProps {
 function MenuItem({ Icon, label, href }: MenuItemProps) {
   return (
     <Button as="unstyled" href={href} className="flex flex-col items-center">
-      <div className="flex items-center justify-center bg-gray-100 rounded-full size-16 md:size-20">
+      <div className="flex items-center justify-center bg-slate-100 rounded-full size-16 md:size-[4.6rem]">
         <Icon className="text-2xl md:text-3xl" />
       </div>
       <Typography className="mt-2">{label}</Typography>
@@ -40,7 +40,7 @@ function Menu() {
   ];
 
   return (
-    <Container maxWidth={MUI_CONTAINER_MAX_WIDTH} className="mt-8 mb-6">
+    <Container maxWidth={MUI_CONTAINER_MAX_WIDTH} className="mt-5 mb-8">
       <Slider
         slidesPerView={3}
         breakpoints={{
