@@ -8,11 +8,11 @@ import HeaderAccountButton from './HeaderAccountButton';
 function HeaderActions() {
   return (
     <div>
-      <Button as="iconButton" title="Search">
+      <Button as="iconButton" color="inherit" title="Search">
         <SearchOutlined />
       </Button>
       <Link to={ROUTE_LIBRARY}>
-        <Button as="iconButton" title="Library">
+        <Button as="iconButton" color="inherit" title="Library">
           <CollectionsBookmarkOutlined />
         </Button>
       </Link>

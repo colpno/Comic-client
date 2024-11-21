@@ -4,7 +4,7 @@ import { Button } from '~/components/index.ts';
 
 export default function HeaderAccountButton() {
   return (
-    <Button as="iconButton" title="Account">
+    <Button as="iconButton" color="inherit" title="Account">
       <PermIdentityOutlined />
     </Button>
   );

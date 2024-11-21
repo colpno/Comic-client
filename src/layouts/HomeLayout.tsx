@@ -14,13 +14,13 @@ function Header() {
   const [activeHeader, setActiveHeader] = useState(false); // true if the user has scrolled down
   const logoColor = activeHeader ? theme.palette.primary.main : '#fff';
 
-  useScroll(() => setActiveHeader(window.scrollY > 100));
+  useScroll(() => setActiveHeader(window.scrollY > 0));
 
   return (
     <MainHeader
       slotProps={{
         container: {
-          className: activeHeader ? '' : 'bg-transparent',
+          className: activeHeader ? 'text-primary' : 'text-white bg-transparent',
         },
       }}
     >
