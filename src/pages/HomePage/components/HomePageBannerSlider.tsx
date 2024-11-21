@@ -1,0 +1,54 @@
+import { Container } from '@mui/material';
+import { useState } from 'react';
+import { Swiper } from 'swiper/types';
+
+import { Slider, Typography } from '~/components/index.ts';
+import { MUI_CONTAINER_MAX_WIDTH } from '~/constants/commonConstants.ts';
+
+interface Props {
+  bannerUrls: string[];
+}
+
+function HomePageBannerSlider({ bannerUrls }: Props) {
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+  const AUTOPLAY_DELAY = 10000; // 10s
+
+  const setCurrSlideIndex = (swiper: Swiper) => setCurrentSlideIndex(swiper.activeIndex);
+
+  return (
+    <div className="relative overflow-hidden h-banner-home flex flex-col items-center justify-center before:absolute before:top-0 before:w-full before:h-24 before:bg-gradient-to-t before:from-transparent before:to-[rgba(0,0,0,0.3)] before:z-home-page-banner-shadow after:absolute after:bottom-0 after:w-full after:h-36 after:bg-gradient-to-b after:from-transparent after:to-[rgba(0,0,0,0.5)] after:z-home-page-banner-shadow">
+      <div
+        style={{ backgroundImage: `url(${bannerUrls[currentSlideIndex]})` }}
+        className="absolute object-cover w-full h-banner-home bg-center bg-cover blur-3xl scale-[1000] z-home-page-banner-blurred-layout"
+      />
+      <Container maxWidth={MUI_CONTAINER_MAX_WIDTH} className="relative z-home-page-banner-images">
+        <Slider onSlideChangeTransitionEnd={setCurrSlideIndex} autoplay={{ delay: AUTOPLAY_DELAY }}>
+          {bannerUrls.map((image, i) => (
+            <div
+              key={`home-page-banner-${i}`}
+              style={{ backgroundImage: `url(${image})` }}
+              className="object-cover w-full bg-center bg-cover aspect-video"
+            />
+          ))}
+        </Slider>
+      </Container>
+      <Container
+        maxWidth={MUI_CONTAINER_MAX_WIDTH}
+        className="absolute bottom-0 pb-10 *:px-12 *:text-white *:line-clamp-1 -translate-x-1/2 left-1/2 z-home-page-banner-caption"
+      >
+        <Typography variant="h4">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis esse, rerum, est
+          excepturi officia ipsam, quibusdam nostrum porro necessitatibus veritatis perferendis
+          iusto dicta aspernatur id obcaecati hic error ad vitae?
+        </Typography>
+        <Typography>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, recusandae eligendi
+          et minima ex incidunt asperiores quod quasi quis, autem saepe repellendus quos, sapiente
+          iste officia molestiae impedit atque voluptas!
+        </Typography>
+      </Container>
+    </div>
+  );
+}
+
+export default HomePageBannerSlider;

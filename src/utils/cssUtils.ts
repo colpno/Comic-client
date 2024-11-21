@@ -13,14 +13,22 @@ const createZIndexes = (layers: ZIndexLayerName[]): ZIndexMap => {
 };
 
 /** Values in order (first is lowest, last is highest). */
-const Z_INDEX_LAYERS: ZIndexLayerName[] = ['slider-navigators', 'header', 'loading'];
+const Z_INDEX_LAYERS: ZIndexLayerName[] = [
+  'slider-navigators',
+  'home-page-banner-blurred-layout',
+  'home-page-banner-images',
+  'home-page-banner-shadow',
+  'home-page-banner-caption',
+  'header',
+  'loading',
+];
 
 export const zIndexes = createZIndexes(Z_INDEX_LAYERS);
 
 export const heights: Record<string, string> = {
   header: '60px',
   'header-md': '80px',
-  'home-banner': '640px',
+  'banner-home': '480px',
 };
 
 export const cn = (...classNames: ClassValue[]) => {
