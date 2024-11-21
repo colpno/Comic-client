@@ -4,6 +4,7 @@ import { ComponentProps, HTMLAttributes, memo, useEffect, useState } from 'react
 import { SwiperClass } from 'swiper/react';
 
 import { Button } from '~/components/index.ts';
+import { useDeviceWatcher } from '~/hooks/useDeviceWatcher.ts';
 import { cn } from '~/utils/cssUtils.ts';
 import Slider from './Slider.tsx';
 
@@ -78,6 +79,8 @@ function Navigators({ swiper, slotProps }: NavigatorsProps) {
 
 function ComicSlider(props: ComponentProps<typeof Slider>) {
   const [swiper, setSwiper] = useState<SwiperClass>();
+  const device = useDeviceWatcher();
+  const isTabletAndMobile = device === 'tablet' || device === 'mobile';
 
   return (
     <Box
@@ -89,8 +92,8 @@ function ComicSlider(props: ComponentProps<typeof Slider>) {
         },
       }}
     >
-      <Slider {...props} onSwiper={setSwiper} navigation />
-      <Navigators swiper={swiper} />
+      <Slider {...props} onSwiper={setSwiper} navigation={!isTabletAndMobile} />
+      {!isTabletAndMobile && <Navigators swiper={swiper} />}
     </Box>
   );
 }

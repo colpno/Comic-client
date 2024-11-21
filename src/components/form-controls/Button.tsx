@@ -28,12 +28,22 @@ function Button({
   const LinkComponent = externalLink ? 'a' : Link;
 
   switch (as) {
-    case 'unstyled':
+    case 'unstyled': {
+      if (href) {
+        return (
+          <button {...props} type={props.type ?? 'button'} className={className}>
+            <LinkComponent to={href} {...{ [externalLink ? 'href' : 'to']: href }}>
+              {children}
+            </LinkComponent>
+          </button>
+        );
+      }
       return (
         <button {...props} type={props.type ?? 'button'} className={className}>
           {children}
         </button>
       );
+    }
     case 'iconButton': {
       const componentProps = props as ButtonAsIconButtonProps<'a'>;
       return (
