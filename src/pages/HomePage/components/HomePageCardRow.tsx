@@ -1,11 +1,12 @@
 import { Container } from '@mui/material';
 import { FaArrowRight } from 'react-icons/fa6';
+import { Link } from 'react-router-dom';
 import { SwiperProps } from 'swiper/react';
 
 import { Button, ComicSlider } from '~/components/index.ts';
 import Typography from '~/components/Typography.tsx';
 import { MUI_CONTAINER_MAX_WIDTH } from '~/constants/commonConstants.ts';
-import { ROUTE_GENRES } from '~/constants/routeConstants.ts';
+import { getComicRoute, ROUTE_GENRES } from '~/constants/routeConstants.ts';
 import { ComicCard, ComicHorizontalCard } from '~/features/index.ts';
 import { Comic } from '~/types/comicType.ts';
 
@@ -88,13 +89,11 @@ function CardRow({ title, items, itemsPerGroup = 5 }: CardRowProps) {
         breakpoints={breakpoints[itemsPerGroup]}
         className="pb-4 overflow-x-scroll md:overflow-x-hidden md:pb-0"
       >
-        {items.map((comic) =>
-          itemsPerGroup === 2 ? (
-            <ComicHorizontalCard key={comic.id} {...comic} />
-          ) : (
-            <ComicCard key={comic.id} {...comic} />
-          )
-        )}
+        {items.map((comic) => (
+          <Link to={getComicRoute(comic.id)} key={comic.id}>
+            {itemsPerGroup === 2 ? <ComicHorizontalCard {...comic} /> : <ComicCard {...comic} />}
+          </Link>
+        ))}
       </ComicSlider>
     </Container>
   );
