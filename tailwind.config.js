@@ -7,6 +7,8 @@ export default {
     zIndex: zIndexes,
     extend: {
       height: heights,
+      margin: heights,
+      padding: heights,
       colors: {
         primary: 'var(--primary)',
       },
