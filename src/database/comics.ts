@@ -2,61 +2,66 @@ import { faker } from '@faker-js/faker';
 
 import { Comic } from '~/types/comicType.ts';
 
+const comicSchema = () => ({
+  id: faker.database.mongodbObjectId(),
+  type: faker.helpers.arrayElement(['manga', 'manhwa', 'manhua']),
+  title: faker.commerce.productName(),
+  altTitles: faker.helpers.multiple(faker.commerce.productName, {
+    count: faker.helpers.rangeToNumber({ min: 0, max: 3 }),
+  }),
+  description: faker.lorem.paragraph({ min: 3, max: 7 }),
+  isLocked: faker.datatype.boolean(),
+  lastVolume: faker.helpers.rangeToNumber({ min: 1, max: 50 }).toString(),
+  lastChapter: faker.helpers.rangeToNumber({ min: 1, max: 100 }).toString(),
+  status: faker.helpers.arrayElement(['ongoing', 'hiatus', 'completed', 'cancelled']),
+  year: faker.date.past().getFullYear(),
+  contentRating: faker.helpers.arrayElement(['suggestive']),
+  tags: faker.helpers.multiple(
+    () => ({
+      id: faker.database.mongodbObjectId(),
+      name: faker.commerce.productAdjective(),
+      description: faker.commerce.productDescription(),
+      group: faker.helpers.arrayElement(['theme', 'genre']),
+    }),
+    { count: faker.helpers.rangeToNumber({ min: 5, max: 12 }) }
+  ),
+  state: faker.helpers.arrayElement(['published', 'draft']),
+  chapterNumbersResetOnNewVolume: faker.datatype.boolean(),
+  chapters: faker.helpers.multiple(faker.database.mongodbObjectId, {
+    count: faker.helpers.rangeToNumber({ min: 0, max: 100 }),
+  }),
+  createdAt: faker.date.past().toISOString(),
+  updatedAt: faker.date.recent().toISOString(),
+  latestUploadedChapter: faker.database.mongodbObjectId(),
+  coverImageUrl: faker.image.url({ width: 512, height: 728 }),
+  related: ['asd'],
+  authors: faker.helpers.multiple(
+    () => ({
+      id: faker.database.mongodbObjectId(),
+      name: faker.person.fullName(),
+      createdAt: faker.date.past().toISOString(),
+      updatedAt: faker.date.recent().toISOString(),
+    }),
+    { count: faker.helpers.rangeToNumber({ min: 1, max: 3 }) }
+  ),
+  artists: faker.helpers.multiple(
+    () => ({
+      id: faker.database.mongodbObjectId(),
+      name: faker.person.fullName(),
+      createdAt: faker.date.past().toISOString(),
+      updatedAt: faker.date.recent().toISOString(),
+    }),
+    { count: faker.helpers.rangeToNumber({ min: 1, max: 3 }) }
+  ),
+});
+
 export const generateComics = (count: number) => {
   return faker.helpers.multiple(
     (): Comic => ({
-      id: faker.database.mongodbObjectId(),
-      type: faker.helpers.arrayElement(['manga', 'manhwa', 'manhua']),
-      title: faker.commerce.productName(),
-      altTitles: faker.helpers.multiple(faker.commerce.productName, {
-        count: faker.helpers.rangeToNumber({ min: 0, max: 3 }),
+      ...comicSchema(),
+      related: faker.helpers.multiple((): Comic => comicSchema(), {
+        count: faker.helpers.rangeToNumber({ min: 3, max: 14 }),
       }),
-      description: faker.commerce.productDescription(),
-      isLocked: faker.datatype.boolean(),
-      lastVolume: faker.helpers.rangeToNumber({ min: 1, max: 50 }).toString(),
-      lastChapter: faker.helpers.rangeToNumber({ min: 1, max: 100 }).toString(),
-      status: faker.helpers.arrayElement(['ongoing', 'hiatus', 'completed', 'cancelled']),
-      year: faker.date.past().getFullYear(),
-      contentRating: faker.helpers.arrayElement(['suggestive']),
-      tags: faker.helpers.multiple(
-        () => ({
-          id: faker.database.mongodbObjectId(),
-          name: faker.commerce.productAdjective(),
-          description: faker.commerce.productDescription(),
-          group: faker.helpers.arrayElement(['theme', 'genre']),
-        }),
-        { count: faker.helpers.rangeToNumber({ min: 5, max: 12 }) }
-      ),
-      state: faker.helpers.arrayElement(['published', 'draft']),
-      chapterNumbersResetOnNewVolume: faker.datatype.boolean(),
-      chapters: faker.helpers.multiple(faker.database.mongodbObjectId, {
-        count: faker.helpers.rangeToNumber({ min: 0, max: 100 }),
-      }),
-      createdAt: faker.date.past().toISOString(),
-      updatedAt: faker.date.recent().toISOString(),
-      latestUploadedChapter: faker.database.mongodbObjectId(),
-      coverImageUrl: faker.image.url({ width: 512, height: 728 }),
-      related: faker.helpers.multiple(faker.database.mongodbObjectId, {
-        count: faker.helpers.rangeToNumber({ min: 0, max: 5 }),
-      }),
-      authors: faker.helpers.multiple(
-        () => ({
-          id: faker.database.mongodbObjectId(),
-          name: faker.person.fullName(),
-          createdAt: faker.date.past().toISOString(),
-          updatedAt: faker.date.recent().toISOString(),
-        }),
-        { count: faker.helpers.rangeToNumber({ min: 1, max: 3 }) }
-      ),
-      artists: faker.helpers.multiple(
-        () => ({
-          id: faker.database.mongodbObjectId(),
-          name: faker.person.fullName(),
-          createdAt: faker.date.past().toISOString(),
-          updatedAt: faker.date.recent().toISOString(),
-        }),
-        { count: faker.helpers.rangeToNumber({ min: 1, max: 3 }) }
-      ),
     }),
     { count }
   );

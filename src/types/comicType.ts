@@ -32,7 +32,7 @@ export interface Comic {
   chapters: (Chapter | Chapter['id'])[];
   latestUploadedChapter?: string;
   coverImageUrl: string;
-  related?: string[];
+  related?: (Comic | string)[];
   authors: Author[];
   artists: Artist[];
   createdAt: string;

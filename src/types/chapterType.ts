@@ -2,8 +2,8 @@ export interface Chapter {
   id: string;
   title: string;
   volume?: number;
-  chapter?: number;
-  content?: ChapterContent[];
+  chapter: number;
+  content: ChapterContent[];
   publishAt?: string;
   readableAt?: string;
   pages?: number;
