@@ -26,6 +26,7 @@ function Button({
   ...props
 }: ButtonProps) {
   const LinkComponent = externalLink ? 'a' : Link;
+  const hyperlinks = LinkComponent === 'a' ? { href } : { to: href };
 
   switch (as) {
     case 'unstyled': {
@@ -45,14 +46,14 @@ function Button({
       );
     }
     case 'iconButton': {
-      const componentProps = props as ButtonAsIconButtonProps<'a'>;
+      const componentProps = props as ButtonAsIconButtonProps;
       return (
         <MUIIconButton
           type="button"
           {...componentProps}
           LinkComponent={LinkComponent}
+          {...hyperlinks}
           disabled={disabled || loading}
-          href={href as string}
           className={className}
         >
           {children}
@@ -73,7 +74,7 @@ function Button({
       variant="contained"
       {...(props as MUIButtonProps)}
       LinkComponent={LinkComponent}
-      href={href}
+      {...hyperlinks}
       disabled={disabled || loading}
       className={cn(
         '[&_+_&]:ml-2',
