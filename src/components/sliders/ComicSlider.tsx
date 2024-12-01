@@ -1,15 +1,16 @@
 import { Box } from '@mui/material';
-import { ComponentProps, HTMLAttributes, memo, useEffect, useState } from 'react';
+import { ComponentProps, HTMLAttributes, memo, useState } from 'react';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
 import { SwiperClass } from 'swiper/react';
 
 import { Button } from '~/components/index.ts';
+import { useCustomSliderNavigators } from '~/hooks/index.ts';
 import { useDeviceWatcher } from '~/hooks/useDeviceWatcher.ts';
 import { cn } from '~/utils/cssUtils.ts';
 import Slider from './Slider.tsx';
 
 interface NavigatorsProps {
-  swiper?: SwiperClass;
+  swiper: SwiperClass;
   slotProps?: {
     slide?: ComponentProps<typeof Slider>['slideProp'];
     prevButton?: HTMLAttributes<HTMLButtonElement>;
@@ -18,37 +19,16 @@ interface NavigatorsProps {
 }
 
 function Navigators({ swiper, slotProps }: NavigatorsProps) {
-  const [isBeginning, setIsBeginning] = useState(true);
-  const [isEnd, setIsEnd] = useState(false);
-
-  useEffect(() => {
-    if (!swiper) return;
-
-    const updateNavigationState = () => {
-      setIsBeginning(swiper.isBeginning);
-      setIsEnd(swiper.isEnd);
-    };
-
-    swiper.on('slideChange', updateNavigationState);
-
-    updateNavigationState();
-
-    return () => {
-      swiper.off('slideChange', updateNavigationState);
-    };
-  }, [swiper]);
+  const { isEnd, isBeginning, handleClickPrev, handleClickNext } =
+    useCustomSliderNavigators(swiper);
 
   const noSlide = swiper?.slides?.length === 0;
   const notEnoughSlides =
     swiper && swiper.slides && swiper.slides.length <= swiper.slidesPerViewDynamic();
 
   let className =
-    'absolute z-10 flex items-center justify-center min-w-0 p-2 text-4xl text-gray-600 transition-opacity ease-out -translate-y-1/2 rounded-full shadow-lg bg-primary top-1/2 z-slider-navigators';
+    'absolute flex items-center justify-center min-w-0 p-2 text-4xl text-gray-600 transition-opacity ease-out -translate-y-1/2 rounded-full shadow-lg bg-primary top-1/2 z-slider-navigators';
   if (!className.includes('hidden') && (noSlide || notEnoughSlides)) className += ' hidden';
-
-  const handleClickPrev = () => swiper && swiper.slidePrev();
-
-  const handleClickNext = () => swiper && swiper.slideNext();
 
   return (
     <>
@@ -93,7 +73,7 @@ function ComicSlider(props: ComponentProps<typeof Slider>) {
       }}
     >
       <Slider {...props} onSwiper={setSwiper} navigation={!isTabletAndMobile} />
-      {!isTabletAndMobile && <Navigators swiper={swiper} />}
+      {!isTabletAndMobile && swiper && <Navigators swiper={swiper} />}
     </Box>
   );
 }
