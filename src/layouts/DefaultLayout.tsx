@@ -7,7 +7,7 @@ function DefaultLayout() {
   return (
     <div className="flex flex-col min-h-dvh">
       <Header />
-      <main className="flex-1 mb-16 mt-header md:mt-header-md">
+      <main className="flex-1 pb-16 pt-header md:pt-header-md">
         <Outlet />
       </main>
       <Footer />
