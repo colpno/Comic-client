@@ -23,27 +23,25 @@ function Slider(props: Props) {
 
   return (
     <Swiper
-      modules={getModules(props)}
+      modules={getModules(swiperProps)}
       {...swiperProps}
       onSlideChange={handleSlideChange}
       className={cn(swiperProps.scrollbar && 'pb-4', className)}
     >
-      {Array.isArray(children) ? (
-        children.map((child, index) => (
-          <SwiperSlide
-            {...slideProp}
-            className={cn(
-              centerSlideContent && 'flex items-center justify-center',
-              slideProp?.className
-            )}
-            key={`slide-${v4()}-${index}`}
-          >
-            {child}
-          </SwiperSlide>
-        ))
-      ) : (
-        <SwiperSlide {...slideProp}>{children}</SwiperSlide>
-      )}
+      {Array.isArray(children)
+        ? children.map((child, index) => (
+            <SwiperSlide
+              {...slideProp}
+              className={cn(
+                centerSlideContent && 'flex items-center justify-center',
+                slideProp?.className
+              )}
+              key={`slide-${v4()}-${index}`}
+            >
+              {child}
+            </SwiperSlide>
+          ))
+        : children}
     </Swiper>
   );
 }
