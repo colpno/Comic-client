@@ -11,7 +11,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 function ComicPageWrapper({ children, containerProps, className, ...islandProps }: Props) {
   return (
     <Container {...containerProps} maxWidth={MUI_CONTAINER_MAX_WIDTH}>
-      <Island {...islandProps} className={cn('p-4 bg-primary', className)}>
+      <Island {...islandProps} className={cn('p-4 bg-main', className)}>
         {children}
       </Island>
     </Container>

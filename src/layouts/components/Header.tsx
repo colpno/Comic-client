@@ -53,10 +53,7 @@ function Header({ slotProps, children }: Props) {
   return (
     <header
       {...slotProps?.container}
-      className={cn(
-        'fixed top-0 left-0 right-0 z-header bg-primary',
-        slotProps?.container?.className
-      )}
+      className={cn('fixed top-0 left-0 right-0 z-header bg-main', slotProps?.container?.className)}
     >
       <Container
         maxWidth="md"

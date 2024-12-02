@@ -27,7 +27,7 @@ function Navigators({ swiper, slotProps }: NavigatorsProps) {
     swiper && swiper.slides && swiper.slides.length <= swiper.slidesPerViewDynamic();
 
   let className =
-    'absolute flex items-center justify-center min-w-0 p-2 text-4xl text-gray-600 transition-opacity ease-out -translate-y-1/2 rounded-full shadow-lg bg-primary top-1/2 z-slider-navigators';
+    'absolute flex items-center justify-center min-w-0 p-2 text-4xl text-gray-600 transition-opacity ease-out -translate-y-1/2 rounded-full shadow-lg bg-main top-1/2 z-slider-navigators';
   if (!className.includes('hidden') && (noSlide || notEnoughSlides)) className += ' hidden';
 
   return (

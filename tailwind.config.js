@@ -13,12 +13,12 @@ export default {
         primary: 'var(--primary)',
       },
       textColor: {
-        primary: 'var(--text-primary)',
+        main: 'var(--text-primary)',
         disabled: 'var(--text-disabled)',
       },
       backgroundColor: {
-        primary: 'var(--background-primary)',
-        secondary: 'var(--background-secondary)',
+        main: 'var(--background-primary)',
+        sub: 'var(--background-secondary)',
       },
     },
   },
