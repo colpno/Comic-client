@@ -5,7 +5,7 @@ function Footer({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
     <footer
       {...props}
       className={cn(
-        'flex flex-col items-center justify-center py-10 px-1 sm:px-2 bg-secondary text-[#868e96] text-sm',
+        'flex flex-col items-center justify-center py-10 px-1 sm:px-2 bg-sub text-[#868e96] text-sm',
         className
       )}
     >
