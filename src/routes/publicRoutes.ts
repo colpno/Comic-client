@@ -28,7 +28,7 @@ const publicRoutes: RouteObject = {
       Component: ReadingLayout,
       children: [
         {
-          path: getComicReadingRoute(':comicId', ':chapter'),
+          path: getComicReadingRoute(':comicId', ':chapterNumber'),
           Component: ReadingPage,
         },
       ],
