@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa6';
+import { GoQuestion } from 'react-icons/go';
 import { HiBars3BottomLeft } from 'react-icons/hi2';
 import { PiBooks } from 'react-icons/pi';
 import { Link, Outlet, useParams } from 'react-router-dom';
 
-import { Button, Logo, Typography } from '~/components/index.ts';
+import { Button, Logo, Popup, Typography } from '~/components/index.ts';
 import { getComicRoute, ROUTE_LIBRARY } from '~/constants/routeConstants.ts';
 import { useDeviceWatcher } from '~/hooks/useDeviceWatcher.ts';
 import { cn } from '~/utils/cssUtils.ts';
@@ -17,11 +18,37 @@ import {
   useReadingLayoutContext,
 } from './ReadingLayoutContext.ts';
 
+interface GuidePopupProps {
+  open: boolean;
+  onClose: () => void;
+}
+
+function GuidePopup({ open, onClose }: GuidePopupProps) {
+  return (
+    <Popup open={open} title="Reading Guide" onClose={onClose}>
+      <table className="[&_th]:border [&_th]:border-black [&_td]:border [&_td]:border-black [&_td]:px-2">
+        <tr className="*:text-center">
+          <th>Action</th>
+          <th>Description</th>
+        </tr>
+        <tr>
+          <td>Click/Touch on chapter's images.</td>
+          <td>To toggle header.</td>
+        </tr>
+      </table>
+    </Popup>
+  );
+}
+
 function Header() {
   const { headerVisibility } = useReadingLayoutContext();
   const isMobile = useDeviceWatcher() === 'mobile';
-  const { comicId } = useParams();
+  const [guidePopup, setGuidePopup] = useState(false);
+  const { comicId, chapterNumber } = useParams();
   const comicPageHref = comicId ? getComicRoute(comicId) : undefined;
+
+  const openGuidePopup = () => setGuidePopup(true);
+  const closeGuidePopup = () => setGuidePopup(false);
 
   return (
     <>
@@ -35,7 +62,7 @@ function Header() {
           },
         }}
       >
-        {({ isMobile, theme }) => (
+        {({ theme }) => (
           <>
             <nav>
               <Link to="/">
@@ -48,16 +75,24 @@ function Header() {
             </nav>
             {!isMobile && (
               <nav className="flex items-center gap-2 md:gap-4">
-                <Button as="iconButton" color="inherit" title="Go to the previous">
+                <Button as="iconButton" color="inherit" title="Go to the previous page">
                   <FaChevronLeft fontSize={18} />
                 </Button>
                 <Typography variant="h6">2</Typography>
-                <Button as="iconButton" color="inherit" title="Go to the next">
+                <Button as="iconButton" color="inherit" title="Go to the next page">
                   <FaChevronRight fontSize={18} />
                 </Button>
               </nav>
             )}
             <nav>
+              <Button
+                as="iconButton"
+                color="inherit"
+                title="Reading guide"
+                onClick={openGuidePopup}
+              >
+                <GoQuestion />
+              </Button>
               <Button as="iconButton" href={ROUTE_LIBRARY} color="inherit" title="Library">
                 <PiBooks />
               </Button>
@@ -84,7 +119,7 @@ function Header() {
             </Button>
           </nav>
           <div className="flex-1 pl-2 pr-4 line-clamp-1">
-            <Typography>Chapter 2</Typography>
+            <Typography>Ch.{chapterNumber}</Typography>
           </div>
           <nav className="flex items-center gap-2 md:gap-4">
             <Button as="iconButton" color="inherit" title="Go to the previous">
@@ -96,6 +131,7 @@ function Header() {
           </nav>
         </div>
       )}
+      <GuidePopup open={guidePopup} onClose={closeGuidePopup} />
     </>
   );
 }

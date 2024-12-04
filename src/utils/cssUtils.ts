@@ -20,6 +20,7 @@ const Z_INDEX_LAYERS: ZIndexLayerName[] = [
   'home-page-banner-shadow',
   'home-page-banner-caption',
   'header',
+  'popup',
   'loading',
 ];
 
