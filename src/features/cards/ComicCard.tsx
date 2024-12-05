@@ -9,7 +9,7 @@ function ComicCard(comic: Comic) {
       <Image
         src={comic.coverImageUrl}
         alt={comic.title}
-        className="rounded-md"
+        className="rounded-md aspect-[8/11] w-full"
         onError={({ currentTarget }) => {
           currentTarget.src = PlaceholderImage;
         }}
