@@ -6,10 +6,12 @@ import { useRouteMatch } from '~/hooks/useRouteMatch.ts';
 export interface LinkTabsProps extends MUITabsProps {
   /** should be sorted in descending. @example ['/users/add', '/users/edit', '/users'] */
   routes: string[];
+  /** Match pathname including params. */
+  exactMatch?: boolean;
 }
 
-function LinkTabs({ routes, children, ...props }: LinkTabsProps) {
-  const currentTab = useRouteMatch(routes) ?? false;
+function LinkTabs({ routes, children, exactMatch, ...props }: LinkTabsProps) {
+  const currentTab = useRouteMatch(routes, { exact: exactMatch }) ?? false;
 
   return (
     <MUITabs role="navigation" {...props} value={currentTab}>
