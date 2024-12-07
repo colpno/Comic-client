@@ -1,6 +1,6 @@
 import { Tab as MUITab, TabProps as MUITabProps } from '@mui/material';
 import { ElementType, memo } from 'react';
-import { LinkProps, To } from 'react-router-dom';
+import { Link, LinkProps, To } from 'react-router-dom';
 
 import { Omit } from '~/types/commonTypes';
 
@@ -22,13 +22,13 @@ export interface TabAsLinkProps extends Omit<BaseProps, 'value' | 'component'> {
    * import { Link } from 'react-router-dom'; // for internal link
    * 'a' // for external link
    */
-  component: 'a' | ElementType<LinkProps>;
+  component?: 'a' | ElementType<LinkProps>;
 }
 
 export type TabProps = TabAsTabProps | TabAsLinkProps;
 
-function Tab(props: TabProps) {
-  return <MUITab {...props} />;
+function Tab({ component = Link, ...props }: TabProps) {
+  return <MUITab {...props} component={component} />;
 }
 
 export default memo(Tab);
