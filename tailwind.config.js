@@ -9,6 +9,7 @@ export default {
       height: heights,
       margin: heights,
       padding: heights,
+      spacing: heights,
       colors: {
         primary: 'var(--primary)',
       },
