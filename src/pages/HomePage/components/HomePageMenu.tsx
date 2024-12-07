@@ -6,7 +6,7 @@ import { RiCalendarTodoFill } from 'react-icons/ri';
 import { Button, Slider } from '~/components/index.ts';
 import Typography from '~/components/Typography.tsx';
 import { MUI_CONTAINER_MAX_WIDTH } from '~/constants/commonConstants.ts';
-import { ROUTE_DAILY_COMIC, ROUTE_RANKING } from '~/constants/routeConstants.ts';
+import { getRankingRoute, ROUTE_DAILY_COMIC } from '~/constants/routeConstants.ts';
 
 interface MenuItemProps {
   Icon: IconType;
@@ -35,7 +35,7 @@ function Menu() {
     {
       Icon: HiOutlineTrophy,
       label: 'Ranking',
-      href: ROUTE_RANKING,
+      href: getRankingRoute(),
     },
   ];
 

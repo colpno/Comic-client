@@ -1,8 +1,13 @@
 import { RouteObject } from 'react-router-dom';
 
-import { getComicReadingRoute, getComicRoute, ROUTE_HOME } from '~/constants/routeConstants';
-import { DefaultLayout, HomeLayout, ReadingLayout } from '~/layouts/index.ts';
-import { ComicPage, HomePage, ReadingPage } from '~/pages/index.ts';
+import {
+  getComicReadingRoute,
+  getComicRoute,
+  ROUTE_HOME,
+  ROUTE_RANKING,
+} from '~/constants/routeConstants';
+import { DefaultLayout, HomeLayout, MenuLayout, ReadingLayout } from '~/layouts/index.ts';
+import { ComicPage, HomePage, RankingPage, ReadingPage } from '~/pages/index.ts';
 
 const publicRoutes: RouteObject = {
   children: [
@@ -30,6 +35,15 @@ const publicRoutes: RouteObject = {
         {
           path: getComicReadingRoute(':comicId', ':chapterNumber'),
           Component: ReadingPage,
+        },
+      ],
+    },
+    {
+      Component: MenuLayout,
+      children: [
+        {
+          path: ROUTE_RANKING,
+          Component: RankingPage,
         },
       ],
     },

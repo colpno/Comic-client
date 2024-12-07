@@ -30,6 +30,8 @@ export const heights: Record<string, string> = {
   header: '60px',
   'header-md': '80px',
   'banner-home': '480px',
+  'menu-layout-sub-menu': '52px',
+  'menu-layout-category-menu': '48px',
 };
 
 export const cn = (...classNames: ClassValue[]) => {
