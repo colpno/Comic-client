@@ -9,7 +9,7 @@ function ComicHorizontalCard(comic: Comic) {
         style={{ backgroundImage: `url(${comic.coverImageUrl})` }}
       />
       <figcaption className="mt-2">
-        <Typography variant="body1" fontWeight={500} className="line-clamp-1">
+        <Typography variant="body1" fontWeight={500} className="line-clamp-1" title={comic.title}>
           {comic.title}
         </Typography>
       </figcaption>
