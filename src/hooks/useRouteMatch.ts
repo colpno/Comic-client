@@ -1,13 +1,23 @@
 import { matchPath, useLocation } from 'react-router-dom';
 
-export const useRouteMatch = (patterns: readonly string[]) => {
-  const { pathname } = useLocation();
+interface Options {
+  /** Match pathname including params. */
+  exact?: boolean;
+}
+
+export const useRouteMatch = (patterns: readonly string[], options?: Options) => {
+  const { pathname, search } = useLocation();
 
   for (let i = 0; i < patterns.length; i += 1) {
     const pattern = patterns[i];
-    const possibleMatch = matchPath(pattern, pathname);
-    if (possibleMatch !== null) {
-      return possibleMatch.pattern.path;
+
+    if (options?.exact && pattern === pathname + search) {
+      return pattern;
+    } else {
+      const possibleMatch = matchPath(pattern, pathname);
+      if (possibleMatch !== null) {
+        return possibleMatch.pattern.path;
+      }
     }
   }
 
