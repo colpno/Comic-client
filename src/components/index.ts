@@ -13,6 +13,7 @@ export const RadioGroup = lazy(() => import('./form-controls/RadioGroup.tsx'));
 export const Select = lazy(() => import('./form-controls/Select.tsx'));
 export const Popup = lazy(() => import('./Popup.tsx'));
 
+export { default as DeviceWatcher } from './DeviceWatcher.tsx';
 export { default as TextField } from './form-controls/TextField.tsx';
 export { default as Form } from './Form/Form.tsx';
 export { default as Image } from './Image.tsx';

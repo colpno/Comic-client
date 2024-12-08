@@ -1,15 +1,9 @@
-import { useMediaQuery, useTheme } from '@mui/material';
+import { useSelector } from 'react-redux';
 
-export type Device = 'mobile' | 'tablet' | 'desktop';
+import { RootState } from '~/libs/redux/store.ts';
+import { Device } from '~/types/commonTypes.ts';
 
-export const useDeviceWatcher = (): Device => {
-  const theme = useTheme();
-  const isMobileScreen = useMediaQuery(theme.breakpoints.down('sm'));
-  const isTabletScreen = useMediaQuery(theme.breakpoints.between('sm', 'md'));
-
-  if (isMobileScreen) return 'mobile';
-
-  if (isTabletScreen) return 'tablet';
-
-  return 'desktop';
+export const useDeviceWatcher = (): Device | null => {
+  const device = useSelector((state: RootState) => state.common.device);
+  return device;
 };

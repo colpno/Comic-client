@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import { Logo } from '~/components/index.ts';
 import { useDeviceWatcher } from '~/hooks/index.ts';
-import { Device } from '~/hooks/useDeviceWatcher.ts';
+import { Device } from '~/types/commonTypes.ts';
 import { cn } from '~/utils/cssUtils.ts';
 import HeaderActions from './HeaderActions/HeaderActions.tsx';
 
@@ -29,7 +29,7 @@ function Header({ slotProps, children }: Props) {
 
   const renderChildren = () => {
     if (typeof children === 'function') {
-      return children({ device, isMobile, theme });
+      return children({ device: device ?? 'desktop', isMobile, theme });
     }
 
     if (children) {
