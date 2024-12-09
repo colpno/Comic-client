@@ -2,7 +2,7 @@ import { matchPath, useLocation } from 'react-router-dom';
 
 interface Options {
   /** Match pathname including params. */
-  exact?: boolean;
+  matchParams?: boolean;
 }
 
 export const useRouteMatch = (patterns: readonly string[], options?: Options) => {
@@ -11,10 +11,14 @@ export const useRouteMatch = (patterns: readonly string[], options?: Options) =>
   for (let i = 0; i < patterns.length; i += 1) {
     const pattern = patterns[i];
 
-    if (options?.exact && pattern === pathname + search) {
-      return pattern;
+    if (options?.matchParams) {
+      const fullPath = pathname + search;
+      if (fullPath.includes(pattern)) {
+        return fullPath;
+      }
     } else {
       const possibleMatch = matchPath(pattern, pathname);
+
       if (possibleMatch !== null) {
         return possibleMatch.pattern.path;
       }

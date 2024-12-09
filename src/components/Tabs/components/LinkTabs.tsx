@@ -7,11 +7,11 @@ export interface LinkTabsProps extends MUITabsProps {
   /** should be sorted in descending. @example ['/users/add', '/users/edit', '/users'] */
   routes: string[];
   /** Match pathname including params. */
-  exactMatch?: boolean;
+  matchParams?: boolean;
 }
 
-function LinkTabs({ routes, children, exactMatch, ...props }: LinkTabsProps) {
-  const currentTab = useRouteMatch(routes, { exact: exactMatch }) ?? false;
+function LinkTabs({ routes, children, matchParams, ...props }: LinkTabsProps) {
+  const currentTab = useRouteMatch(routes, { matchParams: matchParams }) ?? false;
 
   return (
     <MUITabs role="navigation" {...props} value={currentTab}>
