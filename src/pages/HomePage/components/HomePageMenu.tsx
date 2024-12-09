@@ -1,4 +1,5 @@
 import { Container } from '@mui/material';
+import moment from 'moment';
 import { HiOutlineTrophy } from 'react-icons/hi2';
 import { IconType } from 'react-icons/lib';
 import { RiCalendarTodoFill } from 'react-icons/ri';
@@ -6,7 +7,7 @@ import { RiCalendarTodoFill } from 'react-icons/ri';
 import { Button, Slider } from '~/components/index.ts';
 import Typography from '~/components/Typography.tsx';
 import { MUI_CONTAINER_MAX_WIDTH } from '~/constants/commonConstants.ts';
-import { getRankingRoute, ROUTE_DAILY_COMIC } from '~/constants/routeConstants.ts';
+import { getDailyRoute, getRankingRoute } from '~/constants/routeConstants.ts';
 
 interface MenuItemProps {
   Icon: IconType;
@@ -30,7 +31,7 @@ function Menu() {
     {
       Icon: RiCalendarTodoFill,
       label: 'Daily',
-      href: ROUTE_DAILY_COMIC,
+      href: getDailyRoute(moment().format('dddd').toLowerCase()),
     },
     {
       Icon: HiOutlineTrophy,
