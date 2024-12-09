@@ -3,11 +3,12 @@ import { RouteObject } from 'react-router-dom';
 import {
   getComicReadingRoute,
   getComicRoute,
+  ROUTE_DAILY,
   ROUTE_HOME,
   ROUTE_RANKING,
 } from '~/constants/routeConstants';
 import { DefaultLayout, HomeLayout, MenuLayout, ReadingLayout } from '~/layouts/index.ts';
-import { ComicPage, HomePage, RankingPage, ReadingPage } from '~/pages/index.ts';
+import { ComicPage, DailyPage, HomePage, RankingPage, ReadingPage } from '~/pages/index.ts';
 
 const publicRoutes: RouteObject = {
   children: [
@@ -44,6 +45,10 @@ const publicRoutes: RouteObject = {
         {
           path: ROUTE_RANKING,
           Component: RankingPage,
+        },
+        {
+          path: ROUTE_DAILY,
+          Component: DailyPage,
         },
       ],
     },
