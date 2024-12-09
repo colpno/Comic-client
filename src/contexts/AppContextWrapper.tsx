@@ -1,6 +1,5 @@
 import { Provider } from 'react-redux';
 
-import '~/libs/moment/config.ts';
 import store from '~/libs/redux/store.ts';
 import MUIContextWrapper from './MUIContextWrapper.tsx';
 

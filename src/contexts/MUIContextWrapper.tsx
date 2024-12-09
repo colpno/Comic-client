@@ -4,7 +4,6 @@ import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import '~/libs/moment/config.ts';
 import { getTheme } from '~/libs/mui/theme.ts';
 import { RootState } from '~/libs/redux/store.ts';
 
@@ -22,15 +21,13 @@ function MUIContextWrapper({ children }: ContextWrapperProps) {
   }, [themeMode]);
 
   if (!theme) {
-	return null;
+    return null;
   }
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <LocalizationProvider dateAdapter={AdapterMoment} adapterLocale="vi">
-        {children}
-      </LocalizationProvider>
+      <LocalizationProvider dateAdapter={AdapterMoment}>{children}</LocalizationProvider>
     </ThemeProvider>
   );
 }

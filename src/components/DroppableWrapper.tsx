@@ -17,8 +17,6 @@ import {
 } from '@dnd-kit/sortable';
 import { memo } from 'react';
 
-import '~/libs/moment/config.ts';
-
 interface DroppableAreaOnDropArg {
   draggedItemId: UniqueIdentifier;
   droppedItemId: UniqueIdentifier;
