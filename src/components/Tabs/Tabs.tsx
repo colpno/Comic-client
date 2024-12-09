@@ -17,7 +17,12 @@ export interface TabsAsTabsProps extends Omit<MUITabsProps, 'defaultValue' | 'on
   routes?: never;
 }
 
-export type TabsProps = (TabsAsTabsProps | LinkTabsProps) & BaseProps;
+export interface TabsAsLinkTabsProps extends Omit<LinkTabsProps, 'value' | 'onChange'> {
+  value?: string;
+  onChange?: (newValue: TabsValue) => void;
+}
+
+export type TabsProps = (TabsAsTabsProps | TabsAsLinkTabsProps) & BaseProps;
 
 function Tabs({
   routes,
@@ -28,9 +33,7 @@ function Tabs({
   onChange,
   ...props
 }: TabsProps) {
-  const [currentValue, setCurrentValue] = useState<Exclude<TabsAsTabsProps['value'], undefined>>(
-    valueProp ?? 0
-  );
+  const [currentValue, setCurrentValue] = useState<string | TabsValue | undefined>(valueProp);
   const variant = variantProp ?? 'scrollable';
   const centered = centeredProp;
 
@@ -48,6 +51,7 @@ function Tabs({
           value={valueProp}
           centered={variant === 'scrollable' ? false : centered}
           variant={variant}
+          onChange={handleChange}
         >
           {children}
         </LinkTabs>
@@ -57,7 +61,7 @@ function Tabs({
           {...props}
           centered={variant === 'scrollable' ? false : centered}
           variant={variant}
-          value={currentValue}
+          value={currentValue ?? 0}
           onChange={handleChange}
         >
           {children}
