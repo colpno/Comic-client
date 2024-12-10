@@ -12,6 +12,7 @@ export const NumberField = lazy(() => import('./form-controls/NumberField.tsx'))
 export const RadioGroup = lazy(() => import('./form-controls/RadioGroup.tsx'));
 export const Select = lazy(() => import('./form-controls/Select.tsx'));
 export const Popup = lazy(() => import('./Popup.tsx'));
+export const InfiniteScrollPagination = lazy(() => import('./InfiniteScrollPagination.tsx'));
 
 export { default as DeviceWatcher } from './DeviceWatcher.tsx';
 export { default as TextField } from './form-controls/TextField.tsx';

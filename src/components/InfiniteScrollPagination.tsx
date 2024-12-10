@@ -4,7 +4,7 @@ interface Props {
   onIntersect: () => Promise<void>;
 }
 
-function RankingPagePagination({ onIntersect }: Props) {
+function InfiniteScrollPagination({ onIntersect }: Props) {
   const observerRef = useRef<HTMLDivElement | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -52,4 +52,4 @@ function RankingPagePagination({ onIntersect }: Props) {
   );
 }
 
-export default RankingPagePagination;
+export default InfiniteScrollPagination;
