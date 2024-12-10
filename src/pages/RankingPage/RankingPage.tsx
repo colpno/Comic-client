@@ -15,7 +15,7 @@ function RankingPage() {
   return (
     <Container maxWidth={MUI_CONTAINER_MAX_WIDTH}>
       {!isMobile && <Title onParamChange={() => {}} urlParam="category" />}
-      <Content content={comics} />
+      <Content items={comics} />
       <InfiniteScrollPagination onIntersect={async () => {}} />
     </Container>
   );
