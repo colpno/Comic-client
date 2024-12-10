@@ -1,6 +1,11 @@
 import moment from 'moment';
 
-import { getDailyRoute, getRankingRoute, ROUTE_RANKING } from '~/constants/routeConstants.ts';
+import {
+  getDailyRoute,
+  getRankingRoute,
+  ROUTE_NEW_ARRIVALS,
+  ROUTE_RANKING,
+} from '~/constants/routeConstants.ts';
 
 export interface PageMenuItem {
   title: string;
@@ -83,7 +88,12 @@ export const dailyMenu: PageMenuItem[] = [
     link: getDailyRoute('sunday'),
   },
 ];
+
 export const menu = [
+  {
+    title: 'New Arrivals',
+    link: ROUTE_NEW_ARRIVALS,
+  },
   {
     title: 'Daily',
     link: getDailyRoute(moment().format('dddd').toLowerCase()),

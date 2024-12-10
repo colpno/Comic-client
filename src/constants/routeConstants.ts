@@ -3,6 +3,7 @@ export const ROUTE_LIBRARY = '/library' as const;
 export const ROUTE_GENRES = '/genres' as const;
 export const ROUTE_DAILY = '/daily' as const;
 export const ROUTE_RANKING = '/ranking' as const;
+export const ROUTE_NEW_ARRIVALS = '/news' as const;
 
 export const getComicRoute = (comicId: string) => `/comics/${comicId}`;
 

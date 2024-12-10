@@ -5,10 +5,18 @@ import {
   getComicRoute,
   ROUTE_DAILY,
   ROUTE_HOME,
+  ROUTE_NEW_ARRIVALS,
   ROUTE_RANKING,
 } from '~/constants/routeConstants';
 import { DefaultLayout, HomeLayout, MenuLayout, ReadingLayout } from '~/layouts/index.ts';
-import { ComicPage, DailyPage, HomePage, RankingPage, ReadingPage } from '~/pages/index.ts';
+import {
+  ComicPage,
+  DailyPage,
+  HomePage,
+  NewProductsPage,
+  RankingPage,
+  ReadingPage,
+} from '~/pages/index.ts';
 
 const publicRoutes: RouteObject = {
   children: [
@@ -49,6 +57,10 @@ const publicRoutes: RouteObject = {
         {
           path: ROUTE_DAILY,
           Component: DailyPage,
+        },
+        {
+          path: ROUTE_NEW_ARRIVALS,
+          Component: NewProductsPage,
         },
       ],
     },
