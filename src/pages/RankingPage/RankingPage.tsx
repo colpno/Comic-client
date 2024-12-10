@@ -13,7 +13,7 @@ function RankingPage() {
   const isMobile = useDeviceWatcher() === 'mobile';
 
   return (
-    <Container maxWidth={MUI_CONTAINER_MAX_WIDTH} className="pt-6 sm:pt-12">
+    <Container maxWidth={MUI_CONTAINER_MAX_WIDTH}>
       {!isMobile && <Title onCategoryChange={() => {}} />}
       <Content content={comics} />
       <InfiniteScrollPagination onIntersect={async () => {}} />

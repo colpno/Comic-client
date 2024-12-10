@@ -7,7 +7,7 @@ function MenuLayout() {
   return (
     <div className="flex flex-col min-h-dvh">
       <Header />
-      <main className="flex-1 pb-16">
+      <main className="flex-1 pt-6 pb-16 sm:pt-12">
         <Outlet />
       </main>
       <Footer />
