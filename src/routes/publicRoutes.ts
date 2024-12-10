@@ -3,6 +3,7 @@ import { RouteObject } from 'react-router-dom';
 import {
   getComicReadingRoute,
   getComicRoute,
+  ROUTE_COMPLETED,
   ROUTE_DAILY,
   ROUTE_HOME,
   ROUTE_NEW_ARRIVALS,
@@ -11,6 +12,7 @@ import {
 import { DefaultLayout, HomeLayout, MenuLayout, ReadingLayout } from '~/layouts/index.ts';
 import {
   ComicPage,
+  CompletedPage,
   DailyPage,
   HomePage,
   NewProductsPage,
@@ -61,6 +63,10 @@ const publicRoutes: RouteObject = {
         {
           path: ROUTE_NEW_ARRIVALS,
           Component: NewProductsPage,
+        },
+        {
+          path: ROUTE_COMPLETED,
+          Component: CompletedPage,
         },
       ],
     },

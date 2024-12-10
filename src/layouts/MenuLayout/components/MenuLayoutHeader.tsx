@@ -9,7 +9,7 @@ import { useDeviceWatcher } from '~/hooks/useDeviceWatcher.ts';
 import { useScroll } from '~/hooks/useScroll.ts';
 import AppHeader from '~/layouts/components/Header.tsx';
 import { cn, heights } from '~/utils/cssUtils.ts';
-import { menu, PageMenuItem } from '../helpers/getMenuLayoutMenu.ts';
+import { menu, SubMenuItem } from '../helpers/getMenuLayoutMenu.ts';
 
 const parseHeight = (height: string): number => parseInt(height, 10);
 
@@ -65,7 +65,7 @@ function Menu() {
 
 function SubMenu() {
   const { pathname } = useLocation();
-  const [menuItems, setMenuItems] = useState<null | PageMenuItem[]>(null);
+  const [menuItems, setMenuItems] = useState<null | SubMenuItem[]>(null);
 
   useEffect(() => {
     const currMenu = menu.find((item) => item.link.slice(0, pathname.length) === pathname);
