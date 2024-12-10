@@ -69,7 +69,8 @@ function SubMenu() {
 
   useEffect(() => {
     const currMenu = menu.find((item) => item.link.slice(0, pathname.length) === pathname);
-    if (currMenu) setMenuItems(currMenu.headerMenu);
+    if (currMenu && currMenu.headerMenu) setMenuItems(currMenu.headerMenu);
+    else setMenuItems(null);
   }, [pathname]);
 
   if (!menuItems) return null;
