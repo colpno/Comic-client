@@ -7,7 +7,7 @@ function ComicCard(comic: Comic) {
   return (
     <figure>
       <Image
-        src={comic.coverImageUrl}
+        src={PlaceholderImage}
         alt={comic.title}
         className="rounded-md aspect-[8/11] w-full"
         onLoad={({ currentTarget }) => {
