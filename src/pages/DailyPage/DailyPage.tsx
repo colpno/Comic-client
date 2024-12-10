@@ -5,17 +5,17 @@ import { MUI_CONTAINER_MAX_WIDTH } from '~/constants/commonConstants.ts';
 import { generateComics } from '~/database/comics.ts';
 import { useDeviceWatcher } from '~/hooks/useDeviceWatcher.ts';
 import Title from '~/layouts/MenuLayout/components/MenuLayoutPageTitle.tsx';
-import DailyPageContent from './components/DailyPageContent';
+import Content from './components/DailyPageContent';
 
 const comics = generateComics(10);
 
 function DailyPage() {
-  const isMobile = useDeviceWatcher() === 'mobile';
+  const isDesktop = useDeviceWatcher() === 'desktop';
 
   return (
     <Container maxWidth={MUI_CONTAINER_MAX_WIDTH}>
-      {!isMobile && <Title onParamChange={() => {}} urlParam="weekday" />}
-      <DailyPageContent items={comics} />
+      {isDesktop && <Title onParamChange={() => {}} urlParam="weekday" />}
+      <Content items={comics} />
       <InfiniteScrollPagination onIntersect={async () => {}} />
     </Container>
   );

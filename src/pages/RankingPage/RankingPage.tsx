@@ -10,11 +10,11 @@ import Content from './components/RankingPageContent.tsx';
 const comics = generateComics(10);
 
 function RankingPage() {
-  const isMobile = useDeviceWatcher() === 'mobile';
+  const isDesktop = useDeviceWatcher() === 'desktop';
 
   return (
     <Container maxWidth={MUI_CONTAINER_MAX_WIDTH}>
-      {!isMobile && <Title onParamChange={() => {}} urlParam="category" />}
+      {isDesktop && <Title onParamChange={() => {}} urlParam="category" defaultValue="All" />}
       <Content items={comics} />
       <InfiniteScrollPagination onIntersect={async () => {}} />
     </Container>
