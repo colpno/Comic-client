@@ -2,26 +2,28 @@ import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import { Typography } from '~/components/index.ts';
-import { RankingPageCategory } from '~/types/pagesTypes.ts';
 import { toSentenceCase } from '~/utils/converters.ts';
 
 interface Props {
-  onCategoryChange: (category: RankingPageCategory) => void;
+  urlParam: string;
+  onParamChange: (category: string) => void;
 }
 
-function RankingPageTitle({ onCategoryChange }: Props) {
+function MenuLayoutPageTitle({ onParamChange, urlParam }: Props) {
   const [searchParams] = useSearchParams();
-  const category = searchParams.get('category') || 'all';
+  const titleParam = searchParams.get(urlParam);
 
   useEffect(() => {
-    onCategoryChange(category as RankingPageCategory);
-  }, [category, onCategoryChange]);
+    if (titleParam) onParamChange(titleParam);
+  }, [titleParam, onParamChange]);
+
+  if (!titleParam) return null;
 
   return (
     <Typography component="h2" variant="h4" className="!mb-8 !text-3xl md:!text-4xl">
-      {toSentenceCase(category)}
+      {toSentenceCase(titleParam)}
     </Typography>
   );
 }
 
-export default RankingPageTitle;
+export default MenuLayoutPageTitle;
