@@ -20,7 +20,7 @@ function Header() {
     <MainHeader
       slotProps={{
         container: {
-          className: activeHeader ? 'text-main' : 'text-white bg-transparent',
+          className: activeHeader ? 'text-main' : 'text-white bg-transparent border-b-0',
         },
       }}
     >

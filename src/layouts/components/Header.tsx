@@ -47,7 +47,10 @@ function Header({ slotProps, children }: Props) {
   return (
     <header
       {...slotProps?.container}
-      className={cn('fixed top-0 left-0 right-0 z-header bg-main', slotProps?.container?.className)}
+      className={cn(
+        'fixed top-0 left-0 right-0 z-header bg-main border-b',
+        slotProps?.container?.className
+      )}
     >
       <Container
         maxWidth={MUI_CONTAINER_MAX_WIDTH}
