@@ -1,12 +1,12 @@
 import { Container, ContainerProps, Theme, useTheme } from '@mui/material';
 import { HTMLAttributes, memo } from 'react';
-import { Link } from 'react-router-dom';
 
-import { Logo } from '~/components/index.ts';
+import { MUI_CONTAINER_MAX_WIDTH } from '~/constants/commonConstants.ts';
 import { useDeviceWatcher } from '~/hooks/index.ts';
 import { Device } from '~/types/commonTypes.ts';
 import { cn } from '~/utils/cssUtils.ts';
 import HeaderActions from './HeaderActions/HeaderActions.tsx';
+import HeaderLogo from './HeaderLogo.tsx';
 
 interface FunctionalChildrenProps {
   device: Device;
@@ -38,13 +38,7 @@ function Header({ slotProps, children }: Props) {
 
     return (
       <>
-        <Link to="/">
-          {isMobile ? (
-            <Logo variant="small" fill={theme.palette.primary.main} />
-          ) : (
-            <Logo width={110} height={27} fill={theme.palette.primary.main} />
-          )}
-        </Link>
+        <HeaderLogo />
         <HeaderActions />
       </>
     );
@@ -56,7 +50,7 @@ function Header({ slotProps, children }: Props) {
       className={cn('fixed top-0 left-0 right-0 z-header bg-main', slotProps?.container?.className)}
     >
       <Container
-        maxWidth="md"
+        maxWidth={MUI_CONTAINER_MAX_WIDTH}
         {...slotProps?.wrapper}
         className={cn(
           'flex items-center justify-between h-header md:h-header-md',
