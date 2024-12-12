@@ -1,11 +1,10 @@
 import { Container } from '@mui/material';
-import { useState } from 'react';
 import { MdClose } from 'react-icons/md';
 
-import TextInput from '~/components/form-controls/base-controls/TextInput.tsx';
 import { Button } from '~/components/index.ts';
 import { MUI_CONTAINER_MAX_WIDTH } from '~/constants/commonConstants.ts';
 import HeaderLogo from './HeaderLogo.tsx';
+import SearchInput from './SearchInput';
 
 interface SearchPanelProps {
   open: boolean;
@@ -23,7 +22,7 @@ function SearchPanel({ open, onClose }: SearchPanelProps) {
       >
         <HeaderLogo />
         <div className="flex-[0_1_26rem] px-4 sm:px-8">
-          <SearchInput onClose={onClose} />
+          <SearchInput />
         </div>
         <Button as="iconButton" title="Close search panel" onClick={onClose}>
           <MdClose />
@@ -34,26 +33,3 @@ function SearchPanel({ open, onClose }: SearchPanelProps) {
 }
 
 export default SearchPanel;
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function SearchInput({ onClose }: Pick<SearchPanelProps, 'onClose'>) {
-  const [searchText, setSearchText] = useState<string>('');
-
-  const handleSearchChange = (value: string) => {
-    console.log(value);
-    setSearchText(value);
-    // onClose();
-  };
-
-  return (
-    <TextInput
-      name="searchText"
-      label="Search"
-      size="small"
-      fullWidth
-      slotProps={{ input: { className: '!rounded-3xl' } }}
-      value={searchText}
-      onChange={handleSearchChange}
-    />
-  );
-}

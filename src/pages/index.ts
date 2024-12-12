@@ -7,5 +7,6 @@ export const RankingPage = lazy(() => import('./RankingPage/RankingPage.tsx'));
 export const DailyPage = lazy(() => import('./DailyPage/DailyPage.tsx'));
 export const NewProductsPage = lazy(() => import('./NewProductsPage/NewProductsPage.tsx'));
 export const CompletedPage = lazy(() => import('./CompletedPage/CompletedPage.tsx'));
+export const SearchPage = lazy(() => import('./SearchPage/SearchPage.tsx'));
 
 export { default as HomePage } from './HomePage/HomePage.tsx';

@@ -5,6 +5,7 @@ export const ROUTE_DAILY = '/daily' as const;
 export const ROUTE_RANKING = '/ranking' as const;
 export const ROUTE_NEW_ARRIVALS = '/news' as const;
 export const ROUTE_COMPLETED = '/completed' as const;
+export const ROUTE_SEARCH = '/search' as const;
 
 export const getComicRoute = (comicId: string) => `/comics/${comicId}`;
 
@@ -24,4 +25,9 @@ export const getDailyRoute = (weekDay?: string) => {
 export const getCompletedRoute = (category?: string) => {
   if (!category) return ROUTE_COMPLETED;
   return `${ROUTE_COMPLETED}?category=${category}`;
+};
+
+export const getSearchRoute = (searchValue?: string) => {
+  if (!searchValue) return ROUTE_SEARCH;
+  return `${ROUTE_SEARCH}?value=${searchValue}`;
 };

@@ -8,8 +8,15 @@ import {
   ROUTE_HOME,
   ROUTE_NEW_ARRIVALS,
   ROUTE_RANKING,
+  ROUTE_SEARCH,
 } from '~/constants/routeConstants';
-import { DefaultLayout, HomeLayout, MenuLayout, ReadingLayout } from '~/layouts/index.ts';
+import {
+  DefaultLayout,
+  HomeLayout,
+  MenuLayout,
+  ReadingLayout,
+  SearchLayout,
+} from '~/layouts/index.ts';
 import {
   ComicPage,
   CompletedPage,
@@ -18,6 +25,7 @@ import {
   NewProductsPage,
   RankingPage,
   ReadingPage,
+  SearchPage,
 } from '~/pages/index.ts';
 
 const publicRoutes: RouteObject = {
@@ -37,6 +45,15 @@ const publicRoutes: RouteObject = {
         {
           path: getComicRoute(':comicId'),
           Component: ComicPage,
+        },
+      ],
+    },
+    {
+      Component: SearchLayout,
+      children: [
+        {
+          path: ROUTE_SEARCH,
+          Component: SearchPage,
         },
       ],
     },
