@@ -13,7 +13,7 @@ const chapters = generateChapters(50);
 
 function ComicPage() {
   return (
-    <Grid2 container spacing={3} className="relative mt-6">
+    <Grid2 container spacing={3} className="relative pb-16 mt-6">
       <BackgroundImage image={comic.coverImageUrl} />
       <Wrapper>
         <Details {...comic} />
