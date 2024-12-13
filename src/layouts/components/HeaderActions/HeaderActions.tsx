@@ -8,7 +8,7 @@ import HeaderSearchButton from './HeaderSearchButton';
 
 function HeaderActions() {
   return (
-    <div>
+    <div className="flex">
       <HeaderSearchButton />
       <Link to={ROUTE_LIBRARY}>
         <Button as="iconButton" color="inherit" title="Library">
