@@ -1,6 +1,6 @@
 import { lazy } from 'react';
 
-export const DefaultLayout = lazy(() => import('./DefaultLayout.tsx'));
+export const BasicLayout = lazy(() => import('./BasicLayout.tsx'));
 export const ReadingLayout = lazy(() => import('./ReadingLayout/ReadingLayout.tsx'));
 export const MenuLayout = lazy(() => import('./MenuLayout/MenuLayout.tsx'));
 export const SearchLayout = lazy(() => import('./SearchLayout/SearchLayout.tsx'));
