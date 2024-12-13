@@ -6,12 +6,13 @@ import {
   ROUTE_COMPLETED,
   ROUTE_DAILY,
   ROUTE_HOME,
+  ROUTE_LOGIN,
   ROUTE_NEW_ARRIVALS,
   ROUTE_RANKING,
   ROUTE_SEARCH,
 } from '~/constants/routeConstants';
 import {
-  DefaultLayout,
+  BasicLayout,
   HomeLayout,
   MenuLayout,
   ReadingLayout,
@@ -22,6 +23,7 @@ import {
   CompletedPage,
   DailyPage,
   HomePage,
+  LoginPage,
   NewProductsPage,
   RankingPage,
   ReadingPage,
@@ -40,11 +42,15 @@ const publicRoutes: RouteObject = {
       ],
     },
     {
-      Component: DefaultLayout,
+      Component: BasicLayout,
       children: [
         {
           path: getComicRoute(':comicId'),
           Component: ComicPage,
+        },
+        {
+          path: ROUTE_LOGIN,
+          Component: LoginPage,
         },
       ],
     },

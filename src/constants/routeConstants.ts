@@ -6,6 +6,7 @@ export const ROUTE_RANKING = '/ranking' as const;
 export const ROUTE_NEW_ARRIVALS = '/news' as const;
 export const ROUTE_COMPLETED = '/completed' as const;
 export const ROUTE_SEARCH = '/search' as const;
+export const ROUTE_LOGIN = '/login' as const;
 
 export const getComicRoute = (comicId: string) => `/comics/${comicId}`;
 
