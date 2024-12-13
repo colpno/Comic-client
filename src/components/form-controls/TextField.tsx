@@ -4,21 +4,16 @@ import { Controller, useFormContext } from 'react-hook-form';
 
 import TextInput from './base-controls/TextInput';
 
-interface Props extends Omit<ComponentProps<typeof TextInput>, 'onChange'> {
+interface Props extends Omit<ComponentProps<typeof TextInput>, 'onChange' | 'slotProps'> {
   name: string;
   label?: string;
   uppercase?: boolean;
-  formControlProps?: FormControlProps;
+  slotProps?: React.ComponentProps<typeof TextInput>['slotProps'] & {
+    container?: FormControlProps;
+  };
 }
 
-function TextField({
-  name,
-  required,
-  fullWidth,
-  formControlProps,
-  defaultValue = null,
-  ...props
-}: Props) {
+function TextField({ name, required, fullWidth, defaultValue = null, ...props }: Props) {
   const {
     control,
     /*
@@ -33,10 +28,10 @@ function TextField({
 
   return (
     <FormControl
+      {...props.slotProps?.container}
       error={!!errorMessage}
       fullWidth={fullWidth}
       required={required}
-      {...formControlProps}
     >
       <Controller
         control={control}
