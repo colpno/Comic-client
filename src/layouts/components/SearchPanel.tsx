@@ -24,7 +24,7 @@ function SearchPanel({ open, onClose }: SearchPanelProps) {
         <div className="flex-[0_1_26rem] px-4 sm:px-8">
           <SearchInput />
         </div>
-        <Button as="iconButton" title="Close search panel" onClick={onClose}>
+        <Button as="iconButton" color="inherit" title="Close search panel" onClick={onClose}>
           <MdClose />
         </Button>
       </Container>

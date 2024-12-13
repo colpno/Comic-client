@@ -25,7 +25,7 @@ function MenuItem({ Icon, label, href }: MenuItemProps) {
   return (
     <Button as="unstyled" href={href} className="flex flex-col items-center">
       <div className="flex items-center justify-center bg-slate-100 rounded-full size-16 md:size-[4.6rem]">
-        <Icon className="text-2xl md:text-3xl" />
+        <Icon className="text-2xl md:text-3xl !text-black" />
       </div>
       <Typography className="mt-2">{label}</Typography>
     </Button>
@@ -57,7 +57,7 @@ function Menu() {
   ];
 
   return (
-    <div className="mt-5 mb-8 border-b">
+    <div className="mt-5 mb-8 border-b dark:border-gray-800">
       <Container maxWidth={MUI_CONTAINER_MAX_WIDTH}>
         <Slider
           slidesPerView={3}

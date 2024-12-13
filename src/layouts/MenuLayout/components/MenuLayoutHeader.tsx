@@ -29,7 +29,7 @@ function MenuLayoutHeader() {
   return (
     <div style={{ height: headerHeight }}>
       <AppHeader />
-      <div className="fixed left-0 right-0 top-header md:top-header-md z-header">
+      <div className="fixed left-0 right-0 top-header md:top-header-md z-sub-header">
         <Menu />
         <SubMenu />
       </div>
@@ -112,7 +112,7 @@ const tabNavigatorsStyles = {
 
 function MenuContainer({ children, className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   return (
-    <div {...props} className={cn('border-b bg-main', className)}>
+    <div {...props} className={cn('border-b dark:border-gray-800  bg-main', className)}>
       <Container maxWidth={MUI_CONTAINER_MAX_WIDTH} component="nav">
         {children}
       </Container>

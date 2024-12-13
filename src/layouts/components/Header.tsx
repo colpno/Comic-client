@@ -48,7 +48,7 @@ function Header({ slotProps, children }: Props) {
     <header
       {...slotProps?.container}
       className={cn(
-        'fixed top-0 left-0 right-0 z-header bg-main border-b',
+        'fixed top-0 left-0 right-0 z-header bg-main border-b dark:border-gray-800',
         slotProps?.container?.className
       )}
     >

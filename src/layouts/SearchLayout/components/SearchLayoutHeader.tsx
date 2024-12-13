@@ -14,7 +14,7 @@ function SearchLayoutHeader() {
   const searchValue = searchParams.get('value') || undefined; // undefined for prop typing
 
   return (
-    <header className="fixed top-0 left-0 right-0 border-b z-header bg-main">
+    <header className="fixed top-0 left-0 right-0 border-b dark:border-gray-800 z-header bg-main">
       <Container
         maxWidth={MUI_CONTAINER_MAX_WIDTH}
         className="flex items-center justify-between h-header md:h-header-md"

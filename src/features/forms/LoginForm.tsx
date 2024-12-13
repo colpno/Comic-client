@@ -11,7 +11,7 @@ function LoginForm() {
 
   return (
     <div>
-      <Typography variant="h1" className="!text-3xl text-center !mb-10">
+      <Typography variant="h1" className="!text-3xl text-center !mb-8 text-main">
         Sign in
       </Typography>
       <Form validationSchema={loginFormSchema} onSubmit={handleSubmit}>
@@ -23,7 +23,7 @@ function LoginForm() {
           placeholder="Email Address"
           slotProps={{
             container: { className: '!mb-4' },
-            input: { startAdornment: <IoMailOpenOutline size={26} className="mr-2" /> },
+            input: { startAdornment: <IoMailOpenOutline size={27} className="mr-2" /> },
             htmlInput: { className: '!py-4 !text-lg' },
           }}
         />
@@ -35,7 +35,7 @@ function LoginForm() {
           placeholder="Password"
           slotProps={{
             container: { className: '!mb-7' },
-            input: { startAdornment: <CiLock size={30} className="mr-2" /> },
+            input: { startAdornment: <CiLock size={27} className="mr-2" /> },
             htmlInput: { className: '!py-4 !text-lg' },
           }}
         />

@@ -34,9 +34,9 @@ function Form({ open, onClose }: FormProps) {
   const isMobile = useDeviceWatcher() === 'mobile';
 
   if (open) {
-    document.body.style.overflow = 'hidden';
-
     if (isMobile) {
+      document.body.style.overflow = 'hidden';
+
       return (
         <div className="fixed top-0 bottom-0 left-0 right-0 px-6 py-10 overflow-y-scroll bg-main">
           <Button
@@ -52,8 +52,9 @@ function Form({ open, onClose }: FormProps) {
       );
     }
 
+    document.body.style.overflow = 'unset';
     return (
-      <div className="absolute right-0 px-6 pt-6 pb-10 shadow-md border w-[22rem] rounded-xl top-full bg-main">
+      <div className="absolute right-0 px-6 pt-6 pb-10 shadow-md dark:shadow-gray-800 border dark:border-gray-800 w-[22rem] rounded-xl top-full bg-main">
         <LoginForm />
       </div>
     );

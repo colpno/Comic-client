@@ -22,5 +22,25 @@ export const getTheme = (mode: Mode) => {
         paper: getCSSVariableValue('--background-secondary'),
       },
     },
+    components: {
+      MuiTab: {
+        styleOverrides: {
+          root: {
+            color: 'var(--text-primary)',
+          },
+        },
+      },
+      MuiTextField: {
+        styleOverrides: {
+          root: {
+            '& .MuiOutlinedInput-root': {
+              '& fieldset': {
+                borderColor: 'var(--border-primary)',
+              },
+            },
+          },
+        },
+      },
+    },
   });
 };

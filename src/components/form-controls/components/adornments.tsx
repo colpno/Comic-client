@@ -18,7 +18,7 @@ export function PasswordAdornment({ onClick, show }: AdornmentProps) {
 export function ClearAdornment({ onClick }: AdornmentProps) {
   return (
     <Button as="iconButton" onClick={onClick}>
-      <MdClose size={20} />
+      <MdClose className="text-main" size={20} />
     </Button>
   );
 }
