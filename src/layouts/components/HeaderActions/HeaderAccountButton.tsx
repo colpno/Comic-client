@@ -9,7 +9,7 @@ function HeaderAccountButton() {
   const [showForm, setShowForm] = useState(false);
   const clickOutsideRef = useRef<HTMLDivElement | null>(null);
 
-  useClickOutside(clickOutsideRef, () => setShowForm(false));
+  useClickOutside(clickOutsideRef, () => setShowForm(false), { keys: ['Escape'] });
 
   const toggleForm = () => setShowForm((prev) => !prev);
 
