@@ -1,27 +1,35 @@
 import {
   FormControl,
   FormControlLabel,
+  FormControlLabelProps as MUIFormControlLabelProps,
   FormHelperText,
   FormLabel,
   Radio,
   RadioGroup as MUIRadioGroup,
+  RadioGroupProps as MUIRadioGroupProps,
+  RadioProps as MUIRadioProps,
   useTheme,
 } from '@mui/material';
-import { InputHTMLAttributes, memo } from 'react';
+import { memo } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 
 import { RadioOption } from '~/types/formControlTypes.ts';
 
-export interface RadioGroupProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'defaultValue' | 'name'> {
+export interface RadioGroupProps {
   name: string;
   label?: string;
   options: RadioOption[];
   defaultValue?: RadioOption;
+  required?: boolean;
+  slotProps?: {
+    group?: MUIRadioGroupProps;
+    radio?: MUIRadioProps;
+    label?: MUIFormControlLabelProps;
+  };
 }
 
 function RadioGroup(props: RadioGroupProps) {
-  const { label, name, options, required, defaultValue = null } = props;
+  const { label, name, options, required, defaultValue = null, slotProps } = props;
   const theme = useTheme();
   const {
     control,
@@ -45,20 +53,23 @@ function RadioGroup(props: RadioGroupProps) {
         render={({ field: { onChange, ...field } }) => (
           <MUIRadioGroup
             {...field}
+            {...slotProps?.group}
             onChange={(_e, value) => {
               if (value === 'true' || value === 'false') onChange(value === 'true');
               else onChange(value);
             }}
-            row
           >
             {options.map(({ value, label }, index) => (
               <FormControlLabel
+                {...slotProps?.label}
                 value={value}
                 label={label}
                 control={
                   <Radio
+                    {...slotProps?.radio}
                     sx={{
                       color: theme.palette.grey['600'],
+                      ...slotProps?.radio?.sx,
                     }}
                   />
                 }

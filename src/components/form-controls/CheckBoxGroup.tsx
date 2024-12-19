@@ -1,27 +1,35 @@
 import {
   Checkbox,
+  CheckboxProps as MUICheckboxProps,
   FormControl,
   FormControlLabel,
+  FormControlLabelProps as MUIFormControlLabelProps,
   FormGroup,
+  FormGroupProps as MUIFormGroupProps,
   FormHelperText,
   FormLabel,
   useTheme,
 } from '@mui/material';
-import { InputHTMLAttributes, memo } from 'react';
+import { memo } from 'react';
 import { Controller, ControllerRenderProps, useFormContext } from 'react-hook-form';
 
 import { CheckboxOption } from '~/types/formControlTypes.ts';
 
-interface CheckBoxGroupProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'defaultValue' | 'name'> {
+interface CheckBoxGroupProps {
   name: string;
   label?: string;
   options: CheckboxOption[];
   defaultValue?: CheckboxOption[];
+  required?: boolean;
+  slotProps?: {
+    group?: MUIFormGroupProps;
+    checkbox?: MUICheckboxProps;
+    label?: MUIFormControlLabelProps;
+  };
 }
 
 function CheckBoxGroup(props: CheckBoxGroupProps) {
-  const { label, name, options, required, defaultValue = [] } = props;
+  const { label, name, options, required, defaultValue = [], slotProps } = props;
   const theme = useTheme();
   const {
     control,
@@ -50,7 +58,7 @@ function CheckBoxGroup(props: CheckBoxGroupProps) {
   return (
     <FormControl error={!!errorMessage} required={required}>
       <FormLabel sx={{ color: theme.palette.text.primary }}>{label}</FormLabel>
-      <FormGroup row>
+      <FormGroup {...slotProps?.group}>
         <Controller
           control={control}
           name={name}
@@ -60,10 +68,12 @@ function CheckBoxGroup(props: CheckBoxGroupProps) {
               <>
                 {options.map((item) => (
                   <FormControlLabel
+                    {...slotProps?.label}
                     key={`${name}-${item.value}`}
                     label={item.label}
                     control={
                       <Checkbox
+                        {...slotProps?.checkbox}
                         checked={field.value?.includes(item.value) || false}
                         onChange={() => handleChange(field, item)}
                       />
