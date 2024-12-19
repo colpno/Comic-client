@@ -12,11 +12,19 @@ const comics = generateComics(10);
 function DailyPage() {
   const isDesktop = useDeviceWatcher() === 'desktop';
 
+  const handleTitleChange = (value: string) => {
+    // TODO: Fetch comics based on category
+  };
+
+  const handleIntersect = async () => {
+    // TODO: Fetch next page
+  };
+
   return (
     <Container maxWidth={MUI_CONTAINER_MAX_WIDTH}>
-      {isDesktop && <Title onParamChange={() => {}} urlParam="weekday" />}
+      {isDesktop && <Title onParamChange={handleTitleChange} urlParam="weekday" />}
       <Content items={comics} />
-      <InfiniteScrollPagination onIntersect={async () => {}} />
+      <InfiniteScrollPagination onIntersect={handleIntersect} />
     </Container>
   );
 }

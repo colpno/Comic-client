@@ -14,13 +14,17 @@ function SearchPage() {
   const [searchParam] = useSearchParams();
   const searchValue = searchParam.get('value');
 
+  const handleIntersect = async () => {
+    // TODO: Fetch next page
+  };
+
   if (!searchValue) return <NoSearchValue />;
 
   return (
     <Container maxWidth={MUI_CONTAINER_MAX_WIDTH} className="pt-8">
       <Title searchValue={searchValue} />
       <Content items={comics} />
-      <InfiniteScrollPagination onIntersect={async () => {}} />
+      <InfiniteScrollPagination onIntersect={handleIntersect} />
     </Container>
   );
 }

@@ -12,11 +12,21 @@ const comics = generateComics(10);
 function RankingPage() {
   const isDesktop = useDeviceWatcher() === 'desktop';
 
+  const handleTitleChange = (value: string) => {
+    // TODO: Fetch comics based on category
+  };
+
+  const handleIntersect = async () => {
+    // TODO: Fetch next page
+  };
+
   return (
     <Container maxWidth={MUI_CONTAINER_MAX_WIDTH}>
-      {isDesktop && <Title onParamChange={() => {}} urlParam="category" defaultValue="All" />}
+      {isDesktop && (
+        <Title onParamChange={handleTitleChange} urlParam="category" defaultValue="All" />
+      )}
       <Content items={comics} />
-      <InfiniteScrollPagination onIntersect={async () => {}} />
+      <InfiniteScrollPagination onIntersect={handleIntersect} />
     </Container>
   );
 }

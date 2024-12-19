@@ -8,10 +8,14 @@ import Content from './components/NewProductsPageContent.tsx';
 const comics = generateComics(10);
 
 function NewProductsPage() {
+  const handleIntersect = async () => {
+    // TODO: Fetch next page
+  };
+
   return (
     <Container maxWidth={MUI_CONTAINER_MAX_WIDTH} className="-mt-8">
       <Content items={comics} />
-      <InfiniteScrollPagination onIntersect={async () => {}} />
+      <InfiniteScrollPagination onIntersect={handleIntersect} />
     </Container>
   );
 }
