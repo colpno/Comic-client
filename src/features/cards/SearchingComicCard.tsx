@@ -12,7 +12,7 @@ function SearchingComicCard(comic: Comic) {
       <Image
         src={PlaceholderImage}
         alt={comic.title}
-        className="rounded-md aspect-[8/11] w-28"
+        className="rounded-md aspect-[8/11] w-20 sm:w-24 md:w-28"
         onLoad={({ currentTarget }) => {
           currentTarget.src = comic.coverImageUrl;
         }}
@@ -20,7 +20,7 @@ function SearchingComicCard(comic: Comic) {
           currentTarget.src = PlaceholderImage;
         }}
       />
-      <div className="flex flex-col pb-10 pt-7">
+      <div className="flex flex-col pt-4 pb-6 sm:pb-10 sm:pt-7">
         <Typography
           fontWeight={500}
           className="line-clamp-1"

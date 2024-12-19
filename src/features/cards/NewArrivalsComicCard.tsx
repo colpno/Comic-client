@@ -41,7 +41,7 @@ function MobileCard(comic: Comic) {
       <Image
         src={PlaceholderImage}
         alt={comic.title}
-        className="rounded-md aspect-[8/11] w-20"
+        className="rounded-md aspect-[8/11] w-20 sm:w-24 md:w-28"
         onLoad={({ currentTarget }) => {
           currentTarget.src = comic.coverImageUrl;
         }}
