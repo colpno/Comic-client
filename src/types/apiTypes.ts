@@ -6,7 +6,7 @@
 ======================================================================
 */
 
-import { PrimitiveType } from './commonTypes.ts';
+import { PrimitiveValue } from './commonTypes.ts';
 
 export interface SuccessfulApiResponse<D = unknown> {
   data: D;
@@ -62,19 +62,19 @@ export interface FilterOperators {
   /** Contain string. */
   like: string;
   /** Equal. */
-  eq: PrimitiveType;
+  eq: PrimitiveValue;
   /** Not equal. */
-  ne: PrimitiveType;
+  ne: PrimitiveValue;
   /** Not null or the field is exist. */
   exists: boolean;
   /** Greater than. */
-  gt: Exclude<PrimitiveType, boolean>;
+  gt: Exclude<PrimitiveValue, boolean>;
   /** Greater than or equal. */
-  gte: Exclude<PrimitiveType, boolean>;
+  gte: Exclude<PrimitiveValue, boolean>;
   /** Lesser than. */
-  lt: Exclude<PrimitiveType, boolean>;
+  lt: Exclude<PrimitiveValue, boolean>;
   /** Lesser than or equal. */
-  lte: Exclude<PrimitiveType, boolean>;
+  lte: Exclude<PrimitiveValue, boolean>;
   /** Compare array size. */
   size:
     | number
@@ -84,11 +84,11 @@ export interface FilterOperators {
     | { lte: number }
     | { lt: number };
   /** Has all values. */
-  all: PrimitiveType[];
+  all: PrimitiveValue[];
   /** Has one of the values. */
-  in: PrimitiveType[];
+  in: PrimitiveValue[];
   /** Has no value in. */
-  nin: PrimitiveType[];
+  nin: PrimitiveValue[];
   /** This or that. */
   or: Record<
     string,
@@ -140,7 +140,7 @@ export type Sort<D = Record<string, unknown>> = Partial<Record<keyof D, SortOrde
  * { field1: 'value1', field2: { gt: 10 } }
  */
 export type Filter<D = Record<string, unknown>> = Partial<
-  Record<keyof D, PrimitiveType | Partial<FilterOperators>>
+  Record<keyof D, PrimitiveValue | Partial<FilterOperators>>
 >;
 
 export interface GetRequestOperators<D = undefined> {

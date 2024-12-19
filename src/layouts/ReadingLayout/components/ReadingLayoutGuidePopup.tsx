@@ -1,4 +1,4 @@
-import { Popup } from '~/components/index.ts';
+import { Dialog } from '~/components/index.ts';
 
 interface GuidePopupProps {
   open: boolean;
@@ -19,7 +19,7 @@ function ReadingLayoutGuidePopup({ open, onClose }: GuidePopupProps) {
   ];
 
   return (
-    <Popup open={open} title="Reading Guide" onClose={onClose}>
+    <Dialog open={open} title="Reading Guide" onClose={onClose}>
       <table className="[&_th]:border [&_th]:border-black [&_td]:border [&_td]:border-black [&_td]:px-2">
         <tr className="*:text-center">
           <th>Action</th>
@@ -32,7 +32,7 @@ function ReadingLayoutGuidePopup({ open, onClose }: GuidePopupProps) {
           </tr>
         ))}
       </table>
-    </Popup>
+    </Dialog>
   );
 }
 
