@@ -32,7 +32,7 @@ const comicSchema = () => ({
   }),
   createdAt: faker.date.past().toISOString(),
   updatedAt: faker.date.recent().toISOString(),
-  latestUploadedChapter: faker.database.mongodbObjectId(),
+  latestUploadedChapter: faker.helpers.rangeToNumber({ min: 1, max: 100 }),
   coverImageUrl: faker.image.url({ width: 512, height: 728 }),
   related: ['asd'],
   authors: faker.helpers.multiple(
@@ -141,7 +141,7 @@ export const comic: Comic = {
   chapterNumbersResetOnNewVolume: false,
   createdAt: '2018-02-05T07:33:35+00:00',
   updatedAt: '2024-10-09T12:09:09+00:00',
-  latestUploadedChapter: 'ca2a1bdf-99d6-41ee-90a3-dd3bc630217f',
+  latestUploadedChapter: 1,
   authors: [
     {
       id: '6afbe7ae-36a4-4d95-aacc-610bd9c64332',
