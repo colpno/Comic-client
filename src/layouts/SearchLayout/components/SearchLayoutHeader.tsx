@@ -4,7 +4,7 @@ import { Link, useSearchParams } from 'react-router-dom';
 
 import { Button } from '~/components/index.ts';
 import { MUI_CONTAINER_MAX_WIDTH } from '~/constants/commonConstants.ts';
-import { ROUTE_LIBRARY } from '~/constants/routeConstants';
+import { ROUTE_HISTORY } from '~/constants/routeConstants';
 import HeaderAccountButton from '~/layouts/components/HeaderActions/HeaderAccountButton.tsx';
 import HeaderLogo from '~/layouts/components/HeaderLogo.tsx';
 import SearchInput from '~/layouts/components/SearchInput.tsx';
@@ -24,8 +24,8 @@ function SearchLayoutHeader() {
           <SearchInput value={searchValue} replaceUrl />
         </div>
         <div>
-          <Link to={ROUTE_LIBRARY}>
-            <Button as="iconButton" color="inherit" title="Library">
+          <Link to={ROUTE_HISTORY}>
+            <Button as="iconButton" color="inherit" title="History">
               <PiBooks />
             </Button>
           </Link>

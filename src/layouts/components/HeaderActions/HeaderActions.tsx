@@ -1,8 +1,7 @@
 import { PiBooks } from 'react-icons/pi';
-import { Link } from 'react-router-dom';
 
 import { Button } from '~/components/index.ts';
-import { ROUTE_LIBRARY } from '~/constants/routeConstants';
+import { ROUTE_HISTORY } from '~/constants/routeConstants';
 import HeaderAccountButton from './HeaderAccountButton';
 import HeaderSearchButton from './HeaderSearchButton';
 
@@ -10,11 +9,9 @@ function HeaderActions() {
   return (
     <div className="flex">
       <HeaderSearchButton />
-      <Link to={ROUTE_LIBRARY}>
-        <Button as="iconButton" color="inherit" title="Library">
-          <PiBooks />
-        </Button>
-      </Link>
+      <Button as="iconButton" href={ROUTE_HISTORY} color="inherit" title="History">
+        <PiBooks />
+      </Button>
       <HeaderAccountButton />
     </div>
   );

@@ -6,7 +6,7 @@ import { PiBooks } from 'react-icons/pi';
 import { Link, useParams } from 'react-router-dom';
 
 import { Button, Logo, Typography } from '~/components/index.ts';
-import { getComicRoute, ROUTE_LIBRARY } from '~/constants/routeConstants.ts';
+import { getComicRoute, ROUTE_HISTORY } from '~/constants/routeConstants.ts';
 import { useDeviceWatcher } from '~/hooks/useDeviceWatcher.ts';
 import BaseHeader from '~/layouts/components/Header.tsx';
 import HeaderAccountButton from '~/layouts/components/HeaderActions/HeaderAccountButton.tsx';
@@ -106,7 +106,7 @@ function ReadingLayoutHeader() {
               >
                 <GoQuestion />
               </Button>
-              <Button as="iconButton" href={ROUTE_LIBRARY} color="inherit" title="Library">
+              <Button as="iconButton" href={ROUTE_HISTORY} color="inherit" title="History">
                 <PiBooks />
               </Button>
               <HeaderAccountButton />
