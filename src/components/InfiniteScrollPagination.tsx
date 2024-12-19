@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { memo, useCallback, useEffect, useRef, useState } from 'react';
 
 interface Props {
   onIntersect: () => Promise<void>;
@@ -52,4 +52,4 @@ function InfiniteScrollPagination({ onIntersect }: Props) {
   );
 }
 
-export default InfiniteScrollPagination;
+export default memo(InfiniteScrollPagination);

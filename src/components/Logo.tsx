@@ -1,4 +1,4 @@
-import { SVGProps } from 'react';
+import { memo, SVGProps } from 'react';
 
 interface Props extends SVGProps<SVGSVGElement> {
   variant?: 'default' | 'small';
@@ -59,4 +59,4 @@ function Logo({ variant = 'default', ...props }: Props) {
   );
 }
 
-export default Logo;
+export default memo(Logo);
