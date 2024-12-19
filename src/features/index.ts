@@ -6,3 +6,7 @@ export { default as RankingComicCard } from './cards/RankingComicCard.tsx';
 export { default as SearchingComicCard } from './cards/SearchingComicCard.tsx';
 
 export { default as LoginForm } from './forms/LoginForm.tsx';
+export {
+  default as SelectiveFilterForm,
+  type SelectiveFilterFormValues,
+} from './forms/SelectiveFilterForm/SelectiveFilterForm.tsx';
