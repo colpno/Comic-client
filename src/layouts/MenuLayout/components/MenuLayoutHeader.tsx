@@ -48,7 +48,13 @@ function Menu() {
 
   return (
     <MenuContainer className="h-menu-layout-sub-menu">
-      <Tabs routes={menu.map((item) => item.link)} matchParams centered sx={tabNavigatorsStyles}>
+      <Tabs
+        as="links"
+        routes={menu.map((item) => item.link)}
+        matchParams
+        centered
+        sx={tabNavigatorsStyles}
+      >
         {menu.map((item) => (
           <Tab
             label={item.title}
@@ -78,6 +84,7 @@ function SubMenu() {
   return (
     <MenuContainer className="h-menu-layout-category-menu">
       <Tabs
+        as="links"
         routes={menuItems.map((item) => item.link)}
         centered
         matchParams

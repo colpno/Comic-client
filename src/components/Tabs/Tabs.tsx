@@ -12,12 +12,14 @@ interface BaseProps {
 }
 
 export interface TabsAsTabsProps extends Omit<MUITabsProps, 'defaultValue' | 'onChange' | 'value'> {
+  as?: 'tabs';
   value?: TabsValue;
   onChange?: (newValue: TabsValue) => void;
   routes?: never;
 }
 
 export interface TabsAsLinkTabsProps extends Omit<LinkTabsProps, 'value' | 'onChange'> {
+  as: 'links';
   value?: string;
   onChange?: (newValue: TabsValue) => void;
 }
@@ -25,6 +27,7 @@ export interface TabsAsLinkTabsProps extends Omit<LinkTabsProps, 'value' | 'onCh
 export type TabsProps = (TabsAsTabsProps | TabsAsLinkTabsProps) & BaseProps;
 
 function Tabs({
+  as = 'tabs',
   routes,
   children,
   variant: variantProp,
