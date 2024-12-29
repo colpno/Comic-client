@@ -5,7 +5,7 @@ import { v4 } from 'uuid';
 import Image from '~/components/Image.tsx';
 import Typography from '~/components/Typography.tsx';
 import { getComicReadingRoute } from '~/constants/routeConstants.ts';
-import { PlaceholderImage } from '~/images/index.ts';
+import { placeholderImage } from '~/images/index.ts';
 import { Chapter } from '~/types/chapterType.ts';
 import { cn } from '~/utils/cssUtils.ts';
 import ReadingPageSlider from './ReadingPageSlider.tsx';
@@ -32,7 +32,7 @@ function ReadingPagePagination({ chapters }: Props) {
                   onLoad={({ currentTarget }) => (currentTarget.src = content[0].data)}
                   alt={title}
                   onError={({ currentTarget }) => {
-                    currentTarget.src = PlaceholderImage;
+                    currentTarget.src = placeholderImage;
                   }}
                   className={cn(
                     'w-full aspect-[8/11] rounded-md',
@@ -40,7 +40,7 @@ function ReadingPagePagination({ chapters }: Props) {
                   )}
                 />
                 <Typography
-                  className={cn('line-clamp-1', isActive && 'text-primary')}
+                  className={cn('line-clamp-1', isActive && 'text-primary-500')}
                   title={`Ch.${chapterNumber}: ${title}`}
                 >
                   Ch.{chapterNumber}: {title}

@@ -2,7 +2,7 @@ import { ImgHTMLAttributes, memo } from 'react';
 import { LazyLoadImage, LazyLoadImageProps } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
-import { PlaceholderImage } from '~/images/index.ts';
+import { placeholderImage } from '~/images/index.ts';
 
 interface ImageAsLazyImageProps extends LazyLoadImageProps {
   /** If true, and there is a set of this components, the common parent should be wrapped with HOC trackWindowScroll. */
@@ -21,7 +21,7 @@ function Image({ lazy, loading = 'lazy', decoding = 'async', ...imgProps }: Imag
       <LazyLoadImage
         {...imgProps}
         effect="blur"
-        placeholderSrc={PlaceholderImage}
+        placeholderSrc={placeholderImage}
         loading={loading}
         decoding={decoding}
       />
