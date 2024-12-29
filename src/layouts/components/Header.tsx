@@ -17,8 +17,8 @@ interface FunctionalChildrenProps {
 interface Props {
   children?: React.ReactNode | ((props: FunctionalChildrenProps) => React.ReactNode);
   slotProps?: {
-    container?: HTMLAttributes<HTMLElement>;
-    wrapper?: ContainerProps;
+    header?: HTMLAttributes<HTMLElement>;
+    container?: ContainerProps;
   };
 }
 
@@ -46,18 +46,18 @@ function Header({ slotProps, children }: Props) {
 
   return (
     <header
-      {...slotProps?.container}
+      {...slotProps?.header}
       className={cn(
         'fixed top-0 left-0 right-0 z-header bg-main border-b dark:border-gray-800',
-        slotProps?.container?.className
+        slotProps?.header?.className
       )}
     >
       <Container
         maxWidth={MUI_CONTAINER_MAX_WIDTH}
-        {...slotProps?.wrapper}
+        {...slotProps?.container}
         className={cn(
           'flex items-center justify-between h-header md:h-header-md',
-          slotProps?.wrapper?.className
+          slotProps?.container?.className
         )}
       >
         {renderChildren()}

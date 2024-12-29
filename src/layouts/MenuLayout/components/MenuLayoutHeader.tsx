@@ -7,7 +7,7 @@ import { Tab, Tabs } from '~/components/index.ts';
 import { MUI_CONTAINER_MAX_WIDTH } from '~/constants/commonConstants.ts';
 import { useDeviceWatcher } from '~/hooks/useDeviceWatcher.ts';
 import { useScroll } from '~/hooks/useScroll.ts';
-import AppHeader from '~/layouts/components/Header.tsx';
+import BaseHeader from '~/layouts/components/Header.tsx';
 import { cn, heights } from '~/utils/cssUtils.ts';
 import { menu, SubMenuItem } from '../helpers/getMenuLayoutMenu.ts';
 
@@ -28,7 +28,7 @@ function MenuLayoutHeader() {
 
   return (
     <div style={{ height: headerHeight }}>
-      <AppHeader />
+      <BaseHeader />
       <div className="fixed left-0 right-0 top-header md:top-header-md z-sub-header">
         <Menu />
         <SubMenu />
