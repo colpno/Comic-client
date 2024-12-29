@@ -11,7 +11,17 @@ export const getTheme = (mode: Mode) => {
     palette: {
       mode,
       primary: {
-        main: getCSSVariableValue('--primary'),
+        main: getCSSVariableValue('--primary-500'),
+        dark: getCSSVariableValue('--primary-600'),
+        '100': getCSSVariableValue('--primary-100'),
+        '200': getCSSVariableValue('--primary-200'),
+        '300': getCSSVariableValue('--primary-300'),
+        '400': getCSSVariableValue('--primary-400'),
+        '500': getCSSVariableValue('--primary-500'),
+        '600': getCSSVariableValue('--primary-600'),
+        '700': getCSSVariableValue('--primary-700'),
+        '800': getCSSVariableValue('--primary-800'),
+        '900': getCSSVariableValue('--primary-900'),
       },
       text: {
         primary: getCSSVariableValue('--text-primary'),

@@ -42,7 +42,7 @@ function InfiniteScrollPagination({ onIntersect }: Props) {
   return (
     <div ref={observerRef}>
       {isLoading && (
-        <div className="flex items-center justify-center *:bg-primary *:size-[0.6rem] gap-2 *:rounded-full [&>*:nth-child(odd)]:animate-[infinite-scroll-odd-dots_1.2s_infinite] [&>*:nth-child(even)]:animate-[infinite-scroll-even-dots_1.2s_infinite] mt-10">
+        <div className="flex items-center justify-center *:bg-primary-500 *:size-[0.6rem] gap-2 *:rounded-full [&>*:nth-child(odd)]:animate-[infinite-scroll-odd-dots_1.2s_infinite] [&>*:nth-child(even)]:animate-[infinite-scroll-even-dots_1.2s_infinite] mt-10">
           <div />
           <div />
           <div />

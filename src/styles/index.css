@@ -3,7 +3,15 @@
 @tailwind utilities;
 
 :root {
-  --primary: #ff0000;
+  --primary-100: #fdcccc;
+  --primary-200: #fb9999;
+  --primary-300: #f96666;
+  --primary-400: #f73333;
+  --primary-500: #f50000;
+  --primary-600: #b90000;
+  --primary-700: #9c0000;
+  --primary-800: #620000;
+  --primary-900: #310000;
 
   --background-primary: #fff;
   --background-secondary: #f1f3f5;

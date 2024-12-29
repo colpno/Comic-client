@@ -64,7 +64,7 @@ function ConfirmDialog({
       fullScreen={isMobile}
       className={cn('z-dialog', className)}
     >
-      <div className={cn('p-3 border-b text-primary', classes?.title)}>
+      <div className={cn('p-3 border-b text-primary-500', classes?.title)}>
         {overrideUI?.title || <Typography variant="h5">{title}</Typography>}
       </div>
       <div className={cn('px-6 overflow-y-auto shadow-inner py-9 text-main', classes?.content)}>
