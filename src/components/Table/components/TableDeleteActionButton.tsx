@@ -1,12 +1,19 @@
-import { GridActionsCellItem } from '@mui/x-data-grid';
 import { MdDelete } from 'react-icons/md';
 
-interface Props {
-  onClick: () => void;
+import TableActionButton, { TableActionButtonProps } from './TableActionButton.tsx';
+
+interface Props extends Omit<TableActionButtonProps, 'label'> {
+  label?: string;
 }
 
-function TableDeleteActionButton(props: Props) {
-  return <GridActionsCellItem icon={<MdDelete />} label="Delete" color="inherit" {...props} />;
+function TableDeleteActionButton({ label = 'Delete', ...props }: Props) {
+  return (
+    <TableActionButton
+      {...props}
+      icon={<MdDelete className="text-xl text-primary-600" />}
+      label={label}
+    />
+  );
 }
 
 export default TableDeleteActionButton;

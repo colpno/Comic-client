@@ -1,12 +1,18 @@
-import { GridActionsCellItem } from '@mui/x-data-grid';
 import { MdSave } from 'react-icons/md';
 
-interface Props {
-  onClick: () => void;
-}
+import TableActionButton, { TableActionButtonProps } from './TableActionButton.tsx';
 
-function TableSaveActionButton(props: Props) {
-  return <GridActionsCellItem icon={<MdSave />} label="Save" color="inherit" {...props} />;
+interface Props extends Omit<TableActionButtonProps, 'label'> {
+  label?: string;
+}
+function TableSaveActionButton({ label = 'Save', ...props }: Props) {
+  return (
+    <TableActionButton
+      {...props}
+      icon={<MdSave className="text-xl text-blue-700" />}
+      label={label}
+    />
+  );
 }
 
 export default TableSaveActionButton;

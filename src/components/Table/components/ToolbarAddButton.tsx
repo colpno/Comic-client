@@ -1,6 +1,6 @@
-import { IconButton } from '@mui/material';
 import { MdAdd } from 'react-icons/md';
 
+import { Button } from '~/components/index.ts';
 import { useTableContext } from '~/components/Table/TableContext';
 
 interface ToolbarAddButtonProps {
@@ -8,20 +8,14 @@ interface ToolbarAddButtonProps {
 }
 
 function ToolbarAddButton(props: ToolbarAddButtonProps) {
-  const { disableAdd } = useTableContext();
+  const { addable } = useTableContext();
 
-  if (disableAdd) return null;
+  if (!addable) return null;
 
   return (
-    <IconButton
-      aria-label="Add new record"
-      title="Thêm mới"
-      color="primary"
-      size="large"
-      {...props}
-    >
+    <Button title="Add new record" color="primary" size="large" {...props} as="iconButton">
       <MdAdd />
-    </IconButton>
+    </Button>
   );
 }
 

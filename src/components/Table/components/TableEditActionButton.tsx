@@ -1,12 +1,13 @@
-import { GridActionsCellItem } from '@mui/x-data-grid';
 import { MdEdit } from 'react-icons/md';
 
-interface Props {
-  onClick: () => void;
+import TableActionButton, { TableActionButtonProps } from './TableActionButton.tsx';
+
+interface Props extends Omit<TableActionButtonProps, 'label'> {
+  label?: string;
 }
 
-function TableEditActionButton(props: Props) {
-  return <GridActionsCellItem icon={<MdEdit />} label="Edit" color="inherit" {...props} />;
+function TableEditActionButton({ label = 'Edit', ...props }: Props) {
+  return <TableActionButton {...props} icon={<MdEdit className="text-lg" />} label={label} />;
 }
 
 export default TableEditActionButton;

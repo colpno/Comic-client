@@ -1,6 +1,6 @@
-import { IconButton } from '@mui/material';
 import { MdDelete } from 'react-icons/md';
 
+import { Button } from '~/components/index.ts';
 import { useTableContext } from '~/components/Table/TableContext';
 
 interface Props {
@@ -8,20 +8,14 @@ interface Props {
 }
 
 function ToolbarMultipleDeleteButton(props: Props) {
-  const { checkboxSelection } = useTableContext();
+  const { removable } = useTableContext();
 
-  if (!checkboxSelection) return null;
+  if (!(typeof removable === 'object' && removable.multiple === true)) return null;
 
   return (
-    <IconButton
-      aria-label="Delete selected records"
-      title="Xoá đa trường"
-      color="error"
-      size="large"
-      {...props}
-    >
+    <Button title="Delete selected records" color="error" size="large" {...props} as="iconButton">
       <MdDelete />
-    </IconButton>
+    </Button>
   );
 }
 

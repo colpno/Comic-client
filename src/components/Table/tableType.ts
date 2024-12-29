@@ -1,6 +1,6 @@
 import { DataGridProps as MUIDataGridProps, GridSortModel } from '@mui/x-data-grid';
 
-type DataGridProps = Omit<
+type BaseTableProps = Omit<
   MUIDataGridProps,
   | 'rowModesModel'
   | 'editMode'
@@ -11,13 +11,29 @@ type DataGridProps = Omit<
   | 'slotProps'
 >;
 
-export interface TableProps extends DataGridProps {
-  /** Disable the ability of deleting rows individually. */
-  disableDelete?: boolean;
-  /** Disable the ability of editing rows. */
-  disableEdit?: boolean;
+export type TableData = BaseTableProps['rows'];
+export type TableColsDef = BaseTableProps['columns'];
+
+export interface TableProps extends Omit<BaseTableProps, 'rows' | 'checkboxSelection'> {
+  rows: TableData;
+  /** Disable the ability of deleting a row. */
+  removable?:
+    | boolean
+    | {
+        /** The ability of deleting a row. */
+        single?: boolean;
+        /** The ability of deleting multiple rows by checkboxes. */
+        multiple?: boolean;
+      };
+  /** Disable the ability of editing a row. */
+  editable?: boolean;
   /** Disable the ability of adding a new record. */
-  disableAdd?: boolean;
+  addable?: boolean;
+  onAdd?: (data: Exclude<TableData, undefined>[number]) => Promise<boolean> | boolean;
+  onRemove?: (id: string | string[]) => Promise<boolean> | boolean;
+  onEdit?: (data: Exclude<TableData, undefined>[number]) => Promise<boolean> | boolean;
   /** Sort a column. */
   sort?: Exclude<GridSortModel, []>;
+  /** @default 400px */
+  height?: string;
 }
