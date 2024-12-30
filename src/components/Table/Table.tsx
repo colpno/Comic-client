@@ -23,6 +23,7 @@ function Table(componentProps: TableProps) {
     onRemove,
     onEdit,
     rowSelection = false,
+    height,
     ...props
   } = componentProps;
   const [rows, setRows] = useState(rowsProp);
@@ -61,7 +62,7 @@ function Table(componentProps: TableProps) {
 
   return (
     <TableProvider value={componentProps}>
-      <div style={{ height: props.height ?? '400px' }}>
+      <div className="h-[600px] sm:h-[500px] md:h-[400px]" style={{ height }}>
         <DataGrid
           pageSizeOptions={[1, 5, 10, 25, 50, 100]}
           {...props}

@@ -34,6 +34,5 @@ export interface TableProps extends Omit<BaseTableProps, 'rows' | 'checkboxSelec
   onEdit?: (data: Exclude<TableData, undefined>[number]) => Promise<boolean> | boolean;
   /** Sort a column. */
   sort?: Exclude<GridSortModel, []>;
-  /** @default 400px */
   height?: string;
 }
