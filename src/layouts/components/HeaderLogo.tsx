@@ -2,6 +2,7 @@ import { useTheme } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 import { Logo } from '~/components/index.ts';
+import { ROUTE_HOME } from '~/constants/routeConstants.ts';
 import { useDeviceWatcher } from '~/hooks/index.ts';
 
 function HeaderLogo() {
@@ -9,7 +10,7 @@ function HeaderLogo() {
   const theme = useTheme();
 
   return (
-    <Link to="/">
+    <Link to={ROUTE_HOME}>
       {isMobile ? (
         <Logo variant="small" fill={theme.palette.primary.main} />
       ) : (
