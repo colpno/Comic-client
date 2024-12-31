@@ -12,7 +12,7 @@ type LoginAction = PayloadAction<Exclude<State['user'], null>>;
 
 const initialState: State = {
   user: null,
-  isLoggedIn: false,
+  isLoggedIn: import.meta.env.DEV,
 };
 
 const slice = createSlice({
