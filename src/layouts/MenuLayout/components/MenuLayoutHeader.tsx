@@ -9,7 +9,7 @@ import { useDeviceWatcher } from '~/hooks/useDeviceWatcher.ts';
 import { useScroll } from '~/hooks/useScroll.ts';
 import BaseHeader from '~/layouts/components/Header.tsx';
 import { cn, heights } from '~/utils/cssUtils.ts';
-import { menu, SubMenuItem } from '../helpers/getMenuLayoutMenu.ts';
+import { menu, SubMenuItem } from '../menus.ts';
 
 const parseHeight = (height: string): number => parseInt(height, 10);
 
@@ -56,13 +56,7 @@ function Menu() {
         sx={tabNavigatorsStyles}
       >
         {menu.map((item) => (
-          <Tab
-            label={item.title}
-            to={item.link}
-            value={item.link}
-            className="!text-lg !font-bold"
-            key={v4()}
-          />
+          <Tab label={item.title} value={item.link} className="!text-lg !font-bold" key={v4()} />
         ))}
       </Tabs>
     </MenuContainer>
@@ -101,7 +95,7 @@ function SubMenu() {
         }}
       >
         {menuItems.map((item) => (
-          <Tab label={item.title} to={item.link} value={item.link} key={v4()} />
+          <Tab label={item.title} value={item.link} key={v4()} />
         ))}
       </Tabs>
     </MenuContainer>
