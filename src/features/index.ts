@@ -11,3 +11,4 @@ export {
   default as SelectiveFilterForm,
   type SelectiveFilterFormValues,
 } from './forms/SelectiveFilterForm/SelectiveFilterForm.tsx';
+export { default as FilterForm } from './forms/FilterForm.tsx';

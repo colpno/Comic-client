@@ -3,18 +3,23 @@ import { SwiperClass } from 'swiper/react';
 
 import { Button, Form, Slider, Typography } from '~/components/index.ts';
 import { CheckboxOption } from '~/types/formControlTypes.ts';
+import { cn } from '~/utils/cssUtils.ts';
 import { selectiveFilterFormSchema, SelectiveFilterFormValues } from '../validationSchemas.ts';
 import ExcludeFilterPanel from './components/ExcludeFilterPanel';
 import IncludeFilterPanel from './components/IncludeFilterPanel.tsx';
 import Navigation from './components/Navigation.tsx';
 
-interface Props {
+interface Props
+  extends Omit<
+    React.ComponentProps<typeof Form>,
+    'onSubmit' | 'title' | 'validationSchema' | 'children'
+  > {
   onSubmit: (values: SelectiveFilterFormValues) => void;
   options: CheckboxOption[];
   title: string;
 }
 
-function SelectiveFilterForm({ onSubmit, options, title }: Props) {
+function SelectiveFilterForm({ onSubmit, options, title, className, ...props }: Props) {
   const [panel, setPanel] = useState(0);
   const [Swiper, setSwiper] = useState<SwiperClass | null>(null);
 
@@ -23,12 +28,17 @@ function SelectiveFilterForm({ onSubmit, options, title }: Props) {
   }, [panel]);
 
   return (
-    <Form validationSchema={selectiveFilterFormSchema} onSubmit={onSubmit} className="space-y-3">
+    <Form
+      {...props}
+      validationSchema={selectiveFilterFormSchema}
+      onSubmit={onSubmit}
+      className={cn('space-y-3', className)}
+    >
       {({ reset }) => (
         <>
           <div className="flex items-center justify-between">
             <Typography variant="h6">{title}</Typography>
-            <Button variant="text" className="!text-primary" onClick={() => reset()}>
+            <Button variant="text" className="!text-primary-500" onClick={() => reset()}>
               Clear
             </Button>
           </div>
