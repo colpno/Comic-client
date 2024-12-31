@@ -13,7 +13,7 @@ interface Props extends Omit<ComponentProps<typeof TextInput>, 'onChange' | 'slo
   };
 }
 
-function TextField({ name, required, fullWidth, defaultValue = null, ...props }: Props) {
+function TextField({ name, required, fullWidth, defaultValue, ...props }: Props) {
   const {
     control,
     /*
