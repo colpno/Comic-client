@@ -7,7 +7,7 @@ const getCSSVariableValue = (variable: string) => {
 type Mode = 'light' | 'dark';
 
 export const getTheme = (mode: Mode) => {
-  return createTheme({
+  const theme = createTheme({
     palette: {
       mode,
       primary: {
@@ -53,4 +53,64 @@ export const getTheme = (mode: Mode) => {
       },
     },
   });
+
+  theme.typography.h1 = {
+    fontSize: '2.125rem',
+    lineHeight: '2.5rem',
+    [theme.breakpoints.up('sm')]: {
+      fontSize: '2.875rem',
+      lineHeight: '3.25rem',
+    },
+  };
+
+  theme.typography.h2 = {
+    fontSize: '1.875rem',
+    lineHeight: '2.25rem',
+    [theme.breakpoints.up('md')]: {
+      fontSize: '2.25rem',
+      lineHeight: '2.5rem',
+    },
+  };
+
+  theme.typography.h4 = {
+    fontSize: '1.5rem',
+    lineHeight: '2rem',
+    [theme.breakpoints.up('sm')]: {
+      fontSize: '1.875rem',
+      lineHeight: '2.25rem',
+    },
+    [theme.breakpoints.up('md')]: {
+      fontSize: '2.25rem',
+      lineHeight: '2.5rem',
+    },
+  };
+
+  theme.typography.h5 = {
+    fontSize: '1.125rem',
+    lineHeight: '1.75rem',
+    [theme.breakpoints.up('sm')]: {
+      fontSize: '1.5rem',
+      lineHeight: '2rem',
+    },
+  };
+
+  theme.typography.body1 = {
+    fontSize: '0.875rem',
+    lineHeight: '1.25rem',
+    [theme.breakpoints.up('sm')]: {
+      fontSize: '1rem',
+      lineHeight: '1.5rem',
+    },
+  };
+
+  theme.typography.body2 = {
+    fontSize: '0.75rem',
+    lineHeight: '1rem',
+    [theme.breakpoints.up('sm')]: {
+      fontSize: '0.875rem',
+      lineHeight: '1.25rem',
+    },
+  };
+
+  return theme;
 };

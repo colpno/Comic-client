@@ -58,13 +58,10 @@ function MobileCard(comic: Comic) {
         >
           {comic.title}
         </Typography>
-        <Typography
-          variant="body2"
-          className="!text-disabled !text-xs sm:!text-sm line-clamp-1 !mt-1 !mb-auto"
-        >
+        <Typography variant="body2" className="line-clamp-1 !mt-1 !mb-auto">
           {comic.tags.map((tag) => tag.name).join(', ')}
         </Typography>
-        <Typography variant="body2" className="!text-disabled !text-xs sm:!text-sm line-clamp-1">
+        <Typography variant="body2" className="line-clamp-1">
           {comic.authors.map((author) => author.name).join(', ')}
         </Typography>
       </div>

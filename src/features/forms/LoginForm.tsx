@@ -11,7 +11,7 @@ function LoginForm() {
 
   return (
     <div>
-      <Typography variant="h1" className="!text-3xl text-center !mb-8 text-main">
+      <Typography variant="h1" className="text-center !mb-8 text-main">
         Sign in
       </Typography>
       <Form validationSchema={loginFormSchema} onSubmit={handleSubmit}>

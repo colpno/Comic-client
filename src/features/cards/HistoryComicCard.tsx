@@ -41,13 +41,10 @@ function HistoryComicCard({ history, onRemove }: Props) {
         >
           {comic.title}
         </Typography>
-        <Typography
-          variant="body2"
-          className="!text-disabled !text-xs sm:!text-sm line-clamp-1 !mt-1 !mb-auto"
-        >
+        <Typography variant="body2" className="line-clamp-1 !mt-1 !mb-auto">
           {authors}
         </Typography>
-        <Typography variant="body2" className="!text-disabled !text-xs sm:!text-sm line-clamp-1">
+        <Typography variant="body2" className="line-clamp-1">
           {readAt}
         </Typography>
       </div>

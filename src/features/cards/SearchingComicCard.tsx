@@ -29,18 +29,10 @@ function SearchingComicCard(comic: Comic) {
         >
           {comic.title}
         </Typography>
-        <Typography
-          variant="body2"
-          className="!text-disabled !text-xs sm:!text-sm line-clamp-1 !mt-1 !mb-auto"
-          title={tags}
-        >
+        <Typography variant="body2" className="line-clamp-1 !mt-1 !mb-auto" title={tags}>
           {tags}
         </Typography>
-        <Typography
-          variant="body2"
-          className="!text-disabled !text-xs sm:!text-sm line-clamp-1"
-          title={authors}
-        >
+        <Typography variant="body2" className="line-clamp-1" title={authors}>
           {authors}
         </Typography>
       </div>

@@ -31,7 +31,7 @@ function RankingComicCard({ comic, rank }: Props) {
       />
       <Typography
         variant="h5"
-        className="!mt-2 italic font-extrabold line-clamp-1 !text-lg md:!text-2xl"
+        className="!mt-2 italic font-extrabold line-clamp-1"
         title={`${rank}`}
       >
         {rank}
@@ -62,11 +62,7 @@ function MobileCard({ comic, rank }: Props) {
         }}
       />
       <div className="flex flex-col">
-        <Typography
-          variant="h5"
-          className="italic font-extrabold line-clamp-1 !text-lg md:!text-2xl"
-          title={`${rank}`}
-        >
+        <Typography variant="h5" className="italic font-extrabold line-clamp-1" title={`${rank}`}>
           {rank}
         </Typography>
         <Typography
@@ -77,13 +73,10 @@ function MobileCard({ comic, rank }: Props) {
         >
           {comic.title}
         </Typography>
-        <Typography
-          variant="body2"
-          className="!text-disabled !text-xs sm:!text-sm line-clamp-1 !mt-1 !mb-auto"
-        >
+        <Typography variant="body2" className="line-clamp-1 !mt-1 !mb-auto">
           {comic.tags.map((tag) => tag.name).join(', ')}
         </Typography>
-        <Typography variant="body2" className="!text-disabled !text-xs sm:!text-sm line-clamp-1">
+        <Typography variant="body2" className="line-clamp-1">
           {comic.authors.map((author) => author.name).join(', ')}
         </Typography>
       </div>
