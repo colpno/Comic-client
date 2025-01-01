@@ -6,12 +6,8 @@ import {
 import { memo } from 'react';
 import { Link } from 'react-router-dom';
 
-import {
-  ButtonAsButtonProps,
-  ButtonAsIconButtonProps,
-  ButtonProps,
-} from '~/types/formControlTypes';
 import { cn } from '~/utils/cssUtils.ts';
+import { AsButtonProps, AsIconButtonProps, Props } from './types/buttonTypes.ts';
 
 function Button({
   children,
@@ -24,7 +20,7 @@ function Button({
   href,
   externalLink,
   ...props
-}: ButtonProps) {
+}: Props) {
   const LinkComponent = externalLink ? 'a' : Link;
   const hyperlinks = LinkComponent === 'a' ? { href } : { to: href };
 
@@ -46,7 +42,7 @@ function Button({
       );
     }
     case 'iconButton': {
-      const componentProps = props as ButtonAsIconButtonProps;
+      const componentProps = props as AsIconButtonProps;
       return (
         <MUIIconButton
           type="button"
@@ -64,7 +60,7 @@ function Button({
       break;
   }
 
-  if ((props as ButtonAsButtonProps).variant === 'text') {
+  if ((props as AsButtonProps).variant === 'text') {
     props.color = 'inherit';
   }
 
@@ -97,3 +93,9 @@ function LoadingSpinner() {
 }
 
 export default memo(Button);
+export type {
+  Props as ButtonProps,
+  AsButtonProps as ButtonAsButtonProps,
+  AsIconButtonProps as ButtonAsIconButtonProps,
+  AsUnstyledProps as ButtonAsUnstyledProps,
+} from './types/buttonTypes.ts';

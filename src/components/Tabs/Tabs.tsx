@@ -5,26 +5,26 @@ import { Omit } from '~/types/commonTypes.ts';
 import LinkTabs, { LinkTabsProps } from './components/LinkTabs.tsx';
 import TabsWrapper from './components/TabsWrapper.tsx';
 
-export type TabsValue = false | number;
+type TabsValue = false | number;
 
 interface BaseProps {
   children: React.ReactNode;
 }
 
-export interface TabsAsTabsProps extends Omit<MUITabsProps, 'defaultValue' | 'onChange' | 'value'> {
+interface TabsAsTabsProps extends Omit<MUITabsProps, 'defaultValue' | 'onChange' | 'value'> {
   as?: 'tabs';
   value?: TabsValue;
   onChange?: (newValue: TabsValue) => void;
   routes?: never;
 }
 
-export interface TabsAsLinkTabsProps extends Omit<LinkTabsProps, 'value' | 'onChange'> {
+interface TabsAsLinkTabsProps extends Omit<LinkTabsProps, 'value' | 'onChange'> {
   as: 'links';
   value?: string;
   onChange?: (newValue: TabsValue) => void;
 }
 
-export type TabsProps = (TabsAsTabsProps | TabsAsLinkTabsProps) & BaseProps;
+type TabsProps = (TabsAsTabsProps | TabsAsLinkTabsProps) & BaseProps;
 
 function Tabs({
   as = 'tabs',

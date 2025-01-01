@@ -1,11 +1,8 @@
 import {
   Checkbox,
-  CheckboxProps as MUICheckboxProps,
   FormControl,
   FormControlLabel,
-  FormControlLabelProps as MUIFormControlLabelProps,
   FormGroup,
-  FormGroupProps as MUIFormGroupProps,
   FormHelperText,
   FormLabel,
   useTheme,
@@ -13,22 +10,9 @@ import {
 import { memo } from 'react';
 import { Controller, ControllerRenderProps, useFormContext } from 'react-hook-form';
 
-import { CheckboxOption } from '~/types/formControlTypes.ts';
+import { Option, Props } from './types/checkboxGroupTypes.ts';
 
-interface CheckBoxGroupProps {
-  name: string;
-  label?: string;
-  options: CheckboxOption[];
-  defaultValue?: CheckboxOption[];
-  required?: boolean;
-  slotProps?: {
-    group?: MUIFormGroupProps;
-    checkbox?: MUICheckboxProps;
-    label?: MUIFormControlLabelProps;
-  };
-}
-
-function CheckBoxGroup(props: CheckBoxGroupProps) {
+function CheckBoxGroup(props: Props) {
   const { label, name, options, required, defaultValue = [], slotProps } = props;
   const theme = useTheme();
   const {
@@ -43,7 +27,7 @@ function CheckBoxGroup(props: CheckBoxGroupProps) {
   } = useFormContext();
   const errorMessage = getFieldState(name)?.error?.message;
 
-  const handleChange = (field: ControllerRenderProps, item: CheckboxOption) => {
+  const handleChange = (field: ControllerRenderProps, item: Option) => {
     // Not in checked list, then add to checked list
     if (!field.value.includes(item.value)) {
       field.onChange([...field.value, item.value]);
@@ -92,3 +76,4 @@ function CheckBoxGroup(props: CheckBoxGroupProps) {
 }
 
 export default memo(CheckBoxGroup);
+export type { Option as CheckboxOption, Props as CheckboxProps };

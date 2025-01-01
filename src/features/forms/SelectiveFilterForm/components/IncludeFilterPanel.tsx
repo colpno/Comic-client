@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
 
 import TextInput from '~/components/form-controls/base-controls/TextInput.tsx';
-import { CheckBoxGroup } from '~/components/index.ts';
+import { CheckBoxGroup, CheckboxOption } from '~/components/index.ts';
 import { useDebounce } from '~/hooks/useDebounce.ts';
-import { CheckboxOption } from '~/types/formControlTypes.ts';
 
 interface Props {
   options: CheckboxOption[];

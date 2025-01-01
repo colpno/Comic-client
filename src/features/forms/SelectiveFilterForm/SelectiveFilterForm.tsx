@@ -1,19 +1,14 @@
 import { useEffect, useState } from 'react';
 import { SwiperClass } from 'swiper/react';
 
-import { Button, Form, Slider, Typography } from '~/components/index.ts';
-import { CheckboxOption } from '~/types/formControlTypes.ts';
+import { Button, CheckboxOption, Form, FormProps, Slider, Typography } from '~/components/index.ts';
 import { cn } from '~/utils/cssUtils.ts';
 import { selectiveFilterFormSchema, SelectiveFilterFormValues } from '../validationSchemas.ts';
 import ExcludeFilterPanel from './components/ExcludeFilterPanel';
 import IncludeFilterPanel from './components/IncludeFilterPanel.tsx';
 import Navigation from './components/Navigation.tsx';
 
-interface Props
-  extends Omit<
-    React.ComponentProps<typeof Form>,
-    'onSubmit' | 'title' | 'validationSchema' | 'children'
-  > {
+interface Props extends Omit<FormProps, 'onSubmit' | 'title' | 'validationSchema' | 'children'> {
   onSubmit: (values: SelectiveFilterFormValues) => void;
   options: CheckboxOption[];
   title: string;

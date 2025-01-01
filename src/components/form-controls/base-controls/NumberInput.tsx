@@ -191,3 +191,4 @@ const NumericFormatCustom = forwardRef<HTMLInputElement, NumericFormatProps>(
 );
 
 export default NumberInput;
+export type { Props as NumberInputProps };

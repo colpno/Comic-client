@@ -2,9 +2,8 @@ import { Dialog as MUIDialog, DialogProps as MUIDialogProps } from '@mui/materia
 import { memo } from 'react';
 
 import { useDeviceWatcher } from '~/hooks/useDeviceWatcher.ts';
-import { ButtonAsButtonProps } from '~/types/formControlTypes.ts';
 import { cn } from '~/utils/cssUtils.ts';
-import { Button, Typography } from './index.ts';
+import { Button, ButtonAsButtonProps, Typography } from './index.ts';
 
 interface BaseProps extends Omit<MUIDialogProps, 'onClose'> {
   onClose?: () => void;

@@ -1,14 +1,14 @@
 import { FormControl, FormControlProps, FormHelperText } from '@mui/material';
-import { ComponentProps, memo } from 'react';
+import { memo } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 
-import TextInput from './base-controls/TextInput';
+import TextInput, { TextInputProps } from './base-controls/TextInput';
 
-interface Props extends Omit<ComponentProps<typeof TextInput>, 'onChange' | 'slotProps'> {
+interface Props extends Omit<TextInputProps, 'onChange' | 'slotProps'> {
   name: string;
   label?: string;
   uppercase?: boolean;
-  slotProps?: React.ComponentProps<typeof TextInput>['slotProps'] & {
+  slotProps?: TextInputProps['slotProps'] & {
     container?: FormControlProps;
   };
 }

@@ -1,8 +1,8 @@
 import { createContext, useContext } from 'react';
 
-import { TableProps } from '~/components/Table/tableType';
+import { Props } from '~/components/Table/tableTypes';
 
-export type TableContextType = Partial<TableProps>;
+export type TableContextType = Partial<Props>;
 
 export const TableContext = createContext<TableContextType>({});
 

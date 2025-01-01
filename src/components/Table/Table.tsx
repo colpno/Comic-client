@@ -1,7 +1,6 @@
 import { DataGrid, GridActionsColDef, GridColDef, GridRowModesModel } from '@mui/x-data-grid';
 import { memo, useMemo, useState } from 'react';
 
-import { TableProps } from '~/components/Table/tableType.ts';
 import {
   getInitialState,
   getSlotProps,
@@ -10,9 +9,10 @@ import {
   processRowUpdate,
 } from '~/components/Table/utils/tableUtils.tsx';
 import { TableProvider } from './TableContext.ts';
+import { Props } from './tableTypes.ts';
 import { getCRUDActionsColDef } from './utils/tableColumnUtils.tsx';
 
-function Table(componentProps: TableProps) {
+function Table(componentProps: Props) {
   const {
     rows: rowsProp = [],
     columns,
@@ -87,5 +87,9 @@ function Table(componentProps: TableProps) {
 
 export default memo(Table);
 export { default as TableActionButton } from './components/TableActionButton.tsx';
-export * from './tableType.ts';
+export type {
+  Props as TableProps,
+  ColsDef as TableColsDef,
+  Data as TableData,
+} from './tableTypes.ts';
 export { generateTableActionsColDef } from './utils/tableColumnUtils.tsx';

@@ -1,10 +1,10 @@
 import { FormControl, FormHelperText } from '@mui/material';
-import { ComponentProps, memo } from 'react';
+import { memo } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 
-import NumberInput from './base-controls/NumberInput.tsx';
+import NumberInput, { NumberInputProps } from './base-controls/NumberInput.tsx';
 
-interface NumberFieldProps extends ComponentProps<typeof NumberInput> {
+interface NumberFieldProps extends NumberInputProps {
   name: string;
   label?: string;
   fullWidth?: boolean;

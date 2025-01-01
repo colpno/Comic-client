@@ -3,11 +3,11 @@ import { FaArrowRight } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
 import { SwiperProps } from 'swiper/react';
 
-import { Button, ComicSlider } from '~/components/index.ts';
+import { Button } from '~/components/index.ts';
 import Typography from '~/components/Typography.tsx';
 import { MUI_CONTAINER_MAX_WIDTH } from '~/constants/commonConstants.ts';
 import { getComicRoute, ROUTE_GENRES } from '~/constants/routeConstants.ts';
-import { ComicCard, ComicHorizontalCard } from '~/features/index.ts';
+import { ComicCard, ComicHorizontalCard, ComicSlider } from '~/features/index.ts';
 import { Comic } from '~/types/comicType.ts';
 
 interface CardRowProps {

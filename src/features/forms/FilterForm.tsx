@@ -1,7 +1,7 @@
-import { Button, Form, Typography } from '~/components/index.ts';
+import { Button, Form, FormProps, Typography } from '~/components/index.ts';
 import { cn } from '~/utils/cssUtils.ts';
 
-interface Props extends Omit<React.ComponentProps<typeof Form>, 'title'> {
+interface Props extends Omit<FormProps, 'title'> {
   title: string;
 }
 

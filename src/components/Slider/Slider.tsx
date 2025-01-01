@@ -47,3 +47,4 @@ function Slider(props: Props) {
 }
 
 export default memo(Slider);
+export type { Props as SliderProps };

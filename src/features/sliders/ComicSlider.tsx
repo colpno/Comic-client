@@ -1,18 +1,17 @@
 import { Box } from '@mui/material';
-import { ComponentProps, HTMLAttributes, memo, useState } from 'react';
+import { HTMLAttributes, memo, useState } from 'react';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
 import { SwiperClass } from 'swiper/react';
 
-import { Button } from '~/components/index.ts';
+import { Button, Slider, SliderProps } from '~/components/index.ts';
 import { useCustomSliderNavigators } from '~/hooks/index.ts';
 import { useDeviceWatcher } from '~/hooks/useDeviceWatcher.ts';
 import { cn } from '~/utils/cssUtils.ts';
-import Slider from './Slider.tsx';
 
 interface NavigatorsProps {
   swiper: SwiperClass;
   slotProps?: {
-    slide?: ComponentProps<typeof Slider>['slideProp'];
+    slide?: SliderProps['slideProp'];
     prevButton?: HTMLAttributes<HTMLButtonElement>;
     nextButton?: HTMLAttributes<HTMLButtonElement>;
   };
@@ -57,7 +56,7 @@ function Navigators({ swiper, slotProps }: NavigatorsProps) {
   );
 }
 
-function ComicSlider(props: ComponentProps<typeof Slider>) {
+function ComicSlider(props: SliderProps) {
   const [swiper, setSwiper] = useState<SwiperClass>();
   const device = useDeviceWatcher();
   const isTabletAndMobile = device === 'tablet' || device === 'mobile';

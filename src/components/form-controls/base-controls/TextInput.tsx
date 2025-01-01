@@ -93,3 +93,4 @@ const TextInput = forwardRef(
 );
 
 export default TextInput;
+export type { Props as TextInputProps };

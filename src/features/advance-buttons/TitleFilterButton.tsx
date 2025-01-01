@@ -1,7 +1,6 @@
-import { Button, Popup, TextField } from '~/components/index.ts';
+import { Button, ButtonAsButtonProps, Popup, TextField } from '~/components/index.ts';
 import { FilterForm } from '~/features/index.ts';
 import { usePopup } from '~/hooks/usePopup.ts';
-import { ButtonAsButtonProps } from '~/types/formControlTypes.ts';
 import { cn } from '~/utils/cssUtils.ts';
 import { titleFilterFormSchema, TitleFilterFormValues } from '../forms/validationSchemas.ts';
 
@@ -25,15 +24,7 @@ function TitleFilterButton({ onSubmit, ...buttonProps }: Props) {
       </Button>
       <Popup open={open} onClose={closePopup} anchorEl={popupRef}>
         <div className="w-64 p-4 bg-main">
-          <FilterForm
-            validationSchema={titleFilterFormSchema}
-            title="Title"
-            onSubmit={onSubmit}
-            submitDirtyValuesOnly
-          >
-            <TextField name="include" label="Include" size="small" variant="standard" fullWidth />
-            <TextField name="exclude" label="Exclude" size="small" variant="standard" fullWidth />
-          </FilterForm>
+          <Form onSubmit={onSubmit} />
         </div>
       </Popup>
     </>
@@ -42,3 +33,17 @@ function TitleFilterButton({ onSubmit, ...buttonProps }: Props) {
 
 export default TitleFilterButton;
 export { type TitleFilterFormValues };
+
+function Form(props: Pick<Props, 'onSubmit'>) {
+  return (
+    <FilterForm
+      validationSchema={titleFilterFormSchema}
+      title="Title"
+      submitDirtyValuesOnly
+      {...props}
+    >
+      <TextField name="include" label="Include" size="small" variant="standard" fullWidth />
+      <TextField name="exclude" label="Exclude" size="small" variant="standard" fullWidth />
+    </FilterForm>
+  );
+}

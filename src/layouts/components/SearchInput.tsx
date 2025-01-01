@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { FiSearch } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 
-import TextInput from '~/components/form-controls/base-controls/TextInput.tsx';
+import TextInput, { TextInputProps } from '~/components/form-controls/base-controls/TextInput.tsx';
 import { getSearchRoute } from '~/constants/routeConstants.ts';
 
-interface Props extends Omit<React.ComponentProps<typeof TextInput>, 'name' | 'value'> {
+interface Props extends Omit<TextInputProps, 'name' | 'value'> {
   name?: string;
   value?: string;
   /** Replace the url when submitting or pressing Enter. */

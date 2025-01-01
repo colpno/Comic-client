@@ -1,9 +1,8 @@
 import { faker } from '@faker-js/faker';
 
-import { Button, Popup } from '~/components/index.ts';
+import { Button, ButtonAsButtonProps, Popup } from '~/components/index.ts';
 import { SelectiveFilterForm, SelectiveFilterFormValues } from '~/features/index.ts';
 import { usePopup } from '~/hooks/usePopup.ts';
-import { ButtonAsButtonProps } from '~/types/formControlTypes.ts';
 import { cn } from '~/utils/cssUtils.ts';
 
 interface Props extends Partial<Omit<ButtonAsButtonProps, 'onSubmit'>> {

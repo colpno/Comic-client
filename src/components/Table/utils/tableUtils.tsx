@@ -13,7 +13,7 @@ import TableNoRowsOverlay from '../components/TableNoRowsOverlay.tsx';
 import TableNoSearchResultsOverlay from '../components/TableNoSearchResultsOverlay.tsx';
 import TablePagination from '../components/TablePagination.tsx';
 import TableToolbar from '../components/TableToolbar.tsx';
-import { TableProps } from '../tableType.ts';
+import { Props } from '../tableTypes.ts';
 
 export const getInitialState = (
   initialState?: GridInitialStateCommunity
@@ -56,9 +56,9 @@ export const getSlotProps = ({
 });
 
 interface ProcessRowUpdate {
-  setRows: React.Dispatch<React.SetStateAction<Exclude<TableProps['rows'], undefined>>>;
-  onAdd?: TableProps['onAdd'];
-  onEdit?: TableProps['onEdit'];
+  setRows: React.Dispatch<React.SetStateAction<Exclude<Props['rows'], undefined>>>;
+  onAdd?: Props['onAdd'];
+  onEdit?: Props['onEdit'];
 }
 
 export const processRowUpdate =

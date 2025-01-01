@@ -1,34 +1,18 @@
 import {
   FormControl,
   FormControlLabel,
-  FormControlLabelProps as MUIFormControlLabelProps,
   FormHelperText,
   FormLabel,
   Radio,
   RadioGroup as MUIRadioGroup,
-  RadioGroupProps as MUIRadioGroupProps,
-  RadioProps as MUIRadioProps,
   useTheme,
 } from '@mui/material';
 import { memo } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 
-import { RadioOption } from '~/types/formControlTypes.ts';
+import { Props } from './types/radioGroupTypes.ts';
 
-export interface RadioGroupProps {
-  name: string;
-  label?: string;
-  options: RadioOption[];
-  defaultValue?: RadioOption;
-  required?: boolean;
-  slotProps?: {
-    group?: MUIRadioGroupProps;
-    radio?: MUIRadioProps;
-    label?: MUIFormControlLabelProps;
-  };
-}
-
-function RadioGroup(props: RadioGroupProps) {
+function RadioGroup(props: Props) {
   const { label, name, options, required, defaultValue = null, slotProps } = props;
   const theme = useTheme();
   const {
@@ -85,3 +69,7 @@ function RadioGroup(props: RadioGroupProps) {
 }
 
 export default memo(RadioGroup);
+export type {
+  Props as RadioGroupProps,
+  Option as RadioGroupOption,
+} from './types/radioGroupTypes.ts';
