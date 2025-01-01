@@ -1,5 +1,7 @@
+const BOOKSHELF = '/bookshelf' as const;
+
 export const ROUTE_HOME = '/' as const;
-export const ROUTE_HISTORY = '/history' as const;
+export const ROUTE_HISTORY = `${BOOKSHELF}/history` as const;
 export const ROUTE_GENRES = '/genres' as const;
 export const ROUTE_DAILY = '/daily' as const;
 export const ROUTE_RANKING = '/ranking' as const;
@@ -7,11 +9,18 @@ export const ROUTE_NEW_ARRIVALS = '/news' as const;
 export const ROUTE_COMPLETED = '/completed' as const;
 export const ROUTE_SEARCH = '/search' as const;
 export const ROUTE_LOGIN = '/login' as const;
+export const ROUTE_FOLLOW = `${BOOKSHELF}/follow` as const;
 
 export const getComicRoute = (comicId: string) => `/comics/${comicId}`;
 
-export const getComicReadingRoute = (comicId: string, chapterNumber: string | number) =>
-  `${getComicRoute(comicId)}/reading/${chapterNumber}`;
+/**
+ * @param chapterNumber >= 0 to get the reading route
+ * @returns either empty string or the reading route
+ */
+export const getComicReadingRoute = (comicId: string, chapterNumber: string | number) => {
+  if (typeof chapterNumber === 'number' && chapterNumber < 0) return '';
+  return `${getComicRoute(comicId)}/reading/${chapterNumber}`;
+};
 
 export const getRankingRoute = (category?: string) => {
   if (!category) return ROUTE_RANKING;
