@@ -14,6 +14,7 @@ function RankingPage() {
 
   const handleTitleChange = (value: string) => {
     // TODO: Fetch comics based on category
+    console.log('value:', value);
   };
 
   const handleIntersect = async () => {
