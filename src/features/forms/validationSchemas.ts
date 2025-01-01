@@ -13,3 +13,9 @@ export const selectiveFilterFormSchema = z.object({
   excludedOptions: z.array(z.string()).optional(),
 });
 export type SelectiveFilterFormValues = z.infer<typeof selectiveFilterFormSchema>;
+
+export const titleFilterFormSchema = z.object({
+  include: z.string().optional(),
+  exclude: z.string().optional(),
+});
+export type TitleFilterFormValues = z.infer<typeof titleFilterFormSchema>;
