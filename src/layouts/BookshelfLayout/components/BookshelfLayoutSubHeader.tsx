@@ -8,11 +8,7 @@ import { MUI_CONTAINER_MAX_WIDTH } from '~/constants/commonConstants.ts';
 import { books } from '~/images/index.ts';
 import { getNavigation } from '../bookshelfLayoutConstants.ts';
 
-const navigationItems = getNavigation();
-
-function Navigation() {
-  const navigationRoutes = useMemo(() => navigationItems.map((i) => i.href), [navigationItems]);
-
+function BookshelfLayoutSubHeader() {
   return (
     <div className="border-b border-gray-300 dark:border-gray-700">
       <Container
@@ -25,29 +21,39 @@ function Navigation() {
             Bookshelf
           </Typography>
         </div>
-        <Box sx={{ maxWidth: { xs: 100, sm: 270, md: 370 } }}>
-          <Tabs
-            as="links"
-            routes={navigationRoutes}
-            TabIndicatorProps={{ sx: { display: 'none' } }}
-            sx={{
-              '& .Mui-selected': {
-                fontWeight: 600,
-                color: 'var(--primary-600) !important',
-              },
-              '& *:not(.Mui-selected)': {
-                color: 'var(--text-disabled) !important',
-              },
-            }}
-          >
-            {navigationItems.map((item) => (
-              <Tab key={v4()} label={item.label} value={item.href} />
-            ))}
-          </Tabs>
-        </Box>
+        <Navigation />
       </Container>
     </div>
   );
 }
 
-export default Navigation;
+export default BookshelfLayoutSubHeader;
+
+const navigationItems = getNavigation();
+
+function Navigation() {
+  const navigationRoutes = useMemo(() => navigationItems.map((i) => i.href), [navigationItems]);
+
+  return (
+    <Box sx={{ maxWidth: { xs: 100, sm: 270, md: 370 } }}>
+      <Tabs
+        as="links"
+        routes={navigationRoutes}
+        TabIndicatorProps={{ sx: { display: 'none' } }}
+        sx={{
+          '& .Mui-selected': {
+            fontWeight: 600,
+            color: 'var(--primary-600) !important',
+          },
+          '& *:not(.Mui-selected)': {
+            color: 'var(--text-disabled) !important',
+          },
+        }}
+      >
+        {navigationItems.map((item) => (
+          <Tab key={v4()} label={item.label} value={item.href} />
+        ))}
+      </Tabs>
+    </Box>
+  );
+}
