@@ -1,18 +1,19 @@
 import { createTheme } from '@mui/material';
 
+import { Theme } from '~/types/commonTypes.ts';
+
 const getCSSVariableValue = (variable: string) => {
   return getComputedStyle(document.body).getPropertyValue(variable);
 };
 
-type Mode = 'light' | 'dark';
-
-export const getTheme = (mode: Mode) => {
+export const getThemeConfig = (mode: Exclude<Theme, 'system'>) => {
   const theme = createTheme({
     palette: {
       mode,
       primary: {
         main: getCSSVariableValue('--primary-500'),
         dark: getCSSVariableValue('--primary-600'),
+        light: getCSSVariableValue('--primary-500'),
         '100': getCSSVariableValue('--primary-100'),
         '200': getCSSVariableValue('--primary-200'),
         '300': getCSSVariableValue('--primary-300'),

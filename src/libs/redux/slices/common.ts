@@ -1,15 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+import { INITIAL_THEME } from '~/constants/commonConstants.ts';
 import { REDUCER_PATH_COMMON } from '~/constants/reduxConstants';
-import { Device } from '~/types/commonTypes.ts';
+import { Device, Theme } from '~/types/commonTypes.ts';
 
 interface InitialState {
-  theme: 'light' | 'dark';
+  theme: Theme;
   device: null | Device;
 }
 
 const initialState: InitialState = {
-  theme: 'light',
+  theme: INITIAL_THEME,
   device: null,
 };
 
