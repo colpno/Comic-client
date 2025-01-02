@@ -19,13 +19,13 @@ function Navigation() {
         maxWidth={MUI_CONTAINER_MAX_WIDTH}
         className="flex items-center justify-between py-1"
       >
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-2 sm:gap-4 md:gap-6">
           <Image src={books} alt="Bookshelf logo" className="w-9" />
-          <Typography fontSize={40} className="!font-semibold md:!text-xl">
+          <Typography variant="h5" className="!font-semibold">
             Bookshelf
           </Typography>
         </div>
-        <Box sx={{ maxWidth: { xs: 270, sm: 370 } }}>
+        <Box sx={{ maxWidth: { xs: 100, sm: 270, md: 370 } }}>
           <Tabs
             as="links"
             routes={navigationRoutes}
@@ -34,6 +34,9 @@ function Navigation() {
               '& .Mui-selected': {
                 fontWeight: 600,
                 color: 'var(--primary-600) !important',
+              },
+              '& *:not(.Mui-selected)': {
+                color: 'var(--text-disabled) !important',
               },
             }}
           >
