@@ -10,7 +10,7 @@ export * from './form-controls/CheckBoxGroup.tsx';
 export const Button = lazy(() => import('./form-controls/Button.tsx'));
 export * from './form-controls/Button.tsx';
 export const DatePicker = lazy(() => import('./form-controls/DatePicker.tsx'));
-export const DynamicField = lazy(() => import('./form-controls/DynamicField.tsx'));
+export const DynamicField = lazy(() => import('./form-controls/DynamicField/DynamicField.tsx'));
 export const NumberField = lazy(() => import('./form-controls/NumberField.tsx'));
 export const RadioGroup = lazy(() => import('./form-controls/RadioGroup.tsx'));
 export * from './form-controls/RadioGroup.tsx';
