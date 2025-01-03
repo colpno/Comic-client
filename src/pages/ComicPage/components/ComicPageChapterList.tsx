@@ -7,13 +7,13 @@ import { Comic } from '~/types/comicType.ts';
 import { toDate } from '~/utils/converters.ts';
 
 interface ChapterProps {
-  comicId: Comic['id'];
+  comicTitle: Comic['title'];
   chapter: Pick<ChapterType, 'id' | 'content' | 'title' | 'chapter' | 'publishAt'>;
 }
 
-function Chapter({ comicId, chapter }: ChapterProps) {
+function Chapter({ comicTitle, chapter }: ChapterProps) {
   return (
-    <Link to={getComicReadingRoute(comicId, chapter.chapter)} key={chapter.id}>
+    <Link to={getComicReadingRoute(comicTitle, chapter.chapter)} key={chapter.id}>
       <div className="flex gap-3 mt-4">
         <div
           style={{
@@ -61,7 +61,7 @@ function ComicPageChapterList({ comic, chapters }: Props) {
       <Pagination totalPages={chapters.length} />
       <div>
         {chapters.map((chapter) => (
-          <Chapter comicId={comic.id} chapter={chapter} />
+          <Chapter key={chapter.id} comicTitle={comic.title} chapter={chapter} />
         ))}
       </div>
       <Pagination totalPages={chapters.length} />

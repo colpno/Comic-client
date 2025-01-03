@@ -67,7 +67,7 @@ export const getTableDef = (): TableColsDef => [
           comic.latestUploadedChapter && comic.latestUploadedChapter > chapter.chapter
             ? chapter.chapter + 1
             : -1; // to prevent the link from being generated
-        const nextChapterLink = getComicReadingRoute(comic.id, nextChapterNumber);
+        const nextChapterLink = getComicReadingRoute(comic.title, nextChapterNumber);
         return nextChapterLink;
       };
 

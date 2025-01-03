@@ -12,7 +12,7 @@ export const ROUTE_LOGIN = '/login' as const;
 export const ROUTE_FOLLOW = `${BOOKSHELF}/follow` as const;
 
 /**
- * @param comicTitle title will be converted to lowercase and replace space with '-'
+ * @param comicTitle title will be converted to lowercase and replace space with '-'.
  */
 export const getComicRoute = (comicTitle: string) => {
   const title = comicTitle.toLowerCase().replace(/ /g, '-');
@@ -20,8 +20,9 @@ export const getComicRoute = (comicTitle: string) => {
 };
 
 /**
- * @param chapterNumber >= 0 to get the reading route
- * @returns either empty string or the reading route
+ * @param comicTitle title will be converted to lowercase and replace space with '-'.
+ * @param chapterNumber >= 0 to get the reading route.
+ * @returns either empty string or the reading route.
  */
 export const getComicReadingRoute = (comicTitle: string, chapterNumber: string | number) => {
   if (typeof chapterNumber === 'number' && chapterNumber < 0) return '';

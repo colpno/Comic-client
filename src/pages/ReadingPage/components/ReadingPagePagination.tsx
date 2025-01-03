@@ -15,9 +15,9 @@ interface Props {
 }
 
 function ReadingPagePagination({ chapters }: Props) {
-  const { comicId } = useParams();
+  const { comicTitle } = useParams();
 
-  if (!comicId) return null;
+  if (!comicTitle) return null;
 
   return (
     <ReadingPageSlider>
@@ -25,7 +25,7 @@ function ReadingPagePagination({ chapters }: Props) {
         {chapters.map(({ content, title, chapter: chapterNumber }) => (
           <SwiperSlide key={v4()}>
             {({ isActive }) => (
-              <Link to={getComicReadingRoute(comicId, chapterNumber)}>
+              <Link to={getComicReadingRoute(comicTitle, chapterNumber)}>
                 <Image
                   lazy
                   src={content[0].dataSaver || content[0].data}

@@ -86,21 +86,21 @@ function Description({ content }: { content: Comic['description'] }) {
 }
 
 interface ButtonsProps {
-  comicId: Comic['id'];
+  comicTitle: Comic['id'];
   latestChapterNumber: Comic['latestUploadedChapter'];
 }
 
-function Buttons({ comicId, latestChapterNumber }: ButtonsProps) {
+function Actions({ comicTitle, latestChapterNumber }: ButtonsProps) {
   return (
     <div className="flex flex-col gap-2 mt-6 lg:mt-auto sm:flex-row">
-      <Button variant="contained" color="primary" href={getComicReadingRoute(comicId, 1)}>
+      <Button variant="contained" color="primary" href={getComicReadingRoute(comicTitle, 1)}>
         Read chapter 1
       </Button>
       {latestChapterNumber && (
         <Button
           variant="outlined"
           color="primary"
-          href={getComicReadingRoute(comicId, latestChapterNumber)}
+          href={getComicReadingRoute(comicTitle, latestChapterNumber)}
         >
           Read latest chapter
         </Button>
@@ -142,7 +142,7 @@ function ComicPageDetails(comic: Comic) {
         <Authors authors={comic.authors} />
         <Artists artists={comic.artists} />
         <Description content={comic.description} />
-        <Buttons comicId={comic.id} latestChapterNumber={comic.latestUploadedChapter} />
+        <Actions comicTitle={comic.title} latestChapterNumber={comic.latestUploadedChapter} />
       </Grid2>
     </Grid2>
   );
