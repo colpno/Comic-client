@@ -6,7 +6,12 @@ const position: PopoverProps['anchorOrigin'] = {
   horizontal: 'left',
 };
 
-function Popup({ anchorOrigin = position, ...props }: PopoverProps) {
+interface Props extends Omit<PopoverProps, 'anchorEl'> {
+  /** The anchor element to attach the popup. */
+  anchorEl: PopoverProps['anchorEl'];
+}
+
+function Popup({ anchorOrigin = position, ...props }: Props) {
   return <Popover {...props} anchorOrigin={anchorOrigin} />;
 }
 
