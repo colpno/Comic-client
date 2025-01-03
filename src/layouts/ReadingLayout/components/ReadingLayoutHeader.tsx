@@ -2,14 +2,15 @@ import { useState } from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa6';
 import { GoQuestion } from 'react-icons/go';
 import { HiBars3BottomLeft } from 'react-icons/hi2';
-import { PiBooks } from 'react-icons/pi';
 import { Link, useParams } from 'react-router-dom';
 
 import { Button, Logo, Typography } from '~/components/index.ts';
-import { getComicRoute, ROUTE_HISTORY } from '~/constants/routeConstants.ts';
+import { getComicRoute } from '~/constants/routeConstants.ts';
 import { useDeviceWatcher } from '~/hooks/useDeviceWatcher.ts';
 import BaseHeader from '~/layouts/components/Header.tsx';
-import HeaderAccountButton from '~/layouts/components/HeaderActions/HeaderAccountButton.tsx';
+import AccountButton from '~/layouts/components/HeaderActions/HeaderAccountButton.tsx';
+import BookshelfButton from '~/layouts/components/HeaderActions/HeaderBookshelfButton.tsx';
+import ThemeButton from '~/layouts/components/HeaderActions/HeaderThemeButton.tsx';
 import { cn } from '~/utils/cssUtils.ts';
 import { useReadingLayoutContext } from '../ReadingLayoutContext.ts';
 import ReadingLayoutGuidePopup from './ReadingLayoutGuidePopup.tsx';
@@ -26,7 +27,7 @@ function BottomBar({ isDisplay }: BottomBarProps) {
     <div
       className={cn(
         'fixed bottom-0 left-0 right-0 flex items-center justify-between bg-main shadow-[0_-2px_4px_rgba(0,0,0,0.1)] z-header transition-[opacity] ease-out',
-        !isDisplay && 'opacity-0'
+        !isDisplay && 'hidden'
       )}
     >
       <nav>
@@ -60,7 +61,6 @@ function ReadingLayoutHeader() {
   const [guidePopup, setGuidePopup] = useState(false);
 
   const openGuidePopup = () => setGuidePopup(true);
-
   const closeGuidePopup = () => setGuidePopup(false);
 
   return (
@@ -70,7 +70,7 @@ function ReadingLayoutHeader() {
           header: {
             className: cn(
               'shadow-[0_2px_4px_rgba(0,0,0,0.05)] sm:shadow-none transition-[opacity] ease-out',
-              !headerVisibility && 'opacity-0'
+              !headerVisibility && 'hidden'
             ),
           },
         }}
@@ -87,7 +87,7 @@ function ReadingLayoutHeader() {
               </Link>
             </nav>
             {!isMobile && (
-              <nav className="flex items-center gap-2 md:gap-4">
+              <nav className="absolute flex items-center gap-2 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 md:gap-4">
                 <Button as="iconButton" color="inherit" title="Go to the previous page">
                   <FaChevronLeft fontSize={18} />
                 </Button>
@@ -97,7 +97,7 @@ function ReadingLayoutHeader() {
                 </Button>
               </nav>
             )}
-            <nav>
+            <nav className="flex items-center">
               <Button
                 as="iconButton"
                 color="inherit"
@@ -106,10 +106,9 @@ function ReadingLayoutHeader() {
               >
                 <GoQuestion />
               </Button>
-              <Button as="iconButton" href={ROUTE_HISTORY} color="inherit" title="History">
-                <PiBooks />
-              </Button>
-              <HeaderAccountButton />
+              <BookshelfButton />
+              <AccountButton />
+              <ThemeButton />
             </nav>
           </>
         )}
