@@ -1,6 +1,7 @@
 import { faker } from '@faker-js/faker';
 import { Container } from '@mui/material';
 
+import { useObserver } from '~/hooks/index.ts';
 import { useReadingLayoutContext } from '~/layouts/ReadingLayout/ReadingLayoutContext.ts';
 import { Chapter } from '~/types/chapterType.ts';
 import Content from './components/ReadingPageImages.tsx';
@@ -20,7 +21,7 @@ const chapters = faker.helpers.multiple<Chapter>(
         };
       },
       {
-        count: faker.helpers.rangeToNumber({ min: 1, max: 1 }),
+        count: faker.helpers.rangeToNumber({ min: 3, max: 10 }),
       }
     ),
   }),
@@ -28,12 +29,13 @@ const chapters = faker.helpers.multiple<Chapter>(
 );
 
 function ReadingPage() {
-  const { toggleHeaderVisibility } = useReadingLayoutContext();
+  const { toggleHeaderVisibility, setHeaderVisibility } = useReadingLayoutContext();
+  const { setElementRef } = useObserver(undefined, () => setHeaderVisibility(true));
   const currentChapter = chapters[0];
 
   return (
     <div>
-      <div onClick={toggleHeaderVisibility}>
+      <div onClick={toggleHeaderVisibility} ref={setElementRef}>
         <div className="mx-auto shadow-xl w-full md:w-[728px]">
           <Content id={currentChapter.id} images={currentChapter.content} />
         </div>
