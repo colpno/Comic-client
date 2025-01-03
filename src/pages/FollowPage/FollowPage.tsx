@@ -49,7 +49,7 @@ function FollowPage() {
     <>
       <Container maxWidth={MUI_CONTAINER_MAX_WIDTH} className="pt-12">
         <div className="flex flex-row items-center mb-4 sm:justify-between">
-          <div>
+          <div className="flex gap-1.5">
             <TitleFilterButton onSubmit={handleTitleFilterFormSubmit} />
             <TagFilterButton onSubmit={handleTagFilterFormSubmit} />
           </div>

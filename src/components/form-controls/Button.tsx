@@ -73,10 +73,9 @@ function Button({
       {...hyperlinks}
       disabled={disabled || loading}
       className={cn(
-        '[&_+_&]:ml-2',
         loading && 'flex gap-2 items-center',
         disableGutter && '!ml-0',
-        disableTextTransform && '!text-transform-none',
+        disableTextTransform && '!normal-case',
         className
       )}
     >
