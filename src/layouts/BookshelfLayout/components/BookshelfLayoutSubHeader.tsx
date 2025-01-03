@@ -5,7 +5,7 @@ import { v4 } from 'uuid';
 import Image from '~/components/Image.tsx';
 import { Tab, Tabs, Typography } from '~/components/index.ts';
 import { MUI_CONTAINER_MAX_WIDTH } from '~/constants/commonConstants.ts';
-import { books } from '~/images/index.ts';
+import { booksSVG } from '~/images/index.ts';
 import { getNavigation } from '../bookshelfLayoutConstants.ts';
 
 function BookshelfLayoutSubHeader() {
@@ -16,7 +16,7 @@ function BookshelfLayoutSubHeader() {
         className="flex items-center justify-between py-1"
       >
         <div className="flex items-center gap-2 sm:gap-4 md:gap-6">
-          <Image src={books} alt="Bookshelf logo" className="w-9" />
+          <Image src={booksSVG} alt="Bookshelf logo" className="w-9" />
           <Typography variant="h5" className="!font-semibold">
             Bookshelf
           </Typography>
