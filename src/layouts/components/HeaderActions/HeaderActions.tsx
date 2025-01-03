@@ -1,8 +1,5 @@
-import { PiBooks } from 'react-icons/pi';
-
-import { Button } from '~/components/index.ts';
-import { ROUTE_HISTORY } from '~/constants/routeConstants';
-import AccountButton from './HeaderAccountButton';
+import AccountButton from './HeaderAccountButton.tsx';
+import BookshelfButton from './HeaderBookshelfButton.tsx';
 import SearchButton from './HeaderSearchButton';
 import ThemeButton from './HeaderThemeButton.tsx';
 
@@ -11,9 +8,7 @@ function HeaderActions() {
     <div className="flex">
       <SearchButton />
       <ThemeButton />
-      <Button as="iconButton" href={ROUTE_HISTORY} color="inherit" title="History">
-        <PiBooks />
-      </Button>
+      <BookshelfButton />
       <AccountButton />
     </div>
   );
