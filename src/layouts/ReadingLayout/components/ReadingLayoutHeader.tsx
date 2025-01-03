@@ -19,8 +19,8 @@ interface BottomBarProps {
 }
 
 function BottomBar({ isDisplay }: BottomBarProps) {
-  const { comicId, chapterNumber } = useParams();
-  const comicPageHref = comicId ? getComicRoute(comicId) : undefined;
+  const { comicTitle, chapterNumber } = useParams();
+  const comicPageHref = comicTitle ? getComicRoute(comicTitle) : undefined;
 
   return (
     <div

@@ -1,5 +1,8 @@
+import { Link } from 'react-router-dom';
+
 import Image from '~/components/Image.tsx';
 import Typography from '~/components/Typography.tsx';
+import { getComicRoute } from '~/constants/routeConstants.ts';
 import { useDeviceWatcher } from '~/hooks/useDeviceWatcher.ts';
 import { placeholderImage } from '~/images/index.ts';
 import { Comic } from '~/types/comicType.ts';
@@ -12,24 +15,26 @@ function NewArrivalsComicCard(comic: Comic) {
   }
 
   return (
-    <figure>
-      <Image
-        src={placeholderImage}
-        alt={comic.title}
-        className="rounded-md aspect-[8/11] w-full"
-        onLoad={({ currentTarget }) => {
-          currentTarget.src = comic.coverImageUrl;
-        }}
-        onError={({ currentTarget }) => {
-          currentTarget.src = placeholderImage;
-        }}
-      />
-      <figcaption>
-        <Typography fontWeight={500} className="line-clamp-2" title={comic.title}>
-          {comic.title}
-        </Typography>
-      </figcaption>
-    </figure>
+    <Link to={getComicRoute(comic.title)} key={comic.id}>
+      <figure>
+        <Image
+          src={placeholderImage}
+          alt={comic.title}
+          className="rounded-md aspect-[8/11] w-full"
+          onLoad={({ currentTarget }) => {
+            currentTarget.src = comic.coverImageUrl;
+          }}
+          onError={({ currentTarget }) => {
+            currentTarget.src = placeholderImage;
+          }}
+        />
+        <figcaption>
+          <Typography fontWeight={500} className="line-clamp-2" title={comic.title}>
+            {comic.title}
+          </Typography>
+        </figcaption>
+      </figure>
+    </Link>
   );
 }
 

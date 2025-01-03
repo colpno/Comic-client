@@ -11,15 +11,21 @@ export const ROUTE_SEARCH = '/search' as const;
 export const ROUTE_LOGIN = '/login' as const;
 export const ROUTE_FOLLOW = `${BOOKSHELF}/follow` as const;
 
-export const getComicRoute = (comicId: string) => `/comics/${comicId}`;
+/**
+ * @param comicTitle title will be converted to lowercase and replace space with '-'
+ */
+export const getComicRoute = (comicTitle: string) => {
+  const title = comicTitle.toLowerCase().replace(/ /g, '-');
+  return `/comics/${title}`;
+};
 
 /**
  * @param chapterNumber >= 0 to get the reading route
  * @returns either empty string or the reading route
  */
-export const getComicReadingRoute = (comicId: string, chapterNumber: string | number) => {
+export const getComicReadingRoute = (comicTitle: string, chapterNumber: string | number) => {
   if (typeof chapterNumber === 'number' && chapterNumber < 0) return '';
-  return `${getComicRoute(comicId)}/reading/${chapterNumber}`;
+  return `${getComicRoute(comicTitle)}/reading/${chapterNumber}`;
 };
 
 export const getRankingRoute = (category?: string) => {

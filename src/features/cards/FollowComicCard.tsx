@@ -22,7 +22,7 @@ function FollowComicCard({ item, onRemove }: Props) {
 
   return (
     <figure className="grid grid-cols-[5rem,1fr,2rem] sm:flex gap-x-1 sm:gap-x-3 md:gap-x-4 gap-y-2 sm:gap-4">
-      <Link to={getComicRoute(comic.id)}>
+      <Link to={getComicRoute(comic.title)}>
         <Image
           src={placeholderImage}
           alt={comic.title}
@@ -35,7 +35,10 @@ function FollowComicCard({ item, onRemove }: Props) {
           }}
         />
       </Link>
-      <Link to={getComicRoute(comic.id)} className="flex flex-col w-full pt-3 pb-3 sm:pb-3 sm:pt-2">
+      <Link
+        to={getComicRoute(comic.title)}
+        className="flex flex-col w-full pt-3 pb-3 sm:pb-3 sm:pt-2"
+      >
         <Typography
           fontWeight={500}
           className="line-clamp-1"
