@@ -1,3 +1,5 @@
+import { v4 } from 'uuid';
+
 import { Dialog } from '~/components/index.ts';
 
 interface GuidePopupProps {
@@ -26,7 +28,7 @@ function ReadingLayoutGuidePopup({ open, onClose }: GuidePopupProps) {
           <th>Description</th>
         </tr>
         {tableRows.map((row) => (
-          <tr>
+          <tr key={v4()}>
             <td>{row.action}</td>
             <td>{row.description}</td>
           </tr>
