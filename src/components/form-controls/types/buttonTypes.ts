@@ -7,7 +7,6 @@ import {
 type AssignProps<T, P> = P & Omit<T, keyof P>;
 type BaseProps = {
   loading?: boolean;
-  disableGutter?: boolean;
   disableTextTransform?: boolean;
   externalLink?: boolean;
 };

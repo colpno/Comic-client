@@ -13,7 +13,6 @@ function Button({
   children,
   className,
   loading,
-  disableGutter,
   disableTextTransform,
   disabled,
   as,
@@ -74,7 +73,6 @@ function Button({
       disabled={disabled || loading}
       className={cn(
         loading && 'flex gap-2 items-center',
-        disableGutter && '!ml-0',
         disableTextTransform && '!normal-case',
         className
       )}
