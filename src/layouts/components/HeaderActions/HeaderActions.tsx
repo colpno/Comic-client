@@ -7,8 +7,8 @@ function HeaderActions() {
   return (
     <div className="flex">
       <SearchButton />
-      <ThemeButton />
       <BookshelfButton />
+      <ThemeButton />
       <AccountButton />
     </div>
   );
