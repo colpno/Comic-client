@@ -8,7 +8,7 @@ const comics = generateComics(10);
 function HomePage() {
   return (
     <div>
-      <BannerSlider bannerUrls={comics.map((c) => c.coverImageUrl)} />
+      <BannerSlider items={comics} />
       <Menu />
       <CardRow title="Genre 1" items={comics} />
       <CardRow title="Genre 1" items={comics} />
