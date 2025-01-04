@@ -4,7 +4,6 @@ import { User } from '~/types/userTypes';
 
 export const user: User = {
   id: faker.database.mongodbObjectId(),
-  email: faker.internet.email(),
   createdAt: faker.date.past().toISOString(),
   updatedAt: faker.date.recent().toISOString(),
 };
