@@ -107,8 +107,8 @@ function ReadingLayoutHeader() {
                 <GoQuestion />
               </Button>
               <BookshelfButton />
-              <AccountButton />
               <ThemeButton />
+              <AccountButton />
             </nav>
           </>
         )}

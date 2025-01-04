@@ -1,11 +1,10 @@
 import { Container } from '@mui/material';
-import { PiBooks } from 'react-icons/pi';
-import { Link, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 
-import { Button } from '~/components/index.ts';
 import { MUI_CONTAINER_MAX_WIDTH } from '~/constants/commonConstants.ts';
-import { ROUTE_HISTORY } from '~/constants/routeConstants';
 import HeaderAccountButton from '~/layouts/components/HeaderActions/HeaderAccountButton.tsx';
+import HeaderBookshelfButton from '~/layouts/components/HeaderActions/HeaderBookshelfButton.tsx';
+import HeaderThemeButton from '~/layouts/components/HeaderActions/HeaderThemeButton.tsx';
 import HeaderLogo from '~/layouts/components/HeaderLogo.tsx';
 import SearchInput from '~/layouts/components/SearchInput.tsx';
 
@@ -23,12 +22,9 @@ function SearchLayoutHeader() {
         <div className="flex-[0_1_26rem] px-4 sm:px-8">
           <SearchInput value={searchValue} replaceUrl />
         </div>
-        <div>
-          <Link to={ROUTE_HISTORY}>
-            <Button as="iconButton" color="inherit" title="History">
-              <PiBooks />
-            </Button>
-          </Link>
+        <div className="flex">
+          <HeaderBookshelfButton />
+          <HeaderThemeButton />
           <HeaderAccountButton />
         </div>
       </Container>
