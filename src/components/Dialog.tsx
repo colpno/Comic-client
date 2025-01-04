@@ -87,7 +87,7 @@ function ConfirmDialog({
         <Typography
           {...titleProps}
           variant="h5"
-          className={cn('p-3 border-b text-primary-500', classes?.title)}
+          className={cn('p-3 border-b dark:border-gray-600 text-primary-500', classes?.title)}
         >
           {title}
         </Typography>
@@ -98,7 +98,10 @@ function ConfirmDialog({
       >
         {children}
       </div>
-      <div {...actionsProps} className={cn('p-3 text-right border-t', classes?.actions)}>
+      <div
+        {...actionsProps}
+        className={cn('p-3 text-right border-t dark:border-gray-600 space-x-3', classes?.actions)}
+      >
         {overrideUI?.actions || (
           <>
             {onAccept && (
