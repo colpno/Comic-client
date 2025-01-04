@@ -6,8 +6,8 @@ interface Props {
 
 function SearchPageTitle({ searchValue }: Props) {
   return (
-    <Typography variant="h2" className="!mb-6 !font-semibold line-clamp-1" title={searchValue}>
-      Search results for '{searchValue}'
+    <Typography variant="h5" className="!mb-6 !font-semibold line-clamp-1" title={searchValue}>
+      Search results for '{searchValue}'.
     </Typography>
   );
 }
