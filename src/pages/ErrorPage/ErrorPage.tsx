@@ -10,11 +10,11 @@ interface Props {
 
 function ErrorPage({ message = '' }: Props) {
   const error = useRouteError();
-  const navigator = window.navigator;
+  const { onLine } = window.navigator;
 
   if (isRouteErrorResponse(error)) return <NotFoundPage error={error} />;
 
-  if (navigator.onLine === false) return <OfflineErrorPage />;
+  if (onLine === false) return <OfflineErrorPage />;
 
   return <UnknownErrorPage message={message} />;
 }
