@@ -21,7 +21,7 @@ const slice = createSlice({
     setTheme(state, { payload }: PayloadAction<InitialState['theme']>) {
       state.theme = payload;
     },
-    changeDevice(state, { payload }: PayloadAction<InitialState['device']>) {
+    setDevice(state, { payload }: PayloadAction<InitialState['device']>) {
       state.device = payload;
     },
   },
@@ -29,6 +29,6 @@ const slice = createSlice({
 
 const { reducer: commonReducer, actions } = slice;
 
-export const { setTheme, changeDevice } = actions;
+export const { setTheme, setDevice } = actions;
 
 export default commonReducer;

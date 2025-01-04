@@ -1,7 +1,7 @@
 import { useMediaQuery, useTheme } from '@mui/material';
 import { useCallback, useEffect } from 'react';
 
-import { changeDevice } from '~/libs/redux/slices/common.ts';
+import { setDevice } from '~/libs/redux/slices/commonSlice';
 import { useAppDispatch } from '~/libs/redux/store.ts';
 import { Device } from '~/types/commonTypes.ts';
 
@@ -13,7 +13,7 @@ function DeviceWatcher() {
 
   const dispatchChangeDevice = useCallback(
     (device: Device) => {
-      dispatch(changeDevice(device));
+      dispatch(setDevice(device));
     },
     [dispatch]
   );

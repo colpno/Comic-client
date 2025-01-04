@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 
 import { Button, ButtonAsButtonProps, Popup, Typography } from '~/components/index.ts';
 import { usePopup } from '~/hooks/usePopup.ts';
-import { setTheme } from '~/libs/redux/slices/common.ts';
+import { setTheme } from '~/libs/redux/slices/commonSlice';
 import { RootState, useAppDispatch } from '~/libs/redux/store.ts';
 import { Theme } from '~/types/commonTypes.ts';
 
