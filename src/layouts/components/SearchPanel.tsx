@@ -18,7 +18,7 @@ function SearchPanel({ open, onClose }: SearchPanelProps) {
     <div className="absolute top-0 left-0 right-0 z-header bg-main">
       <Container
         maxWidth={MUI_CONTAINER_MAX_WIDTH}
-        className="flex items-center justify-between h-header md:h-header-md"
+        className="flex items-center justify-between h-header md:h-header-md text-main"
       >
         <HeaderLogo />
         <div className="flex-[0_1_26rem] px-4 sm:px-8">
