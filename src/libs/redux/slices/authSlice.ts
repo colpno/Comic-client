@@ -34,4 +34,6 @@ const { reducer: authReducer, actions } = slice;
 
 export const { login, logout } = actions;
 
+export type AuthReducerState = State;
+
 export default authReducer;
