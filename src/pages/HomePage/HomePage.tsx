@@ -6,10 +6,13 @@ import CardRow from './components/HomePageCardRow.tsx';
 import Menu from './components/HomePageMenu.tsx';
 
 const newComics = generateComics(10);
-const comicsByGenre: React.ComponentProps<typeof CardRow>[] = faker.helpers.multiple(
+
+type ComicsByGenre = React.ComponentProps<typeof CardRow> & { id: string };
+const comicsByGenre: ComicsByGenre[] = faker.helpers.multiple(
   () => ({
     items: generateComics(10),
     title: faker.commerce.productMaterial(),
+    id: faker.database.mongodbObjectId(),
   }),
   { count: 7 }
 );
@@ -19,7 +22,7 @@ function CardRowList() {
   comicsByGenre[3].itemsPerGroup = 2;
   comicsByGenre[5].itemsPerGroup = 4;
 
-  return comicsByGenre.map((props) => <CardRow {...props} />);
+  return comicsByGenre.map(({ id, ...props }) => <CardRow key={id} {...props} />);
 }
 
 function HomePage() {
