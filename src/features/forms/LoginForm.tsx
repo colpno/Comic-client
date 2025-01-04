@@ -4,17 +4,17 @@ import { IoMailOpenOutline } from 'react-icons/io5';
 import { Button, Form, TextField, Typography } from '~/components/index.ts';
 import { loginFormSchema, LoginFormValues } from './validationSchemas.ts';
 
-function LoginForm() {
-  const handleSubmit = (values: LoginFormValues) => {
-    console.log('values:', values);
-  };
+interface Props {
+  onSubmit: (values: LoginFormValues) => void | Promise<void>;
+}
 
+function LoginForm({ onSubmit }: Props) {
   return (
     <div>
       <Typography variant="h2" className="text-center !mb-8 text-main">
         Sign in
       </Typography>
-      <Form validationSchema={loginFormSchema} onSubmit={handleSubmit}>
+      <Form validationSchema={loginFormSchema} onSubmit={onSubmit}>
         <TextField
           name="email"
           variant="standard"
