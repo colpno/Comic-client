@@ -1,2 +1,2 @@
-export { default as commonPersistConfig } from './common.ts';
-export { default as rootPersistConfig } from './root.ts';
+export { default as commonPersistConfig } from './commonPersist.ts';
+export { default as rootPersistConfig } from './rootPersist.ts';

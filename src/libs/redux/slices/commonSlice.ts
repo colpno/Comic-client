@@ -31,4 +31,6 @@ const { reducer: commonReducer, actions } = slice;
 
 export const { setTheme, setDevice } = actions;
 
+export type CommonReducerState = InitialState;
+
 export default commonReducer;
