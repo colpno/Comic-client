@@ -11,7 +11,7 @@ function LoginForm() {
 
   return (
     <div>
-      <Typography variant="h1" className="text-center !mb-8 text-main">
+      <Typography variant="h2" className="text-center !mb-8 text-main">
         Sign in
       </Typography>
       <Form validationSchema={loginFormSchema} onSubmit={handleSubmit}>
@@ -39,10 +39,10 @@ function LoginForm() {
             htmlInput: { className: '!py-4 !text-lg' },
           }}
         />
-        <Button size="large" type="submit" fullWidth disableGutter className="!mb-4">
+        <Button size="large" type="submit" fullWidth className="!mb-4">
           Log in
         </Button>
-        <Button variant="outlined" size="large" fullWidth disableGutter>
+        <Button variant="outlined" size="large" fullWidth>
           Sign up
         </Button>
       </Form>
