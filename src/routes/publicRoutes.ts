@@ -3,6 +3,7 @@ import { RouteObject } from 'react-router-dom';
 import {
   getComicReadingRoute,
   getComicRoute,
+  getComicsByGenreRoute,
   ROUTE_COMPLETED,
   ROUTE_DAILY,
   ROUTE_HOME,
@@ -20,6 +21,7 @@ import {
 } from '~/layouts/index.ts';
 import {
   ComicPage,
+  ComicsByGenrePage,
   CompletedPage,
   DailyPage,
   HomePage,
@@ -51,6 +53,10 @@ const publicRoutes: RouteObject = {
         {
           path: ROUTE_LOGIN,
           Component: LoginPage,
+        },
+        {
+          path: getComicsByGenreRoute(':genre'),
+          Component: ComicsByGenrePage,
         },
       ],
     },

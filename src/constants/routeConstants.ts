@@ -48,3 +48,8 @@ export const getSearchRoute = (searchValue?: string) => {
   if (!searchValue) return ROUTE_SEARCH;
   return `${ROUTE_SEARCH}?value=${searchValue}`;
 };
+
+export const getComicsByGenreRoute = (genre: string) => {
+  const genreURL = genre.toLowerCase().replace(/ /g, '-');
+  return `${ROUTE_GENRES}/${genreURL}`;
+};

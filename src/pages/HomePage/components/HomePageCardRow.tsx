@@ -5,7 +5,7 @@ import { SwiperProps } from 'swiper/react';
 import { Button } from '~/components/index.ts';
 import Typography from '~/components/Typography.tsx';
 import { MUI_CONTAINER_MAX_WIDTH } from '~/constants/commonConstants.ts';
-import { ROUTE_GENRES } from '~/constants/routeConstants.ts';
+import { getComicsByGenreRoute } from '~/constants/routeConstants.ts';
 import { ComicCard, ComicHorizontalCard, ComicSlider } from '~/features/index.ts';
 import { Comic } from '~/types/comicType.ts';
 
@@ -21,7 +21,7 @@ type Breakpoints = Record<
 >;
 
 function CardRow({ title, items, itemsPerGroup = 5 }: CardRowProps) {
-  const genreUrl = `${ROUTE_GENRES}/${title.toLowerCase().replace(/\s/g, '-')}`;
+  const genreUrl = getComicsByGenreRoute(title);
   const breakpoints: Breakpoints = {
     2: {
       0: {
