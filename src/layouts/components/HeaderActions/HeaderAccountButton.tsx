@@ -54,7 +54,7 @@ function Form({ open, onClose }: FormProps) {
 
     document.body.style.overflow = 'unset';
     return (
-      <div className="absolute right-0 px-6 pt-6 pb-10 shadow-md dark:shadow-gray-800 border dark:border-gray-800 w-[22rem] rounded-xl top-full bg-main">
+      <div className="absolute right-0 px-6 pt-6 pb-10 shadow-md dark:shadow-gray-900 border dark:border-gray-800 w-[22rem] rounded-xl top-full bg-main">
         <LoginForm />
       </div>
     );

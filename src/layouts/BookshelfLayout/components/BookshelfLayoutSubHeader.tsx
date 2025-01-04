@@ -10,7 +10,7 @@ import { getNavigation } from '../bookshelfLayoutConstants.ts';
 
 function BookshelfLayoutSubHeader() {
   return (
-    <div className="border-b border-gray-300 dark:border-gray-700">
+    <div className="border-b border-gray-300 dark:border-gray-800">
       <Container
         maxWidth={MUI_CONTAINER_MAX_WIDTH}
         className="flex items-center justify-between py-1"
