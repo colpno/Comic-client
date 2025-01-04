@@ -34,6 +34,15 @@ export const getThemeConfig = (mode: Exclude<Theme, 'system'>) => {
       },
     },
     components: {
+      MuiCssBaseline: {
+        styleOverrides: `
+          input:-webkit-autofill,
+          input:-webkit-autofill:hover,
+          input:-webkit-autofill:focus,
+          input:-webkit-autofill:active {
+            -webkit-box-shadow: 0 0 0 30px var(--primary-100) inset !important;
+          }`,
+      },
       MuiTab: {
         styleOverrides: {
           root: {
@@ -41,13 +50,25 @@ export const getThemeConfig = (mode: Exclude<Theme, 'system'>) => {
           },
         },
       },
-      MuiTextField: {
+      MuiInputBase: {
         styleOverrides: {
           root: {
-            '& .MuiOutlinedInput-root': {
-              '& fieldset': {
-                borderColor: 'var(--border-primary)',
-              },
+            '&:has(> input:-webkit-autofill)': {
+              backgroundColor: 'var(--primary-100)',
+              paddingLeft: '8px',
+            },
+            [`&:has(> input:-webkit-autofill),
+              &:has(> input:-webkit-autofill) > button`]: {
+              color: 'black',
+            },
+          },
+        },
+      },
+      MuiOutlinedInput: {
+        styleOverrides: {
+          root: {
+            '& fieldset': {
+              borderColor: 'var(--border-primary)',
             },
           },
         },
