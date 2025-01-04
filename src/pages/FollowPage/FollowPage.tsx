@@ -48,13 +48,15 @@ function FollowPage() {
   return (
     <>
       <Container maxWidth={MUI_CONTAINER_MAX_WIDTH} className="pt-12">
-        <div className="flex flex-row items-center mb-4 sm:justify-between">
-          <div className="flex gap-1.5">
-            <TitleFilterButton onSubmit={handleTitleFilterFormSubmit} />
-            <TagFilterButton onSubmit={handleTagFilterFormSubmit} />
+        {follows.length > 0 && (
+          <div className="flex flex-row items-center mb-4 sm:justify-between">
+            <div className="flex gap-1.5">
+              <TitleFilterButton onSubmit={handleTitleFilterFormSubmit} />
+              <TagFilterButton onSubmit={handleTagFilterFormSubmit} />
+            </div>
+            <SortButton onChange={handleSortOrderChange} className="!ml-2 sm:!ml-0" />
           </div>
-          <SortButton onChange={handleSortOrderChange} className="!ml-2 sm:!ml-0" />
-        </div>
+        )}
         <FollowPageFollowList items={follows} onRemoveClick={openRemovalPopup} />
       </Container>
       <Dialog

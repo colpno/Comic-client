@@ -1,4 +1,6 @@
+import { Image, Typography } from '~/components/index.ts';
 import { FollowComicCard, FollowComicCardProps } from '~/features/index.ts';
+import { noFollowSVG } from '~/images/index.ts';
 
 interface Props {
   items: FollowComicCardProps['item'][];
@@ -6,6 +8,17 @@ interface Props {
 }
 
 function FollowPageFollowList({ items, onRemoveClick }: Props) {
+  if (items.length === 0) {
+    return (
+      <div>
+        <Image src={noFollowSVG} alt="No follows image" className="mx-auto mt-8 max-w-56" />
+        <Typography textAlign="center" variant="h6">
+          There are no follows yet.
+        </Typography>
+      </div>
+    );
+  }
+
   return (
     <section className="space-y-6 sm:space-y-4">
       {items.map((follow) => (
