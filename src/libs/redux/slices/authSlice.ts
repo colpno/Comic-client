@@ -4,7 +4,7 @@ import { REDUCER_PATH_AUTH } from '~/constants/reduxConstants';
 import { User } from '~/types/userTypes';
 
 interface State {
-  user: User | null;
+  user: Pick<User, 'id'> | null;
   isLoggedIn: boolean;
 }
 
