@@ -8,7 +8,6 @@ const api = createApi({
   reducerPath: REDUCER_PATH_BASE,
   baseQuery: baseQuery({ baseURL: serverUrl }),
   endpoints: () => ({}),
-  refetchOnReconnect: true,
 });
 
 export default api;
