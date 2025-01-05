@@ -4,7 +4,7 @@ import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import { getThemeConfig } from '~/libs/mui/config';
+import { getThemeConfig } from '~/configs/muiConf';
 import { RootState } from '~/libs/redux/store.ts';
 
 interface ContextWrapperProps {
