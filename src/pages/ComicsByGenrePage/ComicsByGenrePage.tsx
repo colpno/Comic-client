@@ -1,4 +1,5 @@
 import { Container } from '@mui/material';
+import { Helmet } from 'react-helmet';
 import { useParams } from 'react-router-dom';
 
 import { InfiniteScrollPagination } from '~/components/index.ts';
@@ -28,6 +29,9 @@ function ComicsByGenrePage() {
       )}
       <Content items={comics} />
       <InfiniteScrollPagination onIntersect={handleIntersect} />
+      <Helmet>
+        <title>{genre} - Comic</title>
+      </Helmet>
     </Container>
   );
 }

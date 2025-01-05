@@ -1,4 +1,5 @@
 import { Container } from '@mui/material';
+import { Helmet } from 'react-helmet';
 import { useSearchParams } from 'react-router-dom';
 
 import { InfiniteScrollPagination } from '~/components/index.ts';
@@ -25,6 +26,9 @@ function SearchPage() {
       <Title searchValue={searchValue} />
       <Content items={comics} />
       <InfiniteScrollPagination onIntersect={handleIntersect} />
+      <Helmet>
+        <title>{searchValue} - Comic</title>
+      </Helmet>
     </Container>
   );
 }

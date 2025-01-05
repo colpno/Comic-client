@@ -1,4 +1,5 @@
 import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material';
+import { Helmet } from 'react-helmet';
 import { MdExpandMore } from 'react-icons/md';
 import { ErrorResponse, useNavigate } from 'react-router-dom';
 
@@ -35,6 +36,9 @@ function NotFoundPage({ error }: Props) {
           <AccordionDetails>{data}</AccordionDetails>
         </Accordion>
       </div>
+      <Helmet>
+        <title>404 - Comic</title>
+      </Helmet>
     </BasicLayout>
   );
 }

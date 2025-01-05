@@ -1,4 +1,5 @@
 import { Container } from '@mui/material';
+import { Helmet } from 'react-helmet';
 
 import { InfiniteScrollPagination } from '~/components/index.ts';
 import { MUI_CONTAINER_MAX_WIDTH } from '~/constants/commonConstants.ts';
@@ -16,6 +17,9 @@ function NewProductsPage() {
     <Container maxWidth={MUI_CONTAINER_MAX_WIDTH} className="-mt-8">
       <Content items={comics} />
       <InfiniteScrollPagination onIntersect={handleIntersect} />
+      <Helmet>
+        <title>New comics - Comic</title>
+      </Helmet>
     </Container>
   );
 }

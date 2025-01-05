@@ -1,5 +1,6 @@
 import { faker } from '@faker-js/faker';
 import { Container } from '@mui/material';
+import { Helmet } from 'react-helmet';
 
 import { useObserver } from '~/hooks/index.ts';
 import { useReadingLayoutContext } from '~/layouts/ReadingLayout/ReadingLayoutContext.ts';
@@ -43,6 +44,9 @@ function ReadingPage() {
       <Container maxWidth="lg" className="mt-24 md:mt-40">
         <Pagination chapters={chapters} />
       </Container>
+      <Helmet>
+        <title>{`Chapter ${currentChapter.chapter} - ${currentChapter.title} - Comic`}</title>
+      </Helmet>
     </div>
   );
 }

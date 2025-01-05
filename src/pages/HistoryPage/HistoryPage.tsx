@@ -1,5 +1,6 @@
 import { Container } from '@mui/material';
 import { useMemo } from 'react';
+import { Helmet } from 'react-helmet';
 
 import Typography from '~/components/Typography.tsx';
 import { MUI_CONTAINER_MAX_WIDTH } from '~/constants/commonConstants.ts';
@@ -32,6 +33,9 @@ function HistoryPage() {
         History
       </Typography>
       <Table data={tableData} />
+      <Helmet>
+        <title>Reading history - Comic</title>
+      </Helmet>
     </Container>
   );
 }

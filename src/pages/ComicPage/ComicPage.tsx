@@ -1,4 +1,5 @@
 import { Grid2 } from '@mui/material';
+import { Helmet } from 'react-helmet';
 
 import { generateChapters } from '~/database/chapter.ts';
 import { generateComics } from '~/database/comics.ts';
@@ -10,7 +11,6 @@ import Wrapper from './components/ComicPageWrapper.tsx';
 
 const comic = generateComics(1)[0];
 const chapters = generateChapters(50);
-
 function ComicPage() {
   return (
     <Grid2 container spacing={3} className="relative pb-16 mt-6">
@@ -24,6 +24,9 @@ function ComicPage() {
       <Wrapper>
         <ChapterList comic={comic} chapters={chapters} />
       </Wrapper>
+      <Helmet>
+        <title>{comic.title} - Comic</title>
+      </Helmet>
     </Grid2>
   );
 }

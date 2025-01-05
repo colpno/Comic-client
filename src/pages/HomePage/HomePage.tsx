@@ -1,4 +1,5 @@
 import { faker } from '@faker-js/faker';
+import { Helmet } from 'react-helmet';
 
 import { generateComics } from '~/database/comics.ts';
 import BannerSlider from './components/HomePageBannerSlider.tsx';
@@ -31,6 +32,9 @@ function HomePage() {
       <BannerSlider items={newComics} />
       <Menu />
       <CardRowList />
+      <Helmet>
+        <title>Comic</title>
+      </Helmet>
     </div>
   );
 }

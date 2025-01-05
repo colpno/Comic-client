@@ -1,4 +1,5 @@
 import { Container } from '@mui/material';
+import { Helmet } from 'react-helmet';
 
 import { InfiniteScrollPagination } from '~/components/index.ts';
 import { MUI_CONTAINER_MAX_WIDTH } from '~/constants/commonConstants.ts';
@@ -26,6 +27,9 @@ function DailyPage() {
       {isDesktop && <Title onParamChange={handleTitleChange} urlParam="weekday" />}
       <Content items={comics} />
       <InfiniteScrollPagination onIntersect={handleIntersect} />
+      <Helmet>
+        <title>Daily - Comic</title>
+      </Helmet>
     </Container>
   );
 }

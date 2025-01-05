@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import { user } from '~/database/user.ts';
@@ -28,6 +29,9 @@ function LoginPage() {
       <div className="px-28 pt-12 pb-24 mx-auto bg-main rounded-2xl flex-[0_1_38rem] border dark:border-gray-900 shadow-lg">
         <LoginForm onSubmit={handleFormSubmit} />
       </div>
+      <Helmet>
+        <title>Login - Comic</title>
+      </Helmet>
     </div>
   );
 }
