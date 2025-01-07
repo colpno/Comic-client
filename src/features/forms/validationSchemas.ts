@@ -4,6 +4,10 @@ export const loginFormSchema = z
   .object({
     email: z.string().email(),
     password: z.string().min(10),
+    rememberMe: z
+      .array(z.enum(['true']))
+      .transform((val) => val[0])
+      .optional(),
   })
   .required();
 export type LoginFormValues = z.infer<typeof loginFormSchema>;

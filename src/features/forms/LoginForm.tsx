@@ -1,7 +1,7 @@
 import { CiLock } from 'react-icons/ci';
 import { IoMailOpenOutline } from 'react-icons/io5';
 
-import { Button, Form, TextField, Typography } from '~/components/index.ts';
+import { Button, CheckBoxGroup, Form, TextField, Typography } from '~/components/index.ts';
 import { loginFormSchema, LoginFormValues } from './validationSchemas.ts';
 
 interface Props {
@@ -15,30 +15,33 @@ function LoginForm({ onSubmit }: Props) {
         Sign in
       </Typography>
       <Form validationSchema={loginFormSchema} onSubmit={onSubmit}>
-        <TextField
-          name="email"
-          variant="standard"
-          fullWidth
-          clearable
-          placeholder="Email Address"
-          slotProps={{
-            container: { className: '!mb-4' },
-            input: { startAdornment: <IoMailOpenOutline size={27} className="mr-2" /> },
-            htmlInput: { className: '!py-4 !text-lg' },
-          }}
-        />
-        <TextField
-          name="password"
-          type="password"
-          variant="standard"
-          fullWidth
-          placeholder="Password"
-          slotProps={{
-            container: { className: '!mb-7' },
-            input: { startAdornment: <CiLock size={27} className="mr-2" /> },
-            htmlInput: { className: '!py-4 !text-lg' },
-          }}
-        />
+        <div className="flex flex-col gap-4 mb-7">
+          <TextField
+            name="email"
+            variant="standard"
+            size="small"
+            fullWidth
+            clearable
+            placeholder="Email Address"
+            slotProps={{
+              input: { startAdornment: <IoMailOpenOutline size={27} className="mr-2" /> },
+              htmlInput: { className: '!py-4 !text-lg' },
+            }}
+          />
+          <TextField
+            name="password"
+            type="password"
+            variant="standard"
+            size="small"
+            fullWidth
+            placeholder="Password"
+            slotProps={{
+              input: { startAdornment: <CiLock size={27} className="mr-2" /> },
+              htmlInput: { className: '!py-4 !text-lg' },
+            }}
+          />
+          <CheckBoxGroup name="rememberMe" options={[{ label: 'Remember me.', value: 'true' }]} />
+        </div>
         <Button size="large" type="submit" fullWidth className="!mb-4">
           Log in
         </Button>
