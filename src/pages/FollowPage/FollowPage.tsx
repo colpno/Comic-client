@@ -1,6 +1,6 @@
 import { Container } from '@mui/material';
 import { useState } from 'react';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 
 import { Dialog } from '~/components/index.ts';
 import { MUI_CONTAINER_MAX_WIDTH } from '~/constants/commonConstants.ts';

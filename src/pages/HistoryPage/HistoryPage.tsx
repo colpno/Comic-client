@@ -1,6 +1,6 @@
 import { Container } from '@mui/material';
 import { useMemo } from 'react';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 
 import Typography from '~/components/Typography.tsx';
 import { MUI_CONTAINER_MAX_WIDTH } from '~/constants/commonConstants.ts';

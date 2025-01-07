@@ -1,5 +1,5 @@
 import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import { MdExpandMore } from 'react-icons/md';
 import { ErrorResponse, useNavigate } from 'react-router-dom';
 

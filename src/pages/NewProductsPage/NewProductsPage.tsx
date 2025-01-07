@@ -1,5 +1,5 @@
 import { Container } from '@mui/material';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 
 import { InfiniteScrollPagination } from '~/components/index.ts';
 import { MUI_CONTAINER_MAX_WIDTH } from '~/constants/commonConstants.ts';

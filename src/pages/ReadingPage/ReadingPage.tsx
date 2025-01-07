@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
 import { Container } from '@mui/material';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 
 import { useObserver } from '~/hooks/index.ts';
 import { useReadingLayoutContext } from '~/layouts/ReadingLayout/ReadingLayoutContext.ts';

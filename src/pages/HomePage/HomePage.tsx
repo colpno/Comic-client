@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 
 import { generateComics } from '~/database/comics.ts';
 import BannerSlider from './components/HomePageBannerSlider.tsx';
@@ -11,7 +11,7 @@ const newComics = generateComics(10);
 type ComicsByGenre = React.ComponentProps<typeof CardRow> & { id: string };
 const comicsByGenre: ComicsByGenre[] = faker.helpers.multiple(
   () => ({
-    items: generateComics(10),
+    items: newComics,
     title: faker.commerce.productMaterial(),
     id: faker.database.mongodbObjectId(),
   }),
