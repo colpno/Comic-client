@@ -33,7 +33,7 @@ const comicSchema = () => ({
   createdAt: faker.date.past().toISOString(),
   updatedAt: faker.date.recent().toISOString(),
   latestUploadedChapter: faker.helpers.rangeToNumber({ min: 1, max: 100 }),
-  coverImageUrl: faker.image.url({ width: 512, height: 728 }),
+  coverImageUrl: faker.image.urlPicsumPhotos({ width: 512, height: 728 }),
   related: ['asd'],
   authors: faker.helpers.multiple(
     () => ({
