@@ -1,7 +1,7 @@
 import { Popover, PopoverProps } from '@mui/material';
 import { memo } from 'react';
 
-const position: Exclude<PopoverProps['anchorOrigin'], undefined> = {
+const defaultPosition: Exclude<PopoverProps['anchorOrigin'], undefined> = {
   vertical: 'bottom',
   horizontal: 'left',
 };
@@ -10,13 +10,24 @@ interface Props extends Omit<PopoverProps, 'anchorEl' | 'anchorOrigin'> {
   /** The anchor element to attach the popup. */
   anchorEl: PopoverProps['anchorEl'];
   /** @inheritdoc PopoverProps['anchorOrigin'] */
-  anchorOrigin?: Partial<PopoverProps['anchorOrigin']>;
+  position?: Partial<PopoverProps['anchorOrigin']>;
 }
 
-function Popup({ anchorOrigin, ...props }: Props) {
-  const pos = anchorOrigin ? { ...position, ...anchorOrigin } : position;
+function Popup({ position, open, ...props }: Props) {
+  const anchorOrigin = position ? { ...defaultPosition, ...position } : position;
+  const transformOrigin: PopoverProps['transformOrigin'] = {
+    vertical: anchorOrigin?.vertical === 'bottom' ? 'top' : 'bottom',
+    horizontal: anchorOrigin?.horizontal || 'left',
+  };
 
-  return <Popover {...props} anchorOrigin={pos} />;
+  return (
+    <Popover
+      {...props}
+      open={props.anchorEl ? open : false}
+      anchorOrigin={anchorOrigin}
+      transformOrigin={transformOrigin}
+    />
+  );
 }
 
 export default memo(Popup);
