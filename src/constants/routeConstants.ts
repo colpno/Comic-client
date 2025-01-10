@@ -11,6 +11,8 @@ export const ROUTE_SEARCH = '/search' as const;
 export const ROUTE_LOGIN = '/login' as const;
 export const ROUTE_FOLLOW = `${BOOKSHELF}/follow` as const;
 
+export const PROTECTED_ROUTES = [ROUTE_HISTORY, ROUTE_FOLLOW] as string[];
+
 /**
  * @param comicTitle title will be converted to lowercase and replace space with '-'.
  */
