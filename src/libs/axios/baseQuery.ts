@@ -3,15 +3,11 @@ import axios, { AxiosError, AxiosRequestConfig, Method } from 'axios';
 import { toast } from 'react-toastify';
 
 import { AUTH_ENDPOINTS } from '~/apis/apiConstants.ts';
-import { cookieCSRFToken } from '~/configs/appConf.ts';
 import { HEADER_CSRF_TOKEN } from '~/constants/commonConstants.ts';
 import { ApiGetCSRFReturnType } from '~/types/apis/authApiTypes.ts';
 import { ApiFailedResponse, ApiFulfilledResponse } from '~/types/apiTypes';
 
-axios.defaults.xsrfCookieName = cookieCSRFToken;
-axios.defaults.xsrfHeaderName = HEADER_CSRF_TOKEN;
 axios.defaults.withCredentials = true;
-axios.defaults.withXSRFToken = true;
 
 interface ApiRequest extends Omit<AxiosRequestConfig, 'url' | 'method' | 'data' | 'params'> {
   url: string;
