@@ -14,9 +14,13 @@ interface Props extends Omit<PopoverProps, 'anchorEl' | 'anchorOrigin'> {
 }
 
 function Popup({ position, open, ...props }: Props) {
-  const anchorOrigin = position ? { ...defaultPosition, ...position } : position;
+  const anchorOrigin = position ? { ...defaultPosition, ...position } : defaultPosition;
   const transformOrigin: PopoverProps['transformOrigin'] = {
-    vertical: anchorOrigin?.vertical === 'bottom' ? 'top' : 'bottom',
+    vertical: anchorOrigin?.vertical
+      ? anchorOrigin.vertical === 'bottom'
+        ? 'top'
+        : 'bottom'
+      : 'top',
     horizontal: anchorOrigin?.horizontal || 'left',
   };
 
