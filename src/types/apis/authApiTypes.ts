@@ -1,0 +1,12 @@
+import { LoginFormValues } from '~/features/forms/validationSchemas.ts';
+import { ApiDataResponse } from '~/types/apiTypes.ts';
+
+export type ApiLoginParams = LoginFormValues;
+
+export type ApiGetCSRFReturnType = ApiDataResponse<string>;
+
+export type ApiRegisterParams = {
+  email: string;
+  password: string;
+  passwordConfirmation: string;
+};

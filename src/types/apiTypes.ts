@@ -8,10 +8,10 @@
 
 import { PrimitiveValue } from './commonTypes.ts';
 
-export interface SuccessfulApiResponse<D = unknown> {
+export interface ApiDataResponse<D = unknown> {
   data: D;
 }
-export interface PaginatedApiResponse<D = unknown> extends SuccessfulApiResponse<D> {
+export interface ApiPaginatedResponse<D = unknown> extends ApiDataResponse<D> {
   metadata: {
     /** The current page. */
     currentPage: number;
@@ -34,7 +34,7 @@ export interface PaginatedApiResponse<D = unknown> extends SuccessfulApiResponse
     totalPages: number;
   };
 }
-export type FulfilledResponse<D = unknown> = PaginatedApiResponse<D> | SuccessfulApiResponse<D>;
+export type ApiFulfilledResponse<D = unknown> = ApiPaginatedResponse<D> | ApiDataResponse<D>;
 
 export interface ValidationError {
   /** Form field name. */
@@ -42,7 +42,10 @@ export interface ValidationError {
   /** Error message. */
   message: string;
 }
-export interface FailedApiResponse {
+/**
+ * @param VE If true, the reason will be an array of `ValidationError`. Otherwise, `string`.
+ */
+export interface ApiFailedResponse {
   /** HTTP status code. */
   code: number;
   /** Indicate the request as error or not. */
