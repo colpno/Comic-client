@@ -23,7 +23,7 @@ const extendedApi = api.injectEndpoints({
       query: (params) => ({
         url: FOLLOW_ENDPOINTS.ADD_FOLLOW(),
         method: 'POST',
-        body: params,
+        data: params,
       }),
     }),
 

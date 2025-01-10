@@ -31,14 +31,14 @@ const extendedApi = api.injectEndpoints({
       query: (params) => ({
         url: AUTH_ENDPOINTS.LOGIN(),
         method: 'POST',
-        body: params,
+        data: params,
       }),
     }),
     register: build.mutation<void, ApiRegisterParams>({
       query: (params) => ({
         url: AUTH_ENDPOINTS.REGISTER(),
         method: 'POST',
-        body: params,
+        data: params,
       }),
     }),
 
@@ -47,7 +47,7 @@ const extendedApi = api.injectEndpoints({
       query: (params) => ({
         url: AUTH_ENDPOINTS.RESET_PASSWORD(),
         method: 'PUT',
-        body: params,
+        data: params,
       }),
     }),
   }),
