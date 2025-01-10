@@ -5,10 +5,10 @@ import { User } from './userTypes.ts';
  * @param C Comic
  * @param U User
  */
-export interface Follow<C extends string | Comic = string, U extends string | User = string> {
+export interface Follow<C extends string[] | Comic[] = string[], U extends string | User = string> {
   id: string;
-  comic: C;
-  user: U;
+  follower: U;
+  following: C;
   createdAt: string;
   updatedAt: string;
 }

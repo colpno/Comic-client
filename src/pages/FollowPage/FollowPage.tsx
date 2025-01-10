@@ -16,7 +16,8 @@ import { Comic } from '~/types/comicType.ts';
 import { Follow } from '~/types/followType.ts';
 import FollowPageFollowList from './components/FollowPageFollowList';
 
-const follows = generateFollows(2, { includeComic: true }) as Follow<Comic>[];
+const follow = generateFollows(1, { includeComic: true })[0] as Follow<Comic[]>;
+const following = follow.following;
 
 function FollowPage() {
   const [followIdToRemove, setFollowIdToRemove] = useState('');
@@ -49,7 +50,7 @@ function FollowPage() {
   return (
     <>
       <Container maxWidth={MUI_CONTAINER_MAX_WIDTH} className="pt-12">
-        {follows.length > 0 && (
+        {following.length > 0 && (
           <div className="flex flex-row items-center mb-4 sm:justify-between">
             <div className="flex gap-1.5">
               <TitleFilterButton onSubmit={handleTitleFilterFormSubmit} />
@@ -58,7 +59,7 @@ function FollowPage() {
             <SortButton onChange={handleSortOrderChange} className="!ml-2 sm:!ml-0" />
           </div>
         )}
-        <FollowPageFollowList items={follows} onRemoveClick={openRemovalPopup} />
+        <FollowPageFollowList items={following} onRemoveClick={openRemovalPopup} />
       </Container>
       <Dialog
         open={!!followIdToRemove}
