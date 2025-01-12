@@ -4,7 +4,7 @@ import { Artist, Author } from './creatorTypes.ts';
 type Status = 'ongoing' | 'completed' | 'hiatus' | 'cancelled';
 type State = 'published' | 'draft';
 type Type = 'manga' | 'manhwa' | 'manhua';
-type ContentRating = 'suggestive';
+type ContentRating = 'safe' | 'suggestive';
 type TagGroup = 'theme' | 'genre' | 'format';
 
 interface Tag {
