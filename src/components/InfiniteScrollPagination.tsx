@@ -1,26 +1,20 @@
-import { memo, useCallback, useEffect, useRef, useState } from 'react';
+import { memo, useEffect, useRef, useState } from 'react';
 
 interface Props {
-  onIntersect: () => Promise<void>;
+  onIntersect: () => void | Promise<void>;
 }
 
 function InfiniteScrollPagination({ onIntersect }: Props) {
   const observerRef = useRef<HTMLDivElement | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-
-  const getNextPage = useCallback(() => {
-    setIsLoading(true);
-
-    onIntersect().then(() => {
-      setIsLoading(false);
-    });
-  }, [onIntersect]);
+  const firstMount = useRef(true);
+  const [isIntersecting, setIsIntersecting] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
-          getNextPage();
+          setIsIntersecting(true);
         }
       },
       { threshold: 1 }
@@ -37,7 +31,31 @@ function InfiniteScrollPagination({ onIntersect }: Props) {
         observer.unobserve(observerNode);
       }
     };
-  }, [getNextPage]);
+  }, []);
+
+  useEffect(() => {
+    if (firstMount.current) {
+      firstMount.current = false;
+    }
+  }, []);
+
+  useEffect(() => {
+    if (isIntersecting && !firstMount.current) {
+      setIsIntersecting(false);
+
+      if (onIntersect instanceof Promise) {
+        setIsLoading(true);
+
+        const callback = onIntersect as () => Promise<void>;
+
+        callback().finally(() => {
+          setIsLoading(false);
+        });
+      } else {
+        onIntersect();
+      }
+    }
+  }, [isIntersecting, firstMount.current]);
 
   return (
     <div ref={observerRef}>
