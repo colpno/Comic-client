@@ -1,3 +1,5 @@
+export const TAG_FOLLOW = 'Follow' as const;
+
 export const AUTH_ENDPOINTS = {
   BASE: '/auth' as const,
   GET_CSRF: () => `${AUTH_ENDPOINTS.BASE}/csrf-token` as const,
@@ -25,4 +27,9 @@ export const FOLLOW_ENDPOINTS = {
   GET_FOLLOWS: () => FOLLOW_ENDPOINTS.BASE,
   ADD_FOLLOW: () => FOLLOW_ENDPOINTS.BASE,
   REMOVE_FOLLOW: (followingId: string) => `${FOLLOW_ENDPOINTS.BASE}/${followingId}` as const,
+};
+
+export const GENRE_ENDPOINTS = {
+  BASE: '/genres' as const,
+  GET_GENRES: () => GENRE_ENDPOINTS.BASE,
 };
