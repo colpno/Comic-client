@@ -14,6 +14,7 @@ export interface ApiGetComicsParams
     Pick<GetRequestOperators, '_limit' | '_page'> {
   hasAvailableChapters?: boolean;
   includedTags?: string[];
+  includedTagsMode?: 'AND' | 'OR';
   _embed?: AllowedEmbed[] | AllowedEmbed;
   _sort?: Partial<
     Record<
