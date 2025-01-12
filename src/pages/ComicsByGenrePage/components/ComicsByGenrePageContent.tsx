@@ -11,7 +11,7 @@ function ComicsByGenrePageContent({ items }: Props) {
   return (
     <Grid2 container columnSpacing={2} rowSpacing={3}>
       {items.map((item) => (
-        <Grid2 key={item.id} size={{ xs: 4, sm: 3, md: 2.4 }}>
+        <Grid2 key={item.id} size={{ xs: 4, sm: 3, md: 2 }}>
           <ComicCard {...item} />
         </Grid2>
       ))}
