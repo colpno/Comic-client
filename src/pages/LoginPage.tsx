@@ -1,7 +1,8 @@
+import { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
-import { user } from '~/database/user.ts';
+import { useLoginMutation } from '~/apis/authApis.ts';
 import { LoginFormValues } from '~/features/forms/validationSchemas.ts';
 import { LoginForm } from '~/features/index.ts';
 import { login } from '~/libs/redux/slices/authSlice.ts';
@@ -11,18 +12,23 @@ function LoginPage() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
+  const [loginQuery, { isSuccess }] = useLoginMutation();
 
-  const handleFormSubmit = (values: LoginFormValues) => {
-    const redirect = searchParams.get('redirect');
-
-    // TODO: Implement login logic
-    console.log('values:', values);
-    dispatch(login(user));
-
-    if (redirect) {
-      navigate(redirect, { replace: true });
-    }
+  const handleFormSubmit = async (values: LoginFormValues) => {
+    try {
+      await loginQuery(values);
+      dispatch(login());
+    } catch (error) {}
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      const redirect = searchParams.get('redirect');
+      if (redirect) {
+        navigate(redirect, { replace: true });
+      }
+    }
+  }, [searchParams, navigate, isSuccess]);
 
   return (
     <div className="flex items-center justify-center pt-12 pb-20 bg-sub">
