@@ -1,34 +1,50 @@
 import { Container } from '@mui/material';
+import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 
+import { useLazyGetComicsQuery } from '~/apis/comicApis.ts';
 import { InfiniteScrollPagination } from '~/components/index.ts';
-import { MUI_CONTAINER_MAX_WIDTH } from '~/constants/commonConstants.ts';
-import { generateComics } from '~/database/comics.ts';
-import { useDeviceWatcher } from '~/hooks/useDeviceWatcher.ts';
-import Title from '~/layouts/MenuLayout/components/MenuLayoutPageTitle.tsx';
-import Content from './components/DailyPageContent';
+import { MUI_CONTAINER_MAX_WIDTH, PAGINATION_INITIAL_PAGE } from '~/constants/commonConstants.ts';
+import { Comic } from '~/types/comicType.ts';
+import Content from './components/LatestUpdatesPageContent';
 
-const comics = generateComics(10);
+const PER_PAGE = 30;
 
 function LatestUpdatesPage() {
-  const isDesktop = useDeviceWatcher() === 'desktop';
-
-  const handleTitleChange = (value: string) => {
-    // TODO: Fetch comics based on category
-    console.log('value:', value);
-  };
+  const [getComics] = useLazyGetComicsQuery();
+  const [comics, setComics] = useState<Comic[]>([]);
+  const [page, setPage] = useState(PAGINATION_INITIAL_PAGE);
 
   const handleIntersect = async () => {
-    // TODO: Fetch next page
+    if (comics.length < PER_PAGE) return;
+    setPage((prevPage) => prevPage + 1);
   };
 
+  useEffect(() => {
+    (async () => {
+      const newComics = await getComics({
+        _embed: 'cover_art',
+        _limit: PER_PAGE,
+        _page: page,
+        _sort: {
+          updatedAt: 'desc',
+        },
+      }).unwrap();
+
+      if (page === PAGINATION_INITIAL_PAGE) {
+        setComics(newComics);
+      } else {
+        setComics((prev) => [...prev, ...newComics]);
+      }
+    })();
+  }, [page]);
+
   return (
-    <Container maxWidth={MUI_CONTAINER_MAX_WIDTH}>
-      {isDesktop && <Title onParamChange={handleTitleChange} urlParam="weekday" />}
+    <Container maxWidth={MUI_CONTAINER_MAX_WIDTH} className="-mt-8">
       <Content items={comics} />
       <InfiniteScrollPagination onIntersect={handleIntersect} />
       <Helmet>
-        <title>Daily - Comic</title>
+        <title>Latest updates - Comic</title>
       </Helmet>
     </Container>
   );
