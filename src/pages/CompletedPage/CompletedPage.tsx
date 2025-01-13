@@ -19,6 +19,7 @@ function CompletedPage() {
   const [getComics, { isFetching: isApiFetching }] = useLazyGetComicsQuery();
   const [isDataFetching, setIsDataFetching] = useState(isApiFetching);
   const [comics, setComics] = useState<Comic[]>([]);
+  const [genre, setGenre] = useState(DEFAULT_GENRE);
   const [getComicsParams, setGetComicsParams] = useState<ApiGetComicsParams>({
     status: ['completed'],
     _embed: 'cover_art',
@@ -39,9 +40,8 @@ function CompletedPage() {
     }));
   };
 
-  const handleGenreChange = (genre: string) => {
-    setIsDataFetching(true);
-
+  // Handle genre change
+  useEffect(() => {
     if (genre !== DEFAULT_GENRE) {
       setGetComicsParams((prev) => ({
         ...prev,
@@ -57,7 +57,7 @@ function CompletedPage() {
         };
       });
     }
-  };
+  }, [genre]);
 
   // Fetch comics
   useEffect(() => {
@@ -74,13 +74,16 @@ function CompletedPage() {
 
   // Handle data fetching state
   useEffect(() => {
+    setIsDataFetching(true);
+  }, [genre]);
+  useEffect(() => {
     if (isDataFetching && !isApiFetching) setIsDataFetching(false);
   }, [isApiFetching]);
 
   return (
     <Container maxWidth={MUI_CONTAINER_MAX_WIDTH}>
       {isDesktop && (
-        <Title onParamChange={handleGenreChange} urlParam="category" defaultValue={DEFAULT_GENRE} />
+        <Title onParamChange={setGenre} urlParam="category" defaultValue={DEFAULT_GENRE} />
       )}
       {isDataFetching ? <DataFetching /> : <Content items={comics} />}
       <InfiniteScrollPagination onIntersect={handleIntersect} />
