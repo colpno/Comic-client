@@ -30,3 +30,10 @@ export interface ApiGetComicParams {
   id: Comic['id'];
   _embed?: (AllowedEmbed | 'creator')[];
 }
+
+export type ApiSearchComicsParams = Pick<
+  ApiGetComicsParams,
+  '_limit' | '_page' | '_sort' | '_embed'
+> & {
+  q: string;
+};

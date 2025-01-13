@@ -3,6 +3,7 @@ import {
   ApiGetComicReturnType,
   ApiGetComicsParams,
   ApiGetComicsReturnType,
+  ApiSearchComicsParams,
 } from '~/types/apis/comicApiTypes.ts';
 import { COMIC_ENDPOINTS } from './apiConstants.ts';
 import api from './index.ts';
@@ -24,8 +25,29 @@ const extendedApi = api.injectEndpoints({
       }),
       transformResponse: (response: ApiGetComicReturnType) => response.data,
     }),
+    searchComics: build.query<ApiGetComicsReturnType['data'], ApiSearchComicsParams>({
+      query: (query) => ({
+        url: COMIC_ENDPOINTS.SEARCH_COMICS(),
+        params: query,
+      }),
+      transformResponse: (response: ApiGetComicsReturnType) => response.data,
+    }),
   }),
 });
 
-export const { useGetComicQuery, useGetComicsQuery, useLazyGetComicQuery, useLazyGetComicsQuery } =
-  extendedApi;
+export const {
+  useGetComicQuery,
+  useGetComicsQuery,
+  useLazyGetComicQuery,
+  useLazyGetComicsQuery,
+  useLazySearchComicsQuery,
+  useSearchComicsQuery,
+} = extendedApi;
+
+export type {
+  ApiGetComicParams,
+  ApiGetComicReturnType,
+  ApiGetComicsParams,
+  ApiGetComicsReturnType,
+  ApiSearchComicsParams,
+} from '~/types/apis/comicApiTypes.ts';
