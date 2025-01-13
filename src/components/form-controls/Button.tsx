@@ -27,11 +27,11 @@ function Button({
     case 'unstyled': {
       if (href) {
         return (
-          <button {...props} type={props.type ?? 'button'} className={className}>
-            <LinkComponent to={href} {...{ [externalLink ? 'href' : 'to']: href }}>
+          <LinkComponent to={href} {...{ [externalLink ? 'href' : 'to']: href }}>
+            <button {...props} type={props.type ?? 'button'} className={className}>
               {children}
-            </LinkComponent>
-          </button>
+            </button>
+          </LinkComponent>
         );
       }
       return (
