@@ -16,3 +16,5 @@ const extendedApi = api.injectEndpoints({
 });
 
 export const { useGetGenresQuery, useLazyGetGenresQuery } = extendedApi;
+
+export type * from '~/types/apis/genreApiTypes.ts';

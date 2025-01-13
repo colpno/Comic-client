@@ -44,10 +44,4 @@ export const {
   useSearchComicsQuery,
 } = extendedApi;
 
-export type {
-  ApiGetComicParams,
-  ApiGetComicReturnType,
-  ApiGetComicsParams,
-  ApiGetComicsReturnType,
-  ApiSearchComicsParams,
-} from '~/types/apis/comicApiTypes.ts';
+export type * from '~/types/apis/comicApiTypes.ts';

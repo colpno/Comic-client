@@ -32,3 +32,5 @@ export const {
   useLazyGetChaptersQuery,
   useLazyGetContentQuery,
 } = extendedApi;
+
+export type * from '~/types/apis/chapterApiTypes.ts';

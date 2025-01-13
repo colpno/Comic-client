@@ -2,12 +2,11 @@ import { Container } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 
-import { useLazyGetComicsQuery } from '~/apis/comicApis.ts';
+import { ApiGetComicsParams, useLazyGetComicsQuery } from '~/apis/comicApis.ts';
 import { DataFetching, InfiniteScrollPagination } from '~/components/index.ts';
 import { MUI_CONTAINER_MAX_WIDTH, PAGINATION_INITIAL_PAGE } from '~/constants/commonConstants.ts';
 import { useDeviceWatcher } from '~/hooks/useDeviceWatcher.ts';
 import Title from '~/layouts/MenuLayout/components/MenuLayoutPageTitle.tsx';
-import { ApiGetComicsParams } from '~/types/apis/comicApiTypes.ts';
 import { Comic } from '~/types/comicType.ts';
 import Content from './components/CompletedPageContent.tsx';
 

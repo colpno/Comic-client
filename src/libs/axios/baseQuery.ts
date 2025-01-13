@@ -3,8 +3,8 @@ import axios, { AxiosError, AxiosRequestConfig, Method } from 'axios';
 import { toast } from 'react-toastify';
 
 import { AUTH_ENDPOINTS } from '~/apis/apiConstants.ts';
+import { ApiGetCSRFReturnType } from '~/apis/authApis.ts';
 import { HEADER_CSRF } from '~/constants/commonConstants.ts';
-import { ApiGetCSRFReturnType } from '~/types/apis/authApiTypes.ts';
 import { ApiFailedResponse, ApiFulfilledResponse } from '~/types/apiTypes';
 
 axios.defaults.withCredentials = true;

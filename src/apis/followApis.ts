@@ -56,3 +56,5 @@ export const {
   useLazyGetFollowsQuery,
   useRemoveFollowMutation,
 } = extendedApi;
+
+export type * from '~/types/apis/followApiTypes.ts';

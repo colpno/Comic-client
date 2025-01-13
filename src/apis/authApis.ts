@@ -64,3 +64,5 @@ export const {
   useRegisterMutation,
   useResetPasswordMutation,
 } = extendedApi;
+
+export type * from '~/types/apis/authApiTypes.ts';

@@ -8,7 +8,6 @@ export type ApiGetFollowsParams = Partial<Follow> &
     _embed?: 'following';
   };
 
-export type ApiAddFollowReturnType = void;
 export type ApiAddFollowParams = Pick<Follow, 'follower'> & {
   following: Comic['id'];
 };
