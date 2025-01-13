@@ -16,7 +16,8 @@ export const PROTECTED_ROUTES = [ROUTE_HISTORY, ROUTE_FOLLOW] as string[];
 /**
  * @param comicTitle title will be converted to lowercase and replace space with '-'.
  */
-export const getComicRoute = (comicTitle: string) => {
+export const getComicRoute = (comicTitle?: string) => {
+  if (!comicTitle) return '';
   const title = comicTitle.toLowerCase().replace(/ /g, '-');
   return `/comics/${title}`;
 };
@@ -26,8 +27,10 @@ export const getComicRoute = (comicTitle: string) => {
  * @param chapterNumber >= 0 to get the reading route.
  * @returns either empty string or the reading route.
  */
-export const getComicReadingRoute = (comicTitle: string, chapterNumber: string | number) => {
-  if (typeof chapterNumber === 'number' && chapterNumber < 0) return '';
+export const getComicReadingRoute = (comicTitle?: string, chapterNumber?: string | number) => {
+  const invalidChapterNumber =
+    (typeof chapterNumber === 'number' && chapterNumber < 0) || !chapterNumber;
+  if (!comicTitle || invalidChapterNumber) return '';
   return `${getComicRoute(comicTitle)}/reading/${chapterNumber}`;
 };
 
@@ -51,7 +54,8 @@ export const getSearchRoute = (searchValue?: string) => {
   return `${ROUTE_SEARCH}?value=${searchValue}`;
 };
 
-export const getComicsByGenreRoute = (genre: string) => {
+export const getComicsByGenreRoute = (genre?: string) => {
+  if (!genre) return '';
   const genreURL = genre.toLowerCase().replace(/ /g, '-');
   return `${ROUTE_GENRES}/${genreURL}`;
 };
