@@ -33,3 +33,4 @@ export { default as Tab } from './Tab.tsx';
 export { default as Tabs } from './Tabs/Tabs.tsx';
 export { default as Toast } from './Toast.tsx';
 export { default as Typography } from './Typography.tsx';
+export { default as DataFetching } from './DataFetching.tsx';
