@@ -6,12 +6,10 @@ type AllowedEmbed = 'artist' | 'author' | 'cover_art' | 'manga' | 'tag';
 export type ApiGetComicsReturnType = ApiFulfilledResponse<Comic[]>;
 export interface ApiGetComicsParams
   extends Partial<
-      Pick<
-        Comic,
-        'title' | 'year' | 'type' | 'createdAt' | 'updatedAt' | 'status' | 'contentRating'
-      >
+      Pick<Comic, 'title' | 'year' | 'type' | 'createdAt' | 'updatedAt' | 'contentRating'>
     >,
     Pick<GetRequestOperators, '_limit' | '_page'> {
+  status?: Comic['status'][];
   hasAvailableChapters?: boolean;
   includedTags?: string[];
   includedTagsMode?: 'AND' | 'OR';
@@ -19,7 +17,6 @@ export interface ApiGetComicsParams
   _sort?: Partial<
     Record<
       | keyof Pick<Comic, 'title' | 'year' | 'createdAt' | 'updatedAt' | 'latestUploadedChapter'>
-      | 'readableAt'
       | 'followedCount'
       | 'rating'
       | 'relevance',
