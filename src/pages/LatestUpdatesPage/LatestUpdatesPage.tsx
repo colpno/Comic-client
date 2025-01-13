@@ -10,7 +10,7 @@ import Content from './components/DailyPageContent';
 
 const comics = generateComics(10);
 
-function DailyPage() {
+function LatestUpdatesPage() {
   const isDesktop = useDeviceWatcher() === 'desktop';
 
   const handleTitleChange = (value: string) => {
@@ -34,4 +34,4 @@ function DailyPage() {
   );
 }
 
-export default DailyPage;
+export default LatestUpdatesPage;

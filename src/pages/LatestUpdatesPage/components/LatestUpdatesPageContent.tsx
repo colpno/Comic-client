@@ -7,7 +7,7 @@ interface Props {
   items: Comic[];
 }
 
-function DailyPageContent({ items }: Props) {
+function LatestUpdatesPageContent({ items }: Props) {
   return (
     <Grid2 container columnSpacing={2} rowSpacing={3}>
       {items.map((item) => (
@@ -19,4 +19,4 @@ function DailyPageContent({ items }: Props) {
   );
 }
 
-export default DailyPageContent;
+export default LatestUpdatesPageContent;
