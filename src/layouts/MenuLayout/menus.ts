@@ -1,10 +1,8 @@
-import moment from 'moment';
-
 import {
   getCompletedRoute,
-  getDailyRoute,
   getRankingRoute,
   ROUTE_COMPLETED,
+  ROUTE_LATEST_UPDATES,
   ROUTE_NEW_ARRIVALS,
   ROUTE_RANKING,
 } from '~/constants/routeConstants.ts';
@@ -61,37 +59,6 @@ export const rankingPageCategoryMenu: SubMenuItem[] = [
   },
 ];
 
-export const dailyPageMenu: SubMenuItem[] = [
-  {
-    title: 'Monday',
-    link: getDailyRoute('monday'),
-  },
-  {
-    title: 'Tuesday',
-    link: getDailyRoute('tuesday'),
-  },
-  {
-    title: 'Wednesday',
-    link: getDailyRoute('wednesday'),
-  },
-  {
-    title: 'Thursday',
-    link: getDailyRoute('thursday'),
-  },
-  {
-    title: 'Friday',
-    link: getDailyRoute('friday'),
-  },
-  {
-    title: 'Saturday',
-    link: getDailyRoute('saturday'),
-  },
-  {
-    title: 'Sunday',
-    link: getDailyRoute('sunday'),
-  },
-];
-
 export const completedPageMenu: SubMenuItem[] = rankingPageCategoryMenu.map((item) => ({
   ...item,
   link: getCompletedRoute(item.link.split('=')[1]),
@@ -109,9 +76,8 @@ export const menu: MenuItem[] = [
     link: ROUTE_NEW_ARRIVALS,
   },
   {
-    title: 'Daily',
-    link: getDailyRoute(moment().format('dddd').toLowerCase()),
-    headerMenu: dailyPageMenu,
+    title: 'Latest Updates',
+    link: ROUTE_LATEST_UPDATES,
   },
   {
     title: 'Ranking',

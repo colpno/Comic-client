@@ -9,7 +9,7 @@ import { Button, Slider } from '~/components/index.ts';
 import Typography from '~/components/Typography.tsx';
 import { MUI_CONTAINER_MAX_WIDTH } from '~/constants/commonConstants.ts';
 import {
-  getDailyRoute,
+  getLatestUpdatesRoute,
   ROUTE_COMPLETED,
   ROUTE_NEW_ARRIVALS,
   ROUTE_RANKING,
@@ -41,8 +41,8 @@ function Menu() {
     },
     {
       Icon: RiCalendarTodoFill,
-      label: 'Daily',
-      href: getDailyRoute(moment().format('dddd').toLowerCase()),
+      label: 'Latest Updates',
+      href: getLatestUpdatesRoute(moment().format('dddd').toLowerCase()),
     },
     {
       Icon: HiOutlineTrophy,
