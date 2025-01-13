@@ -19,7 +19,9 @@ export interface ApiGetComicsParams
   _sort?: Partial<
     Record<
       | keyof Pick<Comic, 'title' | 'year' | 'createdAt' | 'updatedAt' | 'latestUploadedChapter'>
+      | 'readableAt'
       | 'followedCount'
+      | 'rating'
       | 'relevance',
       'asc' | 'desc'
     >
