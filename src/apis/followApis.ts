@@ -10,7 +10,7 @@ import api from './index.ts';
 const extendedApi = api.injectEndpoints({
   endpoints: (build) => ({
     // GET
-    getFollows: build.query<ApiGetFollowReturnType['data'], ApiGetFollowParams>({
+    getFollows: build.query<ApiGetFollowReturnType['data'], ApiGetFollowParams | void>({
       query: (query) => ({
         url: FOLLOW_ENDPOINTS.GET_FOLLOWS(),
         params: query,
