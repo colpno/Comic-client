@@ -1,7 +1,6 @@
 import { Container } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { useSelector } from 'react-redux';
 
 import {
   ApiGetFollowParams,
@@ -13,7 +12,6 @@ import { DataFetching, Dialog, InfiniteScrollPagination } from '~/components/ind
 import { MUI_CONTAINER_MAX_WIDTH, PAGINATION_INITIAL_PAGE } from '~/constants/commonConstants.ts';
 import { SortButton, TagFilterButton, TagFilterFormValues } from '~/features/index.ts';
 import SearchInput from '~/layouts/components/SearchInput.tsx';
-import { RootState } from '~/libs/redux/store.ts';
 import { SortOrder } from '~/types/apiTypes.ts';
 import { Comic } from '~/types/comicType.ts';
 import { Follow } from '~/types/followType.ts';
@@ -22,12 +20,10 @@ import FollowPageFollowList from './components/FollowPageFollowList';
 const PER_PAGE = 30;
 
 function FollowPage() {
-  const user = useSelector((state: RootState) => state.auth.user);
   const [getFollows, { isFetching: isApiFetching }] = useLazyGetFollowsQuery();
   const [isDataFetching, setIsDataFetching] = useState(isApiFetching);
   const [follows, setFollows] = useState<Follow<Comic>[]>([]);
   const [getFollowsParams, setGetFollowsParams] = useState<ApiGetFollowParams>({
-    follower: user.id,
     _embed: {
       path: 'following',
       populate: 'cover_art',
