@@ -24,8 +24,6 @@ export { default as FilterForm } from './forms/FilterForm.tsx';
 	Advance Buttons
 */
 
-export { default as TitleFilterButton } from './advance-buttons/TitleFilterButton.tsx';
-export * from './advance-buttons/TitleFilterButton.tsx';
 export { default as TagFilterButton } from './advance-buttons/TagFilterButton.tsx';
 export * from './advance-buttons/TagFilterButton.tsx';
 export { default as SortButton } from './advance-buttons/SortButton.tsx';
