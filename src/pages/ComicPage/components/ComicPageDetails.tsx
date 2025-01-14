@@ -1,7 +1,18 @@
 import { Grid2 } from '@mui/material';
+import { useEffect } from 'react';
+import { FaHeart, FaRegHeart } from 'react-icons/fa6';
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
+import {
+  useAddFollowMutation,
+  useLazyGetFollowsQuery,
+  useRemoveFollowMutation,
+} from '~/apis/followApis.ts';
 import { Button, Image, Typography } from '~/components/index.ts';
 import { getComicReadingRoute } from '~/constants/routeConstants.ts';
+import { RootState } from '~/libs/redux/store.ts';
 import { Comic } from '~/types/comicType.ts';
 
 interface TitleProps {
@@ -47,7 +58,7 @@ function Title({ title, altTitles, status }: TitleProps) {
   );
 }
 
-function Authors({ authors }: { authors: Comic['authors'] }) {
+function Authors({ authors }: { authors: Exclude<Comic['authors'], undefined> }) {
   return (
     <div className="flex gap-1 mt-2" title={authors.map((author) => author.name).join(', ')}>
       <Typography variant="subtitle2" className="font-semibold">
@@ -62,7 +73,7 @@ function Authors({ authors }: { authors: Comic['authors'] }) {
   );
 }
 
-function Artists({ artists }: { artists: Comic['artists'] }) {
+function Artists({ artists }: { artists: Exclude<Comic['artists'], undefined> }) {
   return (
     <div className="flex gap-1" title={artists.map((artist) => artist.name).join(', ')}>
       <Typography variant="subtitle2" className="font-semibold">
@@ -85,8 +96,47 @@ function Description({ content }: { content: Comic['description'] }) {
   );
 }
 
+function HeartButton() {
+  const { comicId } = useParams();
+  const { isLoggedIn, user } = useSelector((state: RootState) => state.auth);
+  const [getFollows, { data: follows = [] }] = useLazyGetFollowsQuery();
+  const hasFollowed = follows.length > 0;
+  const [add] = useAddFollowMutation();
+  const [remove] = useRemoveFollowMutation();
+
+  const handleDisabledButtonClick = () => {
+    toast.info('Please login to follow this comic');
+  };
+
+  useEffect(() => {
+    (async () => {
+      if (!user.id) return;
+
+      await getFollows({ follower: user.id });
+    })();
+  }, [user.id]);
+
+  if (!isLoggedIn) {
+    return (
+      <Button as="iconButton" onClick={handleDisabledButtonClick}>
+        <FaRegHeart color="red" />
+      </Button>
+    );
+  }
+
+  return (
+    <Button as="iconButton">
+      {hasFollowed ? (
+        <FaHeart color="red" onClick={() => remove(comicId!)} />
+      ) : (
+        <FaRegHeart color="red" onClick={() => add(comicId!)} />
+      )}
+    </Button>
+  );
+}
+
 interface ButtonsProps {
-  comicTitle: Comic['id'];
+  comicTitle: Comic['title'];
   latestChapterNumber: Comic['latestUploadedChapter'];
 }
 
@@ -105,10 +155,10 @@ function Actions({ comicTitle, latestChapterNumber }: ButtonsProps) {
           Read latest chapter
         </Button>
       )}
+      <HeartButton />
     </div>
   );
 }
-
 function ComicPageDetails(comic: Comic) {
   return (
     <Grid2
@@ -139,8 +189,8 @@ function ComicPageDetails(comic: Comic) {
         className="flex flex-col"
       >
         <Title title={comic.title} altTitles={comic.altTitles} status={comic.status} />
-        <Authors authors={comic.authors} />
-        <Artists artists={comic.artists} />
+        {comic.authors && <Authors authors={comic.authors} />}
+        {comic.artists && <Artists artists={comic.artists} />}
         <Description content={comic.description} />
         <Actions comicTitle={comic.title} latestChapterNumber={comic.latestUploadedChapter} />
       </Grid2>

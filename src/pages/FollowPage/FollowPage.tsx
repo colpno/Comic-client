@@ -1,65 +1,130 @@
 import { Container } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { useSelector } from 'react-redux';
 
-import { Dialog } from '~/components/index.ts';
-import { MUI_CONTAINER_MAX_WIDTH } from '~/constants/commonConstants.ts';
-import { generateFollows } from '~/database/follow.ts';
 import {
-  SortButton,
-  TagFilterButton,
-  TagFilterFormValues,
-  TitleFilterButton,
-  TitleFilterFormValues,
-} from '~/features/index.ts';
+  ApiGetFollowParams,
+  useLazyGetFollowsQuery,
+  useRemoveFollowMutation,
+} from '~/apis/followApis.ts';
+import TextInput, { TextInputProps } from '~/components/form-controls/base-controls/TextInput.tsx';
+import { Dialog, InfiniteScrollPagination } from '~/components/index.ts';
+import { MUI_CONTAINER_MAX_WIDTH, PAGINATION_INITIAL_PAGE } from '~/constants/commonConstants.ts';
+import { SortButton, TagFilterButton, TagFilterFormValues } from '~/features/index.ts';
+import { RootState } from '~/libs/redux/store.ts';
 import { Comic } from '~/types/comicType.ts';
 import { Follow } from '~/types/followType.ts';
 import FollowPageFollowList from './components/FollowPageFollowList';
 
-const follow = generateFollows(1, { includeComic: true })[0] as Follow<Comic[]>;
-const following = follow.following;
+const PER_PAGE = 30;
 
 function FollowPage() {
+  const user = useSelector((state: RootState) => state.auth.user);
   const [followIdToRemove, setFollowIdToRemove] = useState('');
+  const [getFollows, { isFetching: isApiFetching }] = useLazyGetFollowsQuery();
+  const [isDataFetching, setIsDataFetching] = useState(isApiFetching);
+  const [follows, setFollows] = useState<Follow<Comic>[]>([]);
+  const [getFollowsParams, setGetFollowsParams] = useState<ApiGetFollowParams>({
+    follower: user.id,
+    _embed: {
+      path: 'following',
+      populate: 'cover_art',
+    },
+    _limit: PER_PAGE,
+    _page: PAGINATION_INITIAL_PAGE,
+  });
+  const [removeFollow] = useRemoveFollowMutation();
 
   const openRemovalPopup = (followId: string) => setFollowIdToRemove(followId);
   const closeRemovalPopup = () => setFollowIdToRemove('');
 
-  const handleRemoveFollow = () => {
-    // TODO: Implement remove a follow
-    console.log('followIdToRemove:', followIdToRemove);
+  // Handle page change
+  const handleIntersect = async () => {
+    if (follows.length < PER_PAGE) return;
 
-    // closeRemovalPopup();
+    setGetFollowsParams((prev) => ({
+      ...prev,
+      _page: prev._page! + 1,
+    }));
   };
 
-  const handleTitleFilterFormSubmit = (values: TitleFilterFormValues) => {
-    // TODO: Implement filter
-    console.log('values:', values);
+  const handleRemoveFollow = async () => {
+    try {
+      await removeFollow(followIdToRemove);
+      closeRemovalPopup();
+    } catch (error) {}
+  };
+
+  const handleTitleChange: TextInputProps['onChange'] = (value) => {
+    setIsDataFetching(true);
+
+    setGetFollowsParams(({ _embed, ...prev }) => ({
+      ...prev,
+      title: value,
+    }));
   };
 
   const handleTagFilterFormSubmit = (values: TagFilterFormValues) => {
-    // TODO: Implement filter
-    console.log('values:', values);
+    setIsDataFetching(true);
+
+    setGetFollowsParams(({ _embed, ...prev }) => ({
+      ...prev,
+      _embed: {
+        ..._embed!,
+        match: {
+          includedTags: values.includedOptions,
+          includedTagsMode: 'AND',
+          excludedTags: values.excludedOptions,
+          excludedTagsMode: 'AND',
+        },
+      },
+    }));
   };
 
   const handleSortOrderChange = (isAsc: boolean) => {
-    // TODO: Implement sort
-    console.log('order:', isAsc);
+    setIsDataFetching(true);
+
+    setGetFollowsParams(({ _embed, ...prev }) => ({
+      ...prev,
+      _sort: {
+        createdAt: isAsc ? 'asc' : 'desc',
+      },
+    }));
   };
+
+  // Fetch follows
+  useEffect(() => {
+    (async () => {
+      const data = (await getFollows(getFollowsParams).unwrap()) as Follow<Comic>[];
+
+      if (getFollowsParams._page === PAGINATION_INITIAL_PAGE) {
+        setFollows(data);
+      } else {
+        setFollows((prev) => [...prev, ...data]);
+      }
+    })();
+  }, [getFollowsParams]);
+
+  // Handle data fetching state
+  useEffect(() => {
+    if (isDataFetching && !isApiFetching) setIsDataFetching(false);
+  }, [isApiFetching]);
 
   return (
     <>
       <Container maxWidth={MUI_CONTAINER_MAX_WIDTH} className="pt-12">
-        {following.length > 0 && (
-          <div className="flex flex-row items-center mb-4 sm:justify-between">
+        {follows.length > 0 && (
+          <div className="flex flex-row items-end mb-4 sm:justify-between">
             <div className="flex gap-1.5">
-              <TitleFilterButton onSubmit={handleTitleFilterFormSubmit} />
               <TagFilterButton onSubmit={handleTagFilterFormSubmit} />
             </div>
+            <TextInput name="title" size="small" label="Search" onChange={handleTitleChange} />
             <SortButton onChange={handleSortOrderChange} className="!ml-2 sm:!ml-0" />
           </div>
         )}
-        <FollowPageFollowList items={following} onRemoveClick={openRemovalPopup} />
+        <FollowPageFollowList items={follows} onRemoveClick={openRemovalPopup} />
+        <InfiniteScrollPagination onIntersect={handleIntersect} />
       </Container>
       <Dialog
         open={!!followIdToRemove}

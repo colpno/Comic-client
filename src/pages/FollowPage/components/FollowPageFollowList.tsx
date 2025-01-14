@@ -1,9 +1,11 @@
 import { Image, Typography } from '~/components/index.ts';
-import { FollowComicCard, FollowComicCardProps } from '~/features/index.ts';
+import { FollowComicCard } from '~/features/index.ts';
 import { noFollowSVG } from '~/images/index.ts';
+import { Comic } from '~/types/comicType.ts';
+import { Follow } from '~/types/followType.ts';
 
 interface Props {
-  items: FollowComicCardProps['item'][];
+  items: Follow<Comic>[];
   onRemoveClick: (id: string) => void;
 }
 

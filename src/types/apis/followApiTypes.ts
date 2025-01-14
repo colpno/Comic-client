@@ -1,17 +1,20 @@
-import { ApiFulfilledResponse, GetRequestOperators } from '../apiTypes.ts';
+import { ApiFulfilledResponse, Filter, FilterOperators, GetRequestOperators } from '../apiTypes.ts';
 import { Comic } from '../comicType.ts';
 import { Follow } from '../followType.ts';
+import { ApiGetComicsParams } from './comicApiTypes.ts';
 
-export type ApiGetFollowsReturnType = ApiFulfilledResponse<Follow['following']>;
-export type ApiGetFollowsParams = Partial<Follow> &
-  Omit<GetRequestOperators, '_embed' | '_select' | 'id'> & {
-    _embed?: 'following';
+export type ApiGetFollowReturnType = ApiFulfilledResponse<Follow<string | Comic>[]>;
+export type ApiGetFollowParams = Partial<Omit<Follow, 'following'>> &
+  Omit<GetRequestOperators<Follow>, '_embed' | '_select'> & {
+    follower?: string;
+    following?: Partial<Pick<FilterOperators, 'all' | 'in' | 'nin'>> & Filter<Comic>;
+    _embed?: {
+      path: 'following';
+      match?: Omit<ApiGetComicsParams, '_limit' | '_page' | '_sort' | '_embed'>;
+      populate?: ApiGetComicsParams['_embed'];
+    };
   };
 
-export type ApiAddFollowParams = Pick<Follow, 'follower'> & {
-  following: Comic['id'];
-};
+export type ApiAddFollowParam = Comic['id'];
 
-export type ApiRemoveFollowParams = {
-  id: Follow['id'];
-};
+export type ApiRemoveFollowParam = Follow['id'];
