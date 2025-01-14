@@ -53,7 +53,7 @@ const TextInput = forwardRef(
     };
 
     const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-      setAdornments({ password: false, clear: false });
+      if (!value) setAdornments({ password: false, clear: false });
       onBlur?.(e);
     };
 
