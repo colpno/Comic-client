@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { FaSortNumericDown, FaSortNumericUp } from 'react-icons/fa';
 
 import { Button, ButtonAsIconButtonProps } from '~/components/index.ts';
@@ -10,11 +10,10 @@ interface Props extends Partial<Omit<ButtonAsIconButtonProps, 'onChange'>> {
 function SortButton({ onChange, ...props }: Props) {
   const [isAsc, setIsAsc] = useState(false);
 
-  const toggleSort = () => setIsAsc((prev) => !prev);
-
-  useEffect(() => {
+  const toggleSort = () => {
+    setIsAsc((prev) => !prev);
     onChange(isAsc);
-  }, [isAsc]);
+  };
 
   return (
     <Button as="iconButton" {...props} onClick={toggleSort}>
