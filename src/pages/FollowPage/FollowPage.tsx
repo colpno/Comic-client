@@ -8,11 +8,13 @@ import {
   useLazyGetFollowsQuery,
   useRemoveFollowMutation,
 } from '~/apis/followApis.ts';
-import TextInput, { TextInputProps } from '~/components/form-controls/base-controls/TextInput.tsx';
-import { Dialog, InfiniteScrollPagination } from '~/components/index.ts';
+import { TextInputProps } from '~/components/form-controls/base-controls/TextInput.tsx';
+import { DataFetching, Dialog, InfiniteScrollPagination } from '~/components/index.ts';
 import { MUI_CONTAINER_MAX_WIDTH, PAGINATION_INITIAL_PAGE } from '~/constants/commonConstants.ts';
 import { SortButton, TagFilterButton, TagFilterFormValues } from '~/features/index.ts';
+import SearchInput from '~/layouts/components/SearchInput.tsx';
 import { RootState } from '~/libs/redux/store.ts';
+import { SortOrder } from '~/types/apiTypes.ts';
 import { Comic } from '~/types/comicType.ts';
 import { Follow } from '~/types/followType.ts';
 import FollowPageFollowList from './components/FollowPageFollowList';
@@ -21,7 +23,6 @@ const PER_PAGE = 30;
 
 function FollowPage() {
   const user = useSelector((state: RootState) => state.auth.user);
-  const [followIdToRemove, setFollowIdToRemove] = useState('');
   const [getFollows, { isFetching: isApiFetching }] = useLazyGetFollowsQuery();
   const [isDataFetching, setIsDataFetching] = useState(isApiFetching);
   const [follows, setFollows] = useState<Follow<Comic>[]>([]);
@@ -33,7 +34,11 @@ function FollowPage() {
     },
     _limit: PER_PAGE,
     _page: PAGINATION_INITIAL_PAGE,
+    _sort: {
+      addedAt: 'desc',
+    },
   });
+  const [followIdToRemove, setFollowIdToRemove] = useState('');
   const [removeFollow] = useRemoveFollowMutation();
 
   const openRemovalPopup = (followId: string) => setFollowIdToRemove(followId);
@@ -56,13 +61,34 @@ function FollowPage() {
     } catch (error) {}
   };
 
-  const handleTitleChange: TextInputProps['onChange'] = (value) => {
+  const handleSearchChange: TextInputProps['onChange'] = (value) => {
     setIsDataFetching(true);
 
-    setGetFollowsParams(({ _embed, ...prev }) => ({
-      ...prev,
-      title: value,
-    }));
+    if (value) {
+      setGetFollowsParams(({ _embed, ...prev }) => ({
+        ...prev,
+        _embed: {
+          ..._embed!,
+          match: {
+            title: value,
+          },
+        },
+        _page: PAGINATION_INITIAL_PAGE,
+      }));
+    } else {
+      setGetFollowsParams(({ _embed, ...prev }) => {
+        const match = { ..._embed!.match! };
+        if (!!match.title) delete match.title;
+        return {
+          ...prev,
+          _embed: {
+            ..._embed!,
+            match,
+          },
+          _page: PAGINATION_INITIAL_PAGE,
+        };
+      });
+    }
   };
 
   const handleTagFilterFormSubmit = (values: TagFilterFormValues) => {
@@ -79,17 +105,19 @@ function FollowPage() {
           excludedTagsMode: 'AND',
         },
       },
+      _page: PAGINATION_INITIAL_PAGE,
     }));
   };
 
-  const handleSortOrderChange = (isAsc: boolean) => {
+  const handleSortOrderChange = (order: SortOrder) => {
     setIsDataFetching(true);
 
-    setGetFollowsParams(({ _embed, ...prev }) => ({
+    setGetFollowsParams((prev) => ({
       ...prev,
       _sort: {
-        createdAt: isAsc ? 'asc' : 'desc',
+        addedAt: order,
       },
+      _page: PAGINATION_INITIAL_PAGE,
     }));
   };
 
@@ -119,11 +147,24 @@ function FollowPage() {
             <div className="flex gap-1.5">
               <TagFilterButton onSubmit={handleTagFilterFormSubmit} />
             </div>
-            <TextInput name="title" size="small" label="Search" onChange={handleTitleChange} />
-            <SortButton onChange={handleSortOrderChange} className="!ml-2 sm:!ml-0" />
+            <SearchInput
+              name="title"
+              label="Search"
+              fullWidth={false}
+              onSubmit={handleSearchChange}
+            />
+            <SortButton
+              defaultValue="desc"
+              onChange={handleSortOrderChange}
+              className="!ml-2 sm:!ml-0"
+            />
           </div>
         )}
-        <FollowPageFollowList items={follows} onRemoveClick={openRemovalPopup} />
+        {isDataFetching ? (
+          <DataFetching />
+        ) : (
+          <FollowPageFollowList items={follows} onRemoveClick={openRemovalPopup} />
+        )}
         <InfiniteScrollPagination onIntersect={handleIntersect} />
       </Container>
       <Dialog
