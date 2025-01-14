@@ -98,7 +98,7 @@ function Description({ content }: { content: Comic['description'] }) {
 
 function HeartButton() {
   const { comicId } = useParams();
-  const { isLoggedIn, user } = useSelector((state: RootState) => state.auth);
+  const { isLoggedIn } = useSelector((state: RootState) => state.auth);
   const [getFollows, { data: follows = [] }] = useLazyGetFollowsQuery();
   const hasFollowed = follows.length > 0;
   const [add] = useAddFollowMutation();
@@ -110,11 +110,9 @@ function HeartButton() {
 
   useEffect(() => {
     (async () => {
-      if (!user.id) return;
-
-      await getFollows({ follower: user.id });
+      if (isLoggedIn) await getFollows();
     })();
-  }, [user.id]);
+  }, [isLoggedIn]);
 
   if (!isLoggedIn) {
     return (
@@ -125,12 +123,8 @@ function HeartButton() {
   }
 
   return (
-    <Button as="iconButton">
-      {hasFollowed ? (
-        <FaHeart color="red" onClick={() => remove(comicId!)} />
-      ) : (
-        <FaRegHeart color="red" onClick={() => add(comicId!)} />
-      )}
+    <Button as="iconButton" onClick={() => (hasFollowed ? remove(comicId!) : add(comicId!))}>
+      {hasFollowed ? <FaHeart color="red" /> : <FaRegHeart color="red" />}
     </Button>
   );
 }
