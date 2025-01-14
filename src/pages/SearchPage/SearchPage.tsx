@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useSearchParams } from 'react-router-dom';
 
-import { ApiSearchComicsParams, useLazySearchComicsQuery } from '~/apis/comicApis.ts';
+import { ApiGetComicsParams, useLazyGetComicsQuery } from '~/apis/comicApis.ts';
 import { DataFetching, InfiniteScrollPagination } from '~/components/index.ts';
 import { MUI_CONTAINER_MAX_WIDTH, PAGINATION_INITIAL_PAGE } from '~/constants/commonConstants.ts';
 import { Comic } from '~/types/comicType.ts';
@@ -16,10 +16,10 @@ const PER_PAGE = 30;
 function SearchPage() {
   const [searchParam] = useSearchParams();
   const searchValue = searchParam.get('value') || undefined;
-  const [searchComics, { isFetching: isApiFetching }] = useLazySearchComicsQuery();
+  const [searchComics, { isFetching: isApiFetching }] = useLazyGetComicsQuery();
   const [isDataFetching, setIsDataFetching] = useState(isApiFetching);
   const [comics, setComics] = useState<Comic[]>([]);
-  const [getComicsParams, setGetComicsParams] = useState<Partial<ApiSearchComicsParams>>({
+  const [getComicsParams, setGetComicsParams] = useState<Partial<ApiGetComicsParams>>({
     _embed: 'cover_art',
     _limit: PER_PAGE,
     _page: PAGINATION_INITIAL_PAGE,
@@ -52,11 +52,11 @@ function SearchPage() {
   // Fetch comics
   useEffect(() => {
     (async () => {
-      const hasSearchValue = getComicsParams.q && getComicsParams.q.length > 0;
+      const hasSearchValue = getComicsParams.title && getComicsParams.title.length > 0;
       if (hasSearchValue) {
         const newComics = await searchComics({
           ...getComicsParams,
-          q: getComicsParams.q!,
+          title: getComicsParams.title!,
         }).unwrap();
 
         const isFirstPage = getComicsParams._page === PAGINATION_INITIAL_PAGE;
