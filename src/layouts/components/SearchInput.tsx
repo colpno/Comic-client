@@ -6,14 +6,15 @@ import TextInput, { TextInputProps } from '~/components/form-controls/base-contr
 import { Button } from '~/components/index.ts';
 import { getSearchRoute } from '~/constants/routeConstants.ts';
 
-interface Props extends Omit<TextInputProps, 'name' | 'value'> {
+interface Props extends Omit<TextInputProps, 'name' | 'value' | 'onSubmit'> {
   name?: string;
   value?: string;
   /** Replace the url when submitting or pressing Enter. */
   replaceUrl?: boolean;
+  onSubmit?: (value: string) => void;
 }
 
-function SearchInput({ value = '', replaceUrl, ...props }: Props) {
+function SearchInput({ value = '', replaceUrl, onSubmit, ...props }: Props) {
   const navigate = useNavigate();
   const [searchText, setSearchText] = useState<string>(value);
 
@@ -22,7 +23,7 @@ function SearchInput({ value = '', replaceUrl, ...props }: Props) {
   };
 
   const handleSubmit = () => {
-    navigate(getSearchRoute(searchText), { replace: replaceUrl });
+    onSubmit ? onSubmit(searchText) : navigate(getSearchRoute(searchText), { replace: replaceUrl });
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
