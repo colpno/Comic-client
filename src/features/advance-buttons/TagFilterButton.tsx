@@ -1,5 +1,6 @@
-import { faker } from '@faker-js/faker';
+import { useMemo } from 'react';
 
+import { useGetGenresQuery } from '~/apis/genreApis.ts';
 import { Button, ButtonAsButtonProps, Popup } from '~/components/index.ts';
 import { SelectiveFilterForm, SelectiveFilterFormValues } from '~/features/index.ts';
 import { usePopup } from '~/hooks/usePopup.ts';
@@ -10,13 +11,21 @@ interface Props extends Partial<Omit<ButtonAsButtonProps, 'onSubmit'>> {
   onSubmit: (values: SelectiveFilterFormValues) => void;
 }
 
-const tags = Array.from({ length: 20 }, () => ({
-  label: faker.lorem.word(),
-  value: faker.lorem.word(),
-}));
-
 function TagFilterButton({ onSubmit, ...buttonProps }: Props) {
   const { closePopup, open, openPopup, popupRef } = usePopup();
+  const { data: genres, isFetching } = useGetGenresQuery();
+
+  const tags = useMemo(
+    () =>
+      genres
+        ?.map(({ name }) => name)
+        .sort()
+        .map((g) => ({
+          label: g,
+          value: g,
+        })) || [],
+    [genres]
+  );
 
   return (
     <>
@@ -25,6 +34,7 @@ function TagFilterButton({ onSubmit, ...buttonProps }: Props) {
         {...buttonProps}
         className={cn('!bg-primary-600', buttonProps.className)}
         onClick={openPopup}
+        loading={isFetching}
       >
         Tags
       </Button>
