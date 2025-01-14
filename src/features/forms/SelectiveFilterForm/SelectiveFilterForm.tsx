@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { SwiperClass } from 'swiper/react';
 
 import { Button, CheckboxOption, Form, FormProps, Slider, Typography } from '~/components/index.ts';
@@ -17,6 +18,7 @@ interface Props extends Omit<FormProps, 'onSubmit' | 'title' | 'validationSchema
 function SelectiveFilterForm({ onSubmit, options, title, className, ...props }: Props) {
   const [panel, setPanel] = useState(0);
   const [Swiper, setSwiper] = useState<SwiperClass | null>(null);
+  const [_searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
     Swiper?.slideTo(panel);
@@ -33,7 +35,14 @@ function SelectiveFilterForm({ onSubmit, options, title, className, ...props }: 
         <>
           <div className="flex items-center justify-between">
             <Typography variant="h6">{title}</Typography>
-            <Button variant="text" className="!text-primary-500" onClick={() => reset()}>
+            <Button
+              variant="text"
+              className="!text-primary-500"
+              onClick={() => {
+                setSearchParams({});
+                reset();
+              }}
+            >
               Clear
             </Button>
           </div>

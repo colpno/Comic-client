@@ -20,4 +20,5 @@ export interface Props {
     checkbox?: MUICheckboxProps;
     label?: MUIFormControlLabelProps;
   };
+  onChange?: (value: string[]) => void;
 }

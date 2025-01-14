@@ -13,7 +13,7 @@ import { Controller, ControllerRenderProps, useFormContext } from 'react-hook-fo
 import { Option, Props } from './types/checkboxGroupTypes.ts';
 
 function CheckBoxGroup(props: Props) {
-  const { label, name, options, required, defaultValue = [], slotProps } = props;
+  const { label, name, options, required, defaultValue = [], slotProps, onChange } = props;
   const theme = useTheme();
   const {
     control,
@@ -30,13 +30,16 @@ function CheckBoxGroup(props: Props) {
   const handleChange = (field: ControllerRenderProps, item: Option) => {
     // Not in checked list, then add to checked list
     if (!field.value.includes(item.value)) {
-      field.onChange([...field.value, item.value]);
+      const newValue = [...field.value, item.value];
+      field.onChange(newValue);
+      onChange?.(newValue);
       return;
     }
 
     // In checked list, then remove it from checked list
-    const newTopics = field.value.filter((topic: string) => topic !== item.value);
-    field.onChange(newTopics);
+    const newValues = field.value.filter((v: string) => v !== item.value);
+    field.onChange(newValues);
+    onChange?.(newValues);
   };
 
   return (
