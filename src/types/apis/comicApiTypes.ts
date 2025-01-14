@@ -13,6 +13,8 @@ export interface ApiGetComicsParams
   hasAvailableChapters?: boolean;
   includedTags?: string[];
   includedTagsMode?: 'AND' | 'OR';
+  excludedTags?: string[];
+  excludedTagsMode?: 'AND' | 'OR';
   _embed?: AllowedEmbed[] | AllowedEmbed;
   _sort?: Partial<
     Record<
