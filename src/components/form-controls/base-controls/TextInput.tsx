@@ -57,13 +57,20 @@ const TextInput = forwardRef(
       onBlur?.(e);
     };
 
+    const handleClearButtonClick = () => {
+      onChange?.('');
+      setAdornments((prev) =>
+        Object.keys(prev).reduce((acc, key) => ({ ...acc, [key]: false }), {})
+      );
+    };
+
     const renderEndAdornment = () => {
       const showPasswordAdornment = type === 'password' && adornments.password;
       const showClearAdornment = clearable && adornments.clear;
 
       return (
         <>
-          {showClearAdornment && <ClearAdornment onClick={() => onChange?.('')} />}
+          {showClearAdornment && <ClearAdornment onClick={handleClearButtonClick} />}
           {showPasswordAdornment && (
             <PasswordAdornment onClick={handleClickShowPassword} show={showPassword} />
           )}
