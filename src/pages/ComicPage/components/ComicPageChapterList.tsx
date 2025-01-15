@@ -1,5 +1,5 @@
 import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material';
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { MdExpandMore } from 'react-icons/md';
 import { Link, useParams } from 'react-router-dom';
 import { v4 } from 'uuid';
@@ -9,9 +9,14 @@ import { getComicReadingRoute } from '~/constants/routeConstants.ts';
 import { Chapter } from '~/types/chapterType.ts';
 import ChapterFigure from './ComicPageChapterFigure.tsx';
 
+type Volume = {
+  volume: string;
+  chapters: Chapter[];
+};
+
 function ComicPageChapterList({ chapters }: { chapters: Chapter[] }) {
   const { comicTitle } = useParams();
-  const volumes: { volume: string; chapters: Chapter[] }[] = [];
+  const [volumes, setVolumes] = useState<Volume[]>([]);
 
   // Group chapters by volume
   const groupedChapters = useMemo(
@@ -27,13 +32,19 @@ function ComicPageChapterList({ chapters }: { chapters: Chapter[] }) {
     [chapters]
   );
 
-  //  Reverse the volumes
-  const volumeKeys = Object.keys(groupedChapters);
-  for (let i = volumeKeys.length - 1; i >= 0; i--) {
-    const volume = volumeKeys[i];
-    const chapters = groupedChapters[volume];
-    volumes.push({ volume, chapters });
-  }
+  // Reverse the order of volumes
+  useEffect(() => {
+    const vols: typeof volumes = [];
+    const volumeKeys = Object.keys(groupedChapters);
+
+    for (let i = volumeKeys.length - 1; i >= 0; i--) {
+      const volume = volumeKeys[i];
+      const chapters = groupedChapters[volume];
+      vols.push({ volume, chapters });
+    }
+
+    setVolumes(vols);
+  }, [groupedChapters]);
 
   return (
     <div className="my-6">
