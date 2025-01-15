@@ -1,6 +1,7 @@
 import { Container } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { useSearchParams } from 'react-router-dom';
 
 import {
   ApiGetFollowParams,
@@ -36,6 +37,7 @@ function FollowPage() {
   });
   const [followIdToRemove, setFollowIdToRemove] = useState('');
   const [removeFollow] = useRemoveFollowMutation();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const openRemovalPopup = (followId: string) => setFollowIdToRemove(followId);
   const closeRemovalPopup = () => setFollowIdToRemove('');
@@ -60,31 +62,8 @@ function FollowPage() {
   const handleSearchChange: TextInputProps['onChange'] = (value) => {
     setIsDataFetching(true);
 
-    if (value) {
-      setGetFollowsParams(({ _embed, ...prev }) => ({
-        ...prev,
-        _embed: {
-          ..._embed!,
-          match: {
-            title: value,
-          },
-        },
-        _page: PAGINATION_INITIAL_PAGE,
-      }));
-    } else {
-      setGetFollowsParams(({ _embed, ...prev }) => {
-        const match = { ..._embed!.match! };
-        if (!!match.title) delete match.title;
-        return {
-          ...prev,
-          _embed: {
-            ..._embed!,
-            match,
-          },
-          _page: PAGINATION_INITIAL_PAGE,
-        };
-      });
-    }
+    if (value) setSearchParams({ title: value });
+    else setSearchParams({});
   };
 
   const handleTagFilterFormSubmit = (values: TagFilterFormValues) => {
@@ -134,6 +113,35 @@ function FollowPage() {
   useEffect(() => {
     if (isDataFetching && !isApiFetching) setIsDataFetching(false);
   }, [isApiFetching]);
+
+  // Handle search params change
+  useEffect(() => {
+    if (searchParams.has('title')) {
+      setGetFollowsParams(({ _embed, ...prev }) => ({
+        ...prev,
+        _embed: {
+          ..._embed!,
+          match: {
+            title: searchParams.get('title')!,
+          },
+        },
+        _page: PAGINATION_INITIAL_PAGE,
+      }));
+    } else {
+      setGetFollowsParams(({ _embed, ...prev }) => {
+        const match = { ..._embed!.match! };
+        if (!!match.title) delete match.title;
+        return {
+          ...prev,
+          _embed: {
+            ..._embed!,
+            match,
+          },
+          _page: PAGINATION_INITIAL_PAGE,
+        };
+      });
+    }
+  }, [searchParams]);
 
   return (
     <>
