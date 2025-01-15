@@ -26,6 +26,7 @@ export const CHAPTER_ENDPOINTS = {
 export const FOLLOW_ENDPOINTS = {
   BASE: '/follows' as const,
   GET_FOLLOWS: () => FOLLOW_ENDPOINTS.BASE,
+  GET_FOLLOW: (followingId: string) => `${FOLLOW_ENDPOINTS.BASE}/${followingId}` as const,
   ADD_FOLLOW: () => FOLLOW_ENDPOINTS.BASE,
   REMOVE_FOLLOW: (followingId: string) => `${FOLLOW_ENDPOINTS.BASE}/${followingId}` as const,
 };

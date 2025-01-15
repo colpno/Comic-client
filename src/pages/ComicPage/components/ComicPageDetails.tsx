@@ -2,12 +2,11 @@ import { Grid2 } from '@mui/material';
 import { useEffect } from 'react';
 import { FaHeart, FaRegHeart } from 'react-icons/fa6';
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import {
   useAddFollowMutation,
-  useLazyGetFollowsQuery,
+  useLazyGetFollowQuery,
   useRemoveFollowMutation,
 } from '~/apis/followApis.ts';
 import { Button, Image, Typography } from '~/components/index.ts';
@@ -97,13 +96,12 @@ function Description({ content }: { content: Comic['description'] }) {
   );
 }
 
-function HeartButton() {
-  const { comicId } = useParams();
+function HeartButton({ comicId }: { comicId: Comic['id'] }) {
   const { isLoggedIn } = useSelector((state: RootState) => state.auth);
-  const [getFollows, { data: follows = [] }] = useLazyGetFollowsQuery();
-  const hasFollowed = follows.length > 0;
+  const [getFollow, { data: follow }] = useLazyGetFollowQuery();
   const [add] = useAddFollowMutation();
   const [remove] = useRemoveFollowMutation();
+  const hasFollowed = follow?.following === comicId;
 
   const handleDisabledButtonClick = () => {
     toast.info('Please login to follow this comic');
@@ -111,7 +109,7 @@ function HeartButton() {
 
   useEffect(() => {
     (async () => {
-      if (isLoggedIn) await getFollows();
+      if (isLoggedIn) await getFollow({ following: comicId, _select: 'following -id' });
     })();
   }, [isLoggedIn]);
 
@@ -124,24 +122,25 @@ function HeartButton() {
   }
 
   return (
-    <Button as="iconButton" onClick={() => (hasFollowed ? remove(comicId!) : add(comicId!))}>
+    <Button as="iconButton" onClick={() => (hasFollowed ? remove(comicId) : add(comicId))}>
       {hasFollowed ? <FaHeart color="red" /> : <FaRegHeart color="red" />}
     </Button>
   );
 }
 
 interface ButtonsProps {
-  comicTitle: Comic['title'];
+  title: Comic['title'];
+  id: Comic['id'];
 }
 
-function Actions({ comicTitle }: ButtonsProps) {
+function Actions({ title, id }: ButtonsProps) {
   return (
     <div className="flex flex-col gap-2 mt-6 lg:mt-auto sm:flex-row">
-      <Button variant="contained" color="primary" href={getComicReadingRoute(comicTitle, '1')}>
+      <Button variant="contained" color="primary" href={getComicReadingRoute(title, '1')}>
         Read chapter 1
       </Button>
       <div className="ml-auto">
-        <HeartButton />
+        <HeartButton comicId={id} />
       </div>
     </div>
   );
@@ -180,7 +179,7 @@ function ComicPageDetails(comic: Comic) {
         {comic.authors && <Authors authors={comic.authors} />}
         {comic.artists && <Artists artists={comic.artists} />}
         <Description content={comic.description} />
-        <Actions comicTitle={comic.title} />
+        <Actions title={comic.title} id={comic.id} />
       </Grid2>
     </Grid2>
   );

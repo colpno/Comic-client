@@ -2,6 +2,8 @@ import {
   ApiAddFollowParam,
   ApiGetFollowParams,
   ApiGetFollowReturnType,
+  ApiGetFollowsParams,
+  ApiGetFollowsReturnType,
   ApiRemoveFollowParam,
 } from '~/types/apis/followApiTypes.ts';
 import { FOLLOW_ENDPOINTS, TAG_FOLLOW } from './apiConstants.ts';
@@ -10,13 +12,21 @@ import api from './index.ts';
 const extendedApi = api.injectEndpoints({
   endpoints: (build) => ({
     // GET
-    getFollows: build.query<ApiGetFollowReturnType['data'], ApiGetFollowParams | void>({
+    getFollows: build.query<ApiGetFollowsReturnType['data'], ApiGetFollowsParams | void>({
       query: (query) => ({
         url: FOLLOW_ENDPOINTS.GET_FOLLOWS(),
         params: query,
       }),
       providesTags: (result) =>
         result ? [...result.map(({ id }) => ({ type: TAG_FOLLOW, id })), TAG_FOLLOW] : [TAG_FOLLOW],
+      transformResponse: (response: ApiGetFollowsReturnType) => response.data,
+    }),
+    getFollow: build.query<ApiGetFollowReturnType['data'], ApiGetFollowParams>({
+      query: ({ following, ...query }) => ({
+        url: FOLLOW_ENDPOINTS.GET_FOLLOW(following),
+        params: query,
+      }),
+      providesTags: (result) => (result ? [{ type: TAG_FOLLOW, id: result.id }] : [TAG_FOLLOW]),
       transformResponse: (response: ApiGetFollowReturnType) => response.data,
     }),
 
@@ -48,6 +58,8 @@ export const {
   useGetFollowsQuery,
   useLazyGetFollowsQuery,
   useRemoveFollowMutation,
+  useGetFollowQuery,
+  useLazyGetFollowQuery,
 } = extendedApi;
 
 export type * from '~/types/apis/followApiTypes.ts';
