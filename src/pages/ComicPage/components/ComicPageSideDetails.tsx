@@ -2,6 +2,7 @@ import { Accordion, AccordionDetails, AccordionSummary, Grid2 } from '@mui/mater
 import { MdExpandMore } from 'react-icons/md';
 
 import { Button, Typography } from '~/components/index.ts';
+import { getComicsByGenreRoute } from '~/constants/routeConstants.ts';
 import { ComicCard } from '~/features/index.ts';
 import { Comic } from '~/types/comicType.ts';
 import { toSentenceCase } from '~/utils/converters.ts';
@@ -30,7 +31,12 @@ function Tags({ tags }: { tags: Comic['tags'] }) {
       <Typography>Tags:</Typography>
       <div>
         {tags.map((tag) => (
-          <Button variant="outlined" size="small" key={tag.id}>
+          <Button
+            href={getComicsByGenreRoute(tag.name)}
+            variant="outlined"
+            size="small"
+            key={tag.id}
+          >
             {tag.name}
           </Button>
         ))}
