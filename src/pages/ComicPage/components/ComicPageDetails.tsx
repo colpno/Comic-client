@@ -132,25 +132,17 @@ function HeartButton() {
 
 interface ButtonsProps {
   comicTitle: Comic['title'];
-  latestChapterNumber: Comic['latestUploadedChapter'];
 }
 
-function Actions({ comicTitle, latestChapterNumber }: ButtonsProps) {
+function Actions({ comicTitle }: ButtonsProps) {
   return (
     <div className="flex flex-col gap-2 mt-6 lg:mt-auto sm:flex-row">
       <Button variant="contained" color="primary" href={getComicReadingRoute(comicTitle, 1)}>
         Read chapter 1
       </Button>
-      {latestChapterNumber && (
-        <Button
-          variant="outlined"
-          color="primary"
-          href={getComicReadingRoute(comicTitle, latestChapterNumber)}
-        >
-          Read latest chapter
-        </Button>
-      )}
-      <HeartButton />
+      <div className="ml-auto">
+        <HeartButton />
+      </div>
     </div>
   );
 }
@@ -188,7 +180,7 @@ function ComicPageDetails(comic: Comic) {
         {comic.authors && <Authors authors={comic.authors} />}
         {comic.artists && <Artists artists={comic.artists} />}
         <Description content={comic.description} />
-        <Actions comicTitle={comic.title} latestChapterNumber={comic.latestUploadedChapter} />
+        <Actions comicTitle={comic.title} />
       </Grid2>
     </Grid2>
   );
