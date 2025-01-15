@@ -9,6 +9,7 @@ export interface ApiGetComicsParams
       Pick<Comic, 'title' | 'year' | 'type' | 'createdAt' | 'updatedAt' | 'contentRating'>
     >,
     Pick<GetRequestOperators, '_limit' | '_page'> {
+  ids?: Comic['id'][];
   status?: Comic['status'][];
   hasAvailableChapters?: boolean;
   includedTags?: string[];
