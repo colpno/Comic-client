@@ -89,9 +89,10 @@ function Artists({ artists }: { artists: Exclude<Comic['artists'], undefined> })
 }
 
 function Description({ content }: { content: Comic['description'] }) {
+  const description = content?.replace(/\n+/g, '\n');
   return (
-    <Typography className="!mt-4 line-clamp-3" title={content}>
-      {content}
+    <Typography className="!mt-4 line-clamp-3" title={description}>
+      {description}
     </Typography>
   );
 }
@@ -153,6 +154,7 @@ function Actions({ comicTitle, latestChapterNumber }: ButtonsProps) {
     </div>
   );
 }
+
 function ComicPageDetails(comic: Comic) {
   return (
     <Grid2
