@@ -116,6 +116,15 @@ export const getThemeConfig = (mode: Exclude<Theme, 'system'>) => {
     },
   };
 
+  theme.typography.h5 = {
+    fontSize: '1rem',
+    lineHeight: '1.5rem',
+    [theme.breakpoints.up('sm')]: {
+      fontSize: '1.5rem',
+      lineHeight: '2rem',
+    },
+  };
+
   theme.typography.body1 = {
     fontSize: '0.875rem',
     lineHeight: '1.25rem',
