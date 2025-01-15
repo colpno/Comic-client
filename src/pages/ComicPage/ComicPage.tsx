@@ -21,7 +21,7 @@ function ComicPage() {
     if (comictitle) {
       getComic({
         title: comictitle,
-        _embed: ['cover_art', 'artist', 'author', 'manga'],
+        _embed: ['cover_art', 'artist', 'author'],
       });
     }
   }, [comictitle]);

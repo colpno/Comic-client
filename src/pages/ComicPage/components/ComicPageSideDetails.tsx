@@ -1,7 +1,9 @@
 import { Accordion, AccordionDetails, AccordionSummary, Grid2 } from '@mui/material';
+import { useEffect } from 'react';
 import { MdExpandMore } from 'react-icons/md';
 
-import { Button, Typography } from '~/components/index.ts';
+import { useLazyGetComicsQuery } from '~/apis/comicApis.ts';
+import { Button, DataFetching, Typography } from '~/components/index.ts';
 import { getComicsByGenreRoute } from '~/constants/routeConstants.ts';
 import { ComicCard } from '~/features/index.ts';
 import { Comic } from '~/types/comicType.ts';
@@ -29,7 +31,7 @@ function Tags({ tags }: { tags: Comic['tags'] }) {
   return (
     <div>
       <Typography>Tags:</Typography>
-      <div>
+      <div className="flex flex-wrap gap-1">
         {tags.map((tag) => (
           <Button
             href={getComicsByGenreRoute(tag.name)}
@@ -60,7 +62,26 @@ function AdditionalDetails(comic: Comic) {
   );
 }
 
-function RelatedComics({ comics }: { comics: Comic[] }) {
+function RelatedComics({ comicsId }: { comicsId: Comic['id'][] }) {
+  const [getComics, { data: related = [], isFetching }] = useLazyGetComicsQuery();
+
+  useEffect(() => {
+    if (comicsId.length > 0) {
+      getComics({
+        ids: comicsId as Comic['id'][],
+        _embed: ['cover_art'],
+      });
+    }
+  }, [comicsId]);
+
+  if (isFetching) {
+    return <DataFetching />;
+  }
+
+  if (related.length === 0) {
+    return null;
+  }
+
   return (
     <Accordion>
       <AccordionSummary expandIcon={<MdExpandMore />}>
@@ -68,7 +89,7 @@ function RelatedComics({ comics }: { comics: Comic[] }) {
       </AccordionSummary>
       <AccordionDetails>
         <Grid2 container spacing={2}>
-          {(comics as Comic[]).map((relatedComic) => (
+          {related.map((relatedComic) => (
             <Grid2
               key={relatedComic.id}
               size={{
@@ -89,9 +110,7 @@ function ComicPageSideDetails(comic: Comic) {
   return (
     <>
       <AdditionalDetails {...comic} />
-      {comic.related && comic.related.length > 0 && (
-        <RelatedComics comics={comic.related as Comic[]} />
-      )}
+      <RelatedComics comicsId={(comic.related as Comic['id'][]) || []} />
     </>
   );
 }
