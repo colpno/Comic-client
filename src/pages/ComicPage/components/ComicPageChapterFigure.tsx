@@ -14,7 +14,7 @@ function ChapterFigure({ chapter }: Props) {
   return (
     <div className="flex gap-3 mt-4">
       <div className="items-start flex-1">
-        <Typography variant="h6" title={title} className="line-clamp-1">
+        <Typography title={title} className="line-clamp-1">
           {title}
         </Typography>
       </div>
