@@ -15,7 +15,7 @@ type Volume = {
 };
 
 function ComicPageChapterList({ chapters }: { chapters: Chapter[] }) {
-  const { comicTitle } = useParams();
+  const { comictitle } = useParams();
   const [volumes, setVolumes] = useState<Volume[]>([]);
 
   // Group chapters by volume
@@ -64,11 +64,13 @@ function ComicPageChapterList({ chapters }: { chapters: Chapter[] }) {
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
-            {chapters.map((chapter) => (
-              <Link to={getComicReadingRoute(comicTitle, chapter.chapter)} key={chapter.id}>
-                <ChapterFigure key={chapter.id} chapter={chapter} />
-              </Link>
-            ))}
+            {chapters.map((chapter) => {
+              return (
+                <Link to={getComicReadingRoute(comictitle, chapter.chapter)} key={chapter.id}>
+                  <ChapterFigure key={chapter.id} chapter={chapter} />
+                </Link>
+              );
+            })}
           </AccordionDetails>
         </Accordion>
       ))}

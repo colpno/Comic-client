@@ -27,10 +27,8 @@ export const getComicRoute = (comicTitle?: string) => {
  * @param chapterNumber >= 0 to get the reading route.
  * @returns either empty string or the reading route.
  */
-export const getComicReadingRoute = (comicTitle?: string, chapterNumber?: string | number) => {
-  const invalidChapterNumber =
-    (typeof chapterNumber === 'number' && chapterNumber < 0) || !chapterNumber;
-  if (!comicTitle || invalidChapterNumber) return '';
+export const getComicReadingRoute = (comicTitle?: string, chapterNumber?: string) => {
+  if (!comicTitle || !chapterNumber) return '';
   return `${getComicRoute(comicTitle)}/reading/${chapterNumber}`;
 };
 

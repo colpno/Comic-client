@@ -137,7 +137,7 @@ interface ButtonsProps {
 function Actions({ comicTitle }: ButtonsProps) {
   return (
     <div className="flex flex-col gap-2 mt-6 lg:mt-auto sm:flex-row">
-      <Button variant="contained" color="primary" href={getComicReadingRoute(comicTitle, 1)}>
+      <Button variant="contained" color="primary" href={getComicReadingRoute(comicTitle, '1')}>
         Read chapter 1
       </Button>
       <div className="ml-auto">
