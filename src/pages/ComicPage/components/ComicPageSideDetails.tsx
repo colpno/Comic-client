@@ -70,7 +70,7 @@ function RelatedComics({ comics }: { comics: Comic[] }) {
                 sm: 4,
               }}
             >
-              <ComicCard key={relatedComic.id} {...relatedComic} />
+              <ComicCard {...relatedComic} />
             </Grid2>
           ))}
         </Grid2>
@@ -83,7 +83,9 @@ function ComicPageSideDetails(comic: Comic) {
   return (
     <>
       <AdditionalDetails {...comic} />
-      {comic.related && <RelatedComics comics={comic.related as Comic[]} />}
+      {comic.related && comic.related.length > 0 && (
+        <RelatedComics comics={comic.related as Comic[]} />
+      )}
     </>
   );
 }

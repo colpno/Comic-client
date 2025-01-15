@@ -47,7 +47,7 @@ const publicRoutes: RouteObject = {
       Component: BasicLayout,
       children: [
         {
-          path: getComicRoute(':comicTitle'),
+          path: getComicRoute(':comictitle'),
           Component: ComicPage,
         },
         {

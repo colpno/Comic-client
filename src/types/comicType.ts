@@ -30,7 +30,8 @@ export interface Comic {
   state: State;
   chapterNumbersResetOnNewVolume: boolean;
   chapters: (Chapter | Chapter['id'])[];
-  latestUploadedChapter?: number;
+  /** chapter's id */
+  latestUploadedChapter?: string;
   coverImageUrl: string;
   related?: (Comic | string)[];
   authors?: Author[];

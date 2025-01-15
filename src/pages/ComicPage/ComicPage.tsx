@@ -1,17 +1,39 @@
 import { Grid2 } from '@mui/material';
+import { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { useParams } from 'react-router-dom';
 
-import { generateChapters } from '~/database/chapter.ts';
-import { generateComics } from '~/database/comics.ts';
+import { useLazyGetComicQuery } from '~/apis/comicApis.ts';
+import { DataFetching } from '~/components/index.ts';
+import NotFoundPage from '../ErrorPage/components/NotFoundPage.tsx';
 import BackgroundImage from './components/ComicPageBackgroundImage';
-import ChapterList from './components/ComicPageChapterList';
+import ChapterList from './components/ComicPageChapterSection.tsx';
 import Details from './components/ComicPageDetails';
 import SideDetails from './components/ComicPageSideDetails';
 import Wrapper from './components/ComicPageWrapper.tsx';
 
-const comic = generateComics(1)[0];
-const chapters = generateChapters(50);
 function ComicPage() {
+  const { comictitle } = useParams();
+  const [getComic, { data: comic, isFetching }] = useLazyGetComicQuery();
+
+  // Fetch comic
+  useEffect(() => {
+    if (comictitle) {
+      getComic({
+        title: comictitle,
+        _embed: ['cover_art', 'artist', 'author', 'manga'],
+      });
+    }
+  }, [comictitle]);
+
+  if (isFetching) {
+    return <DataFetching />;
+  }
+
+  if (!comic) {
+    return <NotFoundPage />;
+  }
+
   return (
     <Grid2 container spacing={3} className="relative pb-16 mt-6">
       <BackgroundImage image={comic.coverImageUrl} />
@@ -22,7 +44,7 @@ function ComicPage() {
         <SideDetails {...comic} />
       </Wrapper>
       <Wrapper>
-        <ChapterList comic={comic} chapters={chapters} />
+        <ChapterList comic={comic} />
       </Wrapper>
       <Helmet>
         <title>{comic.title} - Comic</title>

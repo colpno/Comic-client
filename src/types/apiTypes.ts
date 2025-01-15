@@ -12,26 +12,28 @@ export interface ApiDataResponse<D = unknown> {
   data: D;
 }
 export interface ApiPaginatedResponse<D = unknown> extends ApiDataResponse<D> {
-  metadata: {
-    /** The current page. */
-    currentPage: number;
-    /** The links to navigate pages. */
-    links: {
-      /**
-       * The link to the next page.
-       */
-      next?: string;
-      /**
-       * The link to the previous page.
-       */
-      previous?: string;
+  metadata?: {
+    pagination?: {
+      /** The current page. */
+      currentPage: number;
+      /** The links to navigate pages. */
+      links: {
+        /**
+         * The link to the next page.
+         */
+        next?: string;
+        /**
+         * The link to the previous page.
+         */
+        previous?: string;
+      };
+      /** The maximum items in 1 page. */
+      perPage: number;
+      /** The total of items. */
+      totalItems: number;
+      /** The total of pages. */
+      totalPages: number;
     };
-    /** The maximum items in 1 page. */
-    perPage: number;
-    /** The total of items. */
-    totalItems: number;
-    /** The total of pages. */
-    totalPages: number;
   };
 }
 export type ApiFulfilledResponse<D = unknown> = ApiPaginatedResponse<D> | ApiDataResponse<D>;

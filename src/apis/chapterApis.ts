@@ -16,12 +16,11 @@ const extendedApi = api.injectEndpoints({
       }),
       transformResponse: (response: ApiGetContentReturnType) => response.data,
     }),
-    getChapters: build.query<ApiGetChaptersReturnType['data'], ApiGetChaptersParams>({
+    getChapters: build.query<ApiGetChaptersReturnType, ApiGetChaptersParams>({
       query: ({ comicId, ...query }) => ({
         url: CHAPTER_ENDPOINTS.GET_CHAPTERS(comicId),
         params: query,
       }),
-      transformResponse: (response: ApiGetChaptersReturnType) => response.data,
     }),
   }),
 });

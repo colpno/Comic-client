@@ -13,7 +13,7 @@ export const AUTH_ENDPOINTS = {
 export const COMIC_ENDPOINTS = {
   BASE: '/comics' as const,
   GET_COMICS: () => COMIC_ENDPOINTS.BASE,
-  GET_COMIC: (id: string) => `${COMIC_ENDPOINTS.BASE}/${id}` as const,
+  GET_COMIC: (title: string) => `${COMIC_ENDPOINTS.BASE}/${title}` as const,
   SEARCH_COMICS: () => `${COMIC_ENDPOINTS.BASE}/search` as const,
 };
 

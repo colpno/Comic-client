@@ -29,6 +29,6 @@ export interface ApiGetComicsParams
 
 export type ApiGetComicReturnType = ApiFulfilledResponse<Comic>;
 export interface ApiGetComicParams {
-  id: Comic['id'];
+  title: Comic['title'];
   _embed?: (AllowedEmbed | 'creator')[];
 }

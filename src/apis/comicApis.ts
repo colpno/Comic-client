@@ -18,8 +18,8 @@ const extendedApi = api.injectEndpoints({
       transformResponse: (response: ApiGetComicsReturnType) => response.data,
     }),
     getComic: build.query<ApiGetComicReturnType['data'], ApiGetComicParams>({
-      query: ({ id, ...query }) => ({
-        url: COMIC_ENDPOINTS.GET_COMIC(id),
+      query: ({ title, ...query }) => ({
+        url: COMIC_ENDPOINTS.GET_COMIC(title),
         params: query,
       }),
       transformResponse: (response: ApiGetComicReturnType) => response.data,
