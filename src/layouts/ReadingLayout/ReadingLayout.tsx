@@ -1,6 +1,10 @@
-import { useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Outlet, useParams } from 'react-router-dom';
 
+import { useLazyGetChaptersQuery, useLazyGetContentQuery } from '~/apis/chapterApis.ts';
+import { useLazyGetComicQuery } from '~/apis/comicApis.ts';
+import DataFetching from '~/components/DataFetching.tsx';
+import NotFoundPage from '~/pages/ErrorPage/components/NotFoundPage.tsx';
 import Footer from '../components/Footer.tsx';
 import Header from './components/ReadingLayoutHeader';
 import {
@@ -10,6 +14,56 @@ import {
 
 function ReadingLayout() {
   const [visibility, setVisibility] = useState(true);
+  const { comictitle, chapterNumber } = useParams();
+  const [getComic, { data: comic, isFetching: isGetComicFetching }] = useLazyGetComicQuery();
+  const [getChapters, { data: getChaptersData, isFetching: isGetChaptersFetching }] =
+    useLazyGetChaptersQuery();
+  const [getChapterContent, { data: content = [], isFetching: isGetContentFetching }] =
+    useLazyGetContentQuery();
+  const [chapterPagination, setChapterPagination] = useState<
+    ContextType['chapterPagination'] | undefined
+  >();
+
+  const chapters = getChaptersData?.data || [];
+
+  // Fetch chapter's pagination
+  useEffect(() => {
+    if (chapters.length > 0) {
+      const currentChapterIndex = chapters.findIndex(
+        (chapter) => chapter.chapter === chapterNumber
+      );
+      const currentChapter = chapters[currentChapterIndex] || null;
+      const previousChapter = chapters[currentChapterIndex - 1] || null;
+      const nextChapter = chapters[currentChapterIndex + 1] || null;
+
+      setChapterPagination({
+        current: currentChapter,
+        previous: previousChapter,
+        next: nextChapter,
+      });
+
+      getChapterContent(currentChapter.id);
+    }
+  }, [chapterNumber, chapters]);
+
+  // Fetch ascending chapters based on comic's id
+  useEffect(() => {
+    if (comic) {
+      getChapters({
+        comicId: comic.id,
+        _sort: {
+          chapter: 'asc',
+        },
+      });
+    }
+  }, [comic]);
+
+  // Fetch comic based on comic's title
+  useEffect(() => {
+    if (comictitle) {
+      getComic({ title: comictitle });
+    }
+  }, [comictitle]);
 
   const toggleVisibility = () => setVisibility((prev) => !prev);
 
@@ -17,7 +71,25 @@ function ReadingLayout() {
     headerVisibility: visibility,
     setHeaderVisibility: setVisibility,
     toggleHeaderVisibility: toggleVisibility,
+    comic,
+    chapters,
+    chapterPagination,
+    content,
   };
+
+  if (isGetComicFetching || isGetChaptersFetching || isGetContentFetching) {
+    return (
+      <div className="pt-16 mt-header md:mt-header-md">
+        <DataFetching />
+      </div>
+    );
+  }
+  if (!comic) {
+    return <NotFoundPage title="Looks like the comic doesn't exist" />;
+  }
+  if (!chapterPagination?.current) {
+    return <NotFoundPage title="Looks like the chapter doesn't exist" />;
+  }
 
   return (
     <ContextProvider value={contextValues}>

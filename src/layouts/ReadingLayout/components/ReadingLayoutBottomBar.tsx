@@ -1,18 +1,39 @@
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa6';
 import { HiBars3BottomLeft } from 'react-icons/hi2';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { Button, Typography } from '~/components/index.ts';
-import { getComicRoute } from '~/constants/routeConstants.ts';
+import { getComicReadingRoute, getComicRoute } from '~/constants/routeConstants.ts';
 import { cn } from '~/utils/cssUtils.ts';
+import { useReadingLayoutContext } from '../ReadingLayoutContext.ts';
 
 interface Props {
   isDisplay: boolean;
 }
 
 function ReadingLayoutBottomBar({ isDisplay }: Props) {
+  const navigate = useNavigate();
   const { comicTitle, chapterNumber } = useParams();
   const comicPageHref = comicTitle ? getComicRoute(comicTitle) : undefined;
+  const { chapterPagination } = useReadingLayoutContext();
+
+  const handlePrevClick = () => {
+    if (!chapterPagination) return;
+    const { previous } = chapterPagination;
+
+    if (previous) {
+      navigate(getComicReadingRoute(comicTitle, previous.chapter));
+    }
+  };
+
+  const handleNextClick = () => {
+    if (!chapterPagination) return;
+    const { next } = chapterPagination;
+
+    if (next) {
+      navigate(getComicReadingRoute(comicTitle, next.chapter));
+    }
+  };
 
   return (
     <div
@@ -35,10 +56,15 @@ function ReadingLayoutBottomBar({ isDisplay }: Props) {
         <Typography>Ch.{chapterNumber}</Typography>
       </div>
       <nav className="flex items-center gap-2 md:gap-4">
-        <Button as="iconButton" color="inherit" title="Go to the previous">
+        <Button
+          as="iconButton"
+          color="inherit"
+          title="Go to the previous"
+          onClick={handlePrevClick}
+        >
           <FaChevronLeft fontSize={18} />
         </Button>
-        <Button as="iconButton" color="inherit" title="Go to the next">
+        <Button as="iconButton" color="inherit" title="Go to the next" onClick={handleNextClick}>
           <FaChevronRight fontSize={18} />
         </Button>
       </nav>
