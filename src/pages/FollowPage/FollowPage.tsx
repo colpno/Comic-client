@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import { useSearchParams } from 'react-router-dom';
 
 import {
-  ApiGetFollowParams,
+  ApiGetFollowsParams,
   useLazyGetFollowsQuery,
   useRemoveFollowMutation,
 } from '~/apis/followApis.ts';
@@ -24,7 +24,7 @@ function FollowPage() {
   const [getFollows, { isFetching: isApiFetching }] = useLazyGetFollowsQuery();
   const [isDataFetching, setIsDataFetching] = useState(isApiFetching);
   const [follows, setFollows] = useState<Follow<Comic>[]>([]);
-  const [getFollowsParams, setGetFollowsParams] = useState<ApiGetFollowParams>({
+  const [getFollowsParams, setGetFollowsParams] = useState<ApiGetFollowsParams>({
     _embed: {
       path: 'following',
       populate: 'cover_art',
