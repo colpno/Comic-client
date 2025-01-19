@@ -64,7 +64,7 @@ export const getTableDef = (): TableColsDef => [
 
       const getNextChapterLink = () => {
         const nextChapterNumber =
-          comic.latestUploadedChapter && comic.latestUploadedChapter > chapter.chapter
+          comic.lastChapter && chapter.chapter && comic.lastChapter > chapter.chapter
             ? chapter.chapter + 1
             : -1; // to prevent the link from being generated
         const nextChapterLink = getComicReadingRoute(comic.title, nextChapterNumber);
@@ -72,7 +72,7 @@ export const getTableDef = (): TableColsDef => [
       };
 
       const disableNext =
-        !comic.latestUploadedChapter || comic.latestUploadedChapter <= chapter.chapter;
+        !comic.lastChapter || !chapter.chapter || comic.lastChapter <= chapter.chapter;
 
       return [
         <TableActionButton

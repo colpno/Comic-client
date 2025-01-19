@@ -3,21 +3,16 @@ import { getTableDef } from '../historyPageTableDef.tsx';
 
 interface Props {
   data: TableData;
+  onRemove: Exclude<React.ComponentProps<typeof Table>['onRemove'], undefined>;
 }
 
-function HistoryPageTable({ data }: Props) {
-  const handleRemove = (id: string | string[]) => {
-    // TODO: Implement remove a history
-    console.log('id:', id);
-    return true;
-  };
-
+function HistoryPageTable({ data, onRemove }: Props) {
   return (
     <Table
       columns={getTableDef()}
       rows={data}
       removable={{ single: true, multiple: true }}
-      onRemove={handleRemove}
+      onRemove={onRemove}
     />
   );
 }

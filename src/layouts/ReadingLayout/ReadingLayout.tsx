@@ -4,6 +4,8 @@ import { Outlet, useParams } from 'react-router-dom';
 import { useLazyGetChaptersQuery, useLazyGetContentQuery } from '~/apis/chapterApis.ts';
 import { useLazyGetComicQuery } from '~/apis/comicApis.ts';
 import DataFetching from '~/components/DataFetching.tsx';
+import { addReadingHistory } from '~/libs/redux/slices/commonSlice.ts';
+import { useAppDispatch } from '~/libs/redux/store.ts';
 import NotFoundPage from '~/pages/ErrorPage/components/NotFoundPage.tsx';
 import Footer from '../components/Footer.tsx';
 import Header from './components/ReadingLayoutHeader';
@@ -23,6 +25,7 @@ function ReadingLayout() {
   const [chapterPagination, setChapterPagination] = useState<
     ContextType['chapterPagination'] | undefined
   >();
+  const dispatch = useAppDispatch();
 
   const chapters = getChaptersData?.data || [];
 
@@ -64,6 +67,22 @@ function ReadingLayout() {
       getComic({ title: comictitle });
     }
   }, [comictitle]);
+
+  // Save reading history
+  useEffect(() => {
+    const currentChapter = chapterPagination?.current;
+
+    if (comic && currentChapter) {
+      dispatch(
+        addReadingHistory({
+          id: comic.id,
+          readAt: new Date().toISOString(),
+          comic,
+          chapter: currentChapter,
+        })
+      );
+    }
+  }, [comic, chapterPagination?.current]);
 
   const toggleVisibility = () => setVisibility((prev) => !prev);
 
