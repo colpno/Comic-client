@@ -1,4 +1,4 @@
-import { ApiFulfilledResponse, GetRequestOperators } from '~/types/apiTypes.ts';
+import { ApiDataResponse, ApiFulfilledResponse, GetRequestOperators } from '~/types/apiTypes.ts';
 import { Comic } from '~/types/comicType.ts';
 
 type AllowedEmbed = 'artist' | 'author' | 'cover_art' | 'manga' | 'tag';
@@ -28,7 +28,7 @@ export interface ApiGetComicsParams
   >;
 }
 
-export type ApiGetComicReturnType = ApiFulfilledResponse<Comic>;
+export type ApiGetComicReturnType = ApiDataResponse<Comic>;
 export interface ApiGetComicParams {
   title: Comic['title'];
   _embed?: (AllowedEmbed | 'creator')[];

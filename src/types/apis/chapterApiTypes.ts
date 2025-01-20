@@ -1,4 +1,9 @@
-import { ApiFulfilledResponse, GetRequestOperators, Sort } from '~/types/apiTypes.ts';
+import {
+  ApiDataResponse,
+  ApiFulfilledResponse,
+  GetRequestOperators,
+  Sort,
+} from '~/types/apiTypes.ts';
 import { Chapter } from '~/types/chapterType.ts';
 
 type AllowedInclude = 'emptyPages' | 'futurePublishAt' | 'externalUrl';
@@ -12,4 +17,4 @@ export interface ApiGetChaptersParams
   _sort?: Sort<Pick<Chapter, 'publishAt' | 'readableAt' | 'volume' | 'chapter'>>;
 }
 
-export type ApiGetContentReturnType = ApiFulfilledResponse<Chapter['content']>;
+export type ApiGetContentReturnType = ApiDataResponse<Chapter['content']>;
