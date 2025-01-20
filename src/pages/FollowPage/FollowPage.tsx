@@ -99,7 +99,8 @@ function FollowPage() {
   // Fetch follows
   useEffect(() => {
     (async () => {
-      const data = (await getFollows(getFollowsParams).unwrap()) as Follow<Comic>[];
+      const res = await getFollows(getFollowsParams).unwrap();
+      const data = res.data as Follow<Comic>[];
 
       if (getFollowsParams._page === PAGINATION_INITIAL_PAGE) {
         setFollows(data);
