@@ -1,9 +1,10 @@
 import { Accordion, AccordionDetails, AccordionSummary, Grid2 } from '@mui/material';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { MdExpandMore } from 'react-icons/md';
 
 import { useLazyGetComicsQuery } from '~/apis/comicApis.ts';
-import { Button, DataFetching, Typography } from '~/components/index.ts';
+import { Button, DataFetching, Pagination, Typography } from '~/components/index.ts';
+import { PAGINATION_INITIAL_PAGE } from '~/constants/commonConstants.ts';
 import { getComicsByGenreRoute } from '~/constants/routeConstants.ts';
 import { ComicCard } from '~/features/index.ts';
 import { Comic } from '~/types/comicType.ts';
@@ -62,17 +63,28 @@ function AdditionalDetails(comic: Comic) {
   );
 }
 
+const RELATED_PER_PAGE = 50;
+
 function RelatedComics({ comicsId }: { comicsId: Comic['id'][] }) {
-  const [getComics, { data: related = [], isFetching }] = useLazyGetComicsQuery();
+  const [getComics, { data, isFetching }] = useLazyGetComicsQuery();
+  const [page, setPage] = useState(PAGINATION_INITIAL_PAGE);
+  const related = data?.data || [];
+  const pagination = data?.metadata?.pagination;
 
   useEffect(() => {
     if (comicsId.length > 0) {
+      const paginatedComicIds = comicsId.slice(
+        (page - 1) * RELATED_PER_PAGE,
+        page * RELATED_PER_PAGE
+      );
       getComics({
-        ids: comicsId as Comic['id'][],
+        ids: paginatedComicIds,
         _embed: ['cover_art'],
+        _page: page,
+        _limit: RELATED_PER_PAGE,
       });
     }
-  }, [comicsId]);
+  }, [comicsId, page]);
 
   if (isFetching) {
     return <DataFetching />;
@@ -101,6 +113,7 @@ function RelatedComics({ comicsId }: { comicsId: Comic['id'][] }) {
             </Grid2>
           ))}
         </Grid2>
+        {pagination && <Pagination pageCount={pagination.totalPages} onChange={setPage} />}
       </AccordionDetails>
     </Accordion>
   );
