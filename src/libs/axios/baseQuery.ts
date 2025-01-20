@@ -5,7 +5,12 @@ import { toast } from 'react-toastify';
 import { AUTH_ENDPOINTS } from '~/apis/apiConstants.ts';
 import { ApiGetCSRFReturnType } from '~/apis/authApis.ts';
 import { HEADER_CSRF } from '~/constants/commonConstants.ts';
-import { ApiFailedResponse, ApiFulfilledResponse, ApiRequestArgs } from '~/types/apiTypes';
+import {
+  ApiFailedResponse,
+  ApiFulfilledResponse,
+  ApiRequestArgs,
+  ValidationError,
+} from '~/types/apiTypes';
 
 axios.defaults.withCredentials = true;
 
@@ -54,7 +59,15 @@ const baseQuery =
         (unknownError as Error).message ||
         'Something went wrong, please contact with any Administrator';
 
-      typeof message === 'string' && toast.error(message);
+      if (typeof message === 'string') toast.error(message);
+
+      // Validation errors
+      if (Array.isArray(message)) {
+        const validationErrors = message as ValidationError[];
+        validationErrors.forEach(({ message }) => {
+          toast.error(`Validation error: ${message}`);
+        });
+      }
 
       return {
         error: {
