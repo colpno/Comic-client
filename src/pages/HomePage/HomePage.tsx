@@ -4,7 +4,7 @@ import { v4 } from 'uuid';
 
 import { useGetComicsQuery } from '~/apis/comicApis.ts';
 import { Comic } from '~/types/comicType.ts';
-import BannerSlider from './components/HomePageBannerSlider.tsx';
+import BannerSlider from './components/HomePageBanner.tsx';
 import CardRow from './components/HomePageCardRow.tsx';
 import GenreContainer from './components/HomePageGenreContainer.tsx';
 import Menu from './components/HomePageMenu.tsx';
