@@ -38,7 +38,7 @@ export interface ApiPaginatedResponse<D = unknown> extends ApiDataResponse<D> {
     };
   };
 }
-export type ApiFulfilledResponse<D = unknown> = ApiPaginatedResponse<D> | ApiDataResponse<D>;
+export type ApiFulfilledResponse<D = unknown> = ApiPaginatedResponse<D> & ApiDataResponse<D>;
 
 export interface ValidationError {
   /** Form field name. */

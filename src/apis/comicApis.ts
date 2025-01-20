@@ -10,12 +10,11 @@ import api from './index.ts';
 const extendedApi = api.injectEndpoints({
   endpoints: (build) => ({
     // GET
-    getComics: build.query<ApiGetComicsReturnType['data'], ApiGetComicsParams>({
+    getComics: build.query<ApiGetComicsReturnType, ApiGetComicsParams>({
       query: (query) => ({
         url: COMIC_ENDPOINTS.GET_COMICS(),
         params: query,
       }),
-      transformResponse: (response: ApiGetComicsReturnType) => response.data,
     }),
     getComic: build.query<ApiGetComicReturnType['data'], ApiGetComicParams>({
       query: ({ title, ...query }) => ({

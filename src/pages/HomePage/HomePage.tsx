@@ -57,12 +57,13 @@ const filterComicsByGenre: FilterComicsByGenre = (genres, comics) => {
 };
 
 function HomePage() {
-  const { data: comics = [] } = useGetComicsQuery({
+  const { data } = useGetComicsQuery({
     _limit: 100,
     includedTags: genres,
     includedTagsMode: 'OR',
     _embed: 'cover_art',
   });
+  const comics = data?.data || [];
   const [comicsByGenre, setComicsByGenre] = useState<ComicsByGenre[]>([]);
 
   // Filter comics by genre

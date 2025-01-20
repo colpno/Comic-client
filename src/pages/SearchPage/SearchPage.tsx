@@ -54,10 +54,11 @@ function SearchPage() {
     (async () => {
       const hasSearchValue = getComicsParams.title && getComicsParams.title.length > 0;
       if (hasSearchValue) {
-        const newComics = await searchComics({
+        const data = await searchComics({
           ...getComicsParams,
           title: getComicsParams.title!,
         }).unwrap();
+        const newComics = data.data;
 
         const isFirstPage = getComicsParams._page === PAGINATION_INITIAL_PAGE;
         if (isFirstPage) {

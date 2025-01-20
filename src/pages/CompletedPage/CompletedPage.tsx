@@ -61,7 +61,8 @@ function CompletedPage() {
   // Fetch comics
   useEffect(() => {
     (async () => {
-      const newComics = await getComics(getComicsParams).unwrap();
+      const data = await getComics(getComicsParams).unwrap();
+      const newComics = data.data;
 
       if (getComicsParams._page === PAGINATION_INITIAL_PAGE) {
         setComics(newComics);

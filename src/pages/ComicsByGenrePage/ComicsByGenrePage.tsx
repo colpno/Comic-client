@@ -28,12 +28,13 @@ function ComicsByGenrePage() {
 
   useEffect(() => {
     (async () => {
-      const newComics = await getComics({
+      const data = await getComics({
         includedTags: [genre],
         _embed: 'cover_art',
         _limit: PER_PAGE,
         _page: page,
       }).unwrap();
+      const newComics = data.data;
 
       if (page === PAGINATION_INITIAL_PAGE) {
         setComics(newComics);

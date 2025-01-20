@@ -22,7 +22,7 @@ function LatestUpdatesPage() {
 
   useEffect(() => {
     (async () => {
-      const newComics = await getComics({
+      const data = await getComics({
         _embed: 'cover_art',
         _limit: PER_PAGE,
         _page: page,
@@ -30,6 +30,7 @@ function LatestUpdatesPage() {
           updatedAt: 'desc',
         },
       }).unwrap();
+      const newComics = data.data;
 
       if (page === PAGINATION_INITIAL_PAGE) {
         setComics(newComics);
