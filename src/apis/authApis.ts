@@ -6,6 +6,7 @@ import {
   ApiRegisterParams,
 } from '~/types/apis/authApiTypes.ts';
 import { AUTH_ENDPOINTS } from './apiConstants.ts';
+import { attachAuthorization } from './apiUtils.ts';
 import api from './index.ts';
 
 const extendedApi = api.injectEndpoints({
@@ -23,9 +24,21 @@ const extendedApi = api.injectEndpoints({
       }),
     }),
     logout: build.query<void, void>({
-      query: () => ({
-        url: AUTH_ENDPOINTS.LOGOUT(),
-      }),
+      queryFn: async (_args, { getState }, _, query) => {
+        const res = await attachAuthorization(
+          {
+            url: AUTH_ENDPOINTS.LOGOUT(),
+          },
+          getState,
+          query
+        );
+
+        if (res.error) {
+          return { error: res.error };
+        }
+
+        return { data: undefined as void };
+      },
     }),
     refreshAccessToken: build.query<ApiRefreshAccessToken['data'], void>({
       query: () => ({
