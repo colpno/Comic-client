@@ -3,14 +3,16 @@ import { GrFormNextLink } from 'react-icons/gr';
 import {
   generateTableActionsColDef,
   Image,
+  Popup,
   TableActionButton,
   TableColsDef,
   Typography,
 } from '~/components/index.ts';
-import { getComicReadingRoute } from '~/constants/routeConstants.ts';
+import { getComicReadingRoute, getComicRoute } from '~/constants/routeConstants.ts';
+import { usePopup } from '~/hooks/usePopup.ts';
 import { placeholderImage } from '~/images/index.ts';
-import { Chapter } from '~/types/chapterType.ts';
 import { Comic } from '~/types/comicType.ts';
+import { History } from '~/types/historyType.ts';
 import { toDate } from '~/utils/converters.ts';
 
 export const getTableDef = (): TableColsDef => [
@@ -19,34 +21,51 @@ export const getTableDef = (): TableColsDef => [
     headerName: 'Title',
     flex: 2,
     renderCell: ({ value }) => {
-      const comic = value as Comic;
+      const { title, coverImageUrl } = value as Comic;
+      const { closePopup, open, openPopup, popupRef } = usePopup();
       return (
-        <div className="flex items-center h-full gap-3">
+        <div className="flex items-center h-full gap-3 font-semibold">
           <Image
             src={placeholderImage}
-            alt={comic.title}
+            alt={title}
             className="w-7 aspect-[8/11]"
             onLoad={({ currentTarget }) => {
-              currentTarget.src = comic.coverImageUrl;
+              currentTarget.src = coverImageUrl;
             }}
             onError={({ currentTarget }) => {
               currentTarget.src = placeholderImage;
             }}
+            onPointerEnter={openPopup}
+            onTouchEnd={openPopup}
           />
-          <Typography>{comic.title}</Typography>
+          <Popup
+            open={open}
+            onClose={closePopup}
+            anchorEl={popupRef}
+            position={{ vertical: 'center' }}
+          >
+            <Image src={coverImageUrl} alt={title} className="w-32 md:w-48 aspect-[8/11]" />
+          </Popup>
+          <Typography href={getComicRoute(title)}>{title}</Typography>
         </div>
       );
     },
   },
   {
-    field: 'chapter',
+    field: 'chapterNumber',
     type: 'number',
     headerName: 'Chapter',
     align: 'center',
     headerAlign: 'center',
-    renderCell: ({ value }) => {
-      const chapter = value as Chapter;
-      return chapter.chapter;
+    renderCell: ({ row }) => {
+      const { comic, chapterNumber } = row as History;
+      return (
+        <div className="flex items-center justify-center h-full font-semibold">
+          <Typography href={getComicReadingRoute(comic.title, chapterNumber)}>
+            {chapterNumber}
+          </Typography>
+        </div>
+      );
     },
   },
   {
@@ -59,27 +78,17 @@ export const getTableDef = (): TableColsDef => [
   },
   generateTableActionsColDef({
     render: ({ row }) => {
-      const comic = row.comic as Comic;
-      const chapter = row.chapter as Chapter;
+      const { comic, nextChapter } = row as History;
+      const { title } = comic as Comic;
 
-      const getNextChapterLink = () => {
-        const nextChapterNumber =
-          comic.lastChapter && chapter.chapter && comic.lastChapter > chapter.chapter
-            ? chapter.chapter + 1
-            : -1; // to prevent the link from being generated
-        const nextChapterLink = getComicReadingRoute(comic.title, nextChapterNumber);
-        return nextChapterLink;
-      };
-
-      const disableNext =
-        !comic.lastChapter || !chapter.chapter || comic.lastChapter <= chapter.chapter;
+      const nextChapterLink = nextChapter ? getComicReadingRoute(title, nextChapter) : undefined;
 
       return [
         <TableActionButton
           label="Read next"
           icon={<GrFormNextLink className="text-2xl" />}
-          disabled={disableNext}
-          href={getNextChapterLink()}
+          disabled={nextChapterLink === undefined}
+          href={nextChapterLink}
         />,
       ];
     },

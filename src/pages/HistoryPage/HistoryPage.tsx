@@ -1,5 +1,4 @@
 import { Container } from '@mui/material';
-import { useMemo } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useSelector } from 'react-redux';
 
@@ -12,17 +11,6 @@ import Table from './components/HistoryPageTable';
 function HistoryPage() {
   const dispatch = useAppDispatch();
   const readingHistory = useSelector((state: RootState) => state.common.read);
-
-  const tableData = useMemo(
-    () =>
-      readingHistory.map((history) => ({
-        id: history.id,
-        readAt: new Date(history.readAt),
-        comic: history.comic,
-        chapter: history.chapter,
-      })),
-    []
-  );
 
   const handleRemove = (id: string | string[]) => {
     try {
@@ -38,7 +26,7 @@ function HistoryPage() {
       <Typography variant="h4" className="!mb-4">
         History
       </Typography>
-      <Table data={tableData} onRemove={handleRemove} />
+      <Table data={readingHistory} onRemove={handleRemove} />
       <Helmet>
         <title>Reading history - Comic</title>
       </Helmet>

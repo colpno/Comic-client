@@ -4,7 +4,7 @@ export const usePopup = () => {
   const [ref, setRef] = useState<HTMLElement | null>(null);
   const open = Boolean(ref);
 
-  const openPopup = (e: React.MouseEvent<HTMLElement>) => {
+  const openPopup = (e: React.UIEvent<HTMLElement>) => {
     setRef(e.currentTarget);
   };
 

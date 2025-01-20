@@ -3,7 +3,8 @@ import { Comic } from './comicType.ts';
 
 export interface History {
   id: string;
-  comic: Comic;
-  chapter: Chapter;
+  comic: Pick<Comic, 'title' | 'coverImageUrl'>;
+  chapterNumber: Chapter['chapter'];
+  nextChapter?: Chapter['chapter'];
   readAt: string;
 }

@@ -64,7 +64,7 @@ function ReadingLayout() {
   // Fetch comic based on comic's title
   useEffect(() => {
     if (comictitle) {
-      getComic({ title: comictitle });
+      getComic({ title: comictitle, _embed: ['cover_art'] });
     }
   }, [comictitle]);
 
@@ -77,8 +77,12 @@ function ReadingLayout() {
         addReadingHistory({
           id: comic.id,
           readAt: new Date().toISOString(),
-          comic,
-          chapter: currentChapter,
+          comic: {
+            title: comic.title,
+            coverImageUrl: comic.coverImageUrl,
+          },
+          chapterNumber: currentChapter.chapter,
+          nextChapter: chapterPagination?.next?.chapter,
         })
       );
     }
