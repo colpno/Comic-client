@@ -6,6 +6,8 @@
 ======================================================================
 */
 
+import { AxiosRequestConfig, Method } from 'axios';
+
 import { PrimitiveValue } from './commonTypes.ts';
 
 export interface ApiDataResponse<D = unknown> {
@@ -175,4 +177,12 @@ export interface GetRequestOperators<D = undefined> {
   _limit?: number;
   /** For paginating. */
   _page?: number;
+}
+
+export interface ApiRequestArgs
+  extends Omit<AxiosRequestConfig, 'url' | 'method' | 'data' | 'params'> {
+  url: string;
+  method?: Method;
+  data?: AxiosRequestConfig['data'];
+  params?: AxiosRequestConfig['params'];
 }
