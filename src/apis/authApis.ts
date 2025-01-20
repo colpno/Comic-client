@@ -2,6 +2,7 @@ import {
   ApiGetCSRFReturnType,
   ApiLoginParams,
   ApiLoginReturnType,
+  ApiRefreshAccessToken,
   ApiRegisterParams,
 } from '~/types/apis/authApiTypes.ts';
 import { AUTH_ENDPOINTS } from './apiConstants.ts';
@@ -25,6 +26,12 @@ const extendedApi = api.injectEndpoints({
       query: () => ({
         url: AUTH_ENDPOINTS.LOGOUT(),
       }),
+    }),
+    refreshAccessToken: build.query<ApiRefreshAccessToken['data'], void>({
+      query: () => ({
+        url: AUTH_ENDPOINTS.REFRESH_ACCESS_TOKEN(),
+      }),
+      transformResponse: (response: ApiRefreshAccessToken) => response.data,
     }),
 
     // POST
@@ -65,6 +72,8 @@ export const {
   useRefreshCSRFQuery,
   useRegisterMutation,
   useResetPasswordMutation,
+  useRefreshAccessTokenQuery,
+  useLazyRefreshAccessTokenQuery,
 } = extendedApi;
 
 export type * from '~/types/apis/authApiTypes.ts';

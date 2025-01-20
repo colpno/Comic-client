@@ -24,12 +24,15 @@ const slice = createSlice({
       state.accessToken = initialState.accessToken;
       state.isLoggedIn = false;
     },
+    setAccessToken: (state, { payload }: PayloadAction<State['accessToken']>) => {
+      state.accessToken = payload;
+    },
   },
 });
 
 const { reducer: authReducer, actions } = slice;
 
-export const { login, logout } = actions;
+export const { login, logout, setAccessToken } = actions;
 
 export type AuthReducerState = State;
 

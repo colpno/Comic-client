@@ -1,6 +1,6 @@
 import { RouterProvider } from 'react-router-dom';
 
-import { DeviceWatcher, Toast } from './components/index.ts';
+import { AccessTokenRefresher, DeviceWatcher, Toast } from './components/index.ts';
 import AppContextWrapper from './contexts/AppContextWrapper.tsx';
 import { router } from './routes/index.ts';
 
@@ -10,6 +10,7 @@ function App() {
       <RouterProvider router={router} />
       <Toast />
       <DeviceWatcher />
+      <AccessTokenRefresher />
     </AppContextWrapper>
   );
 }

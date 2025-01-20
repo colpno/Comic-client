@@ -8,6 +8,7 @@ export const AUTH_ENDPOINTS = {
   LOGOUT: () => `${AUTH_ENDPOINTS.BASE}/logout` as const,
   REGISTER: () => `${AUTH_ENDPOINTS.BASE}/register` as const,
   RESET_PASSWORD: () => `${AUTH_ENDPOINTS.BASE}/reset-password` as const,
+  REFRESH_ACCESS_TOKEN: () => `${AUTH_ENDPOINTS.BASE}/refresh-token` as const,
 };
 
 export const COMIC_ENDPOINTS = {

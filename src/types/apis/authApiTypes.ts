@@ -13,3 +13,5 @@ export type ApiRegisterParams = {
   password: string;
   passwordConfirmation: string;
 };
+
+export type ApiRefreshAccessToken = ApiLoginReturnType;
