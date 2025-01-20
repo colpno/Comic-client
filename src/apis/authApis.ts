@@ -1,6 +1,7 @@
 import {
   ApiGetCSRFReturnType,
   ApiLoginParams,
+  ApiLoginReturnType,
   ApiRegisterParams,
 } from '~/types/apis/authApiTypes.ts';
 import { AUTH_ENDPOINTS } from './apiConstants.ts';
@@ -27,12 +28,13 @@ const extendedApi = api.injectEndpoints({
     }),
 
     // POST
-    login: build.mutation<void, ApiLoginParams>({
+    login: build.mutation<ApiLoginReturnType['data'], ApiLoginParams>({
       query: (params) => ({
         url: AUTH_ENDPOINTS.LOGIN(),
         method: 'POST',
         data: params,
       }),
+      transformResponse: (response: ApiLoginReturnType) => response.data,
     }),
     register: build.mutation<void, ApiRegisterParams>({
       query: (params) => ({

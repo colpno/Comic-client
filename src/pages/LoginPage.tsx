@@ -16,8 +16,8 @@ function LoginPage() {
 
   const handleFormSubmit = async (values: LoginFormValues) => {
     try {
-      await loginQuery(values);
-      dispatch(login());
+      const data = await loginQuery(values).unwrap();
+      dispatch(login(data.accessToken));
     } catch (error) {}
   };
 

@@ -34,8 +34,8 @@ function HeaderAccountButton() {
 
   const handleFormSubmit = async (values: LoginFormValues) => {
     try {
-      await loginQuery(values);
-      dispatch(login());
+      const data = await loginQuery(values).unwrap();
+      dispatch(login(data.accessToken));
       closePopup();
     } catch (error) {}
   };
