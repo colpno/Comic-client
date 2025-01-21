@@ -46,7 +46,9 @@ export const getTableDef = (): TableColsDef => [
           >
             <Image src={coverImageUrl} alt={title} className="w-32 md:w-48 aspect-[8/11]" />
           </Popup>
-          <Typography href={getComicRoute(title)}>{title}</Typography>
+          <Typography href={getComicRoute(title)} title="Go to the comic page">
+            {title}
+          </Typography>
         </div>
       );
     },
@@ -61,7 +63,10 @@ export const getTableDef = (): TableColsDef => [
       const { comic, chapterNumber } = row as History;
       return (
         <div className="flex items-center justify-center h-full font-semibold">
-          <Typography href={getComicReadingRoute(comic.title, chapterNumber)}>
+          <Typography
+            href={getComicReadingRoute(comic.title, chapterNumber)}
+            title={`Go to chapter ${chapterNumber}`}
+          >
             {chapterNumber}
           </Typography>
         </div>
