@@ -4,6 +4,7 @@ import { GoQuestion } from 'react-icons/go';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { Button, Logo, Typography } from '~/components/index.ts';
+import { getComicRoute } from '~/constants/routeConstants.ts';
 import { useDeviceWatcher } from '~/hooks/useDeviceWatcher.ts';
 import BaseHeader from '~/layouts/components/Header.tsx';
 import AccountButton from '~/layouts/components/HeaderActions/HeaderAccountButton.tsx';
@@ -16,7 +17,7 @@ import Guide from './ReadingLayoutGuidePopup.tsx';
 
 function ReadingLayoutHeader() {
   const navigate = useNavigate();
-  const { headerVisibility, pagination, chapter } = useReadingLayoutContext();
+  const { headerVisibility, pagination, comic, chapter } = useReadingLayoutContext();
   const isMobile = useDeviceWatcher() === 'mobile';
   const [guidePopup, setGuidePopup] = useState(false);
 
@@ -53,7 +54,7 @@ function ReadingLayoutHeader() {
       >
         {({ theme }) => (
           <>
-            <nav>
+            <nav className="flex items-center justify-center gap-3">
               <Link to="/">
                 {isMobile ? (
                   <Logo variant="small" fill={theme.palette.primary.main} />
@@ -61,6 +62,17 @@ function ReadingLayoutHeader() {
                   <Logo width={110} height={27} fill={theme.palette.primary.main} />
                 )}
               </Link>
+              {comic && (
+                <div className="line-clamp-1 w-[100px] md:w-[180px] lg:w-[200px]">
+                  <Typography
+                    href={getComicRoute(comic.title)}
+                    title={comic.title}
+                    fontWeight={600}
+                  >
+                    {comic.title}
+                  </Typography>
+                </div>
+              )}
             </nav>
             {!isMobile && chapter && (
               <nav className="absolute flex items-center gap-2 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 md:gap-4">
