@@ -22,6 +22,8 @@ export const CHAPTER_ENDPOINTS = {
   BASE: '/chapters' as const,
   GET_CONTENT: (id: string) => `${CHAPTER_ENDPOINTS.BASE}/${id}/content` as const,
   GET_CHAPTERS: (comicId: string) => `${COMIC_ENDPOINTS.BASE}/${comicId}/chapters` as const,
+  READING_CHAPTER: (title: string, chapterNumber: string) =>
+    `${COMIC_ENDPOINTS.BASE}/${title}/reading/${chapterNumber}` as const,
 };
 
 export const FOLLOW_ENDPOINTS = {

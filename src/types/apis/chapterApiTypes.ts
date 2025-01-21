@@ -5,6 +5,7 @@ import {
   Sort,
 } from '~/types/apiTypes.ts';
 import { Chapter } from '~/types/chapterType.ts';
+import { Comic } from '../comicType.ts';
 
 type AllowedInclude = 'emptyPages' | 'futurePublishAt' | 'externalUrl';
 
@@ -18,3 +19,12 @@ export interface ApiGetChaptersParams
 }
 
 export type ApiGetContentReturnType = ApiDataResponse<Chapter['content']>;
+
+export type ApiReadingChapterReturnType = ApiFulfilledResponse<{
+  comic: Pick<Comic, 'id' | 'title' | 'coverImageUrl'>;
+  chapter: Chapter;
+}>;
+export interface ApiReadingChapterParams {
+  title: string;
+  chapterNumber: string;
+}

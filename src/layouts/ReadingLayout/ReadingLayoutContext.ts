@@ -4,28 +4,22 @@ import { Chapter } from '~/types/chapterType.ts';
 import { Comic } from '~/types/comicType.ts';
 
 export interface ReadingLayoutContextType {
-  comic?: Comic | null;
-  chapters: Chapter[];
-  chapterPagination?: {
-    current: Chapter | null;
-    previous: Chapter | null;
-    next: Chapter | null;
+  comic?: Pick<Comic, 'id' | 'title' | 'coverImageUrl'>;
+  chapter?: Chapter;
+  pagination: {
+    previous?: string;
+    next?: string;
   };
-  content: Chapter['content'];
   headerVisibility: boolean;
   setHeaderVisibility: (value: boolean) => void;
   toggleHeaderVisibility: () => void;
 }
 
 const defaultValues: ReadingLayoutContextType = {
-  comic: null,
-  chapters: [],
-  chapterPagination: {
-    current: null,
-    previous: null,
-    next: null,
+  pagination: {
+    previous: undefined,
+    next: undefined,
   },
-  content: [],
   headerVisibility: true,
   setHeaderVisibility: () => {},
   toggleHeaderVisibility: () => {},

@@ -78,17 +78,13 @@ export const getTableDef = (): TableColsDef => [
   },
   generateTableActionsColDef({
     render: ({ row }) => {
-      const { comic, nextChapter } = row as History;
-      const { title } = comic as Comic;
-
-      const nextChapterLink = nextChapter ? getComicReadingRoute(title, nextChapter) : undefined;
-
+      const { nextChapter } = row as History;
       return [
         <TableActionButton
           label="Read next"
           icon={<GrFormNextLink className="text-2xl" />}
-          disabled={nextChapterLink === undefined}
-          href={nextChapterLink}
+          disabled={nextChapter === undefined}
+          href={nextChapter}
         />,
       ];
     },

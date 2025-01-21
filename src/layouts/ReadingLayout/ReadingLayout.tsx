@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Outlet, useParams } from 'react-router-dom';
 
-import { useLazyGetChaptersQuery, useLazyGetContentQuery } from '~/apis/chapterApis.ts';
-import { useLazyGetComicQuery } from '~/apis/comicApis.ts';
+import { useLazyReadingChapterQuery } from '~/apis/chapterApis.ts';
 import DataFetching from '~/components/DataFetching.tsx';
 import { addReadingHistory } from '~/libs/redux/slices/commonSlice.ts';
 import { useAppDispatch } from '~/libs/redux/store.ts';
@@ -17,62 +16,23 @@ import {
 function ReadingLayout() {
   const [visibility, setVisibility] = useState(true);
   const { comictitle, chapterNumber } = useParams();
-  const [getComic, { data: comic, isFetching: isGetComicFetching }] = useLazyGetComicQuery();
-  const [getChapters, { data: getChaptersData, isFetching: isGetChaptersFetching }] =
-    useLazyGetChaptersQuery();
-  const [getChapterContent, { data: content = [], isFetching: isGetContentFetching }] =
-    useLazyGetContentQuery();
-  const [chapterPagination, setChapterPagination] = useState<
-    ContextType['chapterPagination'] | undefined
-  >();
+  const [getReadingChapterData, { data, isFetching }] = useLazyReadingChapterQuery();
+  const readingData = data?.data;
+  const pagination = data?.metadata?.pagination;
   const dispatch = useAppDispatch();
 
-  const chapters = getChaptersData?.data || [];
-
-  // Fetch chapter's pagination
+  // Fetch data for reading
   useEffect(() => {
-    if (chapters.length > 0) {
-      const currentChapterIndex = chapters.findIndex(
-        (chapter) => chapter.chapter === chapterNumber
-      );
-      const currentChapter = chapters[currentChapterIndex] || null;
-      const previousChapter = chapters[currentChapterIndex - 1] || null;
-      const nextChapter = chapters[currentChapterIndex + 1] || null;
-
-      setChapterPagination({
-        current: currentChapter,
-        previous: previousChapter,
-        next: nextChapter,
-      });
-
-      getChapterContent(currentChapter.id);
+    if (comictitle && chapterNumber) {
+      getReadingChapterData({ title: comictitle, chapterNumber });
     }
-  }, [chapterNumber, chapters]);
-
-  // Fetch ascending chapters based on comic's id
-  useEffect(() => {
-    if (comic) {
-      getChapters({
-        comicId: comic.id,
-        _sort: {
-          chapter: 'asc',
-        },
-      });
-    }
-  }, [comic]);
-
-  // Fetch comic based on comic's title
-  useEffect(() => {
-    if (comictitle) {
-      getComic({ title: comictitle, _embed: ['cover_art'] });
-    }
-  }, [comictitle]);
+  }, [comictitle, chapterNumber]);
 
   // Save reading history
   useEffect(() => {
-    const currentChapter = chapterPagination?.current;
+    if (readingData?.comic && readingData?.chapter && pagination) {
+      const { comic, chapter } = readingData;
 
-    if (comic && currentChapter) {
       dispatch(
         addReadingHistory({
           id: comic.id,
@@ -81,12 +41,12 @@ function ReadingLayout() {
             title: comic.title,
             coverImageUrl: comic.coverImageUrl,
           },
-          chapterNumber: currentChapter.chapter,
-          nextChapter: chapterPagination?.next?.chapter,
+          chapterNumber: chapter.chapter,
+          nextChapter: pagination.links.next,
         })
       );
     }
-  }, [comic, chapterPagination?.current]);
+  }, [readingData?.comic, readingData?.chapter, pagination]);
 
   const toggleVisibility = () => setVisibility((prev) => !prev);
 
@@ -94,24 +54,23 @@ function ReadingLayout() {
     headerVisibility: visibility,
     setHeaderVisibility: setVisibility,
     toggleHeaderVisibility: toggleVisibility,
-    comic,
-    chapters,
-    chapterPagination,
-    content,
+    comic: readingData?.comic,
+    chapter: readingData?.chapter,
+    pagination: {
+      previous: pagination?.links.previous,
+      next: pagination?.links.next,
+    },
   };
 
-  if (isGetComicFetching || isGetChaptersFetching || isGetContentFetching) {
+  if (isFetching) {
     return (
       <div className="pt-16 mt-header md:mt-header-md">
         <DataFetching />
       </div>
     );
   }
-  if (!comic) {
-    return <NotFoundPage title="Looks like the comic doesn't exist" />;
-  }
-  if (!chapterPagination?.current) {
-    return <NotFoundPage title="Looks like the chapter doesn't exist" />;
+  if (!data) {
+    return <NotFoundPage title="Looks like the comic or chapter doesn't exist" />;
   }
 
   return (

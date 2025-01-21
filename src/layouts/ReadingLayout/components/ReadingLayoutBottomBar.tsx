@@ -3,7 +3,7 @@ import { HiBars3BottomLeft } from 'react-icons/hi2';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { Button, Typography } from '~/components/index.ts';
-import { getComicReadingRoute, getComicRoute } from '~/constants/routeConstants.ts';
+import { getComicRoute } from '~/constants/routeConstants.ts';
 import { cn } from '~/utils/cssUtils.ts';
 import { useReadingLayoutContext } from '../ReadingLayoutContext.ts';
 
@@ -15,23 +15,21 @@ function ReadingLayoutBottomBar({ isDisplay }: Props) {
   const navigate = useNavigate();
   const { comicTitle, chapterNumber } = useParams();
   const comicPageHref = comicTitle ? getComicRoute(comicTitle) : undefined;
-  const { chapterPagination } = useReadingLayoutContext();
+  const { pagination } = useReadingLayoutContext();
 
   const handlePrevClick = () => {
-    if (!chapterPagination) return;
-    const { previous } = chapterPagination;
+    const { previous } = pagination;
 
     if (previous) {
-      navigate(getComicReadingRoute(comicTitle, previous.chapter));
+      navigate(previous);
     }
   };
 
   const handleNextClick = () => {
-    if (!chapterPagination) return;
-    const { next } = chapterPagination;
+    const { next } = pagination;
 
     if (next) {
-      navigate(getComicReadingRoute(comicTitle, next.chapter));
+      navigate(next);
     }
   };
 

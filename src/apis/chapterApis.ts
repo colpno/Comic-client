@@ -2,6 +2,8 @@ import {
   ApiGetChaptersParams,
   ApiGetChaptersReturnType,
   ApiGetContentReturnType,
+  ApiReadingChapterParams,
+  ApiReadingChapterReturnType,
 } from '~/types/apis/chapterApiTypes.ts';
 import { Chapter } from '~/types/chapterType.ts';
 import { CHAPTER_ENDPOINTS } from './apiConstants.ts';
@@ -22,6 +24,11 @@ const extendedApi = api.injectEndpoints({
         params: query,
       }),
     }),
+    readingChapter: build.query<ApiReadingChapterReturnType, ApiReadingChapterParams>({
+      query: ({ title, chapterNumber }) => ({
+        url: CHAPTER_ENDPOINTS.READING_CHAPTER(title, chapterNumber),
+      }),
+    }),
   }),
 });
 
@@ -30,6 +37,8 @@ export const {
   useGetContentQuery,
   useLazyGetChaptersQuery,
   useLazyGetContentQuery,
+  useReadingChapterQuery,
+  useLazyReadingChapterQuery,
 } = extendedApi;
 
 export type * from '~/types/apis/chapterApiTypes.ts';

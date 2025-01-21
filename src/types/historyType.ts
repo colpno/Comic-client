@@ -5,6 +5,6 @@ export interface History {
   id: string;
   comic: Pick<Comic, 'title' | 'coverImageUrl'>;
   chapterNumber: Chapter['chapter'];
-  nextChapter?: Chapter['chapter'];
+  nextChapter?: string;
   readAt: string;
 }

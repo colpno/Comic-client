@@ -1,10 +1,9 @@
 import { useState } from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa6';
 import { GoQuestion } from 'react-icons/go';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { Button, Logo, Typography } from '~/components/index.ts';
-import { getComicReadingRoute } from '~/constants/routeConstants.ts';
 import { useDeviceWatcher } from '~/hooks/useDeviceWatcher.ts';
 import BaseHeader from '~/layouts/components/Header.tsx';
 import AccountButton from '~/layouts/components/HeaderActions/HeaderAccountButton.tsx';
@@ -17,29 +16,26 @@ import Guide from './ReadingLayoutGuidePopup.tsx';
 
 function ReadingLayoutHeader() {
   const navigate = useNavigate();
-  const { headerVisibility, chapterPagination } = useReadingLayoutContext();
+  const { headerVisibility, pagination, chapter } = useReadingLayoutContext();
   const isMobile = useDeviceWatcher() === 'mobile';
   const [guidePopup, setGuidePopup] = useState(false);
-  const { comictitle } = useParams();
 
   const openGuidePopup = () => setGuidePopup(true);
   const closeGuidePopup = () => setGuidePopup(false);
 
   const handlePrevClick = () => {
-    if (!chapterPagination) return;
-    const { previous } = chapterPagination;
+    const { previous } = pagination;
 
     if (previous) {
-      navigate(getComicReadingRoute(comictitle, previous.chapter));
+      navigate(previous);
     }
   };
 
   const handleNextClick = () => {
-    if (!chapterPagination) return;
-    const { next } = chapterPagination;
+    const { next } = pagination;
 
     if (next) {
-      navigate(getComicReadingRoute(comictitle, next.chapter));
+      navigate(next);
     }
   };
 
@@ -66,12 +62,12 @@ function ReadingLayoutHeader() {
                 )}
               </Link>
             </nav>
-            {!isMobile && chapterPagination && (
+            {!isMobile && chapter && (
               <nav className="absolute flex items-center gap-2 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 md:gap-4">
                 <Button as="iconButton" color="inherit" onClick={handlePrevClick}>
                   <FaChevronLeft fontSize={18} />
                 </Button>
-                <Typography variant="h6">{chapterPagination.current?.chapter}</Typography>
+                <Typography variant="h6">{chapter.chapter}</Typography>
                 <Button as="iconButton" color="inherit" onClick={handleNextClick}>
                   <FaChevronRight fontSize={18} />
                 </Button>
