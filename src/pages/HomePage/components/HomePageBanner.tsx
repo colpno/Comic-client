@@ -10,17 +10,6 @@ import { getComicRoute } from '~/constants/routeConstants.ts';
 import { Comic } from '~/types/comicType.ts';
 import Pagination from './HomePageBannerPagination.tsx';
 
-function SliderSlides({ items }: Props) {
-  return items.map((comic, i) => (
-    <Link to={getComicRoute(comic.title)} key={`home-page-banner-${i}`}>
-      <div
-        style={{ backgroundImage: `url(${comic.coverImageUrl})` }}
-        className="object-cover w-full bg-center bg-cover aspect-video"
-      />
-    </Link>
-  ));
-}
-
 interface Props {
   items: Comic[];
 }
@@ -48,7 +37,14 @@ function HomePageBanner({ items }: Props) {
           onSlideChangeTransitionEnd={setCurrSlideIndex}
           autoplay={{ delay: SLIDE_CHANGE_TIME }}
         >
-          <SliderSlides items={items} />
+          {items.map((comic, i) => (
+            <Link to={getComicRoute(comic.title)} key={`home-page-banner-${i}`}>
+              <div
+                style={{ backgroundImage: `url(${comic.coverImageUrl})` }}
+                className="object-cover w-full bg-center bg-cover aspect-video"
+              />
+            </Link>
+          ))}
         </Slider>
       </Container>
       <Container
