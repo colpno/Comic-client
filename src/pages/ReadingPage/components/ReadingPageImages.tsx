@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 import ImageComponent from '~/components/Image.tsx';
 import Loading from '~/components/Loading.tsx';
+import { proxyServerUrl } from '~/configs/appConf.ts';
 import { placeholderImage } from '~/images/index.ts';
 import { Chapter } from '~/types/chapterType.ts';
 
@@ -33,12 +34,12 @@ function ReadingPageImages({ images, id }: Props) {
     <>
       {!imagesLoaded && <Loading />}
       {images.map((img, i) => {
-        const corsProxy = 'https://cors-anywhere.herokuapp.com/';
-        const data = `${corsProxy}${img.data}`;
+        const data = `${proxyServerUrl}/${img.data}`;
+        const dataSaver = `${proxyServerUrl}/${img.dataSaver}`;
 
         return (
           <ImageComponent
-            src={placeholderImage}
+            src={dataSaver || placeholderImage}
             onLoad={({ currentTarget }) => (currentTarget.src = data)}
             alt={`Page ${i + 1}`}
             className="w-full md:w-[728px]"
