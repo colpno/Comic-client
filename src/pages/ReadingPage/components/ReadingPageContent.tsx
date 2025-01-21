@@ -1,5 +1,6 @@
 import { CircularProgress } from '@mui/material';
 import { useEffect, useState } from 'react';
+import { v1 } from 'uuid';
 
 import ImageComponent from '~/components/Image.tsx';
 import { Typography } from '~/components/index.ts';
@@ -7,12 +8,28 @@ import { proxyServerUrl } from '~/configs/appConf.ts';
 import { placeholderImage } from '~/images/index.ts';
 import { Chapter } from '~/types/chapterType.ts';
 
+function Images({ images }: Props) {
+  return images.map((img, i) => {
+    const data = `${proxyServerUrl}/${img.data}`;
+    const dataSaver = `${proxyServerUrl}/${img.dataSaver}`;
+
+    return (
+      <ImageComponent
+        src={dataSaver || placeholderImage}
+        onLoad={({ currentTarget }) => (currentTarget.src = data)}
+        alt={`Page ${i + 1}`}
+        className="w-full md:w-[728px]"
+        key={`${v1()}-${i}`}
+      />
+    );
+  });
+}
+
 interface Props {
-  id: Chapter['id'];
   images: Chapter['content'];
 }
 
-function ReadingPageImages({ images, id }: Props) {
+function ReadingPageContent({ images }: Props) {
   const [imagesLoaded, setImagesLoaded] = useState(false);
 
   // Wait for all images to load
@@ -44,22 +61,9 @@ function ReadingPageImages({ images, id }: Props) {
           </Typography>
         </div>
       )}
-      {images.map((img, i) => {
-        const data = `${proxyServerUrl}/${img.data}`;
-        const dataSaver = `${proxyServerUrl}/${img.dataSaver}`;
-
-        return (
-          <ImageComponent
-            src={dataSaver || placeholderImage}
-            onLoad={({ currentTarget }) => (currentTarget.src = data)}
-            alt={`Page ${i + 1}`}
-            className="w-full md:w-[728px]"
-            key={`${id}-image-${i + 1}`}
-          />
-        );
-      })}
+      <Images images={images} />
     </div>
   );
 }
 
-export default ReadingPageImages;
+export default ReadingPageContent;
