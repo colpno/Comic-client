@@ -1,9 +1,11 @@
 import { IoLogOutOutline } from 'react-icons/io5';
 import { MdClose, MdOutlinePermIdentity } from 'react-icons/md';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import { useLazyLogoutQuery, useLoginMutation } from '~/apis/authApis.ts';
 import { Button, Dialog, Popup } from '~/components/index.ts';
+import { ROUTE_HOME } from '~/constants/routeConstants.ts';
 import { LoginFormValues } from '~/features/forms/validationSchemas.ts';
 import { LoginForm } from '~/features/index.ts';
 import { useDeviceWatcher, usePopup } from '~/hooks/index.ts';
@@ -15,10 +17,13 @@ function HeaderAccountButton() {
   const [logoutQuery] = useLazyLogoutQuery();
   const [loginQuery] = useLoginMutation();
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
   const isMobile = useDeviceWatcher() === 'mobile';
 
   const handleLogout = () => {
+    navigate(ROUTE_HOME);
+
     logoutQuery().then(() => {
       dispatch(logout());
     });
