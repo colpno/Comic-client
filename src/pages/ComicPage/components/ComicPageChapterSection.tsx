@@ -27,7 +27,7 @@ interface Props {
 }
 
 function ComicPageChapterSection({ comic }: Props) {
-  const [getChapters, { data, isFetching }] = useLazyGetChaptersQuery();
+  const [getChapters, { data, isFetching, isLoading }] = useLazyGetChaptersQuery();
   const [page, setPage] = useState(PAGINATION_INITIAL_PAGE);
   const getChaptersData = (data || {
     data: [],
@@ -51,7 +51,7 @@ function ComicPageChapterSection({ comic }: Props) {
     }
   }, [comic, page]);
 
-  if (isFetching) {
+  if (isFetching || isLoading) {
     return <DataFetching />;
   }
 

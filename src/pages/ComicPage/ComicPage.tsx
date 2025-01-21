@@ -14,7 +14,7 @@ import Wrapper from './components/ComicPageWrapper.tsx';
 
 function ComicPage() {
   const { comictitle } = useParams();
-  const [getComic, { data: comic, isFetching }] = useLazyGetComicQuery();
+  const [getComic, { data: comic, isFetching, isLoading }] = useLazyGetComicQuery();
 
   // Fetch comic
   useEffect(() => {
@@ -26,7 +26,7 @@ function ComicPage() {
     }
   }, [comictitle]);
 
-  if (isFetching) {
+  if (isFetching || isLoading) {
     return <DataFetching />;
   }
 

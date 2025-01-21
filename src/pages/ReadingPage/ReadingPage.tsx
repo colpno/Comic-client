@@ -16,9 +16,7 @@ function ReadingPage() {
   return (
     <div>
       <div onClick={toggleHeaderVisibility} ref={setElementRef}>
-        <div className="mx-auto shadow-xl w-full md:w-[728px]">
-          <Content id={chapter.id} images={chapter.content} />
-        </div>
+        <Content id={chapter.id} images={chapter.content} />
       </div>
       <Helmet>
         <title>{`Chapter ${chapter.chapter} - ${chapter.title} - Comic`}</title>

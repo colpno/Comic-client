@@ -1,7 +1,8 @@
+import { CircularProgress } from '@mui/material';
 import { useEffect, useState } from 'react';
 
 import ImageComponent from '~/components/Image.tsx';
-import Loading from '~/components/Loading.tsx';
+import { Typography } from '~/components/index.ts';
 import { proxyServerUrl } from '~/configs/appConf.ts';
 import { placeholderImage } from '~/images/index.ts';
 import { Chapter } from '~/types/chapterType.ts';
@@ -31,8 +32,18 @@ function ReadingPageImages({ images, id }: Props) {
   }, [images]);
 
   return (
-    <>
-      {!imagesLoaded && <Loading />}
+    <div className="mx-auto shadow-xl w-full md:w-[728px]">
+      {!imagesLoaded && (
+        <div className="flex flex-col items-center justify-center px-6 h-dvh">
+          <CircularProgress />
+          <Typography variant="h6" className="!mt-8 text-center">
+            Please wait patiently as images are loading...
+          </Typography>
+          <Typography variant="body2" className="text-center">
+            You can read now but it will give bad experience.
+          </Typography>
+        </div>
+      )}
       {images.map((img, i) => {
         const data = `${proxyServerUrl}/${img.data}`;
         const dataSaver = `${proxyServerUrl}/${img.dataSaver}`;
@@ -47,7 +58,7 @@ function ReadingPageImages({ images, id }: Props) {
           />
         );
       })}
-    </>
+    </div>
   );
 }
 

@@ -66,7 +66,7 @@ function AdditionalDetails(comic: Comic) {
 const RELATED_PER_PAGE = 50;
 
 function RelatedComics({ comicsId }: { comicsId: Comic['id'][] }) {
-  const [getComics, { data, isFetching }] = useLazyGetComicsQuery();
+  const [getComics, { data, isFetching, isLoading }] = useLazyGetComicsQuery();
   const [page, setPage] = useState(PAGINATION_INITIAL_PAGE);
   const related = data?.data || [];
   const pagination = data?.metadata?.pagination;
@@ -86,7 +86,7 @@ function RelatedComics({ comicsId }: { comicsId: Comic['id'][] }) {
     }
   }, [comicsId, page]);
 
-  if (isFetching) {
+  if (isFetching || isLoading) {
     return <DataFetching />;
   }
 

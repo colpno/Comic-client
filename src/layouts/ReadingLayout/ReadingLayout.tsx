@@ -16,7 +16,7 @@ import {
 function ReadingLayout() {
   const [visibility, setVisibility] = useState(true);
   const { comictitle, chapterNumber } = useParams();
-  const [getReadingChapterData, { data, isFetching }] = useLazyReadingChapterQuery();
+  const [getReadingChapterData, { data, isFetching, isLoading }] = useLazyReadingChapterQuery();
   const readingData = data?.data;
   const pagination = data?.metadata?.pagination;
   const dispatch = useAppDispatch();
@@ -62,7 +62,7 @@ function ReadingLayout() {
     },
   };
 
-  if (isFetching) {
+  if (isFetching || isLoading) {
     return (
       <div className="pt-16 mt-header md:mt-header-md">
         <DataFetching />
