@@ -1,10 +1,10 @@
 import { CircularProgress } from '@mui/material';
-import { useEffect, useState } from 'react';
 import { v1 } from 'uuid';
 
 import ImageComponent from '~/components/Image.tsx';
 import { Typography } from '~/components/index.ts';
 import { proxyServerUrl } from '~/configs/appConf.ts';
+import useLoadImages from '~/hooks/useLoadImages.ts';
 import { placeholderImage } from '~/images/index.ts';
 import { Chapter } from '~/types/chapterType.ts';
 
@@ -30,23 +30,7 @@ interface Props {
 }
 
 function ReadingPageContent({ images }: Props) {
-  const [imagesLoaded, setImagesLoaded] = useState(false);
-
-  // Wait for all images to load
-  useEffect(() => {
-    const imagePromises = images.map((src) => {
-      return new Promise((resolve) => {
-        const img = new Image();
-        img.src = src.data;
-        img.onload = resolve;
-        img.onerror = resolve;
-      });
-    });
-
-    Promise.all(imagePromises).then(() => {
-      setImagesLoaded(true);
-    });
-  }, [images]);
+  const imagesLoaded = useLoadImages(images.map((img) => img.data));
 
   return (
     <div className="mx-auto shadow-xl w-full md:w-[728px]">
