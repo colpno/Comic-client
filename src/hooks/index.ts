@@ -6,3 +6,4 @@ export { default as usePopup } from './usePopup.ts';
 export { default as useRouteMatch } from './useRouteMatch.ts';
 export { default as useScroll } from './useScroll.ts';
 export { default as useLoadImages } from './useLoadImages.ts';
+export { default as useInfinitePagination } from './useInfinitePagination.ts';

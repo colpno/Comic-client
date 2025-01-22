@@ -1,22 +1,24 @@
 import { Container } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { useSearchParams } from 'react-router-dom';
 
 import {
   ApiGetFollowsParams,
-  useGetFollowsQuery,
+  useLazyGetFollowsQuery,
   useRemoveFollowMutation,
 } from '~/apis/followApis.ts';
 import { TextInputProps } from '~/components/form-controls/base-controls/TextInput.tsx';
 import { DataFetching, Dialog, InfiniteScrollPagination } from '~/components/index.ts';
 import { MUI_CONTAINER_MAX_WIDTH, PAGINATION_INITIAL_PAGE } from '~/constants/commonConstants.ts';
 import { SortButton, TagFilterButton, TagFilterFormValues } from '~/features/index.ts';
+import useInfinitePagination from '~/hooks/useInfinitePagination.ts';
 import SearchInput from '~/layouts/components/SearchInput.tsx';
 import { ApiSortOrder, Comic, DialogAsConfirm, Follow } from '~/types/index.ts';
+import NotFoundPage from '../ErrorPage/components/NotFoundPage.tsx';
 import FollowPageFollowList from './components/FollowPageFollowList';
 
 const PER_PAGE = 30;
+
 const initialParams: ApiGetFollowsParams = {
   _embed: {
     path: 'following',
@@ -30,42 +32,45 @@ const initialParams: ApiGetFollowsParams = {
 };
 
 function FollowPage() {
-  const [getFollowsParams, setGetFollowsParams] = useState<ApiGetFollowsParams>(initialParams);
-  const { data, isFetching: isApiFetching, isLoading } = useGetFollowsQuery(getFollowsParams);
-  const follows = (data?.data as Follow<Comic>[]) || [];
-  const [isDataFetching, setIsDataFetching] = useState(isApiFetching);
-  const [removeFollow] = useRemoveFollowMutation();
+  const [getFollows, { isFetching }] = useLazyGetFollowsQuery();
+  const {
+    data: follows,
+    setParams,
+    handleIntersect,
+  } = useInfinitePagination([], initialParams, getFollows);
   const [followIdToRemove, setFollowIdToRemove] = useState('');
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [remove] = useRemoveFollowMutation();
 
-  const openRemovalPopup = (followId: string) => setFollowIdToRemove(followId);
-  const closeRemovalPopup = () => setFollowIdToRemove('');
-
-  // Handle page change
-  const handleIntersect = async () => {
-    if (follows.length < PER_PAGE) return;
-    setGetFollowsParams((prev) => ({
-      ...prev,
-      _page: prev._page! + 1,
-    }));
+  /**
+   * @param followId Don't pass this parameter to close the popup
+   */
+  const toggleRemovalPopup = (followId?: string) => {
+    setFollowIdToRemove(followId ?? '');
   };
 
-  const handleRemoveFollow = async () => {
+  const handleFollowRemoval = async () => {
     try {
-      await removeFollow(followIdToRemove);
-      closeRemovalPopup();
+      await remove(followIdToRemove);
+      toggleRemovalPopup();
     } catch (error) {}
   };
 
   const handleSearchChange: TextInputProps['onChange'] = (value) => {
-    setIsDataFetching(true);
-    if (value) setSearchParams({ title: value });
-    else setSearchParams({});
+    setParams(({ _embed, _page, ...prev }) => {
+      const { title, ...match } = _embed!.match!;
+      const hasSearched = !!value;
+      return {
+        ...prev,
+        _embed: {
+          ..._embed!,
+          match: hasSearched ? { title: value } : match,
+        },
+      };
+    });
   };
 
   const handleTagFilterFormSubmit = (values: TagFilterFormValues) => {
-    setIsDataFetching(true);
-    setGetFollowsParams(({ _embed, ...prev }) => ({
+    setParams(({ _embed, _page, ...prev }) => ({
       ...prev,
       _embed: {
         ..._embed!,
@@ -76,57 +81,17 @@ function FollowPage() {
           excludedTagsMode: 'AND',
         },
       },
-      _page: PAGINATION_INITIAL_PAGE,
     }));
   };
 
   const handleSortOrderChange = (order: ApiSortOrder) => {
-    setIsDataFetching(true);
-    setGetFollowsParams((prev) => ({
+    setParams(({ _page, ...prev }) => ({
       ...prev,
       _sort: {
         addedAt: order,
       },
-      _page: PAGINATION_INITIAL_PAGE,
     }));
   };
-
-  // Handle data fetching state
-  useEffect(() => {
-    if (isDataFetching && !isApiFetching) setIsDataFetching(false);
-  }, [isApiFetching]);
-  useEffect(() => {
-    if (isLoading) setIsDataFetching(true);
-  }, [isLoading]);
-
-  // Handle search params change
-  useEffect(() => {
-    if (searchParams.has('title')) {
-      setGetFollowsParams(({ _embed, ...prev }) => ({
-        ...prev,
-        _embed: {
-          ..._embed!,
-          match: {
-            title: searchParams.get('title')!,
-          },
-        },
-        _page: PAGINATION_INITIAL_PAGE,
-      }));
-    } else {
-      setGetFollowsParams(({ _embed, ...prev }) => {
-        const match = { ..._embed!.match! };
-        if (!!match.title) delete match.title;
-        return {
-          ...prev,
-          _embed: {
-            ..._embed!,
-            match,
-          },
-          _page: PAGINATION_INITIAL_PAGE,
-        };
-      });
-    }
-  }, [searchParams]);
 
   return (
     <>
@@ -149,17 +114,24 @@ function FollowPage() {
             />
           </div>
         )}
-        {isDataFetching ? (
+        {isFetching ? (
           <DataFetching />
+        ) : typeof follows[0] !== 'string' ? (
+          <>
+            <FollowPageFollowList
+              items={follows as Follow<Comic>[]}
+              onRemoveClick={toggleRemovalPopup}
+            />
+            <InfiniteScrollPagination onIntersect={handleIntersect} />
+          </>
         ) : (
-          <FollowPageFollowList items={follows} onRemoveClick={openRemovalPopup} />
+          <NotFoundPage title="Follow list is empty" />
         )}
-        <InfiniteScrollPagination onIntersect={handleIntersect} />
       </Container>
       <RemoveFollowDialog
         open={!!followIdToRemove}
-        onAccept={handleRemoveFollow}
-        onClose={closeRemovalPopup}
+        onAccept={handleFollowRemoval}
+        onClose={toggleRemovalPopup}
       />
       <Helmet>
         <title>Following - Comic</title>

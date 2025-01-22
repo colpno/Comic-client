@@ -5,87 +5,56 @@ import { Helmet } from 'react-helmet-async';
 import { ApiGetComicsParams, useLazyGetComicsQuery } from '~/apis/comicApis.ts';
 import { DataFetching, InfiniteScrollPagination } from '~/components/index.ts';
 import { MUI_CONTAINER_MAX_WIDTH, PAGINATION_INITIAL_PAGE } from '~/constants/commonConstants.ts';
-import { useDeviceWatcher } from '~/hooks/index.ts';
+import { useDeviceWatcher, useInfinitePagination } from '~/hooks/index.ts';
 import Title from '~/layouts/MenuLayout/components/MenuLayoutPageTitle.tsx';
-import { Comic } from '~/types/index.ts';
 import Content from './components/CompletedPageContent.tsx';
 
 const PER_PAGE = 30;
 const DEFAULT_GENRE = 'All';
 
+const initialParams: ApiGetComicsParams = {
+  status: ['completed'],
+  _embed: 'cover_art',
+  _limit: PER_PAGE,
+  _page: PAGINATION_INITIAL_PAGE,
+  _sort: {
+    updatedAt: 'desc',
+  },
+};
+
 function CompletedPage() {
+  const [getComics, { isFetching }] = useLazyGetComicsQuery();
+  const {
+    data: comics,
+    setParams: setGetComicsParams,
+    handleIntersect,
+  } = useInfinitePagination([], initialParams, getComics);
   const isDesktop = useDeviceWatcher() === 'desktop';
-  const [getComics, { isFetching: isApiFetching }] = useLazyGetComicsQuery();
-  const [isDataFetching, setIsDataFetching] = useState(isApiFetching);
-  const [comics, setComics] = useState<Comic[]>([]);
   const [genre, setGenre] = useState(DEFAULT_GENRE);
-  const [getComicsParams, setGetComicsParams] = useState<ApiGetComicsParams>({
-    status: ['completed'],
-    _embed: 'cover_art',
-    _limit: PER_PAGE,
-    _page: PAGINATION_INITIAL_PAGE,
-    _sort: {
-      updatedAt: 'desc',
-    },
-  });
-
-  // Handle page change
-  const handleIntersect = async () => {
-    if (comics.length < PER_PAGE) return;
-
-    setGetComicsParams((prev) => ({
-      ...prev,
-      _page: prev._page! + 1,
-    }));
-  };
 
   // Handle genre change
   useEffect(() => {
+    // Has selected genre, then fetch comics by genre
     if (genre !== DEFAULT_GENRE) {
-      setGetComicsParams((prev) => ({
+      setGetComicsParams(({ _page, ...prev }) => ({
         ...prev,
-        _page: PAGINATION_INITIAL_PAGE,
         includedTags: [genre],
       }));
     } else {
+      // Or, fetch comics with any genre
       setGetComicsParams((prev) => {
-        const { includedTags, ...rest } = prev;
-        return {
-          ...rest,
-          _page: PAGINATION_INITIAL_PAGE,
-        };
+        const { includedTags, _page, ...rest } = prev;
+        return rest;
       });
     }
   }, [genre]);
-
-  // Fetch comics
-  useEffect(() => {
-    (async () => {
-      const data = await getComics(getComicsParams).unwrap();
-      const newComics = data.data;
-
-      if (getComicsParams._page === PAGINATION_INITIAL_PAGE) {
-        setComics(newComics);
-      } else {
-        setComics((prev) => [...prev, ...newComics]);
-      }
-    })();
-  }, [getComicsParams]);
-
-  // Handle data fetching state
-  useEffect(() => {
-    setIsDataFetching(true);
-  }, [genre]);
-  useEffect(() => {
-    if (isDataFetching && !isApiFetching) setIsDataFetching(false);
-  }, [isApiFetching]);
 
   return (
     <Container maxWidth={MUI_CONTAINER_MAX_WIDTH}>
       {isDesktop && (
         <Title onParamChange={setGenre} urlParam="category" defaultValue={DEFAULT_GENRE} />
       )}
-      {isDataFetching ? <DataFetching /> : <Content items={comics} />}
+      {isFetching ? <DataFetching /> : <Content items={comics} />}
       <InfiniteScrollPagination onIntersect={handleIntersect} />
       <Helmet>
         <title>Completed comics - Comic</title>
