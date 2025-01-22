@@ -86,5 +86,3 @@ function Table(componentProps: TableProps) {
 }
 
 export default memo(Table);
-export { default as TableActionButton } from './components/TableActionButton.tsx';
-export { generateTableActionsColDef } from './utils/tableColumnUtils.tsx';
