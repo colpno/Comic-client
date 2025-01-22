@@ -3,7 +3,7 @@ import { useFormContext } from 'react-hook-form';
 import { useSearchParams } from 'react-router-dom';
 
 import TextInput from '~/components/form-controls/base-controls/TextInput.tsx';
-import { CheckBoxGroup } from '~/components/index.ts';
+import { CheckboxGroup } from '~/components/index.ts';
 import { useDebounce } from '~/hooks/useDebounce.ts';
 import { CheckboxOption } from '~/types/index.ts';
 
@@ -63,7 +63,7 @@ function IncludeFilterPanel({ options }: Props) {
         onChange={setSearchText}
       />
       <div>
-        <CheckBoxGroup
+        <CheckboxGroup
           name="includedOptions"
           options={includedOptions}
           onChange={handleCheckboxGroupChange}

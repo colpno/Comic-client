@@ -1,7 +1,7 @@
 import { CiLock } from 'react-icons/ci';
 import { IoMailOpenOutline } from 'react-icons/io5';
 
-import { Button, CheckBoxGroup, Form, TextField, Typography } from '~/components/index.ts';
+import { Button, CheckboxGroup, Form, TextField, Typography } from '~/components/index.ts';
 import { loginFormSchema, LoginFormValues } from './validationSchemas.ts';
 
 interface Props {
@@ -40,7 +40,7 @@ function LoginForm({ onSubmit }: Props) {
               htmlInput: { className: '!py-4 !text-lg' },
             }}
           />
-          <CheckBoxGroup name="rememberMe" options={[{ label: 'Remember me.', value: 'true' }]} />
+          <CheckboxGroup name="rememberMe" options={[{ label: 'Remember me.', value: 'true' }]} />
         </div>
         <Button size="large" type="submit" fullWidth className="!mb-4">
           Log in
