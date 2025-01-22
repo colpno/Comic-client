@@ -5,14 +5,12 @@ import {
   Image,
   Popup,
   TableActionButton,
-  TableColsDef,
   Typography,
 } from '~/components/index.ts';
 import { getComicReadingRoute, getComicRoute } from '~/constants/routeConstants.ts';
 import { usePopup } from '~/hooks/usePopup.ts';
 import { placeholderImage } from '~/images/index.ts';
-import { Comic } from '~/types/comicType.ts';
-import { History } from '~/types/historyType.ts';
+import { Comic, History, TableColsDef } from '~/types/index.ts';
 import { toDate } from '~/utils/converters.ts';
 
 export const getTableDef = (): TableColsDef => [

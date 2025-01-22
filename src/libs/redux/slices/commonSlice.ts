@@ -2,8 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { INITIAL_THEME } from '~/constants/commonConstants.ts';
 import { REDUCER_PATH_COMMON } from '~/constants/reduxConstants';
-import { Device, Theme } from '~/types/commonTypes.ts';
-import { History } from '~/types/historyType.ts';
+import { Device, History, Theme } from '~/types/index.ts';
 
 interface InitialState {
   theme: Theme;

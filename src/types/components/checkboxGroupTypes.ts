@@ -4,16 +4,16 @@ import {
   FormGroupProps as MUIFormGroupProps,
 } from '@mui/material';
 
-export interface Option {
+export interface CheckboxOption {
   label: string;
   value: string;
 }
 
-export interface Props {
+export interface CheckboxProps {
   name: string;
   label?: string;
-  options: Option[];
-  defaultValue?: Option[];
+  options: CheckboxOption[];
+  defaultValue?: CheckboxOption[];
   required?: boolean;
   slotProps?: {
     group?: MUIFormGroupProps;

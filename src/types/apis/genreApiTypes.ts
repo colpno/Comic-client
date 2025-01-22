@@ -1,4 +1,3 @@
-import { ApiDataResponse } from '~/types/apiTypes.ts';
-import { Genre } from '../genreType.ts';
+import { ApiDataResponse, Genre } from '~/types/index.ts';
 
 export type ApiGetGenresReturnType = ApiDataResponse<Genre[]>;

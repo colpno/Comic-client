@@ -1,4 +1,4 @@
-import { Theme } from '~/types/commonTypes.ts';
+import { Theme } from '~/types/index.ts';
 
 export const DATE_FORMAT = 'DD/MM/YYYY' as const;
 

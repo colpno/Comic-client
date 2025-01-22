@@ -1,4 +1,4 @@
-import { Comic } from './comicType.ts';
+import { Comic } from '~/types/index.ts';
 
 /**
  * @param C Comic

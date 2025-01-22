@@ -12,7 +12,7 @@ import {
 import { Button, Image, Typography } from '~/components/index.ts';
 import { getComicReadingRoute } from '~/constants/routeConstants.ts';
 import { RootState } from '~/libs/redux/store.ts';
-import { Comic } from '~/types/comicType.ts';
+import { Comic } from '~/types/index.ts';
 
 interface TitleProps {
   title: Comic['title'];

@@ -2,11 +2,11 @@ import { FormHelperText } from '@mui/material';
 import { forwardRef, Ref } from 'react';
 import { UseFieldArrayRemove } from 'react-hook-form';
 
-import { Errors, InputFieldProps } from '../../types/dynamicFieldTypes.ts';
+import { DynamicFieldErrors, DynamicFieldInputProps } from '~/types/index.ts';
 import DeleteFieldButton from './DynamicFieldDeleteButton.tsx';
 import InputField from './DynamicFieldInput.tsx';
 
-type InputProps = Omit<InputList, 'fields'> & Omit<InputFieldProps, 'error'>;
+type InputProps = Omit<InputList, 'fields'> & Omit<DynamicFieldInputProps, 'error'>;
 
 const Input = forwardRef(
   ({ index, errors, onDeleteClick, ...props }: InputProps, ref: Ref<HTMLInputElement>) => {
@@ -27,10 +27,10 @@ const Input = forwardRef(
   }
 );
 
-interface InputList extends Omit<InputFieldProps, 'error' | 'index'> {
+interface InputList extends Omit<DynamicFieldInputProps, 'error' | 'index'> {
   fields: Record<'id', string>[];
   onDeleteClick: UseFieldArrayRemove;
-  errors?: Errors;
+  errors?: DynamicFieldErrors;
 }
 
 const DynamicFieldInputList = forwardRef(

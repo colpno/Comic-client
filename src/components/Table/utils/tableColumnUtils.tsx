@@ -7,12 +7,12 @@ import {
   GridRowsProp,
 } from '@mui/x-data-grid';
 
+import { TableProps } from '~/types/index.ts';
 import TableApproveActionButton from '../components/TableApproveActionButton.tsx';
 import TableCancelActionButton from '../components/TableCancelActionButton.tsx';
 import TableDeleteActionButton from '../components/TableDeleteActionButton.tsx';
 import TableEditActionButton from '../components/TableEditActionButton.tsx';
 import TableSaveActionButton from '../components/TableSaveActionButton.tsx';
-import { Props } from '../tableTypes.ts';
 
 /* 
   Columns definition generators
@@ -51,8 +51,8 @@ interface GetCRUDActionsColDef {
   setRowModes: (newModel: (oldModel: GridRowModesModel) => GridRowModesModel) => void;
   rows: GridRowsProp;
   setRows: (newRows: (oldRows: GridRowsProp) => GridRowsProp) => void;
-  removable?: Props['removable'];
-  editable?: Props['editable'];
+  removable?: TableProps['removable'];
+  editable?: TableProps['editable'];
   onRemove?: GetRemoveModeActions['onRemove'];
   actionsColumn?: GridActionsColDef;
 }
@@ -153,7 +153,7 @@ const getEditModeActions = ({ id, rows, setRowModes, ...props }: GetEditModeActi
 // Remove mode actions
 
 interface GetRemoveModeActions extends Pick<GetEditModeActions, 'id' | 'setRowModes' | 'setRows'> {
-  onRemove: Exclude<Props['onRemove'], undefined>;
+  onRemove: Exclude<TableProps['onRemove'], undefined>;
 }
 
 const getRemoveModeActions = ({ id, ...params }: GetRemoveModeActions) => {

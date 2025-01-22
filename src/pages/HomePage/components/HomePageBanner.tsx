@@ -7,7 +7,7 @@ import { Swiper as SwiperType } from 'swiper/types';
 import { Slider, Typography } from '~/components/index.ts';
 import { MUI_CONTAINER_MAX_WIDTH } from '~/constants/commonConstants.ts';
 import { getComicRoute } from '~/constants/routeConstants.ts';
-import { Comic } from '~/types/comicType.ts';
+import { Comic } from '~/types/index.ts';
 import Pagination from './HomePageBannerPagination.tsx';
 
 interface Props {

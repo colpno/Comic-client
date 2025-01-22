@@ -8,7 +8,7 @@ import { MUI_CONTAINER_MAX_WIDTH, PAGINATION_INITIAL_PAGE } from '~/constants/co
 import { getComicsByGenreRoute } from '~/constants/routeConstants.ts';
 import { useDeviceWatcher } from '~/hooks/useDeviceWatcher.ts';
 import { backgroundImage1 } from '~/images/index.ts';
-import { Genre } from '~/types/genreType.ts';
+import { Genre } from '~/types/index.ts';
 import { cn } from '~/utils/cssUtils.ts';
 
 function HomePageGenreContainer() {

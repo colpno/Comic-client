@@ -1,5 +1,5 @@
 import { LoginFormValues } from '~/features/forms/validationSchemas.ts';
-import { ApiDataResponse } from '~/types/apiTypes.ts';
+import { ApiDataResponse } from '~/types/index.ts';
 
 export type ApiLoginParams = LoginFormValues;
 export type ApiLoginReturnType = ApiDataResponse<{

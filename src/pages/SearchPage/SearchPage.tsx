@@ -6,7 +6,7 @@ import { useSearchParams } from 'react-router-dom';
 import { ApiGetComicsParams, useLazyGetComicsQuery } from '~/apis/comicApis.ts';
 import { DataFetching, InfiniteScrollPagination } from '~/components/index.ts';
 import { MUI_CONTAINER_MAX_WIDTH, PAGINATION_INITIAL_PAGE } from '~/constants/commonConstants.ts';
-import { Comic } from '~/types/comicType.ts';
+import { Comic } from '~/types/index.ts';
 import Content from './components/SearchPageContent';
 import NoSearchValue from './components/SearchPageNoValue';
 import Title from './components/SearchPageTitle';

@@ -1,3 +1,8 @@
+interface ChapterContent {
+  data: string;
+  dataSaver?: string;
+}
+
 export interface Chapter {
   id: string;
   title: string;
@@ -7,9 +12,4 @@ export interface Chapter {
   publishAt?: string;
   readableAt?: string;
   pages?: number;
-}
-
-interface ChapterContent {
-  data: string;
-  dataSaver?: string;
 }

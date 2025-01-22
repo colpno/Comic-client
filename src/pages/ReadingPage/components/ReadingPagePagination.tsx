@@ -4,7 +4,7 @@ import { v4 } from 'uuid';
 
 import Typography from '~/components/Typography.tsx';
 import { getComicReadingRoute } from '~/constants/routeConstants.ts';
-import { Chapter } from '~/types/chapterType.ts';
+import { Chapter } from '~/types/index.ts';
 import { cn } from '~/utils/cssUtils.ts';
 import ReadingPageSlider from './ReadingPageSlider.tsx';
 

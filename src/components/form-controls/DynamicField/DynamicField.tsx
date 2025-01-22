@@ -2,14 +2,17 @@ import { FormControl, FormHelperText } from '@mui/material';
 import { forwardRef, memo, Ref } from 'react';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 
+import { DynamicFieldErrors, DynamicFieldProps } from '~/types/index.ts';
 import { cn } from '~/utils/cssUtils.ts';
-import { Errors, Props } from '../types/dynamicFieldTypes.ts';
 import InputField from './components/DynamicFieldInput.tsx';
 import InputList from './components/DynamicFieldInputList.tsx';
 import MoreFieldButton from './components/DynamicFieldMoreButton.tsx';
 
 const DynamicField = forwardRef(
-  ({ name, required, fullWidth, disabled, ...props }: Props, ref: Ref<HTMLInputElement>) => {
+  (
+    { name, required, fullWidth, disabled, ...props }: DynamicFieldProps,
+    ref: Ref<HTMLInputElement>
+  ) => {
     const {
       control,
       /*
@@ -20,7 +23,7 @@ const DynamicField = forwardRef(
       formState: { errors: _e },
       getFieldState,
     } = useFormContext();
-    const errors = getFieldState(name)?.error as unknown as Errors;
+    const errors = getFieldState(name)?.error as unknown as DynamicFieldErrors;
     const { fields, append, remove } = useFieldArray({ control, name });
     const hasNoFieldsInitially = fields.length === 0;
     const firstInputError = errors?.[0];

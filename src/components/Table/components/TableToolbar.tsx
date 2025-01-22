@@ -9,9 +9,9 @@ import {
 } from '@mui/x-data-grid';
 import { v1 } from 'uuid';
 
+import { TableColsDef } from '~/types/index.ts';
 import { cn } from '~/utils/cssUtils.ts';
 import { useTableContext } from '../TableContext.ts';
-import { ColsDef } from '../tableTypes.ts';
 import ToolbarAddButton from './ToolbarAddButton.tsx';
 import ToolbarMultipleDeleteButton from './ToolbarMultipleDeleteButton.tsx';
 
@@ -28,7 +28,7 @@ function TableToolbar({ setRows, setRowModesModel, className, ...props }: TableT
 
   const handleAddClick = () => {
     if (!columns) return;
-    const header: ColsDef[number] = columns[0];
+    const header: TableColsDef[number] = columns[0];
     const editableField = header.editable ? header.field : undefined;
 
     setRows((oldRows) => [...oldRows, { id, isNew: true }]);

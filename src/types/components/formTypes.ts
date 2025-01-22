@@ -7,7 +7,7 @@ type ChildrenAsFunction<FormValues extends FieldValues> = (
   }
 ) => React.ReactNode;
 
-export interface Props<FormValues extends FieldValues = FieldValues>
+export interface FormProps<FormValues extends FieldValues = FieldValues>
   extends Omit<React.HTMLAttributes<HTMLFormElement>, 'children' | 'onSubmit'> {
   children: React.ReactNode | ChildrenAsFunction<FormValues>;
   validationSchema: ZodSchema;

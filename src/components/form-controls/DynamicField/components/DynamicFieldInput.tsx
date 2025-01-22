@@ -1,12 +1,12 @@
 import { forwardRef, Ref } from 'react';
 import { Controller } from 'react-hook-form';
 
+import { DynamicFieldInputProps } from '../../../../types/components/dynamicFieldTypes.ts';
 import TextInput from '../../base-controls/TextInput.tsx';
-import { InputFieldProps } from '../../types/dynamicFieldTypes.ts';
 
 const DynamicFieldInput = forwardRef(
   (
-    { control, name, renderInput, index, ...props }: InputFieldProps,
+    { control, name, renderInput, index, ...props }: DynamicFieldInputProps,
     ref: Ref<HTMLInputElement>
   ) => {
     if (renderInput) {

@@ -5,7 +5,7 @@ import { Helmet } from 'react-helmet-async';
 import { useLazyGetComicsQuery } from '~/apis/comicApis.ts';
 import { InfiniteScrollPagination } from '~/components/index.ts';
 import { MUI_CONTAINER_MAX_WIDTH, PAGINATION_INITIAL_PAGE } from '~/constants/commonConstants.ts';
-import { Comic } from '~/types/comicType.ts';
+import { Comic } from '~/types/index.ts';
 import Content from './components/NewProductsPageContent.tsx';
 
 const PER_PAGE = 30;

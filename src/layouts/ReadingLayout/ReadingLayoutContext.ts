@@ -1,7 +1,6 @@
 import { createContext, useContext } from 'react';
 
-import { Chapter } from '~/types/chapterType.ts';
-import { Comic } from '~/types/comicType.ts';
+import { Chapter, Comic } from '~/types/index.ts';
 
 export interface ReadingLayoutContextType {
   comic?: Pick<Comic, 'id' | 'title' | 'coverImageUrl'>;

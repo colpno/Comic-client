@@ -1,4 +1,5 @@
-import { Table, TableData } from '~/components/index.ts';
+import { Table } from '~/components/index.ts';
+import { TableData } from '~/types/index.ts';
 import { getTableDef } from '../historyPageTableDef.tsx';
 
 interface Props {

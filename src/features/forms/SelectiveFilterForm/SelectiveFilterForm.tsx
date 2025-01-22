@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { SwiperClass } from 'swiper/react';
 
-import { Button, CheckboxOption, Form, FormProps, Slider, Typography } from '~/components/index.ts';
+import { Button, Form, Slider, Typography } from '~/components/index.ts';
+import { CheckboxOption, FormProps } from '~/types/index.ts';
 import { cn } from '~/utils/cssUtils.ts';
 import { selectiveFilterFormSchema, SelectiveFilterFormValues } from '../validationSchemas.ts';
 import ExcludeFilterPanel from './components/ExcludeFilterPanel';

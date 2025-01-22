@@ -7,7 +7,7 @@ import { DataFetching, InfiniteScrollPagination } from '~/components/index.ts';
 import { MUI_CONTAINER_MAX_WIDTH, PAGINATION_INITIAL_PAGE } from '~/constants/commonConstants.ts';
 import { useDeviceWatcher } from '~/hooks/useDeviceWatcher.ts';
 import Title from '~/layouts/MenuLayout/components/MenuLayoutPageTitle.tsx';
-import { Comic } from '~/types/comicType.ts';
+import { Comic } from '~/types/index.ts';
 import Content from './components/CompletedPageContent.tsx';
 
 const PER_PAGE = 30;

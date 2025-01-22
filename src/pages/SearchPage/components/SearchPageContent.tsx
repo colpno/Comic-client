@@ -2,7 +2,7 @@ import Image from '~/components/Image.tsx';
 import { Typography } from '~/components/index.ts';
 import { SearchingComicCard } from '~/features/index.ts';
 import { noSearchSVG } from '~/images/index.ts';
-import { Comic } from '~/types/comicType.ts';
+import { Comic } from '~/types/index.ts';
 
 interface Props {
   items: Comic[];

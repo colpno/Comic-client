@@ -13,9 +13,7 @@ import { DataFetching, Dialog, InfiniteScrollPagination } from '~/components/ind
 import { MUI_CONTAINER_MAX_WIDTH, PAGINATION_INITIAL_PAGE } from '~/constants/commonConstants.ts';
 import { SortButton, TagFilterButton, TagFilterFormValues } from '~/features/index.ts';
 import SearchInput from '~/layouts/components/SearchInput.tsx';
-import { SortOrder } from '~/types/apiTypes.ts';
-import { Comic } from '~/types/comicType.ts';
-import { Follow } from '~/types/followType.ts';
+import { ApiSortOrder, Comic, DialogAsConfirm, Follow } from '~/types/index.ts';
 import FollowPageFollowList from './components/FollowPageFollowList';
 
 const PER_PAGE = 30;
@@ -46,7 +44,6 @@ function FollowPage() {
   // Handle page change
   const handleIntersect = async () => {
     if (follows.length < PER_PAGE) return;
-
     setGetFollowsParams((prev) => ({
       ...prev,
       _page: prev._page! + 1,
@@ -62,14 +59,12 @@ function FollowPage() {
 
   const handleSearchChange: TextInputProps['onChange'] = (value) => {
     setIsDataFetching(true);
-
     if (value) setSearchParams({ title: value });
     else setSearchParams({});
   };
 
   const handleTagFilterFormSubmit = (values: TagFilterFormValues) => {
     setIsDataFetching(true);
-
     setGetFollowsParams(({ _embed, ...prev }) => ({
       ...prev,
       _embed: {
@@ -85,9 +80,8 @@ function FollowPage() {
     }));
   };
 
-  const handleSortOrderChange = (order: SortOrder) => {
+  const handleSortOrderChange = (order: ApiSortOrder) => {
     setIsDataFetching(true);
-
     setGetFollowsParams((prev) => ({
       ...prev,
       _sort: {
@@ -162,20 +156,23 @@ function FollowPage() {
         )}
         <InfiniteScrollPagination onIntersect={handleIntersect} />
       </Container>
-      <Dialog
+      <RemoveFollowDialog
         open={!!followIdToRemove}
         onAccept={handleRemoveFollow}
         onClose={closeRemovalPopup}
-        title="Remove Follow"
-        maxWidth="xs"
-        fullWidth
-      >
-        Are you sure to remove this follow?
-      </Dialog>
+      />
       <Helmet>
         <title>Following - Comic</title>
       </Helmet>
     </>
+  );
+}
+
+function RemoveFollowDialog(props: Omit<DialogAsConfirm, 'title'>) {
+  return (
+    <Dialog maxWidth="xs" fullWidth {...props} variant="confirm" title="Remove Follow">
+      Are you sure to remove this follow?
+    </Dialog>
   );
 }
 

@@ -9,9 +9,7 @@ import {
 } from '~/components/index.ts';
 import { PAGINATION_INITIAL_PAGE } from '~/constants/commonConstants.ts';
 import { noDataSVG } from '~/images/index.ts';
-import { ApiPaginatedResponse } from '~/types/apiTypes.ts';
-import { Chapter } from '~/types/chapterType.ts';
-import { Comic } from '~/types/comicType.ts';
+import { ApiPaginatedResponse, Chapter, Comic } from '~/types/index.ts';
 import ComicPageChapterList from './ComicPageChapterList.tsx';
 
 function Pagination(props: React.ComponentProps<typeof AppPagination>) {

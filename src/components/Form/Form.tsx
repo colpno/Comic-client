@@ -2,7 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { memo, useId } from 'react';
 import { FieldValues, FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 
-import { Props } from './formTypes.ts';
+import { FormProps } from '~/types/index.ts';
 import { getDirtyValues } from './formUtils.ts';
 
 function Form<F extends FieldValues>({
@@ -12,7 +12,7 @@ function Form<F extends FieldValues>({
   defaultValues,
   onSubmit,
   ...props
-}: Props<F>) {
+}: FormProps<F>) {
   const formId = `form-${useId()}`;
 
   const formStates = useForm<F>({
@@ -44,7 +44,7 @@ function Form<F extends FieldValues>({
 }
 
 // Explicitly type the memo function
-const MemoizedForm = memo(Form) as <F extends FieldValues>(props: Props<F>) => JSX.Element;
+const MemoizedForm = memo(Form) as <F extends FieldValues>(props: FormProps<F>) => JSX.Element;
 
 export default MemoizedForm;
-export { type Props as FormProps };
+export { type FormProps as FormProps };

@@ -6,8 +6,7 @@ import { Button } from '~/components/index.ts';
 import Typography from '~/components/Typography.tsx';
 import { getComicRoute } from '~/constants/routeConstants.ts';
 import { placeholderImage } from '~/images/index.ts';
-import { Comic } from '~/types/comicType.ts';
-import { Follow } from '~/types/followType.ts';
+import { Comic, Follow } from '~/types/index.ts';
 import { toDate } from '~/utils/converters.ts';
 
 interface Props {

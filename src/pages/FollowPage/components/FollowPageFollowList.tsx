@@ -1,8 +1,7 @@
 import { Image, Typography } from '~/components/index.ts';
 import { FollowComicCard } from '~/features/index.ts';
 import { noFollowSVG } from '~/images/index.ts';
-import { Comic } from '~/types/comicType.ts';
-import { Follow } from '~/types/followType.ts';
+import { Comic, Follow } from '~/types/index.ts';
 
 interface Props {
   items: Follow<Comic>[];

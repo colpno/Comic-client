@@ -1,5 +1,4 @@
-import { Chapter } from './chapterType.ts';
-import { Artist, Author } from './creatorTypes.ts';
+import { Artist, Author, Chapter } from '~/types/index.ts';
 
 type Status = 'ongoing' | 'completed' | 'hiatus' | 'cancelled';
 type State = 'published' | 'draft';

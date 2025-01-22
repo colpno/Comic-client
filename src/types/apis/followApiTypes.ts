@@ -1,12 +1,16 @@
-import { ApiDataResponse, ApiFulfilledResponse, GetRequestOperators } from '../apiTypes.ts';
-import { Comic } from '../comicType.ts';
-import { Follow } from '../followType.ts';
-import { ApiGetComicsParams } from './comicApiTypes.ts';
+import {
+  ApiDataResponse,
+  ApiFulfilledResponse,
+  ApiGetComicsParams,
+  ApiGetRequestOperators,
+  Comic,
+  Follow,
+} from '~/types/index.ts';
 
 export type ApiGetFollowsReturnType = ApiFulfilledResponse<Follow<string | Comic>[]>;
 export type ApiGetFollowsParams = Partial<
   Omit<Follow, 'following'> &
-    Omit<GetRequestOperators<Follow>, '_embed'> & {
+    Omit<ApiGetRequestOperators<Follow>, '_embed'> & {
       follower?: string;
       following?: string;
       _embed?: {
@@ -21,7 +25,7 @@ export type ApiGetFollowReturnType = ApiDataResponse<Follow<string | Comic>>;
 export type ApiGetFollowParams = Pick<Follow, 'following'> &
   Partial<
     Omit<Follow, 'following' | 'follower'> &
-      Pick<GetRequestOperators<Follow>, '_select'> & {
+      Pick<ApiGetRequestOperators<Follow>, '_select'> & {
         follower?: string;
         following?: string;
         _embed?: {

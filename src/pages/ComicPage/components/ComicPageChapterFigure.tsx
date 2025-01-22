@@ -1,5 +1,5 @@
 import { Typography } from '~/components/index.ts';
-import { Chapter } from '~/types/chapterType.ts';
+import { Chapter } from '~/types/index.ts';
 import { toDate } from '~/utils/converters.ts';
 
 interface Props {

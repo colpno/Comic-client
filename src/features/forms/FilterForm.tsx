@@ -1,4 +1,5 @@
-import { Button, Form, FormProps, Typography } from '~/components/index.ts';
+import { Button, Form, Typography } from '~/components/index.ts';
+import { FormProps } from '~/types/index.ts';
 import { cn } from '~/utils/cssUtils.ts';
 
 interface Props extends Omit<FormProps, 'title'> {

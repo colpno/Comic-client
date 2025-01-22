@@ -8,7 +8,7 @@
 
 import { AxiosRequestConfig, Method } from 'axios';
 
-import { PrimitiveValue } from './commonTypes.ts';
+import { PrimitiveValue } from '../index.ts';
 
 export interface ApiDataResponse<D = unknown> {
   data: D;
@@ -65,7 +65,7 @@ export interface ApiFailedResponse {
 ======================================================================
 */
 
-export interface FilterOperators {
+export interface ApiFilterOperators {
   /** Contain string. */
   like: string;
   /** Equal. */
@@ -100,15 +100,15 @@ export interface FilterOperators {
   or: Record<
     string,
     Pick<
-      FilterOperators,
+      ApiFilterOperators,
       'like' | 'eq' | 'ne' | 'exists' | 'gt' | 'gte' | 'lt' | 'lte' | 'size' | 'all' | 'in' | 'nin'
     >
   >[];
   /** This and that. */
-  and: FilterOperators['or'];
+  and: ApiFilterOperators['or'];
 }
 
-export type Embed<D = Record<string, unknown>> = {
+export type ApiEmbed<D = Record<string, unknown>> = {
   /**
    * The field which will be populated.
    * @example
@@ -126,31 +126,31 @@ export type Embed<D = Record<string, unknown>> = {
    * @example
    * { field1: 'value1', field2: { gt: 10 } }
    */
-  match?: Partial<Record<keyof D, Partial<FilterOperators>>>;
+  match?: Partial<Record<keyof D, Partial<ApiFilterOperators>>>;
   /**
    * For deep population. Repeat the embed object.
    */
-  populate?: GetRequestOperators<D>['_embed'];
+  populate?: ApiGetRequestOperators<D>['_embed'];
 };
 
-export type SortOrder = 'asc' | 'desc';
+export type ApiSortOrder = 'asc' | 'desc';
 
 /**
  * @example
  * { field1: 'asc', field2: 'desc' }
  */
-export type Sort<D = Record<string, unknown>> = Partial<Record<keyof D, SortOrder>>;
+export type ApiSort<D = Record<string, unknown>> = Partial<Record<keyof D, ApiSortOrder>>;
 
 /**
  * The filter for the query.
  * @example
  * { field1: 'value1', field2: { gt: 10 } }
  */
-export type Filter<D = Record<string, unknown>> = Partial<
-  Record<keyof D, PrimitiveValue | Partial<FilterOperators>>
+export type ApiFilter<D = Record<string, unknown>> = Partial<
+  Record<keyof D, PrimitiveValue | Partial<ApiFilterOperators>>
 >;
 
-export interface GetRequestOperators<D = undefined> {
+export interface ApiGetRequestOperators<D = undefined> {
   /**
    * Choose the fields to return or not. By define the field with or without the prefix minus sign "-".
    * @example
@@ -166,13 +166,13 @@ export interface GetRequestOperators<D = undefined> {
    * @example
    * [{ path: 'field' }]
    */
-  _embed?: string | Embed<D> | Embed<D>[];
+  _embed?: string | ApiEmbed<D> | ApiEmbed<D>[];
   /**
    * Sort column(s).
    * @example
    * { field1: 'asc', field2: 'desc' }
    */
-  _sort?: Sort<D>;
+  _sort?: ApiSort<D>;
   /** Limit the number of items per page. */
   _limit?: number;
   /** For paginating. */

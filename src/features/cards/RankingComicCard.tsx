@@ -5,7 +5,7 @@ import Typography from '~/components/Typography.tsx';
 import { getComicRoute } from '~/constants/routeConstants.ts';
 import { useDeviceWatcher } from '~/hooks/useDeviceWatcher.ts';
 import { placeholderImage } from '~/images/index.ts';
-import { Comic } from '~/types/comicType.ts';
+import { Comic } from '~/types/index.ts';
 
 interface Props {
   comic: Comic;
@@ -81,9 +81,11 @@ function MobileCard({ comic, rank }: Props) {
         <Typography variant="body2" className="line-clamp-1 !mt-1 !mb-auto">
           {comic.tags.map((tag) => tag.name).join(', ')}
         </Typography>
-        <Typography variant="body2" className="line-clamp-1">
-          {comic.authors.map((author) => author.name).join(', ')}
-        </Typography>
+        {comic.authors && (
+          <Typography variant="body2" className="line-clamp-1">
+            {comic.authors.map((author) => author.name).join(', ')}
+          </Typography>
+        )}
       </div>
     </figure>
   );

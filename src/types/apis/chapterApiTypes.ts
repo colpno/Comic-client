@@ -1,21 +1,21 @@
 import {
   ApiDataResponse,
   ApiFulfilledResponse,
-  GetRequestOperators,
-  Sort,
-} from '~/types/apiTypes.ts';
-import { Chapter } from '~/types/chapterType.ts';
-import { Comic } from '../comicType.ts';
+  ApiGetRequestOperators,
+  ApiSort,
+  Chapter,
+  Comic,
+} from '~/types/index.ts';
 
 type AllowedInclude = 'emptyPages' | 'futurePublishAt' | 'externalUrl';
 
 export type ApiGetChaptersReturnType = ApiFulfilledResponse<Chapter[]>;
 export interface ApiGetChaptersParams
-  extends Pick<GetRequestOperators<Chapter>, '_limit' | '_page'> {
+  extends Pick<ApiGetRequestOperators<Chapter>, '_limit' | '_page'> {
   comicId: string;
   include?: AllowedInclude[];
   exclude?: AllowedInclude[];
-  _sort?: Sort<Pick<Chapter, 'publishAt' | 'readableAt' | 'volume' | 'chapter'>>;
+  _sort?: ApiSort<Pick<Chapter, 'publishAt' | 'readableAt' | 'volume' | 'chapter'>>;
 }
 
 export type ApiGetContentReturnType = ApiDataResponse<Chapter['content']>;

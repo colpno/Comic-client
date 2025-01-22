@@ -4,16 +4,16 @@ import {
   RadioProps as MUIRadioProps,
 } from '@mui/material';
 
-export interface Option {
+export interface RadioGroupOption {
   label: string;
   value: string;
 }
 
-export interface Props {
+export interface RadioGroupProps {
   name: string;
   label?: string;
-  options: Option[];
-  defaultValue?: Option;
+  options: RadioGroupOption[];
+  defaultValue?: RadioGroupOption;
   required?: boolean;
   slotProps?: {
     group?: MUIRadioGroupProps;

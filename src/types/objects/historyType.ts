@@ -1,5 +1,4 @@
-import { Chapter } from './chapterType.ts';
-import { Comic } from './comicType.ts';
+import { Chapter, Comic } from '~/types/index.ts';
 
 export interface History {
   id: string;

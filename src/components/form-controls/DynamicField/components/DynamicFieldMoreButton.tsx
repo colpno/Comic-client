@@ -1,4 +1,5 @@
-import { Button, ButtonAsButtonProps } from '~/components/index.ts';
+import { Button } from '~/components/index.ts';
+import { ButtonAsButtonProps } from '~/types/index.ts';
 
 function DynamicFieldMoreButton(props: ButtonAsButtonProps) {
   return (

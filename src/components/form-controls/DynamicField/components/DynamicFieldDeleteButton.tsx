@@ -1,6 +1,7 @@
 import { MdClose } from 'react-icons/md';
 
-import { Button, ButtonAsIconButtonProps } from '~/components/index.ts';
+import { Button } from '~/components/index.ts';
+import { ButtonAsIconButtonProps } from '~/types/index.ts';
 
 function DynamicFieldDeleteButton(props: Partial<ButtonAsIconButtonProps>) {
   return (

@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { v4 } from 'uuid';
 
 import { useGetComicsQuery } from '~/apis/comicApis.ts';
-import { Comic } from '~/types/comicType.ts';
+import { Comic } from '~/types/index.ts';
 import BannerSlider from './components/HomePageBanner.tsx';
 import CardRow from './components/HomePageCardRow.tsx';
 import GenreContainer from './components/HomePageGenreContainer.tsx';

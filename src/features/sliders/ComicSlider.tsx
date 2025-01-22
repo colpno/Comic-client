@@ -3,9 +3,10 @@ import { HTMLAttributes, memo, useState } from 'react';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
 import { SwiperClass } from 'swiper/react';
 
-import { Button, Slider, SliderProps } from '~/components/index.ts';
+import { Button, Slider } from '~/components/index.ts';
 import { useCustomSliderNavigators } from '~/hooks/index.ts';
 import { useDeviceWatcher } from '~/hooks/useDeviceWatcher.ts';
+import { SliderProps } from '~/types/index.ts';
 import { cn } from '~/utils/cssUtils.ts';
 
 interface NavigatorsProps {

@@ -1,9 +1,10 @@
 import { useMemo } from 'react';
 
 import { useGetGenresQuery } from '~/apis/genreApis.ts';
-import { Button, ButtonAsButtonProps, Popup } from '~/components/index.ts';
+import { Button, Popup } from '~/components/index.ts';
 import { SelectiveFilterForm, SelectiveFilterFormValues } from '~/features/index.ts';
 import { usePopup } from '~/hooks/usePopup.ts';
+import { ButtonAsButtonProps } from '~/types/index.ts';
 import { cn } from '~/utils/cssUtils.ts';
 
 interface Props extends Partial<Omit<ButtonAsButtonProps, 'onSubmit'>> {

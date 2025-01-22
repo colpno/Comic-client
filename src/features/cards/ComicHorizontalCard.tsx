@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 import Typography from '~/components/Typography.tsx';
 import { getComicRoute } from '~/constants/routeConstants.ts';
-import { Comic } from '~/types/comicType.ts';
+import { Comic } from '~/types/index.ts';
 
 function ComicHorizontalCard(comic: Comic) {
   return (

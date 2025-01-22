@@ -3,7 +3,7 @@ import { HTMLAttributes, memo } from 'react';
 
 import { MUI_CONTAINER_MAX_WIDTH } from '~/constants/commonConstants.ts';
 import { useDeviceWatcher } from '~/hooks/index.ts';
-import { Device } from '~/types/commonTypes.ts';
+import { Device } from '~/types/index.ts';
 import { cn } from '~/utils/cssUtils.ts';
 import HeaderActions from './HeaderActions/HeaderActions.tsx';
 import HeaderLogo from './HeaderLogo.tsx';

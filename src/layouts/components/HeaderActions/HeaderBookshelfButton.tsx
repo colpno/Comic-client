@@ -1,7 +1,8 @@
 import { PiBooks } from 'react-icons/pi';
 
-import { Button, ButtonAsIconButtonProps } from '~/components/index.ts';
+import { Button } from '~/components/index.ts';
 import { ROUTE_HISTORY } from '~/constants/routeConstants';
+import { ButtonAsIconButtonProps } from '~/types/index.ts';
 
 type Props = Partial<Omit<ButtonAsIconButtonProps, 'children' | 'href' | 'as' | 'title'>>;
 

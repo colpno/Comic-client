@@ -7,7 +7,7 @@ import { Button, DataFetching, Pagination, Typography } from '~/components/index
 import { PAGINATION_INITIAL_PAGE } from '~/constants/commonConstants.ts';
 import { getComicsByGenreRoute } from '~/constants/routeConstants.ts';
 import { ComicCard } from '~/features/index.ts';
-import { Comic } from '~/types/comicType.ts';
+import { Comic } from '~/types/index.ts';
 import { toSentenceCase } from '~/utils/converters.ts';
 
 function ComicType({ type }: { type: Comic['type'] }) {

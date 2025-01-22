@@ -4,8 +4,8 @@ import {
   ApiGetContentReturnType,
   ApiReadingChapterParams,
   ApiReadingChapterReturnType,
-} from '~/types/apis/chapterApiTypes.ts';
-import { Chapter } from '~/types/chapterType.ts';
+  Chapter,
+} from '~/types/index.ts';
 import { CHAPTER_ENDPOINTS } from './apiConstants.ts';
 import api from './index.ts';
 

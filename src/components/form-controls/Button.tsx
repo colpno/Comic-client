@@ -6,8 +6,8 @@ import {
 import { memo } from 'react';
 import { Link } from 'react-router-dom';
 
+import { ButtonAsButtonProps, ButtonAsIconButtonProps, ButtonProps } from '~/types/index.ts';
 import { cn } from '~/utils/cssUtils.ts';
-import { AsButtonProps, AsIconButtonProps, Props } from './types/buttonTypes.ts';
 
 function Button({
   children,
@@ -19,7 +19,7 @@ function Button({
   href,
   externalLink,
   ...props
-}: Props) {
+}: ButtonProps) {
   const LinkComponent = externalLink ? 'a' : Link;
   const hyperlinks = LinkComponent === 'a' ? { href } : { to: href };
 
@@ -41,7 +41,7 @@ function Button({
       );
     }
     case 'iconButton': {
-      const componentProps = props as AsIconButtonProps;
+      const componentProps = props as ButtonAsIconButtonProps;
       return (
         <MUIIconButton
           type="button"
@@ -59,7 +59,7 @@ function Button({
       break;
   }
 
-  if ((props as AsButtonProps).variant === 'text') {
+  if ((props as ButtonAsButtonProps).variant === 'text') {
     props.color = 'inherit';
   }
 
@@ -90,9 +90,4 @@ function LoadingSpinner() {
 }
 
 export default memo(Button);
-export type {
-  Props as ButtonProps,
-  AsButtonProps as ButtonAsButtonProps,
-  AsIconButtonProps as ButtonAsIconButtonProps,
-  AsUnstyledProps as ButtonAsUnstyledProps,
-} from './types/buttonTypes.ts';
+export type * from '../../types/components/buttonTypes.ts';

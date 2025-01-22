@@ -8,11 +8,11 @@ import {
   handleRowEditStop,
   processRowUpdate,
 } from '~/components/Table/utils/tableUtils.tsx';
+import { TableProps } from '~/types/index.ts';
 import { TableProvider } from './TableContext.ts';
-import { Props } from './tableTypes.ts';
 import { getCRUDActionsColDef } from './utils/tableColumnUtils.tsx';
 
-function Table(componentProps: Props) {
+function Table(componentProps: TableProps) {
   const {
     rows: rowsProp = [],
     columns,
@@ -87,9 +87,4 @@ function Table(componentProps: Props) {
 
 export default memo(Table);
 export { default as TableActionButton } from './components/TableActionButton.tsx';
-export type {
-  Props as TableProps,
-  ColsDef as TableColsDef,
-  Data as TableData,
-} from './tableTypes.ts';
 export { generateTableActionsColDef } from './utils/tableColumnUtils.tsx';

@@ -11,20 +11,21 @@ type BaseProps = {
   externalLink?: boolean;
 };
 
-export type AsButtonProps = {
+export type ButtonAsButtonProps = {
   as?: 'button';
 } & AssignProps<MUIButtonProps, BaseProps>;
 
-export type AsIconButtonProps<D extends React.ElementType = IconButtonTypeMap['defaultComponent']> =
-  {
-    as: 'iconButton';
-    children: JSX.Element;
-    href?: string;
-  } & AssignProps<Omit<MUIIconButtonProps<D>, 'children'>, BaseProps>;
+export type ButtonAsIconButtonProps<
+  D extends React.ElementType = IconButtonTypeMap['defaultComponent']
+> = {
+  as: 'iconButton';
+  children: JSX.Element;
+  href?: string;
+} & AssignProps<Omit<MUIIconButtonProps<D>, 'children'>, BaseProps>;
 
-export type AsUnstyledProps = {
+export type ButtonAsUnstyledProps = {
   as: 'unstyled';
 } & AssignProps<React.ButtonHTMLAttributes<HTMLButtonElement>, BaseProps> &
   React.HTMLProps<HTMLButtonElement>;
 
-export type Props = AsButtonProps | AsIconButtonProps | AsUnstyledProps;
+export type ButtonProps = ButtonAsButtonProps | ButtonAsIconButtonProps | ButtonAsUnstyledProps;

@@ -1,6 +1,6 @@
 import { createTheme } from '@mui/material';
 
-import { Theme } from '~/types/commonTypes.ts';
+import { Theme } from '~/types/index.ts';
 
 const getCSSVariableValue = (variable: string) => {
   return getComputedStyle(document.body).getPropertyValue(variable);

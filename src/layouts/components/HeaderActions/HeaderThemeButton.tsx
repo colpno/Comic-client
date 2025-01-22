@@ -2,11 +2,11 @@ import { IoMoonOutline, IoSunnyOutline } from 'react-icons/io5';
 import { LuSunMoon } from 'react-icons/lu';
 import { useSelector } from 'react-redux';
 
-import { Button, ButtonAsButtonProps, Popup, Typography } from '~/components/index.ts';
+import { Button, Popup, Typography } from '~/components/index.ts';
 import { usePopup } from '~/hooks/usePopup.ts';
 import { setTheme } from '~/libs/redux/slices/commonSlice';
 import { RootState, useAppDispatch } from '~/libs/redux/store.ts';
-import { Theme } from '~/types/commonTypes.ts';
+import { ButtonAsButtonProps, Theme } from '~/types/index.ts';
 
 function ThemeIcon({ theme }: { theme: Theme }) {
   switch (theme) {

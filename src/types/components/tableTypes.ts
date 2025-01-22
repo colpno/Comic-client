@@ -11,11 +11,11 @@ type BaseTableProps = Omit<
   | 'slotProps'
 >;
 
-export type Data = BaseTableProps['rows'];
-export type ColsDef = BaseTableProps['columns'];
+export type TableData = BaseTableProps['rows'];
+export type TableColsDef = BaseTableProps['columns'];
 
-export interface Props extends Omit<BaseTableProps, 'rows' | 'checkboxSelection'> {
-  rows: Data;
+export interface TableProps extends Omit<BaseTableProps, 'rows' | 'checkboxSelection'> {
+  rows: TableData;
   /** Disable the ability of deleting a row. */
   removable?:
     | boolean
@@ -29,9 +29,9 @@ export interface Props extends Omit<BaseTableProps, 'rows' | 'checkboxSelection'
   editable?: boolean;
   /** Disable the ability of adding a new record. */
   addable?: boolean;
-  onAdd?: (data: Exclude<Data, undefined>[number]) => Promise<boolean> | boolean;
+  onAdd?: (data: Exclude<TableData, undefined>[number]) => Promise<boolean> | boolean;
   onRemove?: (id: string | string[]) => Promise<boolean> | boolean;
-  onEdit?: (data: Exclude<Data, undefined>[number]) => Promise<boolean> | boolean;
+  onEdit?: (data: Exclude<TableData, undefined>[number]) => Promise<boolean> | boolean;
   /** Sort a column. */
   sort?: Exclude<GridSortModel, []>;
   height?: string;

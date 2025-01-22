@@ -1,7 +1,6 @@
 import { Tabs as MUITabs, TabsProps as MUITabsProps } from '@mui/material';
 import { memo, SyntheticEvent, useState } from 'react';
 
-import { Omit } from '~/types/commonTypes.ts';
 import LinkTabs, { LinkTabsProps } from './components/LinkTabs.tsx';
 import TabsWrapper from './components/TabsWrapper.tsx';
 

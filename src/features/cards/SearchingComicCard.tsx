@@ -4,11 +4,11 @@ import Image from '~/components/Image.tsx';
 import Typography from '~/components/Typography.tsx';
 import { getComicRoute } from '~/constants/routeConstants.ts';
 import { placeholderImage } from '~/images/index.ts';
-import { Comic } from '~/types/comicType.ts';
+import { Comic } from '~/types/index.ts';
 
 function SearchingComicCard(comic: Comic) {
   const tags = comic.tags.map((tag) => tag.name).join(', ');
-  const authors = comic.authors.map((author) => author.name).join(', ');
+  const authors = comic.authors?.map((author) => author.name).join(', ');
 
   return (
     <Link to={getComicRoute(comic.title)} key={comic.id}>
@@ -36,9 +36,11 @@ function SearchingComicCard(comic: Comic) {
           <Typography variant="body2" className="line-clamp-1 !mt-1 !mb-auto" title={tags}>
             {tags}
           </Typography>
-          <Typography variant="body2" className="line-clamp-1" title={authors}>
-            {authors}
-          </Typography>
+          {authors && (
+            <Typography variant="body2" className="line-clamp-1" title={authors}>
+              {authors}
+            </Typography>
+          )}
         </div>
       </figure>
     </Link>

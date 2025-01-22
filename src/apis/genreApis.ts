@@ -1,4 +1,4 @@
-import { ApiGetGenresReturnType } from '~/types/apis/genreApiTypes.ts';
+import { ApiGetGenresReturnType } from '~/types/index.ts';
 import { GENRE_ENDPOINTS } from './apiConstants.ts';
 import api from './index.ts';
 

@@ -6,7 +6,7 @@ import { Typography } from '~/components/index.ts';
 import { proxyServerUrl } from '~/configs/appConf.ts';
 import useLoadImages from '~/hooks/useLoadImages.ts';
 import { placeholderImage } from '~/images/index.ts';
-import { Chapter } from '~/types/chapterType.ts';
+import { Chapter } from '~/types/index.ts';
 
 function Images({ images }: Props) {
   return images.map((img, i) => {

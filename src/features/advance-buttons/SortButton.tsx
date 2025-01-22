@@ -1,16 +1,16 @@
 import { useState } from 'react';
 import { FaSortNumericDown, FaSortNumericUp } from 'react-icons/fa';
 
-import { Button, ButtonAsIconButtonProps } from '~/components/index.ts';
-import { SortOrder } from '~/types/apiTypes.ts';
+import { Button } from '~/components/index.ts';
+import { ApiSortOrder, ButtonAsIconButtonProps } from '~/types/index.ts';
 
 interface Props extends Partial<Omit<ButtonAsIconButtonProps, 'onChange' | 'defaultValue'>> {
-  defaultValue?: SortOrder;
-  onChange: (order: SortOrder) => void;
+  defaultValue?: ApiSortOrder;
+  onChange: (order: ApiSortOrder) => void;
 }
 
 function SortButton({ onChange, defaultValue, ...props }: Props) {
-  const [order, setOrder] = useState<SortOrder>(defaultValue ?? 'asc');
+  const [order, setOrder] = useState<ApiSortOrder>(defaultValue ?? 'asc');
 
   const toggleSort = () => {
     setOrder((prev) => {

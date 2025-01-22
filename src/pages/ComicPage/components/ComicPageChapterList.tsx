@@ -6,7 +6,7 @@ import { v4 } from 'uuid';
 
 import { Typography } from '~/components/index.ts';
 import { getComicReadingRoute } from '~/constants/routeConstants.ts';
-import { Chapter } from '~/types/chapterType.ts';
+import { Chapter } from '~/types/index.ts';
 import ChapterFigure from './ComicPageChapterFigure.tsx';
 
 type Volume = {

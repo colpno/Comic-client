@@ -10,9 +10,9 @@ import {
 import { memo } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 
-import { Props } from './types/radioGroupTypes.ts';
+import { RadioGroupProps } from '~/types/index.ts';
 
-function RadioGroup(props: Props) {
+function RadioGroup(props: RadioGroupProps) {
   const { label, name, options, required, defaultValue = null, slotProps } = props;
   const theme = useTheme();
   const {
@@ -69,7 +69,3 @@ function RadioGroup(props: Props) {
 }
 
 export default memo(RadioGroup);
-export type {
-  Props as RadioGroupProps,
-  Option as RadioGroupOption,
-} from './types/radioGroupTypes.ts';

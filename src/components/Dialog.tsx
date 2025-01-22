@@ -1,47 +1,12 @@
-import { Dialog as MUIDialog, DialogProps as MUIDialogProps } from '@mui/material';
+import { Dialog as MUIDialog } from '@mui/material';
 import { memo } from 'react';
 
 import { useDeviceWatcher } from '~/hooks/useDeviceWatcher.ts';
+import { DialogAsConfirm, DialogAsContainer, DialogProps } from '~/types/index.ts';
 import { cn } from '~/utils/cssUtils.ts';
-import { Button, ButtonAsButtonProps, Typography } from './index.ts';
+import { Button, Typography } from './index.ts';
 
-interface BaseProps extends Omit<MUIDialogProps, 'onClose'> {
-  onClose?: () => void;
-}
-
-interface DialogAsContainer extends BaseProps {
-  variant: 'container';
-}
-
-interface DialogAsConfirm extends Omit<BaseProps, 'title' | 'slotProps'> {
-  /** @default confirm */
-  variant?: 'confirm';
-  title: string;
-  onAccept?: () => void;
-  onReject?: () => void;
-  overrideUI?: {
-    title?: React.ReactNode;
-    actions?: React.ReactNode;
-  };
-  classes?: {
-    root?: string;
-    title?: string;
-    content?: string;
-    actions?: string;
-  };
-  slotProps?: Omit<BaseProps['slotProps'], 'title' | 'content' | 'actions'> & {
-    title?: React.ComponentProps<typeof Typography>;
-    content?: React.HTMLAttributes<HTMLDivElement>;
-    actions?: React.HTMLAttributes<HTMLDivElement>;
-    'actions.accept'?: ButtonAsButtonProps;
-    'actions.reject'?: ButtonAsButtonProps;
-    'actions.close'?: ButtonAsButtonProps;
-  };
-}
-
-type Props = DialogAsContainer | DialogAsConfirm;
-
-function Dialog({ variant = 'confirm', ...props }: Props) {
+function Dialog({ variant = 'confirm', ...props }: DialogProps) {
   switch (variant) {
     case 'confirm':
       return <ConfirmDialog {...(props as DialogAsConfirm)} />;

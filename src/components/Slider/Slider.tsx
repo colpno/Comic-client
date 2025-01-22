@@ -1,19 +1,13 @@
 import { memo, useCallback, useState } from 'react';
 import 'swiper/css';
-import { Swiper, SwiperClass, SwiperProps, SwiperSlide, SwiperSlideProps } from 'swiper/react';
+import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react';
 import { v4 } from 'uuid';
 
-import { Omit } from '~/types/commonTypes.ts';
+import { SliderProps } from '~/types/index.ts';
 import { cn } from '~/utils/cssUtils.ts';
 import { getModules } from './sliderUtils.ts';
 
-interface Props extends Omit<SwiperProps, 'children' | 'modules'> {
-  children: React.ReactNode | React.ReactNode[];
-  slideProp?: SwiperSlideProps;
-  centerSlideContent?: boolean;
-}
-
-function Slider(props: Props) {
+function Slider(props: SliderProps) {
   const { children, slideProp, centerSlideContent, className, ...swiperProps } = props;
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars -- unused, just for re-rendering navigators when slide change
@@ -47,4 +41,4 @@ function Slider(props: Props) {
 }
 
 export default memo(Slider);
-export type { Props as SliderProps };
+export type { SliderProps };

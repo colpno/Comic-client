@@ -3,7 +3,7 @@ import { useCallback, useEffect } from 'react';
 
 import { setDevice } from '~/libs/redux/slices/commonSlice';
 import { useAppDispatch } from '~/libs/redux/store.ts';
-import { Device } from '~/types/commonTypes.ts';
+import { Device } from '~/types/index.ts';
 
 function DeviceWatcher() {
   const dispatch = useAppDispatch();

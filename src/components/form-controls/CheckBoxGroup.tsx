@@ -10,9 +10,9 @@ import {
 import { memo } from 'react';
 import { Controller, ControllerRenderProps, useFormContext } from 'react-hook-form';
 
-import { Option, Props } from './types/checkboxGroupTypes.ts';
+import { CheckboxOption, CheckboxProps } from '~/types/index.ts';
 
-function CheckBoxGroup(props: Props) {
+function CheckBoxGroup(props: CheckboxProps) {
   const { label, name, options, required, defaultValue = [], slotProps, onChange } = props;
   const theme = useTheme();
   const {
@@ -27,7 +27,7 @@ function CheckBoxGroup(props: Props) {
   } = useFormContext();
   const errorMessage = getFieldState(name)?.error?.message;
 
-  const handleChange = (field: ControllerRenderProps, item: Option) => {
+  const handleChange = (field: ControllerRenderProps, item: CheckboxOption) => {
     // Not in checked list, then add to checked list
     if (!field.value.includes(item.value)) {
       const newValue = [...field.value, item.value];
@@ -79,4 +79,3 @@ function CheckBoxGroup(props: Props) {
 }
 
 export default memo(CheckBoxGroup);
-export type { Option as CheckboxOption, Props as CheckboxProps };

@@ -2,8 +2,6 @@ import { Tab as MUITab, TabProps as MUITabProps } from '@mui/material';
 import { ElementType, memo } from 'react';
 import { Link, LinkProps } from 'react-router-dom';
 
-import { Omit } from '~/types/commonTypes';
-
 interface BaseProps extends Omit<MUITabProps, 'label'> {
   label: string;
 }

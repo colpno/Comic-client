@@ -3,8 +3,9 @@ import { useFormContext } from 'react-hook-form';
 import { useSearchParams } from 'react-router-dom';
 
 import TextInput from '~/components/form-controls/base-controls/TextInput.tsx';
-import { CheckBoxGroup, CheckboxOption } from '~/components/index.ts';
+import { CheckBoxGroup } from '~/components/index.ts';
 import { useDebounce } from '~/hooks/useDebounce.ts';
+import { CheckboxOption } from '~/types/index.ts';
 
 interface Props {
   options: CheckboxOption[];

@@ -10,7 +10,7 @@ import {
   ApiFulfilledResponse,
   ApiRequestArgs,
   ValidationError,
-} from '~/types/apiTypes';
+} from '~/types/apis/apiTypes';
 
 axios.defaults.withCredentials = true;
 
