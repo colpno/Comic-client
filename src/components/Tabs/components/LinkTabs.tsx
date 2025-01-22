@@ -1,7 +1,7 @@
 import { Tabs as MUITabs, TabsProps as MUITabsProps } from '@mui/material';
 import { memo } from 'react';
 
-import { useRouteMatch } from '~/hooks/useRouteMatch.ts';
+import { useRouteMatch } from '~/hooks/index.ts';
 
 export interface LinkTabsProps extends MUITabsProps {
   /** should be sorted in descending. @example ['/users/add', '/users/edit', '/users'] */

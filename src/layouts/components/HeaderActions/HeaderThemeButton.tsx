@@ -3,7 +3,7 @@ import { LuSunMoon } from 'react-icons/lu';
 import { useSelector } from 'react-redux';
 
 import { Button, Popup, Typography } from '~/components/index.ts';
-import { usePopup } from '~/hooks/usePopup.ts';
+import { usePopup } from '~/hooks/index.ts';
 import { setTheme } from '~/libs/redux/slices/commonSlice';
 import { RootState, useAppDispatch } from '~/libs/redux/store.ts';
 import { ButtonAsButtonProps, Theme } from '~/types/index.ts';

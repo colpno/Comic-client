@@ -1,6 +1,4 @@
 import { CssBaseline, Theme as MUITheme, ThemeProvider, useMediaQuery } from '@mui/material';
-import { LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
@@ -28,7 +26,7 @@ function MUIContextWrapper({ children }: ContextWrapperProps) {
   return (
     <ThemeProvider theme={themeConfig}>
       <CssBaseline />
-      <LocalizationProvider dateAdapter={AdapterMoment}>{children}</LocalizationProvider>
+      {children}
     </ThemeProvider>
   );
 }

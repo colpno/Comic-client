@@ -4,7 +4,7 @@ import { useSearchParams } from 'react-router-dom';
 
 import TextInput from '~/components/form-controls/base-controls/TextInput.tsx';
 import { CheckboxGroup } from '~/components/index.ts';
-import { useDebounce } from '~/hooks/useDebounce.ts';
+import { useDebounce } from '~/hooks/index.ts';
 import { CheckboxOption } from '~/types/index.ts';
 
 interface Props {

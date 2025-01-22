@@ -6,7 +6,7 @@ import { useGetGenresQuery } from '~/apis/genreApis.ts';
 import { Button } from '~/components/index.ts';
 import { MUI_CONTAINER_MAX_WIDTH, PAGINATION_INITIAL_PAGE } from '~/constants/commonConstants.ts';
 import { getComicsByGenreRoute } from '~/constants/routeConstants.ts';
-import { useDeviceWatcher } from '~/hooks/useDeviceWatcher.ts';
+import { useDeviceWatcher } from '~/hooks/index.ts';
 import { backgroundImage1 } from '~/images/index.ts';
 import { Genre } from '~/types/index.ts';
 import { cn } from '~/utils/cssUtils.ts';

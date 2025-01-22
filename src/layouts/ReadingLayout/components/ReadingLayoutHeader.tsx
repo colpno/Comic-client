@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { Button, Logo, Typography } from '~/components/index.ts';
 import { getComicRoute } from '~/constants/routeConstants.ts';
-import { useDeviceWatcher } from '~/hooks/useDeviceWatcher.ts';
+import { useDeviceWatcher } from '~/hooks/index.ts';
 import BaseHeader from '~/layouts/components/Header.tsx';
 import AccountButton from '~/layouts/components/HeaderActions/HeaderAccountButton.tsx';
 import BookshelfButton from '~/layouts/components/HeaderActions/HeaderBookshelfButton.tsx';

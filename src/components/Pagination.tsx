@@ -6,7 +6,7 @@ import { memo, useEffect, useRef } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 
 import { PAGINATION_INITIAL_PAGE } from '~/constants/commonConstants';
-import { useDeviceWatcher } from '~/hooks/useDeviceWatcher.ts';
+import { useDeviceWatcher } from '~/hooks/index.ts';
 
 export interface PaginationProps extends Omit<MUIPaginationProps, 'onChange' | 'count'> {
   /** Total of pages */

@@ -1,7 +1,7 @@
 import { Dialog as MUIDialog } from '@mui/material';
 import { memo } from 'react';
 
-import { useDeviceWatcher } from '~/hooks/useDeviceWatcher.ts';
+import { useDeviceWatcher } from '~/hooks/index.ts';
 import { DialogAsConfirm, DialogAsContainer, DialogProps } from '~/types/index.ts';
 import { cn } from '~/utils/cssUtils.ts';
 import { Button, Typography } from './index.ts';

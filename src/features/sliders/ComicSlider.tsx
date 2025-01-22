@@ -4,8 +4,7 @@ import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
 import { SwiperClass } from 'swiper/react';
 
 import { Button, Slider } from '~/components/index.ts';
-import { useCustomSliderNavigators } from '~/hooks/index.ts';
-import { useDeviceWatcher } from '~/hooks/useDeviceWatcher.ts';
+import { useCustomSliderNavigators, useDeviceWatcher } from '~/hooks/index.ts';
 import { SliderProps } from '~/types/index.ts';
 import { cn } from '~/utils/cssUtils.ts';
 

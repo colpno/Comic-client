@@ -7,7 +7,7 @@ import { useLazyGetComicsQuery } from '~/apis/comicApis.ts';
 import { InfiniteScrollPagination } from '~/components/index.ts';
 import Typography from '~/components/Typography.tsx';
 import { MUI_CONTAINER_MAX_WIDTH, PAGINATION_INITIAL_PAGE } from '~/constants/commonConstants.ts';
-import { useDeviceWatcher } from '~/hooks/useDeviceWatcher.ts';
+import { useDeviceWatcher } from '~/hooks/index.ts';
 import { Comic } from '~/types/index.ts';
 import { toSentenceCase } from '~/utils/converters.ts';
 import Content from './components/ComicsByGenrePageContent.tsx';

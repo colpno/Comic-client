@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Image from '~/components/Image.tsx';
 import Typography from '~/components/Typography.tsx';
 import { getComicRoute } from '~/constants/routeConstants.ts';
-import { useDeviceWatcher } from '~/hooks/useDeviceWatcher.ts';
+import { useDeviceWatcher } from '~/hooks/index.ts';
 import { placeholderImage } from '~/images/index.ts';
 import { Comic } from '~/types/index.ts';
 

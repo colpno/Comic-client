@@ -8,7 +8,7 @@ import {
   Typography,
 } from '~/components/index.ts';
 import { getComicReadingRoute, getComicRoute } from '~/constants/routeConstants.ts';
-import { usePopup } from '~/hooks/usePopup.ts';
+import { usePopup } from '~/hooks/index.ts';
 import { placeholderImage } from '~/images/index.ts';
 import { Comic, History, TableColsDef } from '~/types/index.ts';
 import { toDate } from '~/utils/converters.ts';

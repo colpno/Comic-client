@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 import { useGetGenresQuery } from '~/apis/genreApis.ts';
 import { Button, Popup } from '~/components/index.ts';
 import { SelectiveFilterForm, SelectiveFilterFormValues } from '~/features/index.ts';
-import { usePopup } from '~/hooks/usePopup.ts';
+import { usePopup } from '~/hooks/index.ts';
 import { ButtonAsButtonProps } from '~/types/index.ts';
 import { cn } from '~/utils/cssUtils.ts';
 

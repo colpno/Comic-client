@@ -5,8 +5,7 @@ import { v4 } from 'uuid';
 
 import { Tab, Tabs } from '~/components/index.ts';
 import { MUI_CONTAINER_MAX_WIDTH } from '~/constants/commonConstants.ts';
-import { useDeviceWatcher } from '~/hooks/useDeviceWatcher.ts';
-import { useScroll } from '~/hooks/useScroll.ts';
+import { useDeviceWatcher, useScroll } from '~/hooks/index.ts';
 import BaseHeader from '~/layouts/components/Header.tsx';
 import { cn, heights } from '~/utils/cssUtils.ts';
 import { menu, SubMenuItem } from '../menus.ts';
