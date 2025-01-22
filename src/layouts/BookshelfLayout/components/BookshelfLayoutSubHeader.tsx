@@ -1,12 +1,10 @@
-import { Box, Container } from '@mui/material';
-import { useMemo } from 'react';
-import { v4 } from 'uuid';
+import { Container } from '@mui/material';
 
 import Image from '~/components/Image.tsx';
-import { Tab, Tabs, Typography } from '~/components/index.ts';
+import { Typography } from '~/components/index.ts';
 import { MUI_CONTAINER_MAX_WIDTH } from '~/constants/commonConstants.ts';
 import { booksSVG } from '~/images/index.ts';
-import { getNavigation } from '../bookshelfLayoutConstants.ts';
+import Navigation from './BookshelfLayoutSubHeaderNavigators.tsx';
 
 function BookshelfLayoutSubHeader() {
   return (
@@ -28,32 +26,3 @@ function BookshelfLayoutSubHeader() {
 }
 
 export default BookshelfLayoutSubHeader;
-
-const navigationItems = getNavigation();
-
-function Navigation() {
-  const navigationRoutes = useMemo(() => navigationItems.map((i) => i.href), [navigationItems]);
-
-  return (
-    <Box sx={{ maxWidth: { xs: 100, sm: 270, md: 370 } }}>
-      <Tabs
-        as="links"
-        routes={navigationRoutes}
-        TabIndicatorProps={{ sx: { display: 'none' } }}
-        sx={{
-          '& .Mui-selected': {
-            fontWeight: 600,
-            color: 'var(--primary-600) !important',
-          },
-          '& *:not(.Mui-selected)': {
-            color: 'var(--text-disabled) !important',
-          },
-        }}
-      >
-        {navigationItems.map((item) => (
-          <Tab key={v4()} label={item.label} value={item.href} />
-        ))}
-      </Tabs>
-    </Box>
-  );
-}

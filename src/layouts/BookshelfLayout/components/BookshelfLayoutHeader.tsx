@@ -9,6 +9,20 @@ import { useDeviceWatcher } from '~/hooks/index.ts';
 import HeaderActions from '~/layouts/components/HeaderActions/HeaderActions.tsx';
 import { cn } from '~/utils/cssUtils.ts';
 
+function Logo() {
+  const isMobile = useDeviceWatcher() === 'mobile';
+
+  return (
+    <Link to={ROUTE_HOME}>
+      {isMobile ? (
+        <AppLogo variant="small" fill="#fff" />
+      ) : (
+        <AppLogo width={110} height={27} fill="#fff" />
+      )}
+    </Link>
+  );
+}
+
 interface Props {
   slotProps?: {
     header?: HTMLAttributes<HTMLElement>;
@@ -41,17 +55,3 @@ function BookshelfLayoutHeader({ slotProps }: Props) {
 }
 
 export default BookshelfLayoutHeader;
-
-function Logo() {
-  const isMobile = useDeviceWatcher() === 'mobile';
-
-  return (
-    <Link to={ROUTE_HOME}>
-      {isMobile ? (
-        <AppLogo variant="small" fill="#fff" />
-      ) : (
-        <AppLogo width={110} height={27} fill="#fff" />
-      )}
-    </Link>
-  );
-}

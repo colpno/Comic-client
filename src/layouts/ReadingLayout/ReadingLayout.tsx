@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Outlet, useParams } from 'react-router-dom';
 
-import { useLazyReadingChapterQuery } from '~/apis/chapterApis.ts';
+import { useReadingChapterQuery } from '~/apis/chapterApis.ts';
 import DataFetching from '~/components/DataFetching.tsx';
 import { addReadingHistory } from '~/libs/redux/slices/commonSlice.ts';
 import { useAppDispatch } from '~/libs/redux/store.ts';
@@ -14,21 +14,17 @@ import {
 } from './ReadingLayoutContext.ts';
 
 function ReadingLayout() {
-  const [visibility, setVisibility] = useState(true);
+  const dispatch = useAppDispatch();
+  const [headerVisibility, setHeaderVisibility] = useState(true);
   const { comictitle, chapterNumber } = useParams();
-  const [getReadingChapterData, { data, isFetching, isLoading }] = useLazyReadingChapterQuery();
+  const { data, isFetching, isLoading } = useReadingChapterQuery({
+    title: comictitle!,
+    chapterNumber: chapterNumber!,
+  });
   const readingData = data?.data;
   const pagination = data?.metadata?.pagination;
-  const dispatch = useAppDispatch();
 
-  // Fetch data for reading
-  useEffect(() => {
-    if (comictitle && chapterNumber) {
-      getReadingChapterData({ title: comictitle, chapterNumber });
-    }
-  }, [comictitle, chapterNumber]);
-
-  // Save reading history
+  // Save to reading history
   useEffect(() => {
     if (readingData?.comic && readingData?.chapter && pagination) {
       const { comic, chapter } = readingData;
@@ -48,12 +44,11 @@ function ReadingLayout() {
     }
   }, [readingData?.comic, readingData?.chapter, pagination]);
 
-  const toggleVisibility = () => setVisibility((prev) => !prev);
-
+  const toggleHeaderVisibility = () => setHeaderVisibility((prev) => !prev);
   const contextValues: ContextType = {
-    headerVisibility: visibility,
-    setHeaderVisibility: setVisibility,
-    toggleHeaderVisibility: toggleVisibility,
+    headerVisibility: headerVisibility,
+    setHeaderVisibility: setHeaderVisibility,
+    toggleHeaderVisibility: toggleHeaderVisibility,
     comic: readingData?.comic,
     chapter: readingData?.chapter,
     pagination: {

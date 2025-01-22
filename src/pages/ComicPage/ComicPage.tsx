@@ -1,9 +1,8 @@
 import { Grid2 } from '@mui/material';
-import { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 
-import { useLazyGetComicQuery } from '~/apis/comicApis.ts';
+import { useGetComicQuery } from '~/apis/comicApis.ts';
 import { DataFetching } from '~/components/index.ts';
 import NotFoundPage from '../ErrorPage/components/NotFoundPage.tsx';
 import BackgroundImage from './components/ComicPageBackgroundImage';
@@ -14,22 +13,18 @@ import Wrapper from './components/ComicPageWrapper.tsx';
 
 function ComicPage() {
   const { comictitle } = useParams();
-  const [getComic, { data: comic, isFetching, isLoading }] = useLazyGetComicQuery();
-
-  // Fetch comic
-  useEffect(() => {
-    if (comictitle) {
-      getComic({
-        title: comictitle,
-        _embed: ['cover_art', 'artist', 'author'],
-      });
-    }
-  }, [comictitle]);
+  const {
+    data: comic,
+    isFetching,
+    isLoading,
+  } = useGetComicQuery({
+    title: comictitle!,
+    _embed: ['cover_art', 'artist', 'author'],
+  });
 
   if (isFetching || isLoading) {
     return <DataFetching />;
   }
-
   if (!comic) {
     return <NotFoundPage />;
   }
@@ -44,7 +39,7 @@ function ComicPage() {
         <SideDetails {...comic} />
       </Wrapper>
       <Wrapper>
-        <ChapterList comic={comic} />
+        <ChapterList {...comic} />
       </Wrapper>
       <Helmet>
         <title>{comic.title} - Comic</title>

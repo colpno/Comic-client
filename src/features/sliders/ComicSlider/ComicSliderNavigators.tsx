@@ -1,14 +1,13 @@
-import { Box } from '@mui/material';
-import { HTMLAttributes, memo, useState } from 'react';
+import { HTMLAttributes } from 'react';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
 import { SwiperClass } from 'swiper/react';
 
-import { Button, Slider } from '~/components/index.ts';
-import { useCustomSliderNavigators, useDeviceWatcher } from '~/hooks/index.ts';
+import { Button } from '~/components/index.ts';
+import { useCustomSliderNavigators } from '~/hooks/index.ts';
 import { SliderProps } from '~/types/index.ts';
 import { cn } from '~/utils/cssUtils.ts';
 
-interface NavigatorsProps {
+interface Props {
   swiper: SwiperClass;
   slotProps?: {
     slide?: SliderProps['slideProp'];
@@ -17,7 +16,7 @@ interface NavigatorsProps {
   };
 }
 
-function Navigators({ swiper, slotProps }: NavigatorsProps) {
+function ComicSliderNavigators({ swiper, slotProps }: Props) {
   const { isEnd, isBeginning, handleClickPrev, handleClickNext } =
     useCustomSliderNavigators(swiper);
 
@@ -56,25 +55,4 @@ function Navigators({ swiper, slotProps }: NavigatorsProps) {
   );
 }
 
-function ComicSlider(props: SliderProps) {
-  const [swiper, setSwiper] = useState<SwiperClass>();
-  const device = useDeviceWatcher();
-  const isTabletAndMobile = device === 'tablet' || device === 'mobile';
-
-  return (
-    <Box
-      className="relative"
-      sx={{
-        // Hide default navigation buttons
-        '& .swiper-button-next, & .swiper-button-prev': {
-          display: 'none',
-        },
-      }}
-    >
-      <Slider {...props} onSwiper={setSwiper} navigation={!isTabletAndMobile} />
-      {!isTabletAndMobile && swiper && <Navigators swiper={swiper} />}
-    </Box>
-  );
-}
-
-export default memo(ComicSlider);
+export default ComicSliderNavigators;
