@@ -3,12 +3,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { REDUCER_PATH_AUTH } from '~/constants/reduxConstants';
 
 interface State {
-  accessToken: string | undefined;
+  accessToken: string | null;
   isLoggedIn: boolean;
 }
 
 const initialState: State = {
-  accessToken: undefined,
+  accessToken: null,
   isLoggedIn: import.meta.env.DEV,
 };
 

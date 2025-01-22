@@ -40,11 +40,22 @@ const extendedApi = api.injectEndpoints({
         return { data: undefined as void };
       },
     }),
-    refreshAccessToken: build.query<ApiRefreshAccessToken['data'], void>({
-      query: () => ({
-        url: AUTH_ENDPOINTS.REFRESH_ACCESS_TOKEN(),
-      }),
-      transformResponse: (response: ApiRefreshAccessToken) => response.data,
+    refreshAccessToken: build.query<ApiRefreshAccessToken['data'] | undefined, void>({
+      queryFn: async (_args, { getState }, _, query) => {
+        const res = await attachAuthorization(
+          {
+            url: AUTH_ENDPOINTS.REFRESH_ACCESS_TOKEN(),
+          },
+          getState,
+          query
+        );
+
+        if (res.error) {
+          return { error: res.error };
+        }
+
+        return { data: res.data.data as unknown as ApiRefreshAccessToken['data'] };
+      },
     }),
 
     // POST

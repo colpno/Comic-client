@@ -6,22 +6,19 @@ import { setAccessToken } from '~/libs/redux/slices/authSlice.ts';
 import { RootState, useAppDispatch } from '~/libs/redux/store.ts';
 
 function AccessTokenRefresher() {
-  const { accessToken, isLoggedIn } = useSelector((state: RootState) => state.auth);
+  const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
   const [refreshToken] = useLazyRefreshAccessTokenQuery();
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (isLoggedIn && !accessToken) {
+    if (isLoggedIn) {
       refreshToken()
         .unwrap()
-        .then((data) => {
-          dispatch(setAccessToken(data.accessToken));
-        })
-        .catch(() => {
-          dispatch(setAccessToken(undefined));
+        .then((response) => {
+          if (response && 'accessToken' in response) dispatch(setAccessToken(response.accessToken));
         });
     }
-  }, [accessToken, isLoggedIn]);
+  }, [isLoggedIn]);
 
   return <></>;
 }
