@@ -10,7 +10,6 @@ export * from './apis/genreApiTypes.ts';
 export * from './components/buttonTypes.ts';
 export * from './components/checkboxGroupTypes.ts';
 export * from './components/dialogTypes.ts';
-export * from './components/dynamicFieldTypes.ts';
 export * from './components/radioGroupTypes.ts';
 export * from './components/tableTypes.ts';
 export * from './components/formTypes.ts';
