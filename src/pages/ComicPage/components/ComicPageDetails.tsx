@@ -101,7 +101,6 @@ function HeartButton({ comicId }: { comicId: Comic['id'] }) {
   const [getFollow, { data: follow }] = useLazyGetFollowQuery();
   const [add] = useAddFollowMutation();
   const [remove] = useRemoveFollowMutation();
-  const hasFollowed = follow?.following === comicId;
 
   const handleDisabledButtonClick = () => {
     toast.info('Please login to follow this comic');
@@ -109,9 +108,9 @@ function HeartButton({ comicId }: { comicId: Comic['id'] }) {
 
   useEffect(() => {
     (async () => {
-      if (isLoggedIn) await getFollow({ following: comicId, _select: 'following -id' });
+      if (isLoggedIn) await getFollow({ following: comicId });
     })();
-  }, [isLoggedIn]);
+  }, [isLoggedIn, comicId]);
 
   if (!isLoggedIn) {
     return (
@@ -121,9 +120,13 @@ function HeartButton({ comicId }: { comicId: Comic['id'] }) {
     );
   }
 
+  const handleClick = () => {
+    follow ? remove(follow.id) : add(comicId);
+  };
+
   return (
-    <Button as="iconButton" onClick={() => (hasFollowed ? remove(comicId) : add(comicId))}>
-      {hasFollowed ? <FaHeart color="red" /> : <FaRegHeart color="red" />}
+    <Button as="iconButton" onClick={() => handleClick()}>
+      {follow ? <FaHeart color="red" /> : <FaRegHeart color="red" />}
     </Button>
   );
 }
@@ -148,33 +151,15 @@ function Actions({ title, id }: ButtonsProps) {
 
 function ComicPageDetails(comic: Comic) {
   return (
-    <Grid2
-      container
-      spacing={2}
-      size={{
-        lg: 12,
-      }}
-    >
-      <Grid2
-        size={{
-          md: 4,
-          sm: 12,
-        }}
-        className="flex justify-center w-full lg:justify-normal"
-      >
+    <Grid2 container spacing={2} size={{ lg: 12 }}>
+      <Grid2 size={{ md: 4, sm: 12 }} className="flex justify-center w-full lg:justify-normal">
         <Image
           src={comic.coverImageUrl}
           alt={comic.title}
           className="h-[270px] rounded-md shadow-[3px_2px_3px_0px_rgba(0,0,0,0.15)]"
         />
       </Grid2>
-      <Grid2
-        size={{
-          md: 8,
-          sm: 12,
-        }}
-        className="flex flex-col"
-      >
+      <Grid2 size={{ md: 8, sm: 12 }} className="flex flex-col">
         <Title title={comic.title} altTitles={comic.altTitles} status={comic.status} />
         {comic.authors && <Authors authors={comic.authors} />}
         {comic.artists && <Artists artists={comic.artists} />}

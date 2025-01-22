@@ -31,7 +31,7 @@ export const FOLLOW_ENDPOINTS = {
   GET_FOLLOWS: () => FOLLOW_ENDPOINTS.BASE,
   GET_FOLLOW: (followingId: string) => `${FOLLOW_ENDPOINTS.BASE}/${followingId}` as const,
   ADD_FOLLOW: () => FOLLOW_ENDPOINTS.BASE,
-  REMOVE_FOLLOW: (followingId: string) => `${FOLLOW_ENDPOINTS.BASE}/${followingId}` as const,
+  REMOVE_FOLLOW: (id: string) => `${FOLLOW_ENDPOINTS.BASE}/${id}` as const,
 };
 
 export const GENRE_ENDPOINTS = {

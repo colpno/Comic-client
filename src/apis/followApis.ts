@@ -52,7 +52,10 @@ const extendedApi = api.injectEndpoints({
 
         return { data: res.data.data as ApiGetFollowReturnType['data'] };
       },
-      providesTags: (result) => (result ? [{ type: TAG_FOLLOW, id: result.id }] : [TAG_FOLLOW]),
+      providesTags: (result) => {
+        if (!result) return [TAG_FOLLOW];
+        return [{ type: TAG_FOLLOW, id: result.id }, TAG_FOLLOW];
+      },
     }),
 
     // POST
@@ -97,7 +100,7 @@ const extendedApi = api.injectEndpoints({
 
         return { data: undefined as void };
       },
-      invalidatesTags: (_result, _error, id) => [{ type: TAG_FOLLOW, id }],
+      invalidatesTags: (_result, _error, id) => [{ type: TAG_FOLLOW, id }, TAG_FOLLOW],
     }),
   }),
 });
