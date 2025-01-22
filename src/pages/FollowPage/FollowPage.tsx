@@ -5,7 +5,7 @@ import { useSearchParams } from 'react-router-dom';
 
 import {
   ApiGetFollowsParams,
-  useLazyGetFollowsQuery,
+  useGetFollowsQuery,
   useRemoveFollowMutation,
 } from '~/apis/followApis.ts';
 import { TextInputProps } from '~/components/form-controls/base-controls/TextInput.tsx';
@@ -19,24 +19,25 @@ import { Follow } from '~/types/followType.ts';
 import FollowPageFollowList from './components/FollowPageFollowList';
 
 const PER_PAGE = 30;
+const initialParams: ApiGetFollowsParams = {
+  _embed: {
+    path: 'following',
+    populate: 'cover_art',
+  },
+  _limit: PER_PAGE,
+  _page: PAGINATION_INITIAL_PAGE,
+  _sort: {
+    addedAt: 'desc',
+  },
+};
 
 function FollowPage() {
-  const [getFollows, { isFetching: isApiFetching }] = useLazyGetFollowsQuery();
+  const [getFollowsParams, setGetFollowsParams] = useState<ApiGetFollowsParams>(initialParams);
+  const { data, isFetching: isApiFetching, isLoading } = useGetFollowsQuery(getFollowsParams);
+  const follows = (data?.data as Follow<Comic>[]) || [];
   const [isDataFetching, setIsDataFetching] = useState(isApiFetching);
-  const [follows, setFollows] = useState<Follow<Comic>[]>([]);
-  const [getFollowsParams, setGetFollowsParams] = useState<ApiGetFollowsParams>({
-    _embed: {
-      path: 'following',
-      populate: 'cover_art',
-    },
-    _limit: PER_PAGE,
-    _page: PAGINATION_INITIAL_PAGE,
-    _sort: {
-      addedAt: 'desc',
-    },
-  });
-  const [followIdToRemove, setFollowIdToRemove] = useState('');
   const [removeFollow] = useRemoveFollowMutation();
+  const [followIdToRemove, setFollowIdToRemove] = useState('');
   const [searchParams, setSearchParams] = useSearchParams();
 
   const openRemovalPopup = (followId: string) => setFollowIdToRemove(followId);
@@ -96,24 +97,13 @@ function FollowPage() {
     }));
   };
 
-  // Fetch follows
-  useEffect(() => {
-    (async () => {
-      const res = await getFollows(getFollowsParams).unwrap();
-      const data = res.data as Follow<Comic>[];
-
-      if (getFollowsParams._page === PAGINATION_INITIAL_PAGE) {
-        setFollows(data);
-      } else {
-        setFollows((prev) => [...prev, ...data]);
-      }
-    })();
-  }, [getFollowsParams]);
-
   // Handle data fetching state
   useEffect(() => {
     if (isDataFetching && !isApiFetching) setIsDataFetching(false);
   }, [isApiFetching]);
+  useEffect(() => {
+    if (isLoading) setIsDataFetching(true);
+  }, [isLoading]);
 
   // Handle search params change
   useEffect(() => {
