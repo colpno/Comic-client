@@ -16,10 +16,20 @@ axios.defaults.withCredentials = true;
 
 type BaseQuery = BaseQueryFn<ApiRequestArgs, ApiFulfilledResponse, ApiFailedResponse>;
 
+const mutationMethods: Method[] = [
+  'POST',
+  'PUT',
+  'PATCH',
+  'post',
+  'put',
+  'patch',
+  'DELETE',
+  'delete',
+];
+
 const baseQuery =
   ({ baseURL }: { baseURL: string } = { baseURL: '' }): BaseQuery =>
   async ({ url, method, data, params, ...axiosConfigs }, { signal }) => {
-    const mutationMethods: Method[] = ['POST', 'PUT', 'PATCH', 'post', 'put', 'patch'];
     const isMutatedRequest = mutationMethods.includes(method || 'GET');
     const axiosRequestConfig: AxiosRequestConfig = {
       ...axiosConfigs,
