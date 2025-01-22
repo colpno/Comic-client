@@ -5,7 +5,6 @@ export { default as TableActionButton } from './Table/components/TableActionButt
 export { generateTableActionsColDef } from './Table/utils/tableColumnUtils.tsx';
 export const Island = lazy(() => import('./Island.tsx'));
 export const CheckboxGroup = lazy(() => import('./form-controls/CheckBoxGroup.tsx'));
-export const Select = lazy(() => import('./form-controls/Select.tsx'));
 export const Dialog = lazy(() => import('./Dialog.tsx'));
 export const Popup = lazy(() => import('./Popup.tsx'));
 export const InfiniteScrollPagination = lazy(() => import('./InfiniteScrollPagination.tsx'));
