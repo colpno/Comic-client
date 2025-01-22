@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export const usePopup = () => {
+const usePopup = () => {
   const [ref, setRef] = useState<HTMLElement | null>(null);
   const open = Boolean(ref);
 
@@ -14,3 +14,5 @@ export const usePopup = () => {
 
   return { popupRef: ref, openPopup, closePopup, open };
 };
+
+export default usePopup;

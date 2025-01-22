@@ -5,7 +5,7 @@ interface Options {
   matchParams?: boolean;
 }
 
-export const useRouteMatch = (patterns: readonly string[], options?: Options) => {
+const useRouteMatch = (patterns: readonly string[], options?: Options) => {
   const { pathname, search } = useLocation();
 
   for (let i = 0; i < patterns.length; i += 1) {
@@ -27,3 +27,5 @@ export const useRouteMatch = (patterns: readonly string[], options?: Options) =>
 
   return null;
 };
+
+export default useRouteMatch;

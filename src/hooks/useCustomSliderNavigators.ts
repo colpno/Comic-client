@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { SwiperClass } from 'swiper/react';
 
-export const useCustomSliderNavigators = (swiper: SwiperClass) => {
+const useCustomSliderNavigators = (swiper: SwiperClass) => {
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
 
@@ -28,3 +28,5 @@ export const useCustomSliderNavigators = (swiper: SwiperClass) => {
 
   return { isEnd, isBeginning, handleClickPrev, handleClickNext };
 };
+
+export default useCustomSliderNavigators;

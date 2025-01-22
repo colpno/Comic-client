@@ -6,7 +6,7 @@ export type UseOnScrollCallback = (event: Event) => void;
  * Hook that listens to the scroll event on the window.
  * @param callback The function to call when the scroll event is triggered.
  */
-export const useScroll = (callback: UseOnScrollCallback) => {
+const useScroll = (callback: UseOnScrollCallback) => {
   useEffect(() => {
     window.addEventListener('scroll', callback);
     return () => {
@@ -14,3 +14,5 @@ export const useScroll = (callback: UseOnScrollCallback) => {
     };
   }, [callback]);
 };
+
+export default useScroll;

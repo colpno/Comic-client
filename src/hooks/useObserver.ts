@@ -1,12 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 
 type Element = HTMLElement | null;
-
 type UseObserverReturnedValue = {
   /** Pass to ref prop. */
   setElementRef: React.Dispatch<React.SetStateAction<Element>>;
 };
-
 type UseObserver = (executeFC?: () => void, removeFC?: () => void) => UseObserverReturnedValue;
 
 /**
@@ -14,7 +12,7 @@ type UseObserver = (executeFC?: () => void, removeFC?: () => void) => UseObserve
  * @param executeFC Callback function to execute when the element is intersecting.
  * @param removeFC Callback function to execute when the element is not intersecting.
  */
-export const useObserver: UseObserver = (executeFC, removeFC) => {
+const useObserver: UseObserver = (executeFC, removeFC) => {
   const [elementRef, setElementRef] = useState<Element>(null);
 
   const observer = useRef(
@@ -46,3 +44,5 @@ export const useObserver: UseObserver = (executeFC, removeFC) => {
 
   return { setElementRef };
 };
+
+export default useObserver;
