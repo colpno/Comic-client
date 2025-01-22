@@ -5,7 +5,6 @@ export { default as TableActionButton } from './Table/components/TableActionButt
 export { generateTableActionsColDef } from './Table/utils/tableColumnUtils.tsx';
 export const Island = lazy(() => import('./Island.tsx'));
 export const CheckboxGroup = lazy(() => import('./form-controls/CheckBoxGroup.tsx'));
-export const DatePicker = lazy(() => import('./form-controls/DatePicker.tsx'));
 export const DynamicField = lazy(() => import('./form-controls/DynamicField/DynamicField.tsx'));
 export const NumberField = lazy(() => import('./form-controls/NumberField.tsx'));
 export const RadioGroup = lazy(() => import('./form-controls/RadioGroup.tsx'));
