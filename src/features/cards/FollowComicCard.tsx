@@ -65,4 +65,3 @@ function FollowComicCard({ item, onRemove }: Props) {
 }
 
 export default FollowComicCard;
-export { type Props as FollowComicCardProps };
