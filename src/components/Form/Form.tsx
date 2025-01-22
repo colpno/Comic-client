@@ -47,4 +47,3 @@ function Form<F extends FieldValues>({
 const MemoizedForm = memo(Form) as <F extends FieldValues>(props: FormProps<F>) => JSX.Element;
 
 export default MemoizedForm;
-export { type FormProps as FormProps };

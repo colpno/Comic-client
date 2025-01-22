@@ -54,4 +54,3 @@ function TagFilterButton({ onSubmit, ...buttonProps }: Props) {
 }
 
 export default TagFilterButton;
-export { type SelectiveFilterFormValues as TagFilterFormValues };

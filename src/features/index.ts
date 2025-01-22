@@ -7,12 +7,13 @@ export const SearchingComicCard = lazy(() => import('./cards/SearchingComicCard.
 export const SelectiveFilterForm = lazy(
   () => import('./forms/SelectiveFilterForm/SelectiveFilterForm.tsx')
 );
+export type { SelectiveFilterFormValues } from './forms/validationSchemas.ts';
 export const TagFilterButton = lazy(() => import('./advance-buttons/TagFilterButton.tsx'));
 export * from './advance-buttons/TagFilterButton.tsx';
+export type { SelectiveFilterFormValues as TagFilterFormValues } from './forms/validationSchemas.ts';
 export const SortButton = lazy(() => import('./advance-buttons/SortButton.tsx'));
 
 export { default as ComicCard } from './cards/ComicCard.tsx';
 export { default as ComicHorizontalCard } from './cards/ComicHorizontalCard.tsx';
 export { default as LoginForm } from './forms/LoginForm.tsx';
-export * from './forms/SelectiveFilterForm/SelectiveFilterForm.tsx';
 export { default as ComicSlider } from './sliders/ComicSlider.tsx';

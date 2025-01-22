@@ -62,4 +62,3 @@ function SelectiveFilterForm({ onSubmit, options, title, className, ...props }: 
 }
 
 export default SelectiveFilterForm;
-export type { SelectiveFilterFormValues } from '../validationSchemas.ts';
