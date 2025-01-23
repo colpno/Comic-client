@@ -18,7 +18,7 @@ function AccessTokenRefresher() {
           if (response && 'accessToken' in response) dispatch(setAccessToken(response.accessToken));
         });
     }
-  }, [isLoggedIn]);
+  }, []);
 
   return <></>;
 }
