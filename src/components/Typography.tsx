@@ -28,15 +28,16 @@ type Props =
 
 function Typography(props: Props) {
   if ('href' in props && props.href) {
-    const { externalLink } = props;
+    const { externalLink, ...rest } = props;
 
     if (externalLink) return <ExternalLinkTypography {...props} />;
 
-    return <InternalLinkTypography {...props} />;
+    return <InternalLinkTypography {...rest} />;
   }
 
   if ('copyable' in props && props.copyable) {
-    return <CopyableTypography {...props} />;
+    const { copyable, ...rest } = props;
+    return <CopyableTypography {...rest} />;
   }
 
   return <MUITypography {...props} />;
