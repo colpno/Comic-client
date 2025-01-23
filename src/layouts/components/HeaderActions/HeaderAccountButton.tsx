@@ -2,6 +2,7 @@ import { IoLogOutOutline } from 'react-icons/io5';
 import { MdClose, MdOutlinePermIdentity } from 'react-icons/md';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import { useLazyLogoutQuery, useLoginMutation } from '~/apis/authApis.ts';
 import { Button, Dialog, Popup } from '~/components/index.ts';
@@ -25,6 +26,7 @@ function HeaderAccountButton() {
     navigate(ROUTE_HOME);
 
     logoutQuery().then(() => {
+      toast.success('Logout successfully');
       dispatch(logout());
     });
   };
@@ -32,6 +34,7 @@ function HeaderAccountButton() {
   const handleFormSubmit = async (values: LoginFormValues) => {
     try {
       const data = await loginQuery(values).unwrap();
+      toast.success('Login successfully');
       dispatch(login(data.accessToken));
       closePopup();
     } catch (error) {}

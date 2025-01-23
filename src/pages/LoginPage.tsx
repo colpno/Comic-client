@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import { useLoginMutation } from '~/apis/authApis.ts';
 import { LoginFormValues } from '~/features/forms/validationSchemas.ts';
@@ -17,6 +18,7 @@ function LoginPage() {
   const handleFormSubmit = async (values: LoginFormValues) => {
     try {
       const data = await loginQuery(values).unwrap();
+      toast.success('Login successfully');
       dispatch(login(data.accessToken));
     } catch (error) {}
   };
