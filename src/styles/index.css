@@ -23,6 +23,16 @@
 }
 
 .dark {
+  --primary-100: #f5cccc;
+  --primary-200: #eb9999;
+  --primary-300: #e06666;
+  --primary-400: #d63333;
+  --primary-500: #cc0000;
+  --primary-600: #a30000;
+  --primary-700: #7a0000;
+  --primary-800: #520000;
+  --primary-900: #290000;
+
   --background-primary: #121212;
   --background-secondary: #1a1a1a;
 
