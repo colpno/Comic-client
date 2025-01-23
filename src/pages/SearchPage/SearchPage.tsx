@@ -3,10 +3,11 @@ import { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useSearchParams } from 'react-router-dom';
 
-import { ApiGetComicsParams, useLazyGetComicsQuery } from '~/apis/comicApis.ts';
+import { useLazyGetComicsQuery } from '~/apis/comicApis.ts';
 import { DataFetching, InfiniteScrollPagination } from '~/components/index.ts';
 import { MUI_CONTAINER_MAX_WIDTH, PAGINATION_INITIAL_PAGE } from '~/constants/commonConstants.ts';
 import { useInfinitePagination } from '~/hooks/index.ts';
+import { ApiGetComicsParams } from '~/types/index.ts';
 import NotFoundPage from '../ErrorPage/components/NotFoundPage.tsx';
 import Content from './components/SearchPageContent';
 import NoSearchValue from './components/SearchPageNoValue';

@@ -3,7 +3,6 @@ import axios, { AxiosError, AxiosRequestConfig, Method } from 'axios';
 import { toast } from 'react-toastify';
 
 import { AUTH_ENDPOINTS } from '~/apis/apiConstants.ts';
-import { ApiGetCSRFReturnType } from '~/apis/authApis.ts';
 import { HEADER_CSRF } from '~/constants/commonConstants.ts';
 import {
   ApiFailedResponse,
@@ -11,6 +10,7 @@ import {
   ApiRequestArgs,
   ValidationError,
 } from '~/types/apis/apiTypes';
+import { ApiGetCSRFReturnType } from '~/types/index.ts';
 
 axios.defaults.withCredentials = true;
 

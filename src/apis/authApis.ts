@@ -99,5 +99,3 @@ export const {
   useRefreshAccessTokenQuery,
   useLazyRefreshAccessTokenQuery,
 } = extendedApi;
-
-export type * from '~/types/apis/authApiTypes.ts';

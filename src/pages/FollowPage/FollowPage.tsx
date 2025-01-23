@@ -2,18 +2,20 @@ import { Container } from '@mui/material';
 import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 
-import {
-  ApiGetFollowsParams,
-  useLazyGetFollowsQuery,
-  useRemoveFollowMutation,
-} from '~/apis/followApis.ts';
+import { useLazyGetFollowsQuery, useRemoveFollowMutation } from '~/apis/followApis.ts';
 import { TextInputProps } from '~/components/form-controls/base-controls/TextInput.tsx';
 import { DataFetching, Dialog, InfiniteScrollPagination } from '~/components/index.ts';
 import { MUI_CONTAINER_MAX_WIDTH, PAGINATION_INITIAL_PAGE } from '~/constants/commonConstants.ts';
 import { SortButton, TagFilterButton, TagFilterFormValues } from '~/features/index.ts';
 import useInfinitePagination from '~/hooks/useInfinitePagination.ts';
 import SearchInput from '~/layouts/components/SearchInput.tsx';
-import { ApiSortOrder, Comic, DialogAsConfirm, Follow } from '~/types/index.ts';
+import {
+  ApiGetFollowsParams,
+  ApiSortOrder,
+  Comic,
+  DialogAsConfirm,
+  Follow,
+} from '~/types/index.ts';
 import NotFoundPage from '../ErrorPage/components/NotFoundPage.tsx';
 import FollowPageFollowList from './components/FollowPageFollowList';
 

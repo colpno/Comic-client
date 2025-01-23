@@ -28,5 +28,3 @@ const extendedApi = api.injectEndpoints({
 
 export const { useGetComicQuery, useGetComicsQuery, useLazyGetComicQuery, useLazyGetComicsQuery } =
   extendedApi;
-
-export type * from '~/types/apis/comicApiTypes.ts';

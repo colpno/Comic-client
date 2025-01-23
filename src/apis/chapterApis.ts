@@ -40,5 +40,3 @@ export const {
   useReadingChapterQuery,
   useLazyReadingChapterQuery,
 } = extendedApi;
-
-export type * from '~/types/apis/chapterApiTypes.ts';

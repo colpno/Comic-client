@@ -1,10 +1,11 @@
 import { Container } from '@mui/material';
 import { Helmet } from 'react-helmet-async';
 
-import { ApiGetComicsParams, useLazyGetComicsQuery } from '~/apis/comicApis.ts';
+import { useLazyGetComicsQuery } from '~/apis/comicApis.ts';
 import { DataFetching, InfiniteScrollPagination } from '~/components/index.ts';
 import { MUI_CONTAINER_MAX_WIDTH, PAGINATION_INITIAL_PAGE } from '~/constants/commonConstants.ts';
 import { useInfinitePagination } from '~/hooks/index.ts';
+import { ApiGetComicsParams } from '~/types/index.ts';
 import NotFoundPage from '../ErrorPage/components/NotFoundPage.tsx';
 import Content from './components/NewProductsPageContent.tsx';
 
