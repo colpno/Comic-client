@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 
 import { useLazyGetComicsQuery } from '~/apis/comicApis.ts';
-import { InfiniteScrollPagination } from '~/components/index.ts';
+import { DataFetching, InfiniteScrollPagination } from '~/components/index.ts';
 import Typography from '~/components/Typography.tsx';
 import { MUI_CONTAINER_MAX_WIDTH, PAGINATION_INITIAL_PAGE } from '~/constants/commonConstants.ts';
 import { useDeviceWatcher, useInfinitePagination } from '~/hooks/index.ts';
@@ -21,14 +21,15 @@ const initialParams: ApiGetComicsParams = {
 };
 
 function ComicsByGenrePage() {
-  const isDesktop = useDeviceWatcher() === 'desktop';
-  const [getComics] = useLazyGetComicsQuery();
-  const { genre } = useParams();
+  const [getComics, { isFetching, isLoading }] = useLazyGetComicsQuery();
   const {
     data: comics,
     setParams,
     handleIntersect,
   } = useInfinitePagination([], initialParams, getComics);
+  const isFetchingOrLoading = isFetching || isLoading;
+  const isDesktop = useDeviceWatcher() === 'desktop';
+  const { genre } = useParams();
 
   useEffect(() => {
     if (genre) {
@@ -46,8 +47,14 @@ function ComicsByGenrePage() {
           {toSentenceCase(genre)}
         </Typography>
       )}
-      <Content items={comics} />
-      <InfiniteScrollPagination onIntersect={handleIntersect} />
+      {isFetchingOrLoading ? (
+        <DataFetching />
+      ) : (
+        <>
+          <Content items={comics} />
+          <InfiniteScrollPagination onIntersect={handleIntersect} />
+        </>
+      )}
       <Helmet>
         <title>{genre} - Comic</title>
       </Helmet>

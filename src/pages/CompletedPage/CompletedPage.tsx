@@ -23,12 +23,13 @@ const initialParams: ApiGetComicsParams = {
 };
 
 function CompletedPage() {
-  const [getComics, { isFetching }] = useLazyGetComicsQuery();
+  const [getComics, { isFetching, isLoading }] = useLazyGetComicsQuery();
   const {
     data: comics,
     setParams: setGetComicsParams,
     handleIntersect,
   } = useInfinitePagination([], initialParams, getComics);
+  const isFetchingOrLoading = isFetching || isLoading;
   const isDesktop = useDeviceWatcher() === 'desktop';
   const [genre, setGenre] = useState(DEFAULT_GENRE);
 
@@ -54,8 +55,14 @@ function CompletedPage() {
       {isDesktop && (
         <Title onParamChange={setGenre} urlParam="category" defaultValue={DEFAULT_GENRE} />
       )}
-      {isFetching ? <DataFetching /> : <Content items={comics} />}
-      <InfiniteScrollPagination onIntersect={handleIntersect} />
+      {isFetchingOrLoading ? (
+        <DataFetching />
+      ) : (
+        <>
+          <Content items={comics} />
+          <InfiniteScrollPagination onIntersect={handleIntersect} />
+        </>
+      )}
       <Helmet>
         <title>Completed comics - Comic</title>
       </Helmet>

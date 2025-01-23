@@ -23,12 +23,13 @@ const initialParams: ApiGetComicsParams = {
 };
 
 function SearchPage() {
-  const [getComics, { isFetching }] = useLazyGetComicsQuery();
+  const [getComics, { isFetching, isLoading }] = useLazyGetComicsQuery();
   const {
     data: comics,
     setParams,
     handleIntersect,
   } = useInfinitePagination([], initialParams, getComics);
+  const isFetchingOrLoading = isFetching || isLoading;
   const [searchParam] = useSearchParams();
   const searchValue = searchParam.get('value') || undefined;
 
@@ -47,8 +48,14 @@ function SearchPage() {
   return (
     <Container maxWidth={MUI_CONTAINER_MAX_WIDTH} className="pt-8">
       <Title searchValue={searchValue} />
-      {isFetching ? <DataFetching /> : <Content items={comics} />}
-      <InfiniteScrollPagination onIntersect={handleIntersect} />
+      {isFetchingOrLoading ? (
+        <DataFetching />
+      ) : (
+        <>
+          <Content items={comics} />
+          <InfiniteScrollPagination onIntersect={handleIntersect} />
+        </>
+      )}
       <Helmet>
         <title>{searchValue} - Comic</title>
       </Helmet>

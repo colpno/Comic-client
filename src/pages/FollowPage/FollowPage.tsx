@@ -32,12 +32,13 @@ const initialParams: ApiGetFollowsParams = {
 };
 
 function FollowPage() {
-  const [getFollows, { isFetching }] = useLazyGetFollowsQuery();
+  const [getFollows, { isFetching, isLoading }] = useLazyGetFollowsQuery();
   const {
     data: follows,
     setParams,
     handleIntersect,
   } = useInfinitePagination([], initialParams, getFollows);
+  const isFetchingOrLoading = isFetching || isLoading;
   const [followIdToRemove, setFollowIdToRemove] = useState('');
   const [remove] = useRemoveFollowMutation();
 
@@ -114,7 +115,7 @@ function FollowPage() {
             />
           </div>
         )}
-        {isFetching ? (
+        {isFetchingOrLoading ? (
           <DataFetching />
         ) : typeof follows[0] !== 'string' ? (
           <>
