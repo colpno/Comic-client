@@ -38,8 +38,12 @@ function HistoryPage() {
         </Button>
         <Dialog title="Saved History" open={openWarning} onClose={toggleShowSavedHistoryWarning}>
           <Typography>
-            Saved history is stored in your browser's local storage. If you clear your browser's
+            - Saved history is stored in your browser's local storage. If you clear your browser's
             local storage, your saved history will be lost.
+          </Typography>
+          <Typography>
+            - You can export your data by using the "EXPORT" button. And currently, there is no way
+            to import yet.
           </Typography>
         </Dialog>
       </div>
