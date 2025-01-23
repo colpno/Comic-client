@@ -21,42 +21,14 @@ function ThemeIcon({ theme }: { theme: Theme }) {
   }
 }
 
-function LightModeButton(props: ButtonAsButtonProps) {
+function PopupButton(props: ButtonAsButtonProps) {
   return (
     <Button
       {...props}
+      className="!justify-start !pl-4 !rounded-none !items-center"
+      disableTextTransform
       variant={props.disabled ? 'contained' : 'text'}
-      startIcon={<ThemeIcon theme="light" />}
-      title="Light mode"
-    >
-      <Typography>Light</Typography>
-    </Button>
-  );
-}
-
-function DarkModeButton(props: ButtonAsButtonProps) {
-  return (
-    <Button
-      {...props}
-      variant={props.disabled ? 'contained' : 'text'}
-      startIcon={<ThemeIcon theme="dark" />}
-      title="Dark mode"
-    >
-      <Typography>Dark</Typography>
-    </Button>
-  );
-}
-
-function SystemModeButton(props: ButtonAsButtonProps) {
-  return (
-    <Button
-      {...props}
-      variant={props.disabled ? 'contained' : 'text'}
-      startIcon={<ThemeIcon theme="system" />}
-      title="System preference mode"
-    >
-      <Typography>System</Typography>
-    </Button>
+    />
   );
 }
 
@@ -64,11 +36,6 @@ function HeaderThemeButton() {
   const theme = useSelector((state: RootState) => state.common.theme);
   const dispatch = useAppDispatch();
   const { closePopup, open, openPopup, popupRef } = usePopup();
-  const sharedModeButtonProps: ButtonAsButtonProps = {
-    variant: 'text',
-    className: '!justify-start !pl-4 !rounded-none',
-    disableTextTransform: true,
-  };
 
   const handleThemeChange = (theme: Theme) => () => {
     dispatch(setTheme(theme));
@@ -79,23 +46,37 @@ function HeaderThemeButton() {
       <Button as="iconButton" color="inherit" title="Theme" onClick={openPopup}>
         <ThemeIcon theme={theme} />
       </Button>
-      <Popup open={open} onClose={closePopup} anchorEl={popupRef}>
-        <div className="flex flex-col p-2">
-          <LightModeButton
-            {...sharedModeButtonProps}
+      <Popup
+        open={open}
+        onClose={closePopup}
+        anchorEl={popupRef}
+        position={{ horizontal: 'right' }}
+      >
+        <div className="flex flex-col p-2 bg-main">
+          <PopupButton
             disabled={theme === 'light'}
             onClick={handleThemeChange('light')}
-          />
-          <DarkModeButton
-            {...sharedModeButtonProps}
+            startIcon={<ThemeIcon theme="light" />}
+            title="Light mode"
+          >
+            <Typography>Light</Typography>
+          </PopupButton>
+          <PopupButton
             disabled={theme === 'dark'}
             onClick={handleThemeChange('dark')}
-          />
-          <SystemModeButton
-            {...sharedModeButtonProps}
+            startIcon={<ThemeIcon theme="dark" />}
+            title="Dark mode"
+          >
+            <Typography>Dark</Typography>
+          </PopupButton>
+          <PopupButton
             disabled={theme === 'system'}
             onClick={handleThemeChange('system')}
-          />
+            startIcon={<ThemeIcon theme="system" />}
+            title="System preference mode"
+          >
+            <Typography>System</Typography>
+          </PopupButton>
         </div>
       </Popup>
     </>
