@@ -35,7 +35,7 @@ export const getSlots = (): Partial<GridSlots> => ({
   noResultsOverlay: TableNoSearchResultsOverlay,
 });
 
-interface GetSlotProps extends GridSlotsComponentsProps {
+interface GetSlotProps extends GridSlotsComponentsProps, Pick<TableProps, 'disableExport'> {
   setRows: (rows: GridRowsProp) => void;
   setRowModesModel: (rowModesModel: GridRowModesModel) => void;
 }
@@ -43,11 +43,13 @@ interface GetSlotProps extends GridSlotsComponentsProps {
 export const getSlotProps = ({
   setRows,
   setRowModesModel,
+  disableExport = false,
 }: GetSlotProps): GridSlotsComponentsProps => ({
   toolbar: {
     setRows,
     setRowModesModel,
-    printOptions: { hideToolbar: true },
+    printOptions: { hideToolbar: true, disableToolbarButton: disableExport },
+    csvOptions: { disableToolbarButton: disableExport },
   },
   loadingOverlay: {
     variant: 'skeleton',

@@ -24,6 +24,7 @@ function Table(componentProps: TableProps) {
     onEdit,
     rowSelection = false,
     height,
+    disableExport,
     ...props
   } = componentProps;
   const [rows, setRows] = useState(rowsProp);
@@ -31,7 +32,7 @@ function Table(componentProps: TableProps) {
   const initialTableState = getInitialState(props.initialState);
   const tableColsDef: GridColDef[] = [...columns];
   const slots = getSlots();
-  const slotProps = getSlotProps({ setRows, setRowModesModel });
+  const slotProps = getSlotProps({ setRows, setRowModesModel, disableExport });
   const checkboxSelection = typeof removable === 'object' && removable?.multiple;
   const actionsColIndex = useMemo(() => columns.findIndex((c) => c.field === 'actions'), [columns]);
   const actionsColDef = columns[actionsColIndex] as GridActionsColDef;

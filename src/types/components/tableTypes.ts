@@ -35,4 +35,5 @@ export interface TableProps extends Omit<BaseTableProps, 'rows' | 'checkboxSelec
   /** Sort a column. */
   sort?: Exclude<GridSortModel, []>;
   height?: string;
+  disableExport?: boolean;
 }
