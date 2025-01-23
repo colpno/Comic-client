@@ -21,17 +21,17 @@ type Result<D> = {
   >;
 };
 
-type Params = { _page?: number; _limit?: number } | { _page: number; _limit: number };
+type Params = { _page: number; _limit: number };
 
 /**
  * A custom hook to handle infinite pagination.
  * @param initialData an array of data to be set initially.
- * @param initialParams  an object of parameters to be set initially.
+ * @param initialParams  an object of parameters to be set initially. It should contain `_limit`.
  * @param apiCaller  a function to fetch data.
  */
 const useInfinitePagination = <
   D extends ApiFulfilledResponse['data'][] = [], // Response type
-  P extends Params = {} // Request parameters type
+  P extends Params | Partial<Params> = {} // Request parameters type
 >(
   initialData: D,
   initialParams: P,
@@ -52,7 +52,7 @@ const useInfinitePagination = <
    * If the number of data is less than the limit, which means there is no more data to fetch, then it will not be triggered.
    */
   const handleIntersect = async () => {
-    if (params._limit && data.length < params._limit) return;
+    if (!params._limit || data.length < params._limit) return;
     setParams((prev) => ({
       ...prev,
       _page: prev._page! + 1,
@@ -61,7 +61,6 @@ const useInfinitePagination = <
 
   /**
    * A helper function to set the new parameters.\
-   * If not contains `_page`, then new products will be fetched from the first page.
    * @param p New parameters to be set, or a function that receives the previous parameters and returns the new parameters.
    */
   const handleSetParams: typeof setParams = (p) => {
@@ -85,7 +84,7 @@ const useInfinitePagination = <
        * A helper function to set the new data.
        * @param d New data to be set, or a function that receives the previous data and returns the new data.
        */
-      const handleSetResult = (d: D | ((p: D) => D)) => {
+      const handleSetResult = (d: D | ((d: D) => D)) => {
         setResult((prev) => ({
           data: typeof d === 'function' ? d(prev.data) : d,
           pagination: response.metadata?.pagination || {},
