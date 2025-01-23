@@ -5,3 +5,4 @@ export { default as noConnectionSVG } from './no-connection.svg';
 export { default as noSearchSVG } from './no-search.svg';
 export { default as noFollowSVG } from './no-favorite.svg';
 export { default as backgroundImage1 } from './background-image-1.png';
+export { default as maintenancePNG } from './maintenance.png';

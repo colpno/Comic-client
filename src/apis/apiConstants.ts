@@ -38,3 +38,7 @@ export const GENRE_ENDPOINTS = {
   BASE: '/genres' as const,
   GET_GENRES: () => GENRE_ENDPOINTS.BASE,
 };
+
+export const NON_RESOURCES_ENDPOINTS = {
+  PING: () => '/health' as const,
+};
