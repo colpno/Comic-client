@@ -59,7 +59,7 @@ const groupComicsByGenre: FilterComicsByGenre = (genres, comics) => {
 };
 
 function HomePage() {
-  const { data, isFetching, isLoading } = useGetComicsQuery({
+  const { data, isFetching, isLoading, isError } = useGetComicsQuery({
     _limit: 100,
     includedTags: genres,
     includedTagsMode: 'OR',
@@ -73,11 +73,11 @@ function HomePage() {
     setComicsByGenre(groupComicsByGenre(genres, comics));
   }, [comics.length, setComicsByGenre]);
 
-  if (isFetching || isLoading) {
-    return <DataFetching />;
-  }
-  if (!(comics.length > 0 && comicsByGenre.length > 0)) {
+  if (isError) {
     return <NotFoundPage title="No comics found" />;
+  }
+  if (isFetching || isLoading || !(comics.length > 0 && comicsByGenre.length > 0)) {
+    return <DataFetching />;
   }
 
   return (

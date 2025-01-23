@@ -5,6 +5,7 @@ import { ApiGetComicsParams, useLazyGetComicsQuery } from '~/apis/comicApis.ts';
 import { DataFetching, InfiniteScrollPagination } from '~/components/index.ts';
 import { MUI_CONTAINER_MAX_WIDTH, PAGINATION_INITIAL_PAGE } from '~/constants/commonConstants.ts';
 import { useInfinitePagination } from '~/hooks/index.ts';
+import NotFoundPage from '../ErrorPage/components/NotFoundPage.tsx';
 import Content from './components/LatestUpdatesPageContent';
 
 const PER_PAGE = 30;
@@ -19,9 +20,13 @@ const initialParams: ApiGetComicsParams = {
 };
 
 function LatestUpdatesPage() {
-  const [getComics, { isFetching, isLoading }] = useLazyGetComicsQuery();
+  const [getComics, { isFetching, isLoading, isError }] = useLazyGetComicsQuery();
   const { data: comics, handleIntersect } = useInfinitePagination([], initialParams, getComics);
   const isFetchingOrLoading = isFetching || isLoading;
+
+  if (isError) {
+    return <NotFoundPage title="No comics found" />;
+  }
 
   return (
     <Container maxWidth={MUI_CONTAINER_MAX_WIDTH} className="-mt-8">

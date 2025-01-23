@@ -10,6 +10,7 @@ import { MUI_CONTAINER_MAX_WIDTH, PAGINATION_INITIAL_PAGE } from '~/constants/co
 import { useDeviceWatcher, useInfinitePagination } from '~/hooks/index.ts';
 import { ApiGetComicsParams } from '~/types/index.ts';
 import { toSentenceCase } from '~/utils/converters.ts';
+import NotFoundPage from '../ErrorPage/components/NotFoundPage.tsx';
 import Content from './components/ComicsByGenrePageContent.tsx';
 
 const PER_PAGE = 30;
@@ -21,7 +22,7 @@ const initialParams: ApiGetComicsParams = {
 };
 
 function ComicsByGenrePage() {
-  const [getComics, { isFetching, isLoading }] = useLazyGetComicsQuery();
+  const [getComics, { isFetching, isLoading, isError }] = useLazyGetComicsQuery();
   const {
     data: comics,
     setParams,
@@ -39,6 +40,10 @@ function ComicsByGenrePage() {
       }));
     }
   }, [genre]);
+
+  if (isError) {
+    return <NotFoundPage title="No comics found" />;
+  }
 
   return (
     <Container maxWidth={MUI_CONTAINER_MAX_WIDTH} className="pt-8 pb-20">

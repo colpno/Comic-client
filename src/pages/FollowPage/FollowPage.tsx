@@ -32,7 +32,7 @@ const initialParams: ApiGetFollowsParams = {
 };
 
 function FollowPage() {
-  const [getFollows, { isFetching, isLoading }] = useLazyGetFollowsQuery();
+  const [getFollows, { isFetching, isLoading, isError }] = useLazyGetFollowsQuery();
   const {
     data: follows,
     setParams,
@@ -93,6 +93,10 @@ function FollowPage() {
       },
     }));
   };
+
+  if (isError) {
+    return <NotFoundPage title="No comics found" />;
+  }
 
   return (
     <>

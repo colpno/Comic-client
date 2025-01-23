@@ -7,6 +7,7 @@ import { DataFetching, InfiniteScrollPagination } from '~/components/index.ts';
 import { MUI_CONTAINER_MAX_WIDTH, PAGINATION_INITIAL_PAGE } from '~/constants/commonConstants.ts';
 import { useDeviceWatcher, useInfinitePagination } from '~/hooks/index.ts';
 import Title from '~/layouts/MenuLayout/components/MenuLayoutPageTitle.tsx';
+import NotFoundPage from '../ErrorPage/components/NotFoundPage.tsx';
 import Content from './components/CompletedPageContent.tsx';
 
 const PER_PAGE = 30;
@@ -23,7 +24,7 @@ const initialParams: ApiGetComicsParams = {
 };
 
 function CompletedPage() {
-  const [getComics, { isFetching, isLoading }] = useLazyGetComicsQuery();
+  const [getComics, { isFetching, isLoading, isError }] = useLazyGetComicsQuery();
   const {
     data: comics,
     setParams: setGetComicsParams,
@@ -49,6 +50,10 @@ function CompletedPage() {
       });
     }
   }, [genre]);
+
+  if (isError) {
+    return <NotFoundPage title="No comics found" />;
+  }
 
   return (
     <Container maxWidth={MUI_CONTAINER_MAX_WIDTH}>
