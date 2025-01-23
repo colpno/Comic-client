@@ -127,19 +127,19 @@ export const getThemeConfig = (mode: Exclude<Theme, 'system'>) => {
 
   theme.typography.body1 = {
     fontSize: '0.875rem',
-    lineHeight: '0.875rem',
+    lineHeight: '1.25rem',
     [theme.breakpoints.up('sm')]: {
       fontSize: '1rem',
-      lineHeight: '1rem',
+      lineHeight: '1.5rem',
     },
   };
 
   theme.typography.body2 = {
     fontSize: '0.75rem',
-    lineHeight: '0.75rem',
+    lineHeight: '1rem',
     [theme.breakpoints.up('sm')]: {
       fontSize: '0.875rem',
-      lineHeight: '0.875rem',
+      lineHeight: '1.25rem',
     },
   };
 
