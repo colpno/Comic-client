@@ -3,7 +3,9 @@ import { Helmet } from 'react-helmet-async';
 import { v4 } from 'uuid';
 
 import { useGetComicsQuery } from '~/apis/comicApis.ts';
+import DataFetching from '~/components/DataFetching.tsx';
 import { Comic } from '~/types/index.ts';
+import NotFoundPage from '../ErrorPage/components/NotFoundPage.tsx';
 import BannerSlider from './components/HomePageBanner.tsx';
 import CardRow from './components/HomePageCardRow.tsx';
 import GenreContainer from './components/HomePageGenreContainer.tsx';
@@ -27,9 +29,9 @@ const CARD_ROW_ITEM_LIMIT = 10;
 type ComicsByGenre = React.ComponentProps<typeof CardRow> & { id: string };
 type FilterComicsByGenre = (genres: string[], comics: Comic[]) => ComicsByGenre[];
 
-const filterComicsByGenre: FilterComicsByGenre = (genres, comics) => {
-  // Initialize comics by genre object
-  let genreComics = genres.reduce((acc, genre) => {
+const groupComicsByGenre: FilterComicsByGenre = (genres, comics) => {
+  // Initialize
+  const genreComics = genres.reduce((acc, genre) => {
     acc[genre] = [];
     return acc;
   }, {} as Record<string, Comic[]>);
@@ -57,7 +59,7 @@ const filterComicsByGenre: FilterComicsByGenre = (genres, comics) => {
 };
 
 function HomePage() {
-  const { data } = useGetComicsQuery({
+  const { data, isFetching, isLoading } = useGetComicsQuery({
     _limit: 100,
     includedTags: genres,
     includedTagsMode: 'OR',
@@ -68,11 +70,14 @@ function HomePage() {
 
   // Filter comics by genre
   useEffect(() => {
-    setComicsByGenre(filterComicsByGenre(genres, comics));
+    setComicsByGenre(groupComicsByGenre(genres, comics));
   }, [comics.length, setComicsByGenre]);
 
+  if (isFetching || isLoading) {
+    return <DataFetching />;
+  }
   if (!(comics.length > 0 && comicsByGenre.length > 0)) {
-    return null;
+    return <NotFoundPage title="No comics found" />;
   }
 
   return (
