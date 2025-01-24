@@ -3,26 +3,20 @@ import { v1 } from 'uuid';
 
 import ImageComponent from '~/components/Image.tsx';
 import { Typography } from '~/components/index.ts';
-import { proxyServerUrl } from '~/configs/appConf.ts';
 import useLoadImages from '~/hooks/useLoadImages.ts';
 import { placeholderImage } from '~/images/index.ts';
 import { Chapter } from '~/types/index.ts';
 
 function Images({ images }: Props) {
-  return images.map((img, i) => {
-    const data = `${proxyServerUrl}/${img.data}`;
-    const dataSaver = `${proxyServerUrl}/${img.dataSaver}`;
-
-    return (
-      <ImageComponent
-        src={dataSaver || placeholderImage}
-        onLoad={({ currentTarget }) => (currentTarget.src = data)}
-        alt={`Page ${i + 1}`}
-        className="w-full md:w-[728px]"
-        key={`${v1()}-${i}`}
-      />
-    );
-  });
+  return images.map((img, i) => (
+    <ImageComponent
+      src={img.dataSaver || placeholderImage}
+      onLoad={({ currentTarget }) => (currentTarget.src = img.data)}
+      alt={`Page ${i + 1}`}
+      className="w-full md:w-[728px]"
+      key={`${v1()}-${i}`}
+    />
+  ));
 }
 
 interface Props {
