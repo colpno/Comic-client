@@ -1,4 +1,5 @@
 import { Typography } from '~/components/index.ts';
+import useDeviceWatcher from '~/hooks/useDeviceWatcher.ts';
 import { Chapter } from '~/types/index.ts';
 import { toDate } from '~/utils/converters.ts';
 
@@ -7,8 +8,9 @@ interface Props {
 }
 
 function ChapterFigure({ chapter }: Props) {
-  const title = chapter.title
-    ? `Ch.${chapter.chapter} - ${chapter.title}`
+  const isMobile = useDeviceWatcher() === 'mobile';
+  const title = isMobile
+    ? `Ch. ${chapter.chapter}${chapter.title ? ` - ${chapter.title}` : ''}`
     : `Chapter ${chapter.chapter}`;
 
   return (
