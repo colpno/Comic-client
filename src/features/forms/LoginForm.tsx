@@ -15,8 +15,8 @@ function LoginForm({ onSubmit }: Props) {
       <Typography variant="h2" className="text-center !mb-8 text-main">
         Sign in
       </Typography>
-      <Form validationSchema={loginFormSchema} onSubmit={onSubmit}>
-        <div className="flex flex-col gap-4 mb-7">
+      <Form validationSchema={loginFormSchema} onSubmit={onSubmit} className="space-y-4">
+        <div className="space-y-6">
           <TextField
             name="email"
             variant="standard"
@@ -26,7 +26,7 @@ function LoginForm({ onSubmit }: Props) {
             placeholder="Email Address"
             slotProps={{
               input: { startAdornment: <IoMailOpenOutline size={27} className="mr-2" /> },
-              htmlInput: { className: '!py-4 !text-lg' },
+              htmlInput: { className: '!text-lg' },
             }}
           />
           <TextField
@@ -38,12 +38,12 @@ function LoginForm({ onSubmit }: Props) {
             placeholder="Password"
             slotProps={{
               input: { startAdornment: <CiLock size={27} className="mr-2" /> },
-              htmlInput: { className: '!py-4 !text-lg' },
+              htmlInput: { className: '!text-lg' },
             }}
           />
           <CheckboxGroup name="rememberMe" options={[{ label: 'Remember me.', value: 'true' }]} />
         </div>
-        <Button size="large" type="submit" fullWidth className="!mb-4">
+        <Button size="large" type="submit" fullWidth>
           Log in
         </Button>
         <Button variant="outlined" size="large" fullWidth href={ROUTE_SIGNUP}>

@@ -15,10 +15,10 @@ function SignUpForm({ onSubmit }: Props) {
       <Typography variant="h2" className="text-center !mb-8 text-main">
         Sign up
       </Typography>
-      <Form validationSchema={signUpFormSchema} onSubmit={onSubmit}>
+      <Form validationSchema={signUpFormSchema} onSubmit={onSubmit} className="space-y-4">
         {({ formState: { isSubmitting } }) => (
           <>
-            <div className="flex flex-col gap-4 mb-7">
+            <div className="mb-4 space-y-6">
               <TextField
                 name="email"
                 variant="standard"
@@ -28,7 +28,7 @@ function SignUpForm({ onSubmit }: Props) {
                 placeholder="Email Address"
                 slotProps={{
                   input: { startAdornment: <IoMailOpenOutline size={27} className="mr-2" /> },
-                  htmlInput: { className: '!py-4 !text-lg' },
+                  htmlInput: { className: '!text-lg' },
                 }}
               />
               <TextField
@@ -40,7 +40,7 @@ function SignUpForm({ onSubmit }: Props) {
                 placeholder="Password"
                 slotProps={{
                   input: { startAdornment: <CiLock size={27} className="mr-2" /> },
-                  htmlInput: { className: '!py-4 !text-lg' },
+                  htmlInput: { className: '!text-lg' },
                 }}
               />
               <TextField
@@ -52,11 +52,11 @@ function SignUpForm({ onSubmit }: Props) {
                 placeholder="Password confirmation"
                 slotProps={{
                   input: { startAdornment: <CiLock size={27} className="mr-2" /> },
-                  htmlInput: { className: '!py-4 !text-lg' },
+                  htmlInput: { className: '!text-lg' },
                 }}
               />
             </div>
-            <Button loading={isSubmitting} size="large" type="submit" fullWidth className="!mb-4">
+            <Button loading={isSubmitting} size="large" type="submit" fullWidth>
               Register
             </Button>
             <Button variant="outlined" size="large" fullWidth href={ROUTE_LOGIN}>
