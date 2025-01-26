@@ -11,7 +11,7 @@ export type ApiGetCSRFReturnType = ApiDataResponse<string>;
 export type ApiRegisterParams = {
   email: string;
   password: string;
-  passwordConfirmation: string;
+  passwordVerification: string;
 };
 
 export type ApiRefreshAccessToken = ApiLoginReturnType;

@@ -16,4 +16,5 @@ export const SortButton = lazy(() => import('./advance-buttons/SortButton.tsx'))
 export { default as ComicCard } from './cards/ComicCard.tsx';
 export { default as ComicHorizontalCard } from './cards/ComicHorizontalCard.tsx';
 export { default as LoginForm } from './forms/LoginForm.tsx';
+export { default as SignUpForm } from './forms/SignUpForm.tsx';
 export { default as ComicSlider } from './sliders/ComicSlider/ComicSlider.tsx';

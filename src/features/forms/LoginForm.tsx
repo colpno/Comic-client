@@ -2,6 +2,7 @@ import { CiLock } from 'react-icons/ci';
 import { IoMailOpenOutline } from 'react-icons/io5';
 
 import { Button, CheckboxGroup, Form, TextField, Typography } from '~/components/index.ts';
+import { ROUTE_SIGNUP } from '~/constants/routeConstants.ts';
 import { loginFormSchema, LoginFormValues } from './validationSchemas.ts';
 
 interface Props {
@@ -45,7 +46,7 @@ function LoginForm({ onSubmit }: Props) {
         <Button size="large" type="submit" fullWidth className="!mb-4">
           Log in
         </Button>
-        <Button variant="outlined" size="large" fullWidth>
+        <Button variant="outlined" size="large" fullWidth href={ROUTE_SIGNUP}>
           Sign up
         </Button>
       </Form>

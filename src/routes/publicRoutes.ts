@@ -11,6 +11,7 @@ import {
   ROUTE_NEW_ARRIVALS,
   ROUTE_RANKING,
   ROUTE_SEARCH,
+  ROUTE_SIGNUP,
 } from '~/constants/routeConstants';
 import {
   BasicLayout,
@@ -30,6 +31,7 @@ import {
   RankingPage,
   ReadingPage,
   SearchPage,
+  SignUpPage,
 } from '~/pages/index.ts';
 
 const publicRoutes: RouteObject = {
@@ -57,6 +59,10 @@ const publicRoutes: RouteObject = {
         {
           path: getComicsByGenreRoute(':genre'),
           Component: ComicsByGenrePage,
+        },
+        {
+          path: ROUTE_SIGNUP,
+          Component: SignUpPage,
         },
       ],
     },

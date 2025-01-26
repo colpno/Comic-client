@@ -12,6 +12,7 @@ export const LoginPage = lazy(() => import('./LoginPage.tsx'));
 export const HistoryPage = lazy(() => import('./HistoryPage/HistoryPage.tsx'));
 export const FollowPage = lazy(() => import('./FollowPage/FollowPage.tsx'));
 export const ComicsByGenrePage = lazy(() => import('./ComicsByGenrePage/ComicsByGenrePage.tsx'));
+export const SignUpPage = lazy(() => import('./SignUpPage.tsx'));
 
 export { default as HomePage } from './HomePage/HomePage.tsx';
 export { default as MaintenancePage } from './MaintenancePage.tsx';

@@ -10,6 +10,7 @@ export const ROUTE_COMPLETED = '/completed' as const;
 export const ROUTE_SEARCH = '/search' as const;
 export const ROUTE_LOGIN = '/login' as const;
 export const ROUTE_FOLLOW = `${BOOKSHELF}/follow` as const;
+export const ROUTE_SIGNUP = '/signup' as const;
 
 export const PROTECTED_ROUTES = [ROUTE_HISTORY, ROUTE_FOLLOW] as string[];
 
