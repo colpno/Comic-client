@@ -12,9 +12,10 @@ export const ROUTE_SEARCH = '/search' as const;
 export const ROUTE_LOGIN = '/login' as const;
 export const ROUTE_FOLLOW = `${BOOKSHELF}/follow` as const;
 export const ROUTE_SIGNUP = '/signup' as const;
+export const ROUTE_RESET_PASSWORD = `${PASSWORD}/reset` as const;
 export const ROUTE_FORGOT_PASSWORD = `${PASSWORD}/forgot` as const;
 
-export const PROTECTED_ROUTES = [ROUTE_HISTORY, ROUTE_FOLLOW] as string[];
+export const PROTECTED_ROUTES = [ROUTE_HISTORY, ROUTE_FOLLOW, ROUTE_RESET_PASSWORD] as string[];
 
 /**
  * @param comicTitle title will be converted to lowercase and replace space with '-'.

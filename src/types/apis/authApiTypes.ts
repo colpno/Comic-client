@@ -15,3 +15,5 @@ export type ApiRegisterParams = {
 };
 
 export type ApiRefreshAccessToken = ApiLoginReturnType;
+
+export type ApiResetPasswordParams = Pick<ApiRegisterParams, 'password' | 'passwordVerification'>;

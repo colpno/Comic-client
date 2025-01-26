@@ -4,6 +4,7 @@ import {
   ApiLoginReturnType,
   ApiRefreshAccessToken,
   ApiRegisterParams,
+  ApiResetPasswordParams,
 } from '~/types/apis/authApiTypes.ts';
 import { AUTH_ENDPOINTS } from './apiConstants.ts';
 import { attachAuthorization } from './apiUtils.ts';
@@ -76,6 +77,25 @@ const extendedApi = api.injectEndpoints({
     }),
 
     // PUT
+    resetPassword: build.mutation<void, ApiResetPasswordParams>({
+      queryFn: async (params, { getState }, _, query) => {
+        const res = await attachAuthorization(
+          {
+            url: AUTH_ENDPOINTS.RESET_PASSWORD(),
+            method: 'PUT',
+            data: params,
+          },
+          getState,
+          query
+        );
+
+        if (res.error) {
+          return { error: res.error };
+        }
+
+        return { data: undefined as void };
+      },
+    }),
     forgotPassword: build.mutation<void, ApiRegisterParams>({
       query: (params) => ({
         url: AUTH_ENDPOINTS.FORGOT_PASSWORD(),
@@ -95,6 +115,7 @@ export const {
   useLogoutQuery,
   useRefreshCSRFQuery,
   useRegisterMutation,
+  useResetPasswordMutation,
   useRefreshAccessTokenQuery,
   useLazyRefreshAccessTokenQuery,
   useForgotPasswordMutation,
