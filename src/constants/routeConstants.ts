@@ -1,4 +1,5 @@
 const BOOKSHELF = '/bookshelf' as const;
+const PASSWORD = '/password' as const;
 
 export const ROUTE_HOME = '/' as const;
 export const ROUTE_HISTORY = `${BOOKSHELF}/history` as const;
@@ -11,6 +12,7 @@ export const ROUTE_SEARCH = '/search' as const;
 export const ROUTE_LOGIN = '/login' as const;
 export const ROUTE_FOLLOW = `${BOOKSHELF}/follow` as const;
 export const ROUTE_SIGNUP = '/signup' as const;
+export const ROUTE_FORGOT_PASSWORD = `${PASSWORD}/forgot` as const;
 
 export const PROTECTED_ROUTES = [ROUTE_HISTORY, ROUTE_FOLLOW] as string[];
 

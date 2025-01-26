@@ -76,9 +76,9 @@ const extendedApi = api.injectEndpoints({
     }),
 
     // PUT
-    resetPassword: build.mutation<void, ApiRegisterParams>({
+    forgotPassword: build.mutation<void, ApiRegisterParams>({
       query: (params) => ({
-        url: AUTH_ENDPOINTS.RESET_PASSWORD(),
+        url: AUTH_ENDPOINTS.FORGOT_PASSWORD(),
         method: 'PUT',
         data: params,
       }),
@@ -95,7 +95,7 @@ export const {
   useLogoutQuery,
   useRefreshCSRFQuery,
   useRegisterMutation,
-  useResetPasswordMutation,
   useRefreshAccessTokenQuery,
   useLazyRefreshAccessTokenQuery,
+  useForgotPasswordMutation,
 } = extendedApi;

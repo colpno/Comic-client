@@ -5,6 +5,7 @@ import {
   getComicRoute,
   getComicsByGenreRoute,
   ROUTE_COMPLETED,
+  ROUTE_FORGOT_PASSWORD,
   ROUTE_HOME,
   ROUTE_LATEST_UPDATES,
   ROUTE_LOGIN,
@@ -24,6 +25,7 @@ import {
   ComicPage,
   ComicsByGenrePage,
   CompletedPage,
+  ForgotPasswordPage,
   HomePage,
   LatestUpdatesPage,
   LoginPage,
@@ -63,6 +65,10 @@ const publicRoutes: RouteObject = {
         {
           path: ROUTE_SIGNUP,
           Component: SignUpPage,
+        },
+        {
+          path: ROUTE_FORGOT_PASSWORD,
+          Component: ForgotPasswordPage,
         },
       ],
     },

@@ -2,7 +2,7 @@ import { CiLock } from 'react-icons/ci';
 import { IoMailOpenOutline } from 'react-icons/io5';
 
 import { Button, CheckboxGroup, Form, TextField, Typography } from '~/components/index.ts';
-import { ROUTE_SIGNUP } from '~/constants/routeConstants.ts';
+import { ROUTE_FORGOT_PASSWORD, ROUTE_SIGNUP } from '~/constants/routeConstants.ts';
 import { loginFormSchema, LoginFormValues } from './validationSchemas.ts';
 
 interface Props {
@@ -42,6 +42,11 @@ function LoginForm({ onSubmit }: Props) {
             }}
           />
           <CheckboxGroup name="rememberMe" options={[{ label: 'Remember me.', value: 'true' }]} />
+        </div>
+        <div className="flex items-center justify-end">
+          <Typography variant="body2" href={ROUTE_FORGOT_PASSWORD}>
+            Forgot your password?
+          </Typography>
         </div>
         <Button size="large" type="submit" fullWidth>
           Log in
