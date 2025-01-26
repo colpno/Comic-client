@@ -1,12 +1,12 @@
 import { IoLogOutOutline } from 'react-icons/io5';
 import { MdClose, MdOutlinePermIdentity } from 'react-icons/md';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { useLazyLogoutQuery, useLoginMutation } from '~/apis/authApis.ts';
 import { Button, Dialog, Popup } from '~/components/index.ts';
-import { ROUTE_HOME } from '~/constants/routeConstants.ts';
+import { PROTECTED_ROUTES, ROUTE_HOME } from '~/constants/routeConstants.ts';
 import { LoginFormValues } from '~/features/forms/validationSchemas.ts';
 import { LoginForm } from '~/features/index.ts';
 import { useDeviceWatcher, usePopup } from '~/hooks/index.ts';
@@ -15,6 +15,7 @@ import { RootState, useAppDispatch } from '~/libs/redux/store.ts';
 
 function HeaderAccountButton() {
   const { closePopup, open, openPopup, popupRef } = usePopup();
+  const { pathname } = useLocation();
   const [logoutQuery] = useLazyLogoutQuery();
   const [loginQuery] = useLoginMutation();
   const dispatch = useAppDispatch();
@@ -23,9 +24,11 @@ function HeaderAccountButton() {
   const isMobile = useDeviceWatcher() === 'mobile';
 
   const handleLogout = () => {
-    navigate(ROUTE_HOME);
-
     logoutQuery().then(() => {
+      if (PROTECTED_ROUTES.includes(pathname)) {
+        navigate(ROUTE_HOME);
+      }
+
       toast.success('Logout successfully');
       dispatch(logout());
     });
