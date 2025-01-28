@@ -11,7 +11,7 @@ function Footer({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
         className
       )}
     >
-      <Typography className="!mb-2 !text-main" copyable>
+      <Typography className="!mb-2 !text-inherit" copyable>
         {EMAIL_HELPER}
       </Typography>
       <Typography>© Comic Corporation. All rights reserved.</Typography>
