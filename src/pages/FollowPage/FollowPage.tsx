@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet-async';
 
 import { useLazyGetFollowsQuery, useRemoveFollowMutation } from '~/apis/followApis.ts';
 import { TextInputProps } from '~/components/form-controls/base-controls/TextInput.tsx';
-import { DataFetching, Dialog, InfiniteScrollPagination } from '~/components/index.ts';
+import { Dialog, InfiniteScrollPagination } from '~/components/index.ts';
 import { MUI_CONTAINER_MAX_WIDTH, PAGINATION_INITIAL_PAGE } from '~/constants/commonConstants.ts';
 import { SortButton, TagFilterButton, TagFilterFormValues } from '~/features/index.ts';
 import useInfinitePagination from '~/hooks/useInfinitePagination.ts';
@@ -121,15 +121,16 @@ function FollowPage() {
             />
           </div>
         )}
-        {isFetchingOrLoading ? (
-          <DataFetching />
-        ) : typeof follows[0] !== 'string' ? (
+        {typeof follows[0] !== 'string' ? (
           <>
             <FollowPageFollowList
               items={follows as Follow<Comic>[]}
               onRemoveClick={toggleRemovalPopup}
             />
-            <InfiniteScrollPagination onIntersect={handleIntersect} />
+            <InfiniteScrollPagination
+              onIntersect={handleIntersect}
+              isLoading={isFetchingOrLoading}
+            />
           </>
         ) : (
           <NotFoundPage title="Follow list is empty" />

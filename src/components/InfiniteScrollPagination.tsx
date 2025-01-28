@@ -2,11 +2,11 @@ import { memo, useEffect, useRef, useState } from 'react';
 
 interface Props {
   onIntersect: () => void | Promise<void>;
+  isLoading?: boolean;
 }
 
-function InfiniteScrollPagination({ onIntersect }: Props) {
+function InfiniteScrollPagination({ onIntersect, isLoading }: Props) {
   const observerRef = useRef<HTMLDivElement | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
   const firstMount = useRef(true);
   const [isIntersecting, setIsIntersecting] = useState(false);
 
@@ -44,13 +44,9 @@ function InfiniteScrollPagination({ onIntersect }: Props) {
       setIsIntersecting(false);
 
       if (onIntersect instanceof Promise) {
-        setIsLoading(true);
-
         const callback = onIntersect as () => Promise<void>;
 
-        callback().finally(() => {
-          setIsLoading(false);
-        });
+        callback();
       } else {
         onIntersect();
       }

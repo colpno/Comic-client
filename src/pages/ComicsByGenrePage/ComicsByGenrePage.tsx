@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 
 import { useLazyGetComicsQuery } from '~/apis/comicApis.ts';
-import { DataFetching, InfiniteScrollPagination } from '~/components/index.ts';
+import { InfiniteScrollPagination } from '~/components/index.ts';
 import Typography from '~/components/Typography.tsx';
 import { MUI_CONTAINER_MAX_WIDTH, PAGINATION_INITIAL_PAGE } from '~/constants/commonConstants.ts';
 import { useDeviceWatcher, useInfinitePagination } from '~/hooks/index.ts';
@@ -52,14 +52,8 @@ function ComicsByGenrePage() {
           {toSentenceCase(genre)}
         </Typography>
       )}
-      {isFetchingOrLoading ? (
-        <DataFetching />
-      ) : (
-        <>
-          <Content items={comics} />
-          <InfiniteScrollPagination onIntersect={handleIntersect} />
-        </>
-      )}
+      <Content items={comics} />
+      <InfiniteScrollPagination onIntersect={handleIntersect} isLoading={isFetchingOrLoading} />
       <Helmet>
         <title>{genre} - Comic</title>
       </Helmet>

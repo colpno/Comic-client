@@ -2,7 +2,7 @@ import { Container } from '@mui/material';
 import { Helmet } from 'react-helmet-async';
 
 import { useLazyGetComicsQuery } from '~/apis/comicApis.ts';
-import { DataFetching, InfiniteScrollPagination } from '~/components/index.ts';
+import { InfiniteScrollPagination } from '~/components/index.ts';
 import { MUI_CONTAINER_MAX_WIDTH, PAGINATION_INITIAL_PAGE } from '~/constants/commonConstants.ts';
 import { useInfinitePagination } from '~/hooks/index.ts';
 import { ApiGetComicsParams } from '~/types/index.ts';
@@ -31,14 +31,8 @@ function LatestUpdatesPage() {
 
   return (
     <Container maxWidth={MUI_CONTAINER_MAX_WIDTH} className="-mt-8">
-      {isFetchingOrLoading ? (
-        <DataFetching />
-      ) : (
-        <>
-          <Content items={comics} />
-          <InfiniteScrollPagination onIntersect={handleIntersect} />
-        </>
-      )}
+      <Content items={comics} />
+      <InfiniteScrollPagination onIntersect={handleIntersect} isLoading={isFetchingOrLoading} />
       <Helmet>
         <title>Latest updates - Comic</title>
       </Helmet>

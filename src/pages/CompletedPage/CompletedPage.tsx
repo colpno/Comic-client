@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 
 import { useLazyGetComicsQuery } from '~/apis/comicApis.ts';
-import { DataFetching, InfiniteScrollPagination } from '~/components/index.ts';
+import { InfiniteScrollPagination } from '~/components/index.ts';
 import { MUI_CONTAINER_MAX_WIDTH, PAGINATION_INITIAL_PAGE } from '~/constants/commonConstants.ts';
 import { useDeviceWatcher, useInfinitePagination } from '~/hooks/index.ts';
 import Title from '~/layouts/MenuLayout/components/MenuLayoutPageTitle.tsx';
@@ -61,14 +61,8 @@ function CompletedPage() {
       {isDesktop && (
         <Title onParamChange={setGenre} urlParam="category" defaultValue={DEFAULT_GENRE} />
       )}
-      {isFetchingOrLoading ? (
-        <DataFetching />
-      ) : (
-        <>
-          <Content items={comics} />
-          <InfiniteScrollPagination onIntersect={handleIntersect} />
-        </>
-      )}
+      <Content items={comics} />
+      <InfiniteScrollPagination onIntersect={handleIntersect} isLoading={isFetchingOrLoading} />
       <Helmet>
         <title>Completed comics - Comic</title>
       </Helmet>

@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import { useSearchParams } from 'react-router-dom';
 
 import { useLazyGetComicsQuery } from '~/apis/comicApis.ts';
-import { DataFetching, InfiniteScrollPagination } from '~/components/index.ts';
+import { InfiniteScrollPagination } from '~/components/index.ts';
 import { MUI_CONTAINER_MAX_WIDTH, PAGINATION_INITIAL_PAGE } from '~/constants/commonConstants.ts';
 import { useInfinitePagination } from '~/hooks/index.ts';
 import { ApiGetComicsParams } from '~/types/index.ts';
@@ -53,14 +53,8 @@ function SearchPage() {
   return (
     <Container maxWidth={MUI_CONTAINER_MAX_WIDTH} className="pt-8">
       <Title searchValue={searchValue} />
-      {isFetchingOrLoading ? (
-        <DataFetching />
-      ) : (
-        <>
-          <Content items={comics} />
-          <InfiniteScrollPagination onIntersect={handleIntersect} />
-        </>
-      )}
+      <Content items={comics} />
+      <InfiniteScrollPagination onIntersect={handleIntersect} isLoading={isFetchingOrLoading} />
       <Helmet>
         <title>{searchValue} - Comic</title>
       </Helmet>
