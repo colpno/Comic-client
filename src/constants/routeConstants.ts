@@ -41,9 +41,14 @@ export const getRankingRoute = (category?: string) => {
   return `${ROUTE_RANKING}?category=${category}`;
 };
 
-export const getLatestUpdatesRoute = (weekDay?: string) => {
-  if (!weekDay) return ROUTE_LATEST_UPDATES;
-  return `${ROUTE_LATEST_UPDATES}?weekday=${weekDay}`;
+export const getNewArrivalsRoute = (category?: string) => {
+  if (!category) return ROUTE_NEW_ARRIVALS;
+  return `${ROUTE_NEW_ARRIVALS}?category=${category}`;
+};
+
+export const getLatestUpdatesRoute = (category?: string) => {
+  if (!category) return ROUTE_LATEST_UPDATES;
+  return `${ROUTE_LATEST_UPDATES}?category=${category}`;
 };
 
 export const getCompletedRoute = (category?: string) => {

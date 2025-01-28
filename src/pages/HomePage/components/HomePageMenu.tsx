@@ -1,5 +1,4 @@
 import { Container } from '@mui/material';
-import moment from 'moment';
 import { HiOutlineTrophy } from 'react-icons/hi2';
 import { IconType } from 'react-icons/lib';
 import { RiCalendarTodoFill, RiFlagLine } from 'react-icons/ri';
@@ -9,8 +8,8 @@ import { Button, Slider } from '~/components/index.ts';
 import Typography from '~/components/Typography.tsx';
 import { MUI_CONTAINER_MAX_WIDTH } from '~/constants/commonConstants.ts';
 import {
-  getLatestUpdatesRoute,
   ROUTE_COMPLETED,
+  ROUTE_LATEST_UPDATES,
   ROUTE_NEW_ARRIVALS,
   ROUTE_RANKING,
 } from '~/constants/routeConstants.ts';
@@ -42,7 +41,7 @@ function Menu() {
     {
       Icon: RiCalendarTodoFill,
       label: 'Latest Updates',
-      href: getLatestUpdatesRoute(moment().format('dddd').toLowerCase()),
+      href: ROUTE_LATEST_UPDATES,
     },
     {
       Icon: HiOutlineTrophy,

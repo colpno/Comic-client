@@ -1,5 +1,7 @@
 import {
   getCompletedRoute,
+  getLatestUpdatesRoute,
+  getNewArrivalsRoute,
   getRankingRoute,
   ROUTE_COMPLETED,
   ROUTE_LATEST_UPDATES,
@@ -64,6 +66,16 @@ export const completedPageMenu: SubMenuItem[] = rankingPageCategoryMenu.map((ite
   link: getCompletedRoute(item.link.split('=')[1]),
 }));
 
+export const newProductsPageMenu: SubMenuItem[] = rankingPageCategoryMenu.map((item) => ({
+  ...item,
+  link: getNewArrivalsRoute(item.link.split('=')[1]),
+}));
+
+export const latestUpdatesPageMenu: SubMenuItem[] = rankingPageCategoryMenu.map((item) => ({
+  ...item,
+  link: getLatestUpdatesRoute(item.link.split('=')[1]),
+}));
+
 interface MenuItem {
   title: string;
   link: string;
@@ -74,10 +86,12 @@ export const menu: MenuItem[] = [
   {
     title: 'New Arrivals',
     link: ROUTE_NEW_ARRIVALS,
+    headerMenu: newProductsPageMenu,
   },
   {
     title: 'Latest Updates',
     link: ROUTE_LATEST_UPDATES,
+    headerMenu: latestUpdatesPageMenu,
   },
   {
     title: 'Ranking',
