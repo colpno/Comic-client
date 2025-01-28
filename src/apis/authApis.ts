@@ -1,10 +1,11 @@
 import {
   ApiGetCSRFReturnType,
+  ApiGetUserReturnType,
   ApiLoginParams,
   ApiLoginReturnType,
   ApiRefreshAccessToken,
   ApiRegisterParams,
-  ApiResetPasswordParams,
+  ApiUpdateUserParams,
 } from '~/types/apis/authApiTypes.ts';
 import { AUTH_ENDPOINTS } from './apiConstants.ts';
 import { attachAuthorization } from './apiUtils.ts';
@@ -44,9 +45,7 @@ const extendedApi = api.injectEndpoints({
     refreshAccessToken: build.query<ApiRefreshAccessToken['data'] | undefined, void>({
       queryFn: async (_args, { getState }, _, query) => {
         const res = await attachAuthorization(
-          {
-            url: AUTH_ENDPOINTS.REFRESH_ACCESS_TOKEN(),
-          },
+          { url: AUTH_ENDPOINTS.REFRESH_ACCESS_TOKEN() },
           getState,
           query
         );
@@ -56,6 +55,17 @@ const extendedApi = api.injectEndpoints({
         }
 
         return { data: res.data.data as unknown as ApiRefreshAccessToken['data'] };
+      },
+    }),
+    getUser: build.query<ApiGetUserReturnType['data'], void>({
+      queryFn: async (_args, { getState }, _, query) => {
+        const res = await attachAuthorization({ url: AUTH_ENDPOINTS.GET_USER() }, getState, query);
+
+        if (res.error) {
+          return { error: res.error };
+        }
+
+        return { data: res.data.data as unknown as ApiGetUserReturnType['data'] };
       },
     }),
 
@@ -77,11 +87,18 @@ const extendedApi = api.injectEndpoints({
     }),
 
     // PUT
-    resetPassword: build.mutation<void, ApiResetPasswordParams>({
+    forgotPassword: build.mutation<void, ApiRegisterParams>({
+      query: (params) => ({
+        url: AUTH_ENDPOINTS.FORGOT_PASSWORD(),
+        method: 'PUT',
+        data: params,
+      }),
+    }),
+    updateUser: build.mutation<void, ApiUpdateUserParams>({
       queryFn: async (params, { getState }, _, query) => {
         const res = await attachAuthorization(
           {
-            url: AUTH_ENDPOINTS.RESET_PASSWORD(),
+            url: AUTH_ENDPOINTS.UPDATE_USER(),
             method: 'PUT',
             data: params,
           },
@@ -96,13 +113,6 @@ const extendedApi = api.injectEndpoints({
         return { data: undefined as void };
       },
     }),
-    forgotPassword: build.mutation<void, ApiRegisterParams>({
-      query: (params) => ({
-        url: AUTH_ENDPOINTS.FORGOT_PASSWORD(),
-        method: 'PUT',
-        data: params,
-      }),
-    }),
   }),
 });
 
@@ -115,8 +125,10 @@ export const {
   useLogoutQuery,
   useRefreshCSRFQuery,
   useRegisterMutation,
-  useResetPasswordMutation,
   useRefreshAccessTokenQuery,
   useLazyRefreshAccessTokenQuery,
   useForgotPasswordMutation,
+  useUpdateUserMutation,
+  useGetUserQuery,
+  useLazyGetUserQuery,
 } = extendedApi;

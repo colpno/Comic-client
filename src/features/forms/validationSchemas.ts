@@ -20,10 +20,10 @@ export type SelectiveFilterFormValues = z.infer<typeof selectiveFilterFormSchema
 
 export const signUpFormSchema = z
   .object({
-    username: z.string().min(3),
+    username: loginFormSchema.shape.username,
     email: z.string().email(),
-    password: z.string().min(PASSWORD_LENGTH),
-    passwordVerification: z.string().min(PASSWORD_LENGTH),
+    password: loginFormSchema.shape.password,
+    passwordVerification: loginFormSchema.shape.password,
   })
   .refine((data) => data.password === data.passwordVerification, {
     message: "Passwords don't match",
@@ -31,25 +31,26 @@ export const signUpFormSchema = z
   });
 export type SignUpFormValues = z.infer<typeof signUpFormSchema>;
 
-export const resetPasswordFormSchema = z
-  .object({
-    password: z.string().min(PASSWORD_LENGTH),
-    passwordVerification: z.string().min(PASSWORD_LENGTH),
-  })
-  .refine((data) => data.password === data.passwordVerification, {
-    message: "Passwords don't match",
-    path: ['passwordVerification'],
-  });
-export type ResetPasswordFormValues = z.infer<typeof resetPasswordFormSchema>;
-
 export const forgotPasswordFormSchema = z
   .object({
     email: z.string().email(),
-    password: z.string().min(PASSWORD_LENGTH),
-    passwordVerification: z.string().min(PASSWORD_LENGTH),
+    password: loginFormSchema.shape.password,
+    passwordVerification: loginFormSchema.shape.password,
   })
   .refine((data) => data.password === data.passwordVerification, {
     message: "Passwords don't match",
     path: ['passwordVerification'],
   });
 export type ForgotPasswordFormValues = z.infer<typeof forgotPasswordFormSchema>;
+
+export const profileFormSchema = z.object({
+  email: z.string().email().optional(),
+  changePassword: z
+    .array(z.enum(['true']))
+    .length(1)
+    .optional()
+    .or(z.array(z.never()).optional()),
+  password: loginFormSchema.shape.password.optional(),
+  passwordVerification: loginFormSchema.shape.password.optional(),
+});
+export type ProfileFormValues = z.infer<typeof profileFormSchema>;

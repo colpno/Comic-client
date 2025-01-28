@@ -7,9 +7,10 @@ export const AUTH_ENDPOINTS = {
   LOGIN: () => `${AUTH_ENDPOINTS.BASE}/login` as const,
   LOGOUT: () => `${AUTH_ENDPOINTS.BASE}/logout` as const,
   REGISTER: () => `${AUTH_ENDPOINTS.BASE}/register` as const,
-  RESET_PASSWORD: () => `${AUTH_ENDPOINTS.BASE}/password/reset` as const,
   FORGOT_PASSWORD: () => `${AUTH_ENDPOINTS.BASE}/password/forgot` as const,
   REFRESH_ACCESS_TOKEN: () => `${AUTH_ENDPOINTS.BASE}/refresh-token` as const,
+  UPDATE_USER: () => `${AUTH_ENDPOINTS.BASE}/user` as const,
+  GET_USER: () => `${AUTH_ENDPOINTS.BASE}/user` as const,
 };
 
 export const COMIC_ENDPOINTS = {

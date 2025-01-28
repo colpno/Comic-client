@@ -12,11 +12,11 @@ export const TagFilterButton = lazy(() => import('./advance-buttons/TagFilterBut
 export * from './advance-buttons/TagFilterButton.tsx';
 export type { SelectiveFilterFormValues as TagFilterFormValues } from './forms/validationSchemas.ts';
 export const SortButton = lazy(() => import('./advance-buttons/SortButton.tsx'));
+export const ForgotPasswordForm = lazy(() => import('./forms/ForgotPasswordForm.tsx'));
+export const SignUpForm = lazy(() => import('./forms/SignUpForm.tsx'));
+export const ProfileForm = lazy(() => import('./forms/ProfileForm.tsx'));
 
 export { default as ComicCard } from './cards/ComicCard.tsx';
 export { default as ComicHorizontalCard } from './cards/ComicHorizontalCard.tsx';
 export { default as LoginForm } from './forms/LoginForm.tsx';
-export { default as SignUpForm } from './forms/SignUpForm.tsx';
-export { default as ForgotPasswordForm } from './forms/ForgotPasswordForm.tsx';
-export { default as ResetPasswordForm } from './forms/ResetPasswordForm.tsx';
 export { default as ComicSlider } from './sliders/ComicSlider/ComicSlider.tsx';

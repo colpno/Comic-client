@@ -1,3 +1,5 @@
+import { CgProfile } from 'react-icons/cg';
+import { FaPerson } from 'react-icons/fa6';
 import { IoLogOutOutline } from 'react-icons/io5';
 import { MdClose, MdOutlinePermIdentity } from 'react-icons/md';
 import { useSelector } from 'react-redux';
@@ -5,34 +7,21 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { useLazyLogoutQuery, useLoginMutation } from '~/apis/authApis.ts';
-import { Button, Dialog, Popup } from '~/components/index.ts';
-import { PROTECTED_ROUTES, ROUTE_HOME } from '~/constants/routeConstants.ts';
+import { Button, Dialog, Popup, Typography } from '~/components/index.ts';
+import { PROTECTED_ROUTES, ROUTE_HOME, ROUTE_PROFILE } from '~/constants/routeConstants.ts';
 import { LoginFormValues } from '~/features/forms/validationSchemas.ts';
 import { LoginForm } from '~/features/index.ts';
 import { useDeviceWatcher, usePopup } from '~/hooks/index.ts';
 import { login, logout } from '~/libs/redux/slices/authSlice.ts';
 import { RootState, useAppDispatch } from '~/libs/redux/store.ts';
+import { ButtonAsButtonProps, ButtonAsIconButtonProps } from '~/types/index.ts';
 
 function HeaderAccountButton() {
   const { closePopup, open, openPopup, popupRef } = usePopup();
-  const { pathname } = useLocation();
-  const [logoutQuery] = useLazyLogoutQuery();
   const [loginQuery] = useLoginMutation();
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
   const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
   const isMobile = useDeviceWatcher() === 'mobile';
-
-  const handleLogout = () => {
-    logoutQuery().then(() => {
-      if (PROTECTED_ROUTES.includes(pathname)) {
-        navigate(ROUTE_HOME);
-      }
-
-      toast.success('Logout successfully');
-      dispatch(logout());
-    });
-  };
 
   const handleFormSubmit = async (values: LoginFormValues) => {
     try {
@@ -46,9 +35,7 @@ function HeaderAccountButton() {
   return (
     <div>
       {isLoggedIn ? (
-        <Button as="iconButton" color="inherit" title="Account" onClick={handleLogout}>
-          <IoLogOutOutline />
-        </Button>
+        <ForLoggedInUserButton onClick={openPopup} />
       ) : (
         <Button as="iconButton" color="inherit" title="Account" onClick={openPopup}>
           <MdOutlinePermIdentity />
@@ -98,5 +85,73 @@ function MobileForm({ onSubmit, onClose }: MobileFormProps) {
       </Button>
       <LoginForm onSubmit={onSubmit} />
     </div>
+  );
+}
+
+function PopupButton(props: ButtonAsButtonProps) {
+  return (
+    <Button
+      {...props}
+      className="!justify-start !pl-4 !rounded-none !items-center"
+      disableTextTransform
+      variant={props.disabled ? 'contained' : 'text'}
+    />
+  );
+}
+
+function ForLoggedInUserButton({
+  onClick,
+  ...props
+}: Omit<ButtonAsIconButtonProps, 'as' | 'children'>) {
+  const { closePopup, open, openPopup, popupRef } = usePopup();
+  const [logoutQuery] = useLazyLogoutQuery();
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
+  const handleLogout = () => {
+    logoutQuery().then(() => {
+      if (PROTECTED_ROUTES.includes(pathname)) {
+        navigate(ROUTE_HOME);
+      }
+
+      toast.success('Logout successfully');
+      dispatch(logout());
+    });
+  };
+
+  return (
+    <>
+      <Button
+        {...props}
+        as="iconButton"
+        color="inherit"
+        title="Account"
+        onClick={openPopup}
+        onMouseEnter={openPopup}
+      >
+        <FaPerson />
+      </Button>
+      <Popup
+        open={open}
+        anchorEl={popupRef}
+        onClose={closePopup}
+        position={{ horizontal: 'right' }}
+      >
+        <div className="flex flex-col p-2 bg-main">
+          <PopupButton
+            disabled={pathname === ROUTE_PROFILE}
+            href={ROUTE_PROFILE}
+            startIcon={<CgProfile />}
+            title="Profile"
+          >
+            <Typography>Profile</Typography>
+          </PopupButton>
+          <PopupButton onClick={handleLogout} startIcon={<IoLogOutOutline />} title="Logout">
+            <Typography>Logout</Typography>
+          </PopupButton>
+        </div>
+      </Popup>
+    </>
   );
 }

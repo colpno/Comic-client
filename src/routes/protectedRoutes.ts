@@ -1,8 +1,8 @@
 import { RouteObject } from 'react-router-dom';
 
-import { ROUTE_FOLLOW, ROUTE_HISTORY, ROUTE_RESET_PASSWORD } from '~/constants/routeConstants';
-import { BasicLayout, BookshelfLayout, ProtectedLayout } from '~/layouts/index.ts';
-import { FollowPage, HistoryPage, ResetPasswordPage } from '~/pages/index.ts';
+import { ROUTE_FOLLOW, ROUTE_HISTORY, ROUTE_PROFILE } from '~/constants/routeConstants';
+import { BookshelfLayout, ProtectedLayout, UserBasicLayout } from '~/layouts/index.ts';
+import { FollowPage, HistoryPage, ProfilePage } from '~/pages/index.ts';
 
 const protectedRoutes: RouteObject = {
   Component: ProtectedLayout,
@@ -21,11 +21,11 @@ const protectedRoutes: RouteObject = {
       ],
     },
     {
-      Component: BasicLayout,
+      Component: UserBasicLayout,
       children: [
         {
-          path: ROUTE_RESET_PASSWORD,
-          Component: ResetPasswordPage,
+          path: ROUTE_PROFILE,
+          Component: ProfilePage,
         },
       ],
     },

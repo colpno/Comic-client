@@ -1,5 +1,5 @@
 import { LoginFormValues } from '~/features/forms/validationSchemas.ts';
-import { ApiDataResponse } from '~/types/index.ts';
+import { ApiDataResponse, User } from '~/types/index.ts';
 
 export type ApiLoginParams = LoginFormValues;
 export type ApiLoginReturnType = ApiDataResponse<{
@@ -16,4 +16,6 @@ export type ApiRegisterParams = {
 
 export type ApiRefreshAccessToken = ApiLoginReturnType;
 
-export type ApiResetPasswordParams = Pick<ApiRegisterParams, 'password' | 'passwordVerification'>;
+export type ApiGetUserReturnType = ApiDataResponse<User>;
+
+export type ApiUpdateUserParams = Partial<ApiRegisterParams>;
