@@ -3,13 +3,13 @@ import { Helmet } from 'react-helmet-async';
 import { toast } from 'react-toastify';
 
 import { useForgotPasswordMutation } from '~/apis/authApis.ts';
-import { SignUpFormValues } from '~/features/forms/validationSchemas.ts';
+import { ForgotPasswordFormValues } from '~/features/forms/validationSchemas.ts';
 import { ForgotPasswordForm } from '~/features/index.ts';
 
 function ForgotPasswordPage() {
   const [submit, { isSuccess }] = useForgotPasswordMutation();
 
-  const handleFormSubmit = async (values: SignUpFormValues) => {
+  const handleFormSubmit = async (values: ForgotPasswordFormValues) => {
     try {
       await submit(values);
     } catch (error) {}

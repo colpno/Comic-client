@@ -1,5 +1,6 @@
 import { CiLock } from 'react-icons/ci';
 import { IoMailOpenOutline } from 'react-icons/io5';
+import { MdOutlinePermIdentity } from 'react-icons/md';
 
 import { Button, Form, TextField, Typography } from '~/components/index.ts';
 import { ROUTE_LOGIN } from '~/constants/routeConstants.ts';
@@ -19,6 +20,18 @@ function SignUpForm({ onSubmit }: Props) {
         {({ formState: { isSubmitting } }) => (
           <>
             <div className="mb-4 space-y-6">
+              <TextField
+                name="username"
+                variant="standard"
+                size="small"
+                fullWidth
+                clearable
+                placeholder="Username"
+                slotProps={{
+                  input: { startAdornment: <MdOutlinePermIdentity size={27} className="mr-2" /> },
+                  htmlInput: { className: '!text-lg' },
+                }}
+              />
               <TextField
                 name="email"
                 variant="standard"

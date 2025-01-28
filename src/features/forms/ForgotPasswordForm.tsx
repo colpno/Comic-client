@@ -3,10 +3,10 @@ import { IoMailOpenOutline } from 'react-icons/io5';
 import { useNavigate } from 'react-router-dom';
 
 import { Button, Form, TextField, Typography } from '~/components/index.ts';
-import { signUpFormSchema, SignUpFormValues } from './validationSchemas.ts';
+import { forgotPasswordFormSchema, ForgotPasswordFormValues } from './validationSchemas.ts';
 
 interface Props {
-  onSubmit: (values: SignUpFormValues) => void | Promise<void>;
+  onSubmit: (values: ForgotPasswordFormValues) => void | Promise<void>;
 }
 
 function ForgotPasswordForm({ onSubmit }: Props) {
@@ -17,7 +17,7 @@ function ForgotPasswordForm({ onSubmit }: Props) {
       <Typography variant="h2" className="text-center !mb-8 text-main">
         Forgot password
       </Typography>
-      <Form validationSchema={signUpFormSchema} onSubmit={onSubmit} className="space-y-4">
+      <Form validationSchema={forgotPasswordFormSchema} onSubmit={onSubmit} className="space-y-4">
         {({ formState: { isSubmitting } }) => (
           <>
             <div className="mb-4 space-y-6">

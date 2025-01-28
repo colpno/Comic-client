@@ -1,5 +1,5 @@
 import { CiLock } from 'react-icons/ci';
-import { IoMailOpenOutline } from 'react-icons/io5';
+import { MdOutlinePermIdentity } from 'react-icons/md';
 
 import { Button, CheckboxGroup, Form, TextField, Typography } from '~/components/index.ts';
 import { ROUTE_FORGOT_PASSWORD, ROUTE_SIGNUP } from '~/constants/routeConstants.ts';
@@ -18,14 +18,14 @@ function LoginForm({ onSubmit }: Props) {
       <Form validationSchema={loginFormSchema} onSubmit={onSubmit} className="space-y-4">
         <div className="space-y-6">
           <TextField
-            name="email"
+            name="username"
             variant="standard"
             size="small"
             fullWidth
             clearable
-            placeholder="Email Address"
+            placeholder="Username"
             slotProps={{
-              input: { startAdornment: <IoMailOpenOutline size={27} className="mr-2" /> },
+              input: { startAdornment: <MdOutlinePermIdentity size={27} className="mr-2" /> },
               htmlInput: { className: '!text-lg' },
             }}
           />
