@@ -1,12 +1,25 @@
 <a name="readme-top"></a>
 
+<div align="center">
+  <h3 align="center">
+    <img src="public/logo.png" alt="Logo" style="width:100px;">
+  </h3>
+  <p align="center">
+    <a href="https://comic-client-smoky.vercel.app">View Demo</a>
+    ·
+    <a href="https://github.com/colpno/Comic/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/colpno/Comic/issues">Request Feature</a>
+  </p>
+</div>
+
 <!-- TABLE OF CONTENTS -->
 
 ## Table of Contents
 
-- [About The Project](#about-the-project)
-  - [Built With](#built-with)
-  - [Which features this project deal with](#which-features-this-project-deal-with)
+- [Overview](#overview)
+- [Built With](#built-with)
+- [Features](#features)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
@@ -15,12 +28,13 @@
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## About The Project
+## Overview
 
-### Built With
+A website serves comics coming from asia for everyone with many genres. It provide features like search, find comics by genre, by status, by date. Users can also save comics for later read.
+
+## Built With
 
 - <a href="https://www.typescriptlang.org"><img src="https://img.shields.io/badge/Typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=61DAFB" alt="Facebook" style="vertical-align: middle;"></a>
-
 - <a href="https://react.dev"><img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=000000" alt="React" style="vertical-align: middle;"></a>
 - <a href="https://redux-toolkit.js.org"><img src="https://img.shields.io/badge/Redux_Toolkit-764ABC?style=for-the-badge&logo=redux&logoColor=ffffff" alt="Redux Toolkit" style="vertical-align: middle;"></a>
 - <a href="https://www.react-hook-form.com"><img src="https://img.shields.io/badge/React_Hook_Form-EC5990?style=for-the-badge&logo=reacthookform&logoColor=ffffff" alt="React Hook Form" style="vertical-align: middle;"></a>
@@ -30,7 +44,7 @@
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-### Which features this project deal with
+## Features
 
 - Display comics by genre, by date, by status.
 - View ranking comics, which are based on rating.
@@ -66,6 +80,8 @@ cd Comic-client && npm i
 
 ## Usage
 
+Duplicate `.env.example`, rename it to `.env`, and fill in with yours.
+
 ```sh
 npm run dev
 ```
@@ -77,9 +93,7 @@ npm run dev
 Tạ Gia Vinh
 
 - <img src="https://img.shields.io/badge/Gmail-EA4335?style=for-the-badge&logo=gmail&logoColor=61DAFB" alt="Gmail" style="vertical-align: middle;"> : gvinhh@gmail.com
-
 - <img src="https://img.shields.io/badge/Zalo-0068FF?style=for-the-badge&logo=zalo&logoColor=61DAFB" alt="Zalo" style="vertical-align: middle;"> (Phone): 034-523-4854
-
 - <a href="https://www.facebook.com/profile.php?id=100005408149001"><img src="https://img.shields.io/badge/Facebook-0866FF?style=for-the-badge&logo=facebook&logoColor=61DAFB" alt="Facebook" style="vertical-align: middle;"></a>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
