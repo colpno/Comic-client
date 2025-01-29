@@ -28,14 +28,7 @@ function HeaderBookshelfButton(props: Props) {
 
   return (
     <>
-      <Button
-        color="inherit"
-        {...props}
-        as="iconButton"
-        title="Bookshelves"
-        onClick={openPopup}
-        onMouseEnter={openPopup}
-      >
+      <Button color="inherit" {...props} as="iconButton" title="Bookshelves" onClick={openPopup}>
         <PiBooks />
       </Button>
       <Popup

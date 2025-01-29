@@ -43,13 +43,7 @@ function HeaderThemeButton() {
 
   return (
     <>
-      <Button
-        as="iconButton"
-        color="inherit"
-        title="Theme"
-        onClick={openPopup}
-        onMouseEnter={openPopup}
-      >
+      <Button as="iconButton" color="inherit" title="Theme" onClick={openPopup}>
         <ThemeIcon theme={theme} />
       </Button>
       <Popup

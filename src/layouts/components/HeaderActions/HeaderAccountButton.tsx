@@ -122,14 +122,7 @@ function ForLoggedInUserButton({
 
   return (
     <>
-      <Button
-        {...props}
-        as="iconButton"
-        color="inherit"
-        title="Account"
-        onClick={openPopup}
-        onMouseEnter={openPopup}
-      >
+      <Button {...props} as="iconButton" color="inherit" title="Account" onClick={openPopup}>
         <FaPerson />
       </Button>
       <Popup
