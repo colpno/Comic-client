@@ -14,11 +14,12 @@ const extendedApi = api.injectEndpoints({
   endpoints: (build) => ({
     // GET
     getFollows: build.query<ApiGetFollowsReturnType, ApiGetFollowsParams | void>({
-      queryFn: async (args, { getState }, _, query) => {
+      queryFn: async (args, { getState, signal }, _, query) => {
         const res = await attachAuthorization(
           {
             url: FOLLOW_ENDPOINTS.GET_FOLLOWS(),
             params: args,
+            signal,
           },
           getState,
           query
@@ -36,11 +37,12 @@ const extendedApi = api.injectEndpoints({
           : [TAG_FOLLOW],
     }),
     getFollow: build.query<ApiGetFollowReturnType['data'], ApiGetFollowParams>({
-      queryFn: async ({ following, ...args }, { getState }, _, query) => {
+      queryFn: async ({ following, ...args }, { getState, signal }, _, query) => {
         const res = await attachAuthorization(
           {
             url: FOLLOW_ENDPOINTS.GET_FOLLOW(following),
             params: args,
+            signal,
           },
           getState,
           query
@@ -60,7 +62,7 @@ const extendedApi = api.injectEndpoints({
 
     // POST
     addFollow: build.mutation<void, ApiAddFollowParam>({
-      queryFn: async (followingId, { getState }, _, query) => {
+      queryFn: async (followingId, { getState, signal }, _, query) => {
         const res = await attachAuthorization(
           {
             url: FOLLOW_ENDPOINTS.ADD_FOLLOW(),
@@ -68,6 +70,7 @@ const extendedApi = api.injectEndpoints({
             data: {
               followingId,
             },
+            signal,
           },
           getState,
           query
@@ -84,11 +87,12 @@ const extendedApi = api.injectEndpoints({
 
     // DELETE
     removeFollow: build.mutation<void, ApiRemoveFollowParam>({
-      queryFn: async (id, { getState }, _, query) => {
+      queryFn: async (id, { getState, signal }, _, query) => {
         const res = await attachAuthorization(
           {
             url: FOLLOW_ENDPOINTS.REMOVE_FOLLOW(id),
             method: 'DELETE',
+            signal,
           },
           getState,
           query

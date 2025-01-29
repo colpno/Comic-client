@@ -26,10 +26,11 @@ const extendedApi = api.injectEndpoints({
       }),
     }),
     logout: build.query<void, void>({
-      queryFn: async (_args, { getState }, _, query) => {
+      queryFn: async (_args, { getState, signal }, _, query) => {
         const res = await attachAuthorization(
           {
             url: AUTH_ENDPOINTS.LOGOUT(),
+            signal,
           },
           getState,
           query
@@ -43,9 +44,12 @@ const extendedApi = api.injectEndpoints({
       },
     }),
     refreshAccessToken: build.query<ApiRefreshAccessToken['data'] | undefined, void>({
-      queryFn: async (_args, { getState }, _, query) => {
+      queryFn: async (_args, { getState, signal }, _, query) => {
         const res = await attachAuthorization(
-          { url: AUTH_ENDPOINTS.REFRESH_ACCESS_TOKEN() },
+          {
+            url: AUTH_ENDPOINTS.REFRESH_ACCESS_TOKEN(),
+            signal,
+          },
           getState,
           query
         );
@@ -58,8 +62,15 @@ const extendedApi = api.injectEndpoints({
       },
     }),
     getUser: build.query<ApiGetUserReturnType['data'], void>({
-      queryFn: async (_args, { getState }, _, query) => {
-        const res = await attachAuthorization({ url: AUTH_ENDPOINTS.GET_USER() }, getState, query);
+      queryFn: async (_args, { getState, signal }, _, query) => {
+        const res = await attachAuthorization(
+          {
+            url: AUTH_ENDPOINTS.GET_USER(),
+            signal,
+          },
+          getState,
+          query
+        );
 
         if (res.error) {
           return { error: res.error };
@@ -95,12 +106,13 @@ const extendedApi = api.injectEndpoints({
       }),
     }),
     updateUser: build.mutation<void, ApiUpdateUserParams>({
-      queryFn: async (params, { getState }, _, query) => {
+      queryFn: async (params, { getState, signal }, _, query) => {
         const res = await attachAuthorization(
           {
             url: AUTH_ENDPOINTS.UPDATE_USER(),
             method: 'PUT',
             data: params,
+            signal,
           },
           getState,
           query
