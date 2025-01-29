@@ -4,6 +4,7 @@ import { ApiDataResponse, User } from '~/types/index.ts';
 export type ApiLoginParams = LoginFormValues;
 export type ApiLoginReturnType = ApiDataResponse<{
   accessToken: string;
+  tokenExpiredTime: string;
 }>;
 
 export type ApiGetCSRFReturnType = ApiDataResponse<string>;

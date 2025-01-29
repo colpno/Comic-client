@@ -19,7 +19,7 @@ function LoginPage() {
     try {
       const data = await loginQuery(values).unwrap();
       toast.success('Login successfully');
-      dispatch(login(data.accessToken));
+      dispatch(login(data));
     } catch (error) {}
   };
 
