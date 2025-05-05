@@ -4,18 +4,18 @@ import { MdOutlinePermIdentity } from 'react-icons/md';
 import { Button, CheckboxGroup, Form, TextField, Typography } from '~/components/index.ts';
 import { ROUTE_FORGOT_PASSWORD, ROUTE_SIGNUP } from '~/constants/routeConstants.ts';
 import { loginFormSchema, LoginFormValues } from './validationSchemas.ts';
+import { FormProps } from '~/types/index.ts';
+import { cn } from '~/utils/cssUtils.ts';
 
-interface Props {
-  onSubmit: (values: LoginFormValues) => void | Promise<void>;
-}
+type Props = Omit<FormProps<LoginFormValues>, 'validationSchema' | 'children'>
 
-function LoginForm({ onSubmit }: Props) {
+function LoginForm({ onSubmit, ...props }: Props) {
   return (
     <div>
       <Typography variant="h2" className="text-center !mb-8 text-main">
         Sign in
       </Typography>
-      <Form validationSchema={loginFormSchema} onSubmit={onSubmit} className="space-y-4">
+      <Form {...props} validationSchema={loginFormSchema} onSubmit={onSubmit} className={cn("space-y-4", props.className)}>
         <div className="space-y-6">
           <TextField
             name="username"

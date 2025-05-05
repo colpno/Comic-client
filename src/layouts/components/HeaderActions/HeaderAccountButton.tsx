@@ -61,6 +61,11 @@ function HeaderAccountButton() {
 
 export default HeaderAccountButton;
 
+const defaultLoginValues: LoginFormValues = {
+  username: 'john',
+  password: '1234561234567',
+};
+
 interface DesktopFormProps {
   onSubmit: (values: LoginFormValues) => void;
 }
@@ -68,7 +73,7 @@ interface DesktopFormProps {
 function DesktopForm({ onSubmit }: DesktopFormProps) {
   return (
     <div className="px-6 pt-6 pb-10 shadow-md dark:shadow-gray-900 border dark:border-gray-800 w-[22rem] rounded-xl bg-main">
-      <LoginForm onSubmit={onSubmit} />
+      <LoginForm defaultValues={defaultLoginValues} onSubmit={onSubmit} />
     </div>
   );
 }
@@ -83,7 +88,7 @@ function MobileForm({ onSubmit, onClose }: MobileFormProps) {
       <Button as="iconButton" title="Close" className="!absolute top-3 right-3" onClick={onClose}>
         <MdClose size={32} />
       </Button>
-      <LoginForm onSubmit={onSubmit} />
+      <LoginForm defaultValues={defaultLoginValues} onSubmit={onSubmit} />
     </div>
   );
 }
