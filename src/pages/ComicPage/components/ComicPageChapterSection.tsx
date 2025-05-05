@@ -63,7 +63,6 @@ function ComicPageChapterSection(comic: Comic) {
     for (let i = volumeKeys.length - 1; i >= 0; i--) {
       const volume = volumeKeys[i];
       const chapters = groupedChapters[volume];
-      console.log('chapters:', chapters);
       vols.push({ volume, chapters });
     }
 
