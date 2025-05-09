@@ -88,6 +88,7 @@ function HomePageGenreContainer() {
             key={genre.id}
             variant="outlined"
             size="small"
+            className="!font-semibold"
           >
             {genre.name}
           </Button>
