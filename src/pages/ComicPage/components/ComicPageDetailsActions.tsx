@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { FaHeart, FaRegHeart } from 'react-icons/fa6';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
+import { useGetChaptersQuery } from '~/apis/chapterApis';
 
 import {
   useAddFollowMutation,
@@ -54,10 +55,23 @@ interface Props {
 }
 
 function ComicPageDetailsActions({ title, id }: Props) {
+  const { data } = useGetChaptersQuery({
+    comicId: id,
+    _limit: 1,
+    _page: 1,
+    _sort: {
+      chapter: 'asc',
+    },
+  });
+
+  if (!data || data.data.length === 0) {
+    return null;
+  }
+
   return (
     <div className="flex flex-col gap-2 mt-6 lg:mt-auto sm:flex-row">
       <Button variant="contained" color="primary" href={getComicReadingRoute(title, '1')}>
-        Read chapter 1
+        Read chapter {data.data[0].chapter}
       </Button>
       <div className="ml-auto">
         <HeartButton comicId={id} />
