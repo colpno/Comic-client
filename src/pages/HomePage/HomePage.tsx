@@ -31,15 +31,18 @@ type FilterComicsByGenre = (genres: string[], comics: Comic[]) => ComicsByGenre[
 
 const groupComicsByGenre: FilterComicsByGenre = (genres, comics) => {
   // Initialize
-  const genreComics = genres.reduce((acc, genre) => {
-    acc[genre] = [];
-    return acc;
-  }, {} as Record<string, Comic[]>);
+  const genreComics = genres.reduce(
+    (acc, genre) => {
+      acc[genre] = [];
+      return acc;
+    },
+    {} as Record<string, Comic[]>,
+  );
 
   // Assign comics to genre
   comics.forEach((comic) => {
     comic.tags.some(({ name: tag }) => {
-      if (genreComics[tag] && genreComics[tag].length < CARD_ROW_ITEM_LIMIT) {
+      if (genreComics[tag] && genreComics[tag].length < CARD_ROW_ITEM_LIMIT && comic.title) {
         genreComics[tag].push(comic);
         return true;
       }
@@ -52,7 +55,7 @@ const groupComicsByGenre: FilterComicsByGenre = (genres, comics) => {
       items: comics,
       title: genre,
       id: v4(),
-    })
+    }),
   );
 
   return comicsByGenre;
